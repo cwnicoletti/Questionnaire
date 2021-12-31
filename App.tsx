@@ -1,21 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { View } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Provider } from "react-redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import ReduxThunk from "redux-thunk";
+import NavigationContainer from "./navigation/NavigationContainer";
+import authReducer from "./store/reducers/auth";
+import firebase from "firebase/app";
+import * as Notifications from "expo-notifications";
+import FirebaseConfig from "./config";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: FirebaseConfig.apikey,
+  authDomain: FirebaseConfig.authDomain,
+  databaseURL: FirebaseConfig.databaseURL,
+  storageBucket: FirebaseConfig.storageBucket,
+};
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
 });
+
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch | any;
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <SafeAreaProvider>
+        <View style={{ flex: 1, backgroundColor: "#000000" }}>
+          <NavigationContainer />
+        </View>
+      </SafeAreaProvider>
+    </Provider>
+  );
+};
+
+export default App;

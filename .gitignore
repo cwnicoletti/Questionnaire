@@ -1,5 +1,5 @@
-node_modules/
-.expo/
+node_modules/**/*
+.expo/*
 npm-debug.*
 *.jks
 *.p8
@@ -11,3 +11,18 @@ web-build/
 
 # macOS
 .DS_Store
+
+# Hiding API keys and firebase info
+config.ts
+.firebaserc
+firebase.json
+functions/*
+functions/index.js
+functions/package-lock.json
+functions/package.json
+functions/.gitignore
+test.js
+.vscode/.react/node_modules%5Cexpo%5CAppEntry.bundle
+.vscode/.react/debuggerWorker.js
+.vscode/.react/AppEntry.map
+node_modules/
