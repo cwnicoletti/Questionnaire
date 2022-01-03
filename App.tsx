@@ -4,7 +4,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import ReduxThunk from "redux-thunk";
-import NavigationContainer from "./navigation/NavigationContainer";
+import AppNavigator from "./navigation/AppNavigator";
 import authReducer from "./store/reducers/auth";
 import firebase from "firebase/app";
 import * as Notifications from "expo-notifications";
@@ -42,11 +42,7 @@ export type AppDispatch = typeof store.dispatch | any;
 const App = () => {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <View style={{ flex: 1, backgroundColor: "#000000" }}>
-          <NavigationContainer />
-        </View>
-      </SafeAreaProvider>
+      <AppNavigator />
     </Provider>
   );
 };
