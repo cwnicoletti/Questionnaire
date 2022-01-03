@@ -21,7 +21,13 @@ const StartupScreen = (props) => {
   };
 
   const tryLogin = async () => {
-    props.navigation.navigate("StartAuth");
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 400,
+      useNativeDriver: true,
+    }).start(() => {
+      props.navigation.navigate("StartAuth");
+    });
   };
 
   useEffect(() => {
@@ -41,9 +47,7 @@ const StartupScreen = (props) => {
   }, [appIsReady]);
 
   const cacheResourcesAsync = async () => {
-    const images = [
-      require("../assets/ExhibitU_icon_transparent_white_spaced.png"),
-    ];
+    const images = [require("../assets/naire_icon/transparent_colored.png")];
 
     const cacheImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();
@@ -68,7 +72,7 @@ const StartupScreen = (props) => {
   return (
     <Animated.View style={{ ...styles.screen, opacity: fadeAnim }}>
       <Image
-        source={require("../assets/ExhibitU_icon_transparent_white_spaced.png")}
+        source={require("../assets/naire_icon/transparent_colored.png")}
         style={{ height: "100%", width: "100%" }}
         resizeMode="contain"
       />
