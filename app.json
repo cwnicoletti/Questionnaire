@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Affiniti",
-    "slug": "Affiniti",
+    "name": "Naire",
+    "slug": "Naire",
     "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/affiniti_icon/icon.png",
+    "icon": "./assets/naire_icon/icon.png",
     "splash": {
-      "image": "./assets/affiniti_icon/transparent_colored.png",
+      "image": "./assets/naire_icon/transparent_colored.png",
       "resizeMode": "contain",
       "backgroundColor": "#000000"
     },
@@ -24,7 +24,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/affiniti_icon/icon.png"
+      "favicon": "./assets/naire_icon/icon.png"
     }
   }
 }
