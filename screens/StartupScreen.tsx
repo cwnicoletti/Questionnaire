@@ -7,6 +7,7 @@ import AppLoading from "expo-app-loading";
 const StartupScreen = (props) => {
   const [appIsReady, setAppIsReady] = useState(false);
   const fadeAnim = useRef(new Animated.Value(1)).current;
+  const slideAnim1 = useRef(new Animated.Value(0)).current;
 
   const prepare = async () => {
     try {
@@ -47,7 +48,10 @@ const StartupScreen = (props) => {
   }, [appIsReady]);
 
   const cacheResourcesAsync = async () => {
-    const images = [require("../assets/naire_icon/transparent_colored.png")];
+    const images = [
+      require("../assets/naire_icon/transparent_colored.png"),
+      require("../assets/background.jpg"),
+    ];
 
     const cacheImages = images.map((image) => {
       return Asset.fromModule(image).downloadAsync();
@@ -70,7 +74,13 @@ const StartupScreen = (props) => {
   }
 
   return (
-    <Animated.View style={{ ...styles.screen, opacity: fadeAnim }}>
+    <Animated.View
+      style={{
+        ...styles.screen,
+        opacity: fadeAnim,
+        transform: [{ translateY: slideAnim1 }],
+      }}
+    >
       <Image
         source={require("../assets/naire_icon/transparent_colored.png")}
         style={{ height: "100%", width: "100%" }}
@@ -86,7 +96,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000000",
+    backgroundColor: "white",
   },
 });
 
