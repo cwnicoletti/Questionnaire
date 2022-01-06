@@ -4,13 +4,11 @@ import { useAppSelector } from "../hooks";
 import AuthenticatedNavigator from "./AuthenticatedNavigator";
 
 const AppNavigator = () => {
-  const isAuth = useAppSelector((state) => !!state.auth.token);
-
   const MyTheme = {
     ...DefaultTheme,
     colors: {
       ...DefaultTheme.colors,
-      background: "black",
+      background: "white",
     },
   };
 
