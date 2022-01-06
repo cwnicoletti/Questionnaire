@@ -1,4 +1,4 @@
-import { Fontisto, MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome, SimpleLineIcons, AntDesign } from "@expo/vector-icons";
 import React, { useEffect, useRef } from "react";
 import {
   Platform,
@@ -8,6 +8,8 @@ import {
   TouchableOpacity,
   View,
   Animated,
+  ImageBackground,
+  Image,
 } from "react-native";
 
 const SignupOrLoginScreen = (props) => {
@@ -19,8 +21,9 @@ const SignupOrLoginScreen = (props) => {
   const fadeInAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.spring(fadeInAnim, {
+    Animated.timing(fadeInAnim, {
       toValue: 1,
+      duration: 500,
       useNativeDriver: true,
     }).start();
   }, []);
@@ -32,34 +35,130 @@ const SignupOrLoginScreen = (props) => {
         opacity: fadeInAnim,
       }}
     >
-      <Text style={styles.titleText}>Naire</Text>
-      <TouchableCmp
-        onPress={() => {
-          props.navigation.navigate("Signup1");
+      <ImageBackground
+        source={require("../../assets/background.jpg")}
+        resizeMode="cover"
+        style={{
+          height: "100%",
+          width: "100%",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <View
+        <Image
           style={{
-            borderColor: "#00a0db",
-            borderWidth: 1,
-            margin: 10,
-            alignItems: "center",
-            flexDirection: "row",
-            paddingHorizontal: "20%",
-            borderRadius: 15,
+            flex: 2,
           }}
-        >
-          <Fontisto
-            name="email"
-            size={24}
-            color="#38c9ff"
-            style={{ marginVertical: 10 }}
-          />
-          <Text style={{ margin: 10, color: "#00a0db" }}>
-            Signup with Email
-          </Text>
+          source={require("../../assets/naire_icon/full_transparent.png")}
+          resizeMode="contain"
+        />
+        <View style={{ flex: 1, marginHorizontal: 15 }}>
+          <TouchableCmp
+            onPress={() => {
+              props.navigation.navigate("Signup1");
+            }}
+          >
+            <View
+              style={{
+                borderColor: "white",
+                borderWidth: 1,
+                margin: 5,
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                borderRadius: 35,
+              }}
+            >
+              <AntDesign name="apple1" size={24} color="white" />
+              <Text
+                style={{
+                  fontSize: 17,
+                  margin: 15,
+                  color: "white",
+                }}
+              >
+                Sign up with Apple
+              </Text>
+            </View>
+          </TouchableCmp>
+          <TouchableCmp
+            onPress={() => {
+              props.navigation.navigate("Signup1");
+            }}
+          >
+            <View
+              style={{
+                borderColor: "white",
+                borderWidth: 1,
+                margin: 5,
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                borderRadius: 35,
+              }}
+            >
+              <FontAwesome name="facebook-square" size={24} color="white" />
+              <Text
+                style={{
+                  fontSize: 17,
+                  margin: 15,
+                  color: "white",
+                }}
+              >
+                Sign up with Facebook
+              </Text>
+            </View>
+          </TouchableCmp>
+          <TouchableCmp
+            onPress={() => {
+              props.navigation.navigate("SignupPhoneScreen1");
+            }}
+          >
+            <View
+              style={{
+                borderColor: "white",
+                borderWidth: 1,
+                margin: 5,
+                alignItems: "center",
+                justifyContent: "center",
+                flexDirection: "row",
+                borderRadius: 35,
+              }}
+            >
+              <SimpleLineIcons name="phone" size={24} color="white" />
+              <Text
+                style={{
+                  fontSize: 17,
+                  margin: 15,
+                  color: "white",
+                }}
+              >
+                Sign up with Phone Number
+              </Text>
+            </View>
+          </TouchableCmp>
+          <View style={{ margin: 15, alignItems: "center" }}>
+            <Text style={{ color: "white", marginBottom: 5 }}>
+              By pressing a sign up option, you agree to our{" "}
+              <Text
+                style={{ fontWeight: "500", textDecorationLine: "underline" }}
+              >
+                Terms
+              </Text>
+              .
+            </Text>
+            <Text style={{ color: "white" }}>
+              Find out how we use your data in our{" "}
+              <Text
+                style={{ fontWeight: "500", textDecorationLine: "underline" }}
+              >
+                Privacy Policy
+              </Text>
+              .
+            </Text>
+          </View>
         </View>
-      </TouchableCmp>
+      </ImageBackground>
     </Animated.View>
   );
 };
@@ -75,8 +174,11 @@ const styles = StyleSheet.create({
   },
 
   titleText: {
+    alignItems: "center",
+    justifyContent: "center",
     color: "white",
     fontSize: 60,
+    fontFamily: "Nautilus",
   },
 
   image: {
