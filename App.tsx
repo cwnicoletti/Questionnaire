@@ -1,6 +1,4 @@
 import React from "react";
-import { View } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import ReduxThunk from "redux-thunk";
@@ -9,6 +7,7 @@ import authReducer from "./store/reducers/auth";
 import firebase from "firebase/app";
 import * as Notifications from "expo-notifications";
 import FirebaseConfig from "./config";
+import { useFonts } from "expo-font";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -40,6 +39,10 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch | any;
 
 const App = () => {
+  useFonts({
+    Nautilus: require("./assets/fonts/Nautilus.otf"),
+  });
+
   return (
     <Provider store={store}>
       <AppNavigator />
