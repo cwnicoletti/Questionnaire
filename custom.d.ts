@@ -7,3 +7,5 @@ declare module "*.png" {
   const content: React.FunctionComponent<React.PNGAttributes<PNGElement>>;
   export default content;
 }
+
+declare module "react-native-wheel-datepicker";
