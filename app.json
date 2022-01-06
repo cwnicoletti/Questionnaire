@@ -8,7 +8,7 @@
     "splash": {
       "image": "./assets/naire_icon/transparent_colored.png",
       "resizeMode": "contain",
-      "backgroundColor": "#000000"
+      "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
