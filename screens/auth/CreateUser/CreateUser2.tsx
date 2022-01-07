@@ -43,7 +43,7 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const CreateUser1 = (props) => {
+const CreateUser2 = (props) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
@@ -86,10 +86,8 @@ const CreateUser1 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0));
-            setTimeout(() => {
-              props.navigation.goBack();
-            }, 400);
+            dispatch(setProgress(0.1));
+            props.navigation.goBack();
           }}
         >
           <Ionicons
@@ -134,9 +132,6 @@ const CreateUser1 = (props) => {
               autoCorrect={false}
               contextMenuHidden={true}
               maxLength={25}
-              onSubmitEditing={() => {
-                props.navigation.navigate("CreateUser2");
-              }}
               onInputChange={inputChangeHandler}
               inputRef={lastNameRef}
               initialValue=""
@@ -158,9 +153,9 @@ const CreateUser1 = (props) => {
         >
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0.2));
-              props.navigation.navigate("CreateUser2");
+              props.navigation.navigate("CreateUser1");
             }}
+            disabled={formState.formIsValid === false}
           >
             <View
               style={{
@@ -214,4 +209,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CreateUser1;
+export default CreateUser2;

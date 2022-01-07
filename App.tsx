@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import ReduxThunk from "redux-thunk";
 import AppNavigator from "./navigation/AppNavigator";
-import authReducer from "./store/reducers/auth";
+import progressbarReducer from "./store/reducers/progressbar";
 import firebase from "firebase/app";
 import * as Notifications from "expo-notifications";
 import FirebaseConfig from "./config";
@@ -30,7 +30,7 @@ Notifications.setNotificationHandler({
 });
 
 const rootReducer = combineReducers({
-  auth: authReducer,
+  progressbar: progressbarReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

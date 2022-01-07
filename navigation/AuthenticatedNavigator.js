@@ -5,6 +5,8 @@ import SignupOrLoginScreen from "../screens/auth/SignupOrLoginScreen";
 import SignupScreen1 from "../screens/auth/SignupPhone/SignupScreen1";
 import SignupScreen2 from "../screens/auth/SignupPhone/SignupScreen2";
 import AIntroduction from "../screens/auth/CreateUser/AIntroduction";
+import CreateUser1 from "../screens/auth/CreateUser/CreateUser1";
+import CreateUser2 from "../screens/auth/CreateUser/CreateUser2";
 import StartupScreen from "../screens/StartupScreen";
 
 const Stack = createStackNavigator();
@@ -40,6 +42,20 @@ function AuthenticatedNavigator() {
         component={AIntroduction}
         options={{
           ...TransitionPresets.ModalSlideFromBottomIOS,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CreateUser1"
+        component={CreateUser1}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="CreateUser2"
+        component={CreateUser2}
+        options={{
           headerShown: false,
         }}
       />
