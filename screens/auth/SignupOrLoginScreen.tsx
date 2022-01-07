@@ -10,6 +10,7 @@ import {
   Animated,
   ImageBackground,
   Image,
+  StatusBar,
 } from "react-native";
 
 const SignupOrLoginScreen = (props) => {
@@ -35,6 +36,7 @@ const SignupOrLoginScreen = (props) => {
         opacity: fadeInAnim,
       }}
     >
+      <StatusBar barStyle={"light-content"} animated={true} />
       <ImageBackground
         source={require("../../assets/background.jpg")}
         resizeMode="cover"

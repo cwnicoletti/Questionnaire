@@ -8,6 +8,7 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
+  StatusBar,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -79,6 +80,7 @@ const SignupScreen2 = (props) => {
       style={styles.screen}
     >
       <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
             props.navigation.goBack("");
