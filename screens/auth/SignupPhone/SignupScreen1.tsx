@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useState } from "react";
+import React, { useCallback, useReducer, useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Keyboard,
+  StatusBar,
 } from "react-native";
 import { useAppDispatch } from "../../../hooks";
 import { Feather, Entypo, FontAwesome } from "@expo/vector-icons";
@@ -48,6 +49,9 @@ const SignupScreen1 = (props) => {
   const dispatch = useAppDispatch();
   const [isPickingContryCode, setIsPickingCountryCode] = useState(false);
   const [countryCode, setCountryCode] = useState("US +1");
+  const [currentSelectedCode, setCurrentSelectedCode] = useState(
+    "United States of America +1"
+  );
 
   const book = [
     { "United States of America +1": "US +1" },
@@ -315,12 +319,15 @@ const SignupScreen1 = (props) => {
     [dispatchFormState]
   );
 
+  const phoneNumberInputRef = useRef<Input>(null);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.screen}
     >
       <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar barStyle={"dark-content"} animated={true} />
         <View style={{ flex: 1 }}>
           <TouchableCmp
             onPress={() => {
@@ -368,6 +375,7 @@ const SignupScreen1 = (props) => {
                   keyboardType="number-pad"
                   blurOnSubmit={true}
                   autoFocus={true}
+                  inputRef={phoneNumberInputRef}
                   onSubmitEditing={() => {
                     if (formState.formIsValid === true) {
                       authHandler();
@@ -433,30 +441,57 @@ const SignupScreen1 = (props) => {
           </View>
         ) : (
           <View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Text
-                style={{ textAlign: "center", fontSize: 20, fontWeight: "500" }}
+            <View style={{ flexDirection: "row" }}>
+              <View style={{ flex: 1 }}></View>
+              <View
+                style={{
+                  flex: 3,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                Select Country Code
-              </Text>
-              <FontAwesome
-                name="level-down"
-                size={16}
-                color="black"
-                style={{ marginHorizontal: 5 }}
-              />
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 20,
+                    fontWeight: "500",
+                  }}
+                >
+                  Select Country Code
+                </Text>
+                <FontAwesome
+                  name="level-down"
+                  size={16}
+                  color="black"
+                  style={{ marginHorizontal: 5 }}
+                />
+              </View>
+              <View style={{ flex: 1 }}>
+                <TouchableCmp
+                  onPress={() => {
+                    phoneNumberInputRef.current.focus();
+                    setIsPickingCountryCode(false);
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: "#45BDF5",
+                      textAlign: "center",
+                      fontSize: 20,
+                      fontWeight: "300",
+                    }}
+                  >
+                    done
+                  </Text>
+                </TouchableCmp>
+              </View>
             </View>
             <Picker
               style={{
                 backgroundColor: "rgba(0,0,0,0)",
               }}
-              selectedValue={"+1 US"}
+              selectedValue={currentSelectedCode}
               pickerData={[
                 "United States of America +1",
                 "Afghanistan +93",
@@ -692,6 +727,7 @@ const SignupScreen1 = (props) => {
                 const found = book.find(
                   (country) => Object.keys(country)[0] === value
                 );
+                setCurrentSelectedCode(value);
                 setCountryCode(Object.values(found));
               }}
             />
