@@ -60,7 +60,6 @@ const VerifyCodeInput = (props) => {
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
         ref={props.inputRef}
-        maxLength={6}
       />
     </View>
   );

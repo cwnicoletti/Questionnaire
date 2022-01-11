@@ -31,7 +31,6 @@ const Input = (props) => {
     isValid: props.initiallyValid,
     touched: false,
   });
-  // const darkModeValue = useAppSelector((state) => state.user.darkMode);
 
   const { onInputChange, id } = props;
 
@@ -86,7 +85,11 @@ const Input = (props) => {
 
   return (
     <View style={styles.formControl}>
-      <Text style={{ ...styles.label, ...props.textLabel }}>{props.label}</Text>
+      {props.label ? (
+        <Text style={{ ...styles.label, ...props.textLabel }}>
+          {props.label}
+        </Text>
+      ) : null}
       <TextInput
         {...props}
         style={{
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingLeft: 10,
   },
-  
+
   errorText: {
     color: "red",
     fontSize: 13,
