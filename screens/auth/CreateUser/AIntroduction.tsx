@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Platform,
@@ -23,6 +23,16 @@ const AIntroduction = (props) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
+  const lottieRef = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (lottieRef.current) {
+        lottieRef.current.play();
+      }
+    }, 200);
+  }, []);
+
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
     TouchableCmp = TouchableNativeFeedback;
@@ -35,8 +45,9 @@ const AIntroduction = (props) => {
         style={{ flex: 2, justifyContent: "flex-end", alignItems: "center" }}
       >
         <LottieView
+          ref={lottieRef}
           source={require("../../../assets/lottie_anims/52058-check.json")}
-          autoPlay
+          autoPlay={false}
           loop={false}
           colorFilters={[
             {
@@ -50,8 +61,12 @@ const AIntroduction = (props) => {
           ]}
           style={{ height: 80 }}
         />
-        <Text style={{ fontSize: 32 }}>Awesome!</Text>
-        <Text>You're ready to start</Text>
+        <Text style={{ fontWeight: "500", fontSize: 32, color: "#434aa8" }}>
+          Awesome!
+        </Text>
+        <Text style={{ marginTop: 5, fontWeight: "300" }}>
+          You're ready to start
+        </Text>
         <View
           style={{
             alignSelf: "center",
@@ -71,7 +86,7 @@ const AIntroduction = (props) => {
         >
           Naire is a survey-based dating app
         </Text>
-        <Text style={{ fontSize: 18, marginTop: 20 }}>
+        <Text style={{ fontSize: 16, marginTop: 10, fontWeight: "300" }}>
           This means you will be provided with:
         </Text>
       </View>
@@ -96,7 +111,7 @@ const AIntroduction = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: 15,
                   marginHorizontal: 15,
                   fontWeight: "500",
                 }}
@@ -131,7 +146,7 @@ const AIntroduction = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: 15,
                   marginHorizontal: 15,
                   fontWeight: "500",
                 }}
@@ -165,7 +180,7 @@ const AIntroduction = (props) => {
             >
               <Text
                 style={{
-                  fontSize: 16,
+                  fontSize: 15,
                   marginHorizontal: 15,
                   fontWeight: "500",
                 }}
@@ -197,8 +212,8 @@ const AIntroduction = (props) => {
           onPress={() => {
             props.navigation.navigate("CreateUser1");
             setTimeout(() => {
-              dispatch(setProgress(0.1));
-            }, 600);
+              dispatch(setProgress(0.2));
+            }, 400);
           }}
         >
           <View

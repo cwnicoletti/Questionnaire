@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -9,73 +9,25 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import { Ionicons } from "@expo/vector-icons";
-import Input from "../../../components/Input";
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
-
-const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
-    const updateValues = {
-      ...state.inputValues,
-      [action.input]: action.value,
-    };
-    const updatedValidities = {
-      ...state.inputValidities,
-      [action.input]: action.isValid,
-    };
-    let updatedFormIsValid = true;
-    for (const key in updatedValidities) {
-      if (updatedValidities.hasOwnProperty(key)) {
-        updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
-      }
-    }
-    return {
-      formIsValid: updatedFormIsValid,
-      inputValidities: updatedValidities,
-      inputValues: updateValues,
-    };
-  }
-  return state;
-};
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const CreateUser2 = (props) => {
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(false);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [day, setDay] = useState(0);
+  const [month, setMonth] = useState(0);
+  const [year, setYear] = useState(0);
+  const [currentDatePicked, setCurrentDatePicked] = useState(new Date());
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
     TouchableCmp = TouchableNativeFeedback;
   }
-
-  const [formState, dispatchFormState] = useReducer(formReducer, {
-    inputValues: {
-      numbers: "",
-    },
-    inputValidities: {
-      numbers: false,
-    },
-    formIsValid: false,
-  });
-
-  const inputChangeHandler = useCallback(
-    (inputIdentifier, inputValue, inputValidity) => {
-      dispatchFormState({
-        type: FORM_INPUT_UPDATE,
-        value: inputValue,
-        isValid: inputValidity,
-        input: inputIdentifier,
-      });
-    },
-    [dispatchFormState]
-  );
-
-  const lastNameRef = useRef<Input>(null);
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -86,7 +38,7 @@ const CreateUser2 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.1));
+            dispatch(setProgress(0.2));
             props.navigation.goBack();
           }}
         >
@@ -97,65 +49,190 @@ const CreateUser2 = (props) => {
             style={{ margin: 20 }}
           />
         </TouchableCmp>
-        <View style={{ marginTop: 80 }}>
-          <Text style={styles.yourCode}>Let's start with your name...</Text>
-          <View style={styles.authContainer}>
-            <Input
-              id="firstName"
-              label="First Name"
-              placeholder="First name (required)"
-              required
-              keyboardType="default"
-              returnKeyType="next"
-              autoFocus={true}
-              autoCorrect={false}
-              contextMenuHidden={true}
-              maxLength={25}
-              onInputChange={inputChangeHandler}
-              onSubmitEditing={() => {
-                lastNameRef.current.focus();
-              }}
-              initialValue=""
-              styleInput={{
-                fontSize: 28,
-                fontWeight: "300",
-                backgroundColor: "#ffffff",
-                marginHorizontal: "10%",
-              }}
-            />
-            <Input
-              id="lastName"
-              label="Last Name"
-              placeholder="Last Name"
-              keyboardType="default"
-              returnKeyType="done"
-              autoCorrect={false}
-              contextMenuHidden={true}
-              maxLength={25}
-              onInputChange={inputChangeHandler}
-              inputRef={lastNameRef}
-              initialValue=""
-              styleInput={{
-                fontSize: 28,
-                fontWeight: "300",
-                backgroundColor: "#ffffff",
-                marginHorizontal: "10%",
-              }}
-            />
+        <View style={{ flex: 1, marginTop: 80 }}>
+          <Text style={styles.whenWereYouBornText}>When were you born?</Text>
+          <TouchableCmp
+            onPress={() => {
+              setShowDatePicker(true);
+            }}
+          >
+            <View style={styles.dateContainer}>
+              {!month ? (
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    borderBottomWidth: 1,
+                    borderColor: "black",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: "grey",
+                    }}
+                  >
+                    MM
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    borderBottomWidth: 1,
+                    borderColor: "black",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 34,
+                      height: 40,
+                    }}
+                  >
+                    {month}
+                  </Text>
+                </View>
+              )}
+              <Text style={{ fontSize: 34, height: 40 }}>/</Text>
+              {!day ? (
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    borderBottomWidth: 1,
+                    borderColor: "black",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: "grey",
+                    }}
+                  >
+                    DD
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 35,
+                    borderBottomWidth: 1,
+                    borderColor: "black",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 34,
+                      height: 40,
+                    }}
+                  >
+                    {day}
+                  </Text>
+                </View>
+              )}
+              <Text style={{ fontSize: 34, height: 40 }}>/</Text>
+              {!year ? (
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 80,
+                    borderBottomWidth: 1,
+                    borderColor: "black",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      color: "grey",
+                    }}
+                  >
+                    YYYY
+                  </Text>
+                </View>
+              ) : (
+                <View
+                  style={{
+                    marginHorizontal: 15,
+                    borderRadius: 5,
+                    height: 35,
+                    width: 80,
+                    borderBottomWidth: 1,
+                    borderColor: "black",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 34,
+                      height: 40,
+                    }}
+                  >
+                    {year}
+                  </Text>
+                </View>
+              )}
+            </View>
+          </TouchableCmp>
+          <View
+            style={{
+              flexDirection: "row",
+              alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Ionicons name="ios-lock-closed-outline" size={24} color="black" />
+            <Text style={{ marginHorizontal: 5 }}>This can't be changed</Text>
           </View>
         </View>
         <View
           style={{
-            flex: 1,
+            flexDirection: "row",
             justifyContent: "flex-end",
             alignItems: "flex-end",
           }}
         >
+          <View
+            style={{
+              flex: 1,
+              marginLeft: 20,
+              flexDirection: "row",
+              alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <SimpleLineIcons name="globe" size={24} color="black" />
+            <Text style={{ marginHorizontal: 10 }}>Your age will be public</Text>
+          </View>
           <TouchableCmp
             onPress={() => {
-              props.navigation.navigate("CreateUser1");
+              dispatch(setProgress(0.6));
+              props.navigation.navigate("CreateUser3");
             }}
-            disabled={formState.formIsValid === false}
           >
             <View
               style={{
@@ -182,6 +259,22 @@ const CreateUser2 = (props) => {
             </View>
           </TouchableCmp>
         </View>
+        <DateTimePickerModal
+          isVisible={showDatePicker}
+          mode="date"
+          backdropStyleIOS={{ backgroundColor: "black" }}
+          date={currentDatePicked}
+          onConfirm={(date) => {
+            setCurrentDatePicked(date);
+            setMonth(date.getMonth() + 1);
+            setDay(date.getDate());
+            setYear(date.getFullYear());
+            setShowDatePicker(false);
+          }}
+          onCancel={() => {
+            setShowDatePicker(false);
+          }}
+        />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -193,19 +286,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff",
   },
 
-  yourCode: {
+  whenWereYouBornText: {
     marginLeft: "10%",
     color: "black",
     fontSize: 29,
     fontWeight: "500",
   },
 
-  authContainer: {
-    flexDirection: "column",
-  },
-
-  activityContainer: {
-    marginTop: 10,
+  dateContainer: {
+    flex: 1,
+    padding: 40,
+    paddingBottom: 80,
+    flexDirection: "row",
+    justifyContent: "center",
   },
 });
 

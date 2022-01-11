@@ -9,11 +9,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import { Ionicons } from "@expo/vector-icons";
 import Input from "../../../components/Input";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
@@ -45,7 +44,6 @@ const formReducer = (state, action) => {
 
 const CreateUser1 = (props) => {
   const dispatch = useAppDispatch();
-  const [loading, setLoading] = useState(false);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -87,9 +85,7 @@ const CreateUser1 = (props) => {
         <TouchableCmp
           onPress={() => {
             dispatch(setProgress(0));
-            setTimeout(() => {
-              props.navigation.goBack();
-            }, 400);
+            props.navigation.goBack();
           }}
         >
           <Ionicons
@@ -99,12 +95,11 @@ const CreateUser1 = (props) => {
             style={{ margin: 20 }}
           />
         </TouchableCmp>
-        <View style={{ marginTop: 80 }}>
+        <View style={{ flex: 1, marginTop: 80 }}>
           <Text style={styles.yourCode}>Let's start with your name...</Text>
           <View style={styles.authContainer}>
             <Input
               id="firstName"
-              label="First Name"
               placeholder="First name (required)"
               required
               keyboardType="default"
@@ -113,6 +108,7 @@ const CreateUser1 = (props) => {
               autoCorrect={false}
               contextMenuHidden={true}
               maxLength={25}
+              blurOnSubmit={false}
               onInputChange={inputChangeHandler}
               onSubmitEditing={() => {
                 lastNameRef.current.focus();
@@ -127,14 +123,15 @@ const CreateUser1 = (props) => {
             />
             <Input
               id="lastName"
-              label="Last Name"
               placeholder="Last Name"
               keyboardType="default"
               returnKeyType="done"
               autoCorrect={false}
               contextMenuHidden={true}
               maxLength={25}
+              blurOnSubmit={false}
               onSubmitEditing={() => {
+                dispatch(setProgress(0.2));
                 props.navigation.navigate("CreateUser2");
               }}
               onInputChange={inputChangeHandler}
@@ -151,14 +148,29 @@ const CreateUser1 = (props) => {
         </View>
         <View
           style={{
-            flex: 1,
+            flexDirection: "row",
             justifyContent: "flex-end",
             alignItems: "flex-end",
           }}
         >
+          <View
+            style={{
+              flex: 1,
+              marginLeft: 20,
+              flexDirection: "row",
+              alignSelf: "center",
+              alignItems: "center",
+              justifyContent: "flex-start",
+            }}
+          >
+            <Ionicons name="ios-lock-open-outline" size={16} color="black" />
+            <Text style={{ fontSize: 13, marginHorizontal: 5 }}>
+              Your last name will only be shown to matches
+            </Text>
+          </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0.2));
+              dispatch(setProgress(0.4));
               props.navigation.navigate("CreateUser2");
             }}
           >
@@ -206,7 +218,7 @@ const styles = StyleSheet.create({
   },
 
   authContainer: {
-    flexDirection: "column",
+    marginTop: 20,
   },
 
   activityContainer: {
