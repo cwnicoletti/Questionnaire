@@ -98,10 +98,10 @@ const SignupScreen2 = (props) => {
           <View style={styles.authContainer}>
             <VerifyCodeInput
               id="numbers"
-              label="Numbers"
               keyboardType="number-pad"
               autoFocus={true}
               onInputChange={inputChangeHandler}
+              maxLength={6}
               initialValue=""
               styleInput={{
                 fontSize: 28,

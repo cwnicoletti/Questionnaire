@@ -368,12 +368,10 @@ const SignupScreen1 = (props) => {
                   </View>
                 </TouchableCmp>
               </View>
-              <View style={{ flex: 3 }}>
+              <View style={{ flex: 2 }}>
                 <VerifyCodeInput
                   id="numbers"
-                  label="Numbers"
                   keyboardType="number-pad"
-                  blurOnSubmit={true}
                   autoFocus={true}
                   inputRef={phoneNumberInputRef}
                   onSubmitEditing={() => {
