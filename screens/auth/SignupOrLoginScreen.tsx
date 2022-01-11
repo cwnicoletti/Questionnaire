@@ -71,7 +71,21 @@ const SignupOrLoginScreen = (props) => {
                 borderRadius: 35,
               }}
             >
-              <AntDesign name="apple1" size={24} color="white" />
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <AntDesign
+                  name="apple1"
+                  size={24}
+                  color="white"
+                  style={{ marginLeft: 20 }}
+                />
+              </View>
               <Text
                 style={{
                   fontSize: 17,
@@ -99,7 +113,21 @@ const SignupOrLoginScreen = (props) => {
                 borderRadius: 35,
               }}
             >
-              <FontAwesome name="facebook-square" size={24} color="white" />
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <FontAwesome
+                  name="facebook-square"
+                  size={24}
+                  color="white"
+                  style={{ marginLeft: 20 }}
+                />
+              </View>
               <Text
                 style={{
                   fontSize: 17,
@@ -127,7 +155,21 @@ const SignupOrLoginScreen = (props) => {
                 borderRadius: 35,
               }}
             >
-              <SimpleLineIcons name="phone" size={24} color="white" />
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <SimpleLineIcons
+                  name="phone"
+                  size={24}
+                  color="white"
+                  style={{ marginLeft: 20 }}
+                />
+              </View>
               <Text
                 style={{
                   fontSize: 17,
