@@ -41,7 +41,8 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "expo-linear-gradient": "~10.0.3",
-    "expo-image-picker": "~11.0.3"
+    "expo-image-picker": "~11.0.3",
+    "@react-native-community/slider": "4.1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
