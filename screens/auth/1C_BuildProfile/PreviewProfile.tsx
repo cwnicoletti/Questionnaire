@@ -20,7 +20,7 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
 import LottieView from "lottie-react-native";
 
-const ReadyToSurvey = (props) => {
+const PreviewProfile = (props) => {
   const dispatch = useAppDispatch();
   const slideAnim = useRef(new Animated.Value(-100)).current;
   const lottieRef = useRef();
@@ -112,7 +112,7 @@ const ReadyToSurvey = (props) => {
       </Animated.View>
       <ScrollView directionalLockEnabled={true}>
         <View style={{ flex: 1, alignItems: "center" }}>
-          <View style={{ }}>
+          <View style={{}}>
             <Image
               style={{
                 height: 400,
@@ -171,10 +171,7 @@ const ReadyToSurvey = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              props.navigation.navigate("BuildProfile1");
-              setTimeout(() => {
-                dispatch(setProgress(0.1));
-              }, 400);
+              props.navigation.navigate("ReadyForFirstSurveys");
             }}
           >
             <View
@@ -226,4 +223,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ReadyToSurvey;
+export default PreviewProfile;

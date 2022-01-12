@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useState } from "react";
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -9,70 +9,23 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
-import Input from "../../../components/Input";
+import Slider from "@react-native-community/slider";
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
-
-const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
-    const updateValues = {
-      ...state.inputValues,
-      [action.input]: action.value,
-    };
-    const updatedValidities = {
-      ...state.inputValidities,
-      [action.input]: action.isValid,
-    };
-    let updatedFormIsValid = true;
-    for (const key in updatedValidities) {
-      if (updatedValidities.hasOwnProperty(key)) {
-        updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
-      }
-    }
-    return {
-      formIsValid: updatedFormIsValid,
-      inputValidities: updatedValidities,
-      inputValues: updateValues,
-    };
-  }
-  return state;
-};
-
-const BuildProfile10 = (props) => {
+const FirstSurveys7 = (props) => {
+  const [isMan, setIsMan] = useState(false);
+  const [isWoman, setIsWoman] = useState(false);
+  const [isMore, setIsMore] = useState(false);
   const dispatch = useAppDispatch();
-
-  const [formState, dispatchFormState] = useReducer(formReducer, {
-    inputValues: {
-      jobPosition: "",
-    },
-    inputValidities: {
-      jobPosition: false,
-    },
-    formIsValid: false,
-  });
-
-  const inputChangeHandler = useCallback(
-    (inputIdentifier, inputValue, inputValidity) => {
-      dispatchFormState({
-        type: FORM_INPUT_UPDATE,
-        value: inputValue,
-        isValid: inputValidity,
-        input: inputIdentifier,
-      });
-    },
-    [dispatchFormState]
-  );
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
     TouchableCmp = TouchableNativeFeedback;
   }
-
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -83,7 +36,7 @@ const BuildProfile10 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.9));
+            dispatch(setProgress(0.5));
             props.navigation.goBack();
           }}
         >
@@ -94,7 +47,7 @@ const BuildProfile10 = (props) => {
             style={{ margin: 20 }}
           />
         </TouchableCmp>
-        <View style={{ flex: 1, marginTop: 80 }}>
+        <View style={{ flex: 1, marginTop: 40 }}>
           <View
             style={{
               flexDirection: "row",
@@ -102,38 +55,18 @@ const BuildProfile10 = (props) => {
               marginHorizontal: "10%",
             }}
           >
-            <Text style={styles.youAreAText}>What city do you live in?</Text>
-            <MaterialIcons
-              name="location-on"
-              size={28}
-              color="black"
-              style={{ marginHorizontal: 5 }}
-            />
+            <Text style={styles.youAreAText}>
+              How fun was the relationship?
+            </Text>
           </View>
           <View style={styles.buttonsContainer}>
-            <Input
-              id="jobPosition"
-              placeholder="City name"
-              required
-              keyboardType="default"
-              returnKeyType="next"
-              autoFocus={true}
-              autoCorrect={false}
-              contextMenuHidden={true}
-              maxLength={25}
-              blurOnSubmit={false}
-              onInputChange={inputChangeHandler}
-              onSubmitEditing={() => {
-                dispatch(setProgress(0.8));
-                props.navigation.navigate("BuildProfile10");
-              }}
-              initialValue=""
-              styleInput={{
-                fontSize: 28,
-                fontWeight: "300",
-                backgroundColor: "#ffffff",
-                marginHorizontal: "10%",
-              }}
+            <Slider
+              style={{ width: 200, height: 40 }}
+              minimumValue={1}
+              step={1}
+              maximumValue={7}
+              minimumTrackTintColor="#434aa8"
+              maximumTrackTintColor="#A1A1A1"
             />
           </View>
         </View>
@@ -158,8 +91,8 @@ const BuildProfile10 = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0));
-              props.navigation.navigate("ReadyToSurvey");
+              dispatch(setProgress(0.7));
+              props.navigation.navigate("FirstSurveys8");
             }}
           >
             <View
@@ -200,14 +133,15 @@ const styles = StyleSheet.create({
 
   youAreAText: {
     color: "black",
-    fontSize: 22,
+    fontSize: 29,
     fontWeight: "500",
   },
 
   buttonsContainer: {
     padding: 40,
     paddingBottom: 120,
+    alignItems: "center",
   },
 });
 
-export default BuildProfile10;
+export default FirstSurveys7;
