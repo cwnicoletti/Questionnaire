@@ -117,6 +117,7 @@ const BuildProfile10 = (props) => {
               required
               keyboardType="default"
               returnKeyType="next"
+              textContentType="addressCity"
               autoFocus={true}
               autoCorrect={false}
               contextMenuHidden={true}
@@ -124,8 +125,8 @@ const BuildProfile10 = (props) => {
               blurOnSubmit={false}
               onInputChange={inputChangeHandler}
               onSubmitEditing={() => {
-                dispatch(setProgress(0.8));
-                props.navigation.navigate("BuildProfile10");
+                dispatch(setProgress(0));
+                props.navigation.navigate("PreviewProfile");
               }}
               initialValue=""
               styleInput={{

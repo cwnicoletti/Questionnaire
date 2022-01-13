@@ -120,6 +120,7 @@ const BuildProfile9 = (props) => {
               required
               keyboardType="default"
               returnKeyType="next"
+              textContentType="jobTitle"
               autoFocus={true}
               autoCorrect={false}
               contextMenuHidden={true}
