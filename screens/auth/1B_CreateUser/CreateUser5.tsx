@@ -46,10 +46,10 @@ const CreateUser5 = (props) => {
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      numbers: "",
+      email: "",
     },
     inputValidities: {
-      numbers: false,
+      email: false,
     },
     formIsValid: false,
   });
@@ -96,11 +96,11 @@ const CreateUser5 = (props) => {
           <Text style={styles.yourEmailText}>... and your email?</Text>
           <View style={styles.emailContainer}>
             <Input
-              id="firstName"
+              id="email"
               placeholder="Email (optional)"
-              required
+              returnKeyType="done"
+              textContentType="emailAddress"
               keyboardType="email-address"
-              returnKeyType="next"
               autoFocus={true}
               autoCorrect={false}
               contextMenuHidden={true}
@@ -108,7 +108,10 @@ const CreateUser5 = (props) => {
               blurOnSubmit={false}
               autoCapitalize={"none"}
               onInputChange={inputChangeHandler}
-              onSubmitEditing={() => {}}
+              onSubmitEditing={() => {
+                dispatch(setProgress(0));
+                props.navigation.navigate("ReadyToBuild");
+              }}
               initialValue=""
               styleInput={{
                 fontSize: 28,
