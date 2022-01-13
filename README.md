@@ -1,6 +1,8 @@
 # Naire
 ### A survey-based dating app
 
+<video src="https://res.cloudinary.com/personaluse1234/video/upload/v1642107730/RPReplay_Final1642107349_mmht42.mp4">&nbsp;
+
 ## Getting started
 
 1.  Download [npm](https://www.npmjs.com/get-npm) from Node.js
