@@ -372,12 +372,18 @@ const SignupScreen1 = (props) => {
                 <VerifyCodeInput
                   id="numbers"
                   keyboardType="number-pad"
+                  textContentType={"telephoneNumber"}
                   autoFocus={true}
                   inputRef={phoneNumberInputRef}
-                  onSubmitEditing={() => {
-                    if (formState.formIsValid === true) {
-                      authHandler();
+                  placeholder={"Phone number"}
+                  placeholderTextColor={"grey"}
+                  onKeyPress={({ nativeEvent: { key: keyValue } }) => {
+                    if (keyValue.length > 1 && keyValue !== "Backspace") {
+                      props.navigation.navigate("SignupPhoneScreen2");
                     }
+                  }}
+                  onSubmitEditing={() => {
+                    props.navigation.navigate("SignupPhoneScreen2");
                   }}
                   onFocus={() => setIsPickingCountryCode(false)}
                   onInputChange={inputChangeHandler}
