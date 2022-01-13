@@ -99,6 +99,7 @@ const SignupScreen2 = (props) => {
             <VerifyCodeInput
               id="numbers"
               keyboardType="number-pad"
+              textContentType={"oneTimeCode"}
               autoFocus={true}
               onInputChange={inputChangeHandler}
               maxLength={6}
