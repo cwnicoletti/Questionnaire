@@ -14,15 +14,41 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const CreateUser2 = (props) => {
   const dispatch = useAppDispatch();
-  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [currentDatePicked, setCurrentDatePicked] = useState(new Date());
   const [day, setDay] = useState(0);
   const [month, setMonth] = useState(0);
   const [year, setYear] = useState(0);
-  const [currentDatePicked, setCurrentDatePicked] = useState(new Date());
+  const [age, setAge] = useState(0);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || currentDatePicked;
+    const today_date = new Date();
+    const today_year = today_date.getFullYear();
+    const today_month = today_date.getMonth();
+    const today_day = today_date.getDate();
+
+    let age = today_year - currentDate.getFullYear();
+
+    if (today_month < currentDate.getMonth() - 1) {
+      age--;
+    }
+    if (
+      currentDate.getMonth() - 1 == today_month &&
+      today_day < currentDate.getDate()
+    ) {
+      age--;
+    }
+
+    setCurrentDatePicked(currentDate);
+    setMonth(currentDate.getMonth() + 1);
+    setDay(currentDate.getDate());
+    setYear(currentDate.getFullYear());
+    setAge(age);
+  };
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -51,12 +77,29 @@ const CreateUser2 = (props) => {
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
           <Text style={styles.whenWereYouBornText}>When were you born?</Text>
-          <TouchableCmp
-            onPress={() => {
-              setShowDatePicker(true);
-            }}
-          >
-            <View style={styles.dateContainer}>
+          <View style={{}}>
+            <DateTimePicker
+              value={currentDatePicked}
+              mode="date"
+              display="spinner"
+              textColor={"#000000"}
+              themeVariant="light"
+              onChange={onChange}
+              style={{
+                marginVertical: 10,
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            />
+          </View>
+          <View style={styles.dateContainer}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                margin: 40,
+              }}
+            >
               {!month ? (
                 <View
                   style={{
@@ -195,17 +238,32 @@ const CreateUser2 = (props) => {
                 </View>
               )}
             </View>
-          </TouchableCmp>
-          <View
-            style={{
-              flexDirection: "row",
-              alignSelf: "center",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <Ionicons name="ios-lock-closed-outline" size={24} color="black" />
-            <Text style={{ marginHorizontal: 5 }}>This can't be changed</Text>
+            <Text
+              style={{
+                fontSize: 22,
+                fontWeight: "300",
+                textAlign: "center",
+                marginBottom: 5,
+              }}
+            >
+              You are: {age} years old
+            </Text>
+            <View
+              style={{
+                marginTop: 20,
+                flexDirection: "row",
+                alignSelf: "center",
+                alignItems: "center",
+                justifyContent: "flex-start",
+              }}
+            >
+              <Ionicons
+                name="ios-lock-closed-outline"
+                size={24}
+                color="black"
+              />
+              <Text style={{ marginHorizontal: 5 }}>This can't be changed</Text>
+            </View>
           </View>
         </View>
         <View
@@ -226,7 +284,9 @@ const CreateUser2 = (props) => {
             }}
           >
             <SimpleLineIcons name="globe" size={24} color="black" />
-            <Text style={{ marginHorizontal: 10 }}>Your age will be public</Text>
+            <Text style={{ marginHorizontal: 10 }}>
+              Your age will be public
+            </Text>
           </View>
           <TouchableCmp
             onPress={() => {
@@ -259,22 +319,6 @@ const CreateUser2 = (props) => {
             </View>
           </TouchableCmp>
         </View>
-        <DateTimePickerModal
-          isVisible={showDatePicker}
-          mode="date"
-          backdropStyleIOS={{ backgroundColor: "black" }}
-          date={currentDatePicked}
-          onConfirm={(date) => {
-            setCurrentDatePicked(date);
-            setMonth(date.getMonth() + 1);
-            setDay(date.getDate());
-            setYear(date.getFullYear());
-            setShowDatePicker(false);
-          }}
-          onCancel={() => {
-            setShowDatePicker(false);
-          }}
-        />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -294,10 +338,6 @@ const styles = StyleSheet.create({
   },
 
   dateContainer: {
-    flex: 1,
-    padding: 40,
-    paddingBottom: 80,
-    flexDirection: "row",
     justifyContent: "center",
   },
 });
