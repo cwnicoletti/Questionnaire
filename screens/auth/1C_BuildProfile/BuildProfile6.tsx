@@ -18,9 +18,9 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import AwesomeButton from "react-native-really-awesome-button";
 
 const BuildProfile6 = (props) => {
-  const [isMan, setIsMan] = useState(false);
-  const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState(false);
+  const [isOften, setIsOften] = useState(false);
+  const [isSometimes, setIsSometimes] = useState(false);
+  const [isRarely, setIsRarely] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -70,7 +70,9 @@ const BuildProfile6 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften((prevState) => !prevState);
+                setIsSometimes(false);
+                setIsRarely(false);
               }}
             >
               <View
@@ -85,7 +87,7 @@ const BuildProfile6 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isOften}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -122,7 +124,9 @@ const BuildProfile6 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften(false);
+                setIsSometimes((prevState) => !prevState);
+                setIsRarely(false);
               }}
             >
               <View
@@ -137,7 +141,7 @@ const BuildProfile6 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isSometimes}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -174,7 +178,7 @@ const BuildProfile6 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsRarely((prevState) => !prevState);
               }}
             >
               <View
@@ -189,7 +193,7 @@ const BuildProfile6 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isRarely}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -211,7 +215,7 @@ const BuildProfile6 = (props) => {
                     fontWeight: "300",
                   }}
                 >
-                  Never
+                  Rarely
                 </Text>
               </View>
             </AwesomeButton>

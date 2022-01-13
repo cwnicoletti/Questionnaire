@@ -19,9 +19,12 @@ import AwesomeButton from "react-native-really-awesome-button";
 import { Picker } from "react-native-wheel-datepicker";
 
 const BuildProfile8 = (props) => {
-  const [isMan, setIsMan] = useState(false);
-  const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState(false);
+  const [isHighschool, setIsHighSchool] = useState(false);
+  const [isTradeSchool, setIsTradeSchool] = useState(false);
+  const [isInCollege, setIsInCollege] = useState(false);
+  const [isUndergraduateDegree, setIsUndergraduateDegree] = useState(false);
+  const [isInGradSchool, setIsInGradSchool] = useState(false);
+  const [isGraduateDegree, setIsGraduateDegree] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -77,7 +80,12 @@ const BuildProfile8 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsHighSchool((prevState) => !prevState);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -92,7 +100,7 @@ const BuildProfile8 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isHighschool}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -129,7 +137,12 @@ const BuildProfile8 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsHighSchool(false);
+                setIsTradeSchool((prevState) => !prevState);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -144,7 +157,7 @@ const BuildProfile8 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isTradeSchool}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -181,7 +194,12 @@ const BuildProfile8 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege((prevState) => !prevState);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -196,7 +214,7 @@ const BuildProfile8 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isInCollege}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -233,7 +251,12 @@ const BuildProfile8 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree((prevState) => !prevState);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -248,7 +271,7 @@ const BuildProfile8 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isUndergraduateDegree}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -285,7 +308,12 @@ const BuildProfile8 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool((prevState) => !prevState);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -300,7 +328,7 @@ const BuildProfile8 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isInGradSchool}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -337,7 +365,12 @@ const BuildProfile8 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree((prevState) => !prevState);
               }}
             >
               <View
@@ -352,7 +385,7 @@ const BuildProfile8 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isGraduateDegree}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,

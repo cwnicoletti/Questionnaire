@@ -18,9 +18,11 @@ import BouncyCheckbox from "react-native-bouncy-checkbox";
 import AwesomeButton from "react-native-really-awesome-button";
 
 const BuildProfile2 = (props) => {
-  const [isMan, setIsMan] = useState(false);
-  const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState(false);
+  const [isOften, setIsOften] = useState(false);
+  const [isSometimes, setIsSometimes] = useState(false);
+  const [isSocially, setIsSocially] = useState(false);
+  const [isRarely, setIsRarely] = useState(false);
+  const [isNever, setIsNever] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -70,7 +72,11 @@ const BuildProfile2 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften((prevState) => !prevState);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever(false);
               }}
             >
               <View
@@ -85,7 +91,7 @@ const BuildProfile2 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isOften}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -122,7 +128,11 @@ const BuildProfile2 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften(false);
+                setIsSometimes((prevState) => !prevState);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever(false);
               }}
             >
               <View
@@ -137,7 +147,7 @@ const BuildProfile2 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isSometimes}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -174,7 +184,11 @@ const BuildProfile2 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially((prevState) => !prevState);
+                setIsRarely(false);
+                setIsNever(false);
               }}
             >
               <View
@@ -189,7 +203,7 @@ const BuildProfile2 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isSocially}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -226,7 +240,11 @@ const BuildProfile2 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely((prevState) => !prevState);
+                setIsNever(false);
               }}
             >
               <View
@@ -241,7 +259,7 @@ const BuildProfile2 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isRarely}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -278,7 +296,11 @@ const BuildProfile2 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsWoman((prevState) => !prevState);
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever((prevState) => !prevState);
               }}
             >
               <View
@@ -293,7 +315,7 @@ const BuildProfile2 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isWoman}
+                  isChecked={isNever}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,

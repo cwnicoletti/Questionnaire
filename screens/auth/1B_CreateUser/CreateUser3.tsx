@@ -64,6 +64,7 @@ const CreateUser3 = (props) => {
               borderColor={"#A1A1A1"}
               onPress={() => {
                 setIsMan((prevState) => !prevState);
+                setIsWoman(false);
               }}
             >
               <View
@@ -115,6 +116,7 @@ const CreateUser3 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
+                setIsMan(false);
                 setIsWoman((prevState) => !prevState);
               }}
             >
@@ -167,6 +169,8 @@ const CreateUser3 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
+                setIsMan(false);
+                setIsWoman(false);
                 setIsMore(true);
               }}
             >
