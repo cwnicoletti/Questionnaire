@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, Ionicons, Entypo } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
@@ -17,12 +17,13 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import AwesomeButton from "react-native-really-awesome-button";
 
-const BuildProfile4 = (props) => {
-  const [isOften, setIsOften] = useState(false);
-  const [isSometimes, setIsSometimes] = useState(false);
-  const [isSocially, setIsSocially] = useState(false);
-  const [isRarely, setIsRarely] = useState(false);
-  const [isNever, setIsNever] = useState(false);
+const BuildProfile5 = (props) => {
+  const [isHighschool, setIsHighSchool] = useState(false);
+  const [isTradeSchool, setIsTradeSchool] = useState(false);
+  const [isInCollege, setIsInCollege] = useState(false);
+  const [isUndergraduateDegree, setIsUndergraduateDegree] = useState(false);
+  const [isInGradSchool, setIsInGradSchool] = useState(false);
+  const [isGraduateDegree, setIsGraduateDegree] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -51,12 +52,16 @@ const BuildProfile4 = (props) => {
           />
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.youAreAText}>
-              Do you use recreational drugs?
-            </Text>
-            <MaterialCommunityIcons
-              name="pill"
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginHorizontal: "10%",
+            }}
+          >
+            <Text style={styles.youAreAText}>What's your education?</Text>
+            <Entypo
+              name="graduation-cap"
               size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
@@ -74,11 +79,12 @@ const BuildProfile4 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsOften((prevState) => !prevState);
-                setIsSometimes(false);
-                setIsSocially(false);
-                setIsRarely(false);
-                setIsNever(false);
+                setIsHighSchool((prevState) => !prevState);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -93,7 +99,7 @@ const BuildProfile4 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isOften}
+                  isChecked={isHighschool}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -115,7 +121,7 @@ const BuildProfile4 = (props) => {
                     fontWeight: "300",
                   }}
                 >
-                  Often
+                  High school
                 </Text>
               </View>
             </AwesomeButton>
@@ -130,11 +136,12 @@ const BuildProfile4 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsOften(false);
-                setIsSometimes((prevState) => !prevState);
-                setIsSocially(false);
-                setIsRarely(false);
-                setIsNever(false);
+                setIsHighSchool(false);
+                setIsTradeSchool((prevState) => !prevState);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -149,7 +156,7 @@ const BuildProfile4 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isSometimes}
+                  isChecked={isTradeSchool}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -171,7 +178,7 @@ const BuildProfile4 = (props) => {
                     fontWeight: "300",
                   }}
                 >
-                  Sometimes
+                  Trade school
                 </Text>
               </View>
             </AwesomeButton>
@@ -186,11 +193,12 @@ const BuildProfile4 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsOften(false);
-                setIsSometimes(false);
-                setIsSocially((prevState) => !prevState);
-                setIsRarely(false);
-                setIsNever(false);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege((prevState) => !prevState);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -205,7 +213,7 @@ const BuildProfile4 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isSocially}
+                  isChecked={isInCollege}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -227,7 +235,7 @@ const BuildProfile4 = (props) => {
                     fontWeight: "300",
                   }}
                 >
-                  Socially
+                  In college
                 </Text>
               </View>
             </AwesomeButton>
@@ -242,11 +250,12 @@ const BuildProfile4 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsOften(false);
-                setIsSometimes(false);
-                setIsSocially(false);
-                setIsRarely((prevState) => !prevState);
-                setIsNever(false);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree((prevState) => !prevState);
+                setIsInGradSchool(false);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -261,7 +270,7 @@ const BuildProfile4 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isRarely}
+                  isChecked={isUndergraduateDegree}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -283,7 +292,7 @@ const BuildProfile4 = (props) => {
                     fontWeight: "300",
                   }}
                 >
-                  Rarely
+                  Undergraduate
                 </Text>
               </View>
             </AwesomeButton>
@@ -298,11 +307,12 @@ const BuildProfile4 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
-                setIsOften(false);
-                setIsSometimes(false);
-                setIsSocially(false);
-                setIsRarely(false);
-                setIsNever((prevState) => !prevState);
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool((prevState) => !prevState);
+                setIsGraduateDegree(false);
               }}
             >
               <View
@@ -317,7 +327,7 @@ const BuildProfile4 = (props) => {
                   size={25}
                   fillColor="#434aa8"
                   unfillColor="#FFFFFF"
-                  isChecked={isNever}
+                  isChecked={isInGradSchool}
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
@@ -339,7 +349,64 @@ const BuildProfile4 = (props) => {
                     fontWeight: "300",
                   }}
                 >
-                  Never
+                  In grad school
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsHighSchool(false);
+                setIsTradeSchool(false);
+                setIsInCollege(false);
+                setIsUndergraduateDegree(false);
+                setIsInGradSchool(false);
+                setIsGraduateDegree((prevState) => !prevState);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isGraduateDegree}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Graduate degree
                 </Text>
               </View>
             </AwesomeButton>
@@ -407,7 +474,6 @@ const styles = StyleSheet.create({
   },
 
   youAreAText: {
-    marginLeft: "10%",
     color: "black",
     fontSize: 22,
     fontWeight: "500",
@@ -419,4 +485,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BuildProfile4;
+export default BuildProfile5;

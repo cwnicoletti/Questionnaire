@@ -20,7 +20,6 @@ import BuildProfile6 from "../screens/auth/1C_BuildProfile/BuildProfile6";
 import BuildProfile7 from "../screens/auth/1C_BuildProfile/BuildProfile7";
 import BuildProfile8 from "../screens/auth/1C_BuildProfile/BuildProfile8";
 import BuildProfile9 from "../screens/auth/1C_BuildProfile/BuildProfile9";
-import BuildProfile10 from "../screens/auth/1C_BuildProfile/BuildProfile10";
 import PreviewProfile from "../screens/auth/1C_BuildProfile/PreviewProfile";
 import ReadyForFirstSurveys from "../screens/auth/1C_BuildProfile/ReadyForFirstSurveys";
 import AFirstSurveysIntroduction from "../screens/auth/1D_FirstSurveys/AFirstSurveysIntroduction";
@@ -206,14 +205,6 @@ function AuthenticatedNavigator() {
       <Stack.Screen
         name="BuildProfile9"
         component={BuildProfile9}
-        options={{
-          gestureEnabled: false,
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="BuildProfile10"
-        component={BuildProfile10}
         options={{
           gestureEnabled: false,
           headerShown: false,

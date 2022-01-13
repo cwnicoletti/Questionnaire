@@ -20,7 +20,9 @@ import AwesomeButton from "react-native-really-awesome-button";
 const BuildProfile6 = (props) => {
   const [isOften, setIsOften] = useState(false);
   const [isSometimes, setIsSometimes] = useState(false);
+  const [isSocially, setIsSocially] = useState(false);
   const [isRarely, setIsRarely] = useState(false);
+  const [isNever, setIsNever] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -50,9 +52,9 @@ const BuildProfile6 = (props) => {
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.youAreAText}>Do you work out?</Text>
+            <Text style={styles.youAreAText}>Do you drink alcohol?</Text>
             <MaterialCommunityIcons
-              name="dumbbell"
+              name="glass-cocktail"
               size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
@@ -72,7 +74,9 @@ const BuildProfile6 = (props) => {
               onPress={() => {
                 setIsOften((prevState) => !prevState);
                 setIsSometimes(false);
+                setIsSocially(false);
                 setIsRarely(false);
+                setIsNever(false);
               }}
             >
               <View
@@ -126,7 +130,9 @@ const BuildProfile6 = (props) => {
               onPress={() => {
                 setIsOften(false);
                 setIsSometimes((prevState) => !prevState);
+                setIsSocially(false);
                 setIsRarely(false);
+                setIsNever(false);
               }}
             >
               <View
@@ -178,7 +184,67 @@ const BuildProfile6 = (props) => {
               borderWidth={1}
               borderColor={"#A1A1A1"}
               onPress={() => {
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially((prevState) => !prevState);
+                setIsRarely(false);
+                setIsNever(false);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isSocially}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Socially
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially(false);
                 setIsRarely((prevState) => !prevState);
+                setIsNever(false);
               }}
             >
               <View
@@ -216,6 +282,62 @@ const BuildProfile6 = (props) => {
                   }}
                 >
                   Rarely
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever((prevState) => !prevState);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isNever}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Never
                 </Text>
               </View>
             </AwesomeButton>
@@ -285,7 +407,7 @@ const styles = StyleSheet.create({
   youAreAText: {
     marginLeft: "10%",
     color: "black",
-    fontSize: 22,
+    fontSize: 29,
     fontWeight: "500",
   },
 

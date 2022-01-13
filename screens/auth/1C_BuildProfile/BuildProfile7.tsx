@@ -16,12 +16,13 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import AwesomeButton from "react-native-really-awesome-button";
-import { Picker } from "react-native-wheel-datepicker";
 
 const BuildProfile7 = (props) => {
-  const [isMan, setIsMan] = useState(false);
-  const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState(false);
+  const [isOften, setIsOften] = useState(false);
+  const [isSometimes, setIsSometimes] = useState(false);
+  const [isSocially, setIsSocially] = useState(false);
+  const [isRarely, setIsRarely] = useState(false);
+  const [isNever, setIsNever] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -51,96 +52,295 @@ const BuildProfile7 = (props) => {
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.youAreAText}>What is your height?</Text>
+            <Text style={styles.youAreAText}>Do you smoke weed?</Text>
             <Entypo
-              name="ruler"
-              size={24}
+              name="leaf"
+              size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
             />
           </View>
           <View style={styles.buttonsContainer}>
-            <Picker
+            <AwesomeButton
+              raiseLevel={1}
               style={{
-                backgroundColor: "rgba(0,0,0,0)",
+                marginVertical: 10,
               }}
-              selectedValue={"<3'0\""}
-              pickerData={[
-                "< 3' 0\"",
-                "3' 1\"",
-                "3' 2\"",
-                "3' 3\"",
-                "3' 4\"",
-                "3' 5\"",
-                "3' 6\"",
-                "3' 7\"",
-                "3' 8\"",
-                "3' 9\"",
-                "3' 10\"",
-                "3' 11\"",
-                "4' 0\"",
-                "4' 1\"",
-                "4' 2\"",
-                "4' 3\"",
-                "4' 4\"",
-                "4' 5\"",
-                "4' 6\"",
-                "4' 7\"",
-                "4' 8\"",
-                "4' 9\"",
-                "4' 10\"",
-                "4' 11\"",
-                "5' 0\"",
-                "5' 1\"",
-                "5' 2\"",
-                "5' 3\"",
-                "5' 4\"",
-                "5' 5\"",
-                "5' 6\"",
-                "5' 7\"",
-                "5' 8\"",
-                "5' 9\"",
-                "5' 10\"",
-                "5' 11\"",
-                "6' 0\"",
-                "6' 1\"",
-                "6' 2\"",
-                "6' 3\"",
-                "6' 4\"",
-                "6' 5\"",
-                "6' 6\"",
-                "6' 7\"",
-                "6' 8\"",
-                "6' 9\"",
-                "6' 10\"",
-                "6' 11\"",
-                "7' 0\"",
-                "7' 1\"",
-                "7' 2\"",
-                "7' 3\"",
-                "7' 4\"",
-                "7' 5\"",
-                "7' 6\"",
-                "7' 7\"",
-                "7' 8\"",
-                "7' 10\"",
-                "7' 11\"",
-                "8' 0\"",
-                "8' 1\"",
-                "8' 2\"",
-                "8' 3\"",
-                "8' 4\"",
-                "8' 5\"",
-                "8' 6\"",
-                "8' 7\"",
-                "8' 8\"",
-                "8' 9\"",
-                "8' 10\"",
-                "8' 11\"",
-                "> 9' 0\"",
-              ]}
-              onValueChange={() => {}}
-            />
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften((prevState) => !prevState);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever(false);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isOften}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Often
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften(false);
+                setIsSometimes((prevState) => !prevState);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever(false);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isSometimes}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Sometimes
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially((prevState) => !prevState);
+                setIsRarely(false);
+                setIsNever(false);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isSocially}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Socially
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely((prevState) => !prevState);
+                setIsNever(false);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isRarely}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Rarely
+                </Text>
+              </View>
+            </AwesomeButton>
+            <AwesomeButton
+              raiseLevel={1}
+              style={{
+                marginVertical: 10,
+              }}
+              stretch={true}
+              backgroundColor={"#ffffff"}
+              backgroundActive={"rgba(0,0,0,0)"}
+              borderWidth={1}
+              borderColor={"#A1A1A1"}
+              onPress={() => {
+                setIsOften(false);
+                setIsSometimes(false);
+                setIsSocially(false);
+                setIsRarely(false);
+                setIsNever((prevState) => !prevState);
+              }}
+            >
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  position: "absolute",
+                  justifyContent: "center",
+                }}
+              >
+                <BouncyCheckbox
+                  size={25}
+                  fillColor="#434aa8"
+                  unfillColor="#FFFFFF"
+                  isChecked={isNever}
+                  disableBuiltInState={true}
+                  iconStyle={{
+                    marginLeft: 20,
+                    borderColor: "#434aa8",
+                    borderRadius: 5,
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 22,
+                    fontWeight: "300",
+                  }}
+                >
+                  Never
+                </Text>
+              </View>
+            </AwesomeButton>
           </View>
         </View>
         <View
@@ -207,7 +407,7 @@ const styles = StyleSheet.create({
   youAreAText: {
     marginLeft: "10%",
     color: "black",
-    fontSize: 22,
+    fontSize: 29,
     fontWeight: "500",
   },
 
