@@ -13,7 +13,6 @@ import {
 import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import { Ionicons } from "@expo/vector-icons";
 
 import LottieView from "lottie-react-native";
@@ -114,22 +113,36 @@ const ReadyForFirstSurveys = (props) => {
               <Text
                 style={{ fontWeight: "500", fontSize: 26, color: "#434aa8" }}
               >
-                Woohoo!
+                Woohoo! Your profile is built!
               </Text>
               <Text style={{ fontSize: 22, fontWeight: "300", marginTop: 10 }}>
                 Time for what this app was made for!
               </Text>
-              <Text
+              <View
                 style={{
-                  fontSize: 22,
-                  fontWeight: "400",
                   marginTop: 60,
                   marginHorizontal: "10%",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                In this last section you will be filling out surveys from
-                previous relationships and dates
-              </Text>
+                <MaterialCommunityIcons
+                  name="format-list-checks"
+                  size={28}
+                  color="black"
+                />
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "300",
+                    marginHorizontal: "10%",
+                  }}
+                >
+                  In this last section you will be filling out surveys from
+                  previous relationships and dates
+                </Text>
+              </View>
             </View>
             <View
               style={{
@@ -140,10 +153,14 @@ const ReadyForFirstSurveys = (props) => {
                 justifyContent: "center",
               }}
             >
-              <MaterialCommunityIcons name="dumbbell" size={28} color="black" />
+              <MaterialCommunityIcons
+                name="chart-bar"
+                size={28}
+                color="black"
+              />
               <Text
                 style={{
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: "300",
                   marginHorizontal: 20,
                 }}
