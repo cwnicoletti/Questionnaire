@@ -104,12 +104,18 @@ const CreateUser1 = (props) => {
               required
               keyboardType="default"
               returnKeyType="next"
+              textContentType="givenName"
               autoFocus={true}
               autoCorrect={false}
               contextMenuHidden={true}
               maxLength={25}
               blurOnSubmit={false}
               onInputChange={inputChangeHandler}
+              onKeyPress={({ nativeEvent: { key: keyValue } }) => {
+                if (keyValue.length > 1 && keyValue !== "Backspace") {
+                  lastNameRef.current.focus();
+                }
+              }}
               onSubmitEditing={() => {
                 lastNameRef.current.focus();
               }}
@@ -126,10 +132,17 @@ const CreateUser1 = (props) => {
               placeholder="Last Name"
               keyboardType="default"
               returnKeyType="done"
+              textContentType="familyName"
               autoCorrect={false}
               contextMenuHidden={true}
               maxLength={25}
               blurOnSubmit={false}
+              onKeyPress={({ nativeEvent: { key: keyValue } }) => {
+                if (keyValue.length > 1 && keyValue !== "Backspace") {
+                  dispatch(setProgress(0.2));
+                  props.navigation.navigate("CreateUser2");
+                }
+              }}
               onSubmitEditing={() => {
                 dispatch(setProgress(0.2));
                 props.navigation.navigate("CreateUser2");
