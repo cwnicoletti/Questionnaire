@@ -1,7 +1,7 @@
 # Naire
 ### A survey-based dating app
 
-<video src="https://res.cloudinary.com/personaluse1234/video/upload/v1642107730/RPReplay_Final1642107349_mmht42.mp4">&nbsp;
+https://user-images.githubusercontent.com/56566033/149408953-e7a696ea-c04b-4645-9c2a-1d8ce6010e93.mp4
 
 ## Getting started
 
