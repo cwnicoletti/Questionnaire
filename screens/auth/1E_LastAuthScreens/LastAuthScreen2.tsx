@@ -63,18 +63,18 @@ const LastAuthScreen2 = (props) => {
           loop={false}
           style={{ height: 120 }}
         />
-        <Text style={{ fontWeight: "400", fontSize: 28, marginTop: 60 }}>
-          Over time our algorithm will improve who you match with
+        <Text style={{ fontWeight: "400", fontSize: 19, marginTop: 60 }}>
+          The algorithm works best when you are yourself on dates
         </Text>
         <Text
           style={{
             fontWeight: "300",
-            fontSize: 22,
+            fontSize: 18,
             marginTop: 10,
             color: "grey",
           }}
         >
-          It's only a matter of time
+          Genuine surveys mean genuine dates
         </Text>
       </View>
       <View
