@@ -1,2 +1,2 @@
 # Affiniti
-A time-limit-survery-based dating app 
+A survery-based dating app 
