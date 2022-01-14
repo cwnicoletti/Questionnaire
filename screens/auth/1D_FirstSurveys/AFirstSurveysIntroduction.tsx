@@ -65,6 +65,16 @@ const AFirstSurveysIntroduction = (props) => {
             >
               Don't worry! You can change any of your surveys at any time
             </Text>
+            <Text
+              style={{
+                fontSize: 22,
+                color: "grey",
+                fontWeight: "300",
+                margin: 10,
+              }}
+            >
+              Average survey time: 1-minute
+            </Text>
           </View>
           <ScrollView>
             <View style={styles.buttonsContainer}>
