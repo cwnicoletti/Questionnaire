@@ -11,11 +11,9 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Feather } from "@expo/vector-icons";
-import { useAppDispatch } from "../../../hooks";
 import LottieView from "lottie-react-native";
 
 const LastAuthScreen2 = (props) => {
-  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
   const lottieRef = useRef();
@@ -74,7 +72,7 @@ const LastAuthScreen2 = (props) => {
             color: "grey",
           }}
         >
-          Genuine surveys mean genuine dates
+          Genuine surveys means genuine dates
         </Text>
       </View>
       <View
@@ -84,7 +82,11 @@ const LastAuthScreen2 = (props) => {
           alignItems: "flex-end",
         }}
       >
-        <TouchableCmp onPress={() => {}}>
+        <TouchableCmp
+          onPress={() => {
+            props.navigation.navigate("InterScreen");
+          }}
+        >
           <View
             style={{
               borderColor: "#A1A1A1",
