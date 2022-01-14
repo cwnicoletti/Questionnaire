@@ -17,9 +17,8 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import Slider from "@react-native-community/slider";
 
 const FirstSurveys10 = (props) => {
-  const [isMan, setIsMan] = useState(false);
-  const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState(false);
+  const [sliderValue, setSliderValue] = useState(1);
+  const [secondSliderValue, setSecondSliderValue] = useState(1);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -50,7 +49,6 @@ const FirstSurveys10 = (props) => {
         <View style={{ flex: 1, marginTop: 40 }}>
           <View
             style={{
-              flexDirection: "row",
               alignItems: "center",
               marginHorizontal: "10%",
             }}
@@ -58,16 +56,109 @@ const FirstSurveys10 = (props) => {
             <Text style={styles.youAreAText}>
               How instinctually attracted were you to this person?
             </Text>
+            <Text
+              style={{
+                fontSize: 20,
+                color: "grey",
+                fontWeight: "300",
+                marginTop: 10,
+              }}
+            >
+              Gut feeling attraction
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              alignSelf: "center",
+              marginTop: 40,
+              marginHorizontal: "10%",
+            }}
+          >
+            <Text style={styles.youAreAText}>{sliderValue / 100}%</Text>
           </View>
           <View style={styles.buttonsContainer}>
             <Slider
-              style={{ width: 200, height: 40 }}
+              style={{ width: 300, height: 40 }}
               minimumValue={1}
               step={1}
-              maximumValue={7}
+              maximumValue={10000}
+              onValueChange={(value) => {
+                setSliderValue(value);
+              }}
               minimumTrackTintColor="#434aa8"
               maximumTrackTintColor="#A1A1A1"
             />
+            <View
+              style={{
+                width: 300,
+                marginHorizontal: 20,
+                flexDirection: "row",
+              }}
+            >
+              <Text style={{ flex: 1, marginHorizontal: 10 }}>0% least ever</Text>
+              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                100% most ever
+              </Text>
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginHorizontal: "10%",
+            }}
+          >
+            <Text
+              style={{
+                color: "black",
+                fontSize: 20,
+                fontWeight: "400",
+                textAlign: "center",
+              }}
+            >
+              How important is this to you?
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              alignSelf: "center",
+              marginTop: 40,
+              marginHorizontal: "10%",
+            }}
+          >
+            <Text style={{ color: "black", fontSize: 20, fontWeight: "400" }}>
+              {secondSliderValue / 100}%
+            </Text>
+          </View>
+          <View style={styles.buttonsContainer}>
+            <Slider
+              style={{ width: 300, height: 40 }}
+              minimumValue={1}
+              step={1}
+              maximumValue={10000}
+              onValueChange={(value) => {
+                setSecondSliderValue(value);
+              }}
+              minimumTrackTintColor="#434aa8"
+              maximumTrackTintColor="#A1A1A1"
+            />
+            <View
+              style={{
+                width: 300,
+                marginHorizontal: 20,
+                flexDirection: "row",
+              }}
+            >
+              <Text style={{ flex: 1, marginHorizontal: 10 }}>0% the least</Text>
+              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                100% the most
+              </Text>
+            </View>
           </View>
         </View>
         <View
