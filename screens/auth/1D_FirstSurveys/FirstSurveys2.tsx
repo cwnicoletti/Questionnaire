@@ -103,14 +103,13 @@ const FirstSurveys2 = (props) => {
             }}
           >
             <Text style={styles.youAreAText}>
-              Purely used as a reference in your library of surveys, what was
-              their first name?
+              What should the label for this survey be?
             </Text>
           </View>
           <View style={styles.buttonsContainer}>
             <Input
               id="jobPosition"
-              placeholder="First name"
+              placeholder="Survey 1"
               required
               keyboardType="default"
               returnKeyType="next"
