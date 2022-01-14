@@ -34,8 +34,9 @@ import FirstSurveys9 from "../screens/auth/1D_FirstSurveys/FirstSurveys9";
 import FirstSurveys10 from "../screens/auth/1D_FirstSurveys/FirstSurveys10";
 import FirstSurveys11 from "../screens/auth/1D_FirstSurveys/FirstSurveys11";
 import SurveyDone from "../screens/auth/1D_FirstSurveys/SurveyDone";
-import LastAuthScreen1 from "../screens/auth/1E_LastAuthScreens/LastAuthScreen1";
-import LastAuthScreen2 from "../screens/auth/1E_LastAuthScreens/LastAuthScreen2";
+import LastAuthScreen1 from "../screens/auth/1E_LastAuthScreens/1_LastAuthScreen1";
+import LastAuthScreen2 from "../screens/auth/1E_LastAuthScreens/1_LastAuthScreen2";
+import InterScreen from "../screens/auth/1E_LastAuthScreens/InterScreen";
 import StartupScreen from "../screens/StartupScreen";
 
 const Stack = createStackNavigator();
@@ -334,6 +335,15 @@ function AuthenticatedNavigator() {
         name="LastAuthScreen2"
         component={LastAuthScreen2}
         options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="InterScreen"
+        component={InterScreen}
+        options={{
+          cardStyleInterpolator: forFade,
           gestureEnabled: false,
           headerShown: false,
         }}

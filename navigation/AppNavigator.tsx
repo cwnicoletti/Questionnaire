@@ -5,9 +5,11 @@ import AuthenticatedNavigator from "./AuthenticatedNavigator";
 import { Dimensions, SafeAreaView, Animated } from "react-native";
 import * as Progress from "react-native-progress";
 import useDidMountEffect from "../helper/useDidMountEffect";
+import MainNavigator from "./MainNavigator";
 
 const AppNavigator = () => {
   const progress = useSelector((state) => state.progressbar.progress);
+  const isUsingMain = useSelector((state) => state.signup.isUsingMain);
   const growAnim = useRef(new Animated.Value(0)).current;
   const width = Dimensions.get("window").width;
 
@@ -63,7 +65,8 @@ const AppNavigator = () => {
           />
         </Animated.View>
       </SafeAreaView>
-      <AuthenticatedNavigator />
+      {!isUsingMain && <AuthenticatedNavigator />}
+      {isUsingMain && <MainNavigator />}
     </NavigationContainer>
   );
 };
