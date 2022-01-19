@@ -2,13 +2,15 @@ import React from "react";
 import { Provider } from "react-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import ReduxThunk from "redux-thunk";
-import AppNavigator from "./navigation/AppNavigator";
+import AppNavigator from "./navigation/1_AppNavigator";
 import signupReducer from "./store/reducers/signup";
 import progressbarReducer from "./store/reducers/progressbar";
+import toptabbarReducer from "./store/reducers/toptabbar";
 import firebase from "firebase/app";
 import * as Notifications from "expo-notifications";
 import FirebaseConfig from "./config";
 import { useFonts } from "expo-font";
+import "react-native-gesture-handler";
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -31,8 +33,9 @@ Notifications.setNotificationHandler({
 });
 
 const rootReducer = combineReducers({
-  progressbar: progressbarReducer,
   signup: signupReducer,
+  progressbar: progressbarReducer,
+  toptabbar: toptabbarReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
