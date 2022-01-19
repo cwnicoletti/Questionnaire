@@ -116,6 +116,7 @@ const Input = (props) => {
 
 const styles = StyleSheet.create({
   formControl: {
+    height: 60,
     width: "100%",
   },
 
@@ -126,6 +127,7 @@ const styles = StyleSheet.create({
   },
 
   input: {
+    width: "100%",
     paddingHorizontal: 10,
     borderRadius: 15,
     paddingVertical: 13,
