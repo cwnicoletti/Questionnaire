@@ -9,3 +9,4 @@ declare module "*.png" {
 }
 
 declare module "react-native-wheel-datepicker";
+declare module "react-native-swipeable-list";
