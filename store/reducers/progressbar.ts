@@ -12,6 +12,7 @@ export default (state = intialState, action: Action) => {
   switch (action.type) {
     case SET_PROGRESS:
       return {
+        ...state,
         progress: action.progress,
       };
     default:
