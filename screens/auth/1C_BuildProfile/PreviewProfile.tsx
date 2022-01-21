@@ -66,7 +66,6 @@ const PreviewProfile = (props) => {
           borderColor: "grey",
           borderWidth: 1,
           borderTopWidth: 0,
-          borderRadius: 10,
           transform: [{ translateY: slideAnim }],
         }}
       >
@@ -90,7 +89,7 @@ const PreviewProfile = (props) => {
               source={require("../../../assets/lottie_anims/565-camera.json")}
               autoPlay={false}
               loop={false}
-              speed={1.8}
+              speed={2.2}
               style={{
                 marginLeft: 10,
                 height: 75,
