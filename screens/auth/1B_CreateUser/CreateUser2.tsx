@@ -246,7 +246,8 @@ const CreateUser2 = (props) => {
                 marginBottom: 5,
               }}
             >
-              You are: {age} years old
+              You are: {age >= 0 ? age : null}{" "}
+              {age >= 0 ? "years old" : `${age} years old...?`}
             </Text>
             <View
               style={{
