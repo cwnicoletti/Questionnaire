@@ -100,7 +100,9 @@ const Input = (props) => {
         }}
         value={inputState.value}
         placeholder={props.placeholder ? props.placeholder : "type here..."}
-        placeholderTextColor={"grey"}
+        placeholderTextColor={
+          props.placeholderTextColor ? props.placeholderTextColor : "grey"
+        }
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
         ref={props.inputRef}
@@ -110,6 +112,7 @@ const Input = (props) => {
           <Text style={styles.errorText}>{inputState.error}</Text>
         </View>
       ) : null}
+      {props.children}
     </View>
   );
 };
