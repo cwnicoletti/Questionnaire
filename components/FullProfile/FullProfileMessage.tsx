@@ -1,24 +1,47 @@
 import React, { useEffect } from "react";
-import { StyleSheet, Text, Image, View, Dimensions } from "react-native";
 import {
-  FontAwesome,
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Platform,
+} from "react-native";
+import {
+  Ionicons,
   EvilIcons,
-  MaterialIcons,
   Feather,
   Entypo,
   MaterialCommunityIcons,
-  Ionicons,
+  SimpleLineIcons,
+  FontAwesome,
+  FontAwesome5,
 } from "@expo/vector-icons";
-import ImageWithoutMessage from "./FullProfile_components/Image/ImageWithoutMessage";
+import { LinearGradient } from "expo-linear-gradient";
 import PromptWithoutMessage from "./FullProfile_components/Prompt/PromptWithoutMessage";
+import ImageWithoutMessage from "./FullProfile_components/Image/ImageWithoutMessage";
 
-const FullProfile = (props) => {
+const FullProfileMessage = (props) => {
   const width = Dimensions.get("window").width;
 
+  let TouchableCmp: any = TouchableOpacity;
+  if (Platform.OS === "android") {
+    TouchableCmp = TouchableNativeFeedback;
+  }
+
   return (
-    <View>
+    <View style={{ backgroundColor: "#FAFAFA" }}>
       <View>
-        <ImageWithoutMessage image={props.Image1} />
+        <View>
+          <Image
+            source={{
+              uri: props.Image1,
+            }}
+            style={{ height: width, width: width, marginRight: 15 }}
+          />
+        </View>
         <View
           style={{
             marginVertical: 30,
@@ -43,7 +66,7 @@ const FullProfile = (props) => {
               marginTop: 10,
             }}
           >
-            {`99.99% chance of a better date`}
+            {`${props.predictionValue}% chance of a better date`}
           </Text>
           <View
             style={{
@@ -290,18 +313,18 @@ const FullProfile = (props) => {
       </View>
       <ImageWithoutMessage image={props.Image2} />
       <PromptWithoutMessage
-        prompt="A very important question for our relationship is..."
-        answer="What're we gonna cook together? 😊"
+        prompt="One of my favorite things to ask someone is..."
+        answer="What's your favorite color, and why?"
       />
       <ImageWithoutMessage image={props.Image3} />
       <PromptWithoutMessage
-        prompt="Something I'd love to know about your family is..."
-        answer="Do you guys have any family traditions?"
+        prompt="If I could as you any question about the universe, it would be..."
+        answer="Do you believe in a higher power? like god and stuff?"
       />
       <ImageWithoutMessage image={props.Image4} />
       <PromptWithoutMessage
-        prompt="The first thing I gotta know is..."
-        answer="Do bears beat battlestar galactica?"
+        prompt="Something I'd like to know about you..."
+        answer="What's your craziest story?"
       />
       <ImageWithoutMessage image={props.Image5} />
       <ImageWithoutMessage image={props.Image6} />
@@ -311,4 +334,4 @@ const FullProfile = (props) => {
 
 const styles = StyleSheet.create({});
 
-export default FullProfile;
+export default FullProfileMessage;
