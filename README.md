@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="expo sdk" height="128" src="https://user-images.githubusercontent.com/56566033/151096000-7d229155-5dc6-49c9-8563-3894752d872c.png">
+  <img alt="expo sdk" height="128" src="https://user-images.githubusercontent.com/56566033/151099678-4fc99cd6-03f8-4f51-b44d-959828c0113e.png">
   <h1 align="center">A survey-based dating app</h1>
 </p>
 
