@@ -1,4 +1,7 @@
 # Naire
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/29cc94176c21435ba28e91fb50e51137)](https://app.codacy.com/gh/cwnicoletti/Naire?utm_source=github.com&utm_medium=referral&utm_content=cwnicoletti/Naire&utm_campaign=Badge_Grade_Settings)
+
 ### A survey-based dating app
 
 https://user-images.githubusercontent.com/56566033/151094253-a8c50abe-6ac0-4363-b7c9-e071ce0adaf6.mov
