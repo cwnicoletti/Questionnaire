@@ -1,7 +1,17 @@
 # Naire
 ### A survey-based dating app
 
-https://user-images.githubusercontent.com/56566033/149408953-e7a696ea-c04b-4645-9c2a-1d8ce6010e93.mp4
+https://user-images.githubusercontent.com/56566033/151094253-a8c50abe-6ac0-4363-b7c9-e071ce0adaf6.mov
+
+https://user-images.githubusercontent.com/56566033/151094344-fc550f02-84ce-4846-b36c-aa6626152e4c.MOV
+
+https://user-images.githubusercontent.com/56566033/151094417-199e0925-ea3f-48b6-846d-55db1a6c9834.MOV
+
+https://user-images.githubusercontent.com/56566033/151094618-95b8d09c-0fd3-46c6-90d9-cd74e9e97c43.MOV
+
+https://user-images.githubusercontent.com/56566033/151094686-d4e27ac6-b9c3-4b55-9306-c0442af5b16b.MOV
+
+https://user-images.githubusercontent.com/56566033/151094808-b5b6b960-accf-4309-a9af-b239aadff17c.MOV
 
 ## Getting started
 
