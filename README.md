@@ -36,12 +36,6 @@ https://user-images.githubusercontent.com/56566033/151094808-b5b6b960-accf-4309-
 6.  While in the root directory of this repo, run: `expo start`
 7.  Expo Go should find your project if you're on the same wifi as your computer, if not: Open the camera app and focus on the QR code to get a notification to the app.
 
-## Testing your code
-
-Before making a pull request, run: `npm test` in the root directory
-
-Testing is supported by [jest](https://jestjs.io/) and test files (".test.js") can be found in test directories
-
 ## Contributions
 All contributions should be referenced to the [CONTRIBUTIONS](https://github.com/cwnicoletti/Naire/blob/main/CONTRIBUTING.md) file before making a pull request.
 
