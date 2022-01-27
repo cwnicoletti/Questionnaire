@@ -26,6 +26,7 @@ const BackMessages = ({ navigation }) => {
   const [city, setCity] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [predictionValue, setPredictionValue] = useState("");
+  const [params, setParams] = useState({});
 
   useEffect(() => {
     let params = {};
@@ -35,11 +36,11 @@ const BackMessages = ({ navigation }) => {
         .routes.filter((screen) => screen.name === "ChatScreen")[0] !==
       "undefined"
     ) {
-      console.log("hit");
       params = navigation
         .getState()
         .routes.filter((screen) => screen.name === "ChatScreen")[0].params;
     }
+    setParams(params);
     setName(params.name);
     setImage1(params.image1);
     setImage2(params.image2);
@@ -50,6 +51,7 @@ const BackMessages = ({ navigation }) => {
     setAge(params.age);
     setHeight(params.height);
     setWorksOut(params.worksOut);
+
     setCity(params.city);
     setJobTitle(params.jobTitle);
     setPredictionValue(params.predictionValue);
@@ -93,6 +95,12 @@ const BackMessages = ({ navigation }) => {
             height,
             worksOut,
             city,
+            smokesTobacco: params.smokesTobacco,
+            smokesWeed: params.smokesWeed,
+            drinks: params.drinks,
+            drugs: params.drugs,
+            education: params.education,
+            school: params.school,
             jobTitle,
             predictionValue,
           });
@@ -107,7 +115,7 @@ const BackMessages = ({ navigation }) => {
               borderRadius: 60 / 2,
             }}
           />
-          <Text style={{ fontSize: 16, fontWeight: "300", margin: 5 }}>
+          <Text style={{ fontSize: 16, fontWeight: "200", margin: 5 }}>
             {name}
           </Text>
         </View>

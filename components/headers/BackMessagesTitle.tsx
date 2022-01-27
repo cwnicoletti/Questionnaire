@@ -22,6 +22,7 @@ const BackMessages = ({ navigation }) => {
         justifyContent: "space-between",
         alignItems: "center",
         flexDirection: "row",
+        marginBottom: 10,
       }}
     >
       <TouchableCmp
@@ -38,9 +39,8 @@ const BackMessages = ({ navigation }) => {
       </TouchableCmp>
       <Text
         style={{
-          fontSize: 34,
-          color: "#434aa8",
-          fontFamily: "Nautilus",
+          fontSize: 22,
+          fontWeight: "200",
           padding: 5,
         }}
       >
