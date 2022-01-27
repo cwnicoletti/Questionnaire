@@ -17,8 +17,7 @@ import { setProgress } from "../../../../store/actions/progressbar/progressbar";
 import Slider from "@react-native-community/slider";
 
 const CreateSurvey2 = ({ navigation }) => {
-  const [sliderValue, setSliderValue] = useState(1);
-  const [secondSliderValue, setSecondSliderValue] = useState(1);
+  const [sliderValue, setSliderValue] = useState(0);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -56,11 +55,7 @@ const CreateSurvey2 = ({ navigation }) => {
               navigation.goBack();
             }}
           >
-            <Ionicons
-              name="ios-arrow-back"
-              size={30}
-              color="black"
-            />
+            <Ionicons name="ios-arrow-back" size={30} color="black" />
           </TouchableCmp>
           <TouchableCmp
             onPress={() => {
@@ -68,11 +63,7 @@ const CreateSurvey2 = ({ navigation }) => {
               navigation.pop();
             }}
           >
-            <Feather
-              name="x-octagon"
-              size={30}
-              color="black"
-            />
+            <Feather name="x-octagon" size={30} color="black" />
           </TouchableCmp>
         </View>
         <View style={{ flex: 1, marginTop: 20 }}>
@@ -104,6 +95,7 @@ const CreateSurvey2 = ({ navigation }) => {
               minimumValue={0}
               step={1}
               maximumValue={10000}
+              value={0}
               onValueChange={(value) => {
                 setSliderValue(value);
               }}
