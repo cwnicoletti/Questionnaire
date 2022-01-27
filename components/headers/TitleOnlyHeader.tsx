@@ -9,10 +9,15 @@ import {
   Platform,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import MaskedView from "@react-native-masked-view/masked-view";
+import { FontAwesome, Feather } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 
 const TitleOnlyHeader = ({ navigation }) => {
   const [showX, setShowX] = useState(false);
+  const [showBack, setShowBack] = useState(false);
   const opacityXAnim = useRef(new Animated.Value(0)).current;
+  const opacityBackAnim = useRef(new Animated.Value(0)).current;
 
   const showOpacityX = () => {
     Animated.timing(opacityXAnim, {
@@ -24,6 +29,22 @@ const TitleOnlyHeader = ({ navigation }) => {
 
   const removeOpacityX = () => {
     Animated.timing(opacityXAnim, {
+      toValue: 0,
+      duration: 0,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const showOpacityBack = () => {
+    Animated.timing(opacityBackAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const removeOpacityBack = () => {
+    Animated.timing(opacityBackAnim, {
       toValue: 0,
       duration: 0,
       useNativeDriver: true,
@@ -46,12 +67,33 @@ const TitleOnlyHeader = ({ navigation }) => {
           (stackNavigator) => stackNavigator.name === "ProfileScreen"
         ) !== "undefined"
     ) {
-      setShowX(true);
+      showOpacityBack();
+      setShowBack(true);
+    } else {
+      setShowBack(false);
+    }
+
+    if (
+      typeof navigation
+        .getState()
+        .routes.find(
+          (stackNavigator) => stackNavigator.name === "MainStackNavigator"
+        ).state !== "undefined" &&
+      typeof navigation
+        .getState()
+        .routes.find(
+          (stackNavigator) => stackNavigator.name === "MainStackNavigator"
+        )
+        .state.routes.find(
+          (stackNavigator) => stackNavigator.name === "PurchaseScreen"
+        ) !== "undefined"
+    ) {
       showOpacityX();
+      setShowX(true);
     } else {
       setShowX(false);
     }
-  }, [navigation.getState().routes]);
+  }, [navigation.getState()]);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -61,7 +103,7 @@ const TitleOnlyHeader = ({ navigation }) => {
   return (
     <SafeAreaView
       style={{
-        justifyContent: showX ? "space-between" : "center",
+        justifyContent: showX || showBack ? "space-between" : "center",
         alignItems: "center",
         flexDirection: "row",
       }}
@@ -79,20 +121,100 @@ const TitleOnlyHeader = ({ navigation }) => {
               marginLeft: 30,
             }}
           >
-            <Ionicons name="ios-arrow-back" size={30} color="black" />
+            <Feather name="x" size={24} color="black" />
           </Animated.View>
         </TouchableCmp>
       ) : null}
-      <Text
-        style={{
-          fontSize: 34,
-          color: "#434aa8",
-          fontFamily: "Nautilus",
-          paddingTop: 5,
-        }}
-      >
-        Naire
-      </Text>
+      {showBack ? (
+        <TouchableCmp
+          onPress={() => {
+            removeOpacityBack();
+            navigation.navigate("MainScreen");
+          }}
+        >
+          <Animated.View
+            style={{
+              opacity: opacityBackAnim,
+              marginLeft: 30,
+            }}
+          >
+            <Feather name="x" size={24} color="black" />
+          </Animated.View>
+        </TouchableCmp>
+      ) : null}
+      {showX ? (
+        <MaskedView
+          style={{
+            flex: 1,
+            height: 38,
+            backgroundColor: "black",
+          }}
+          maskElement={
+            <View
+              style={{
+                backgroundColor: "transparent",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{
+                  fontSize: 18,
+                  color: "#434aa8",
+                  textAlign: "center",
+                }}
+              >
+                Top Prediction
+              </Text>
+            </View>
+          }
+        >
+          <LinearGradient
+            colors={["#A700D1", "#434aa8"]}
+            style={{
+              height: "100%",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          />
+        </MaskedView>
+      ) : (
+        <MaskedView
+          style={{
+            height: 38,
+            width: 100,
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          maskElement={
+            <View>
+              <Text
+                style={{
+                  fontSize: 34,
+                  color: "#434aa8",
+                  fontFamily: "Nautilus",
+                  paddingHorizontal: 10,
+                  paddingVertical: 5,
+                }}
+              >
+                Naire
+              </Text>
+            </View>
+          }
+        >
+          <LinearGradient
+            colors={["#A700D1", "#434aa8"]}
+            style={{
+              height: "100%",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          />
+        </MaskedView>
+      )}
       {showX ? (
         <View
           style={{
@@ -100,7 +222,17 @@ const TitleOnlyHeader = ({ navigation }) => {
             marginRight: 30,
           }}
         >
-          <Ionicons name="ios-arrow-back" size={30} color="black" />
+          <Feather name="x" size={24} color="black" />
+        </View>
+      ) : null}
+      {showBack ? (
+        <View
+          style={{
+            opacity: 0,
+            marginRight: 30,
+          }}
+        >
+          <Feather name="x" size={24} color="black" />
         </View>
       ) : null}
     </SafeAreaView>

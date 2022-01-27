@@ -47,13 +47,7 @@ const Profile = ({ navigation }) => {
       );
       showOpacityX();
     }
-  }, [
-    navigation
-      .getState()
-      .routes.find(
-        (stackNavigator) => stackNavigator.name === "ProfileStackNavigator"
-      ),
-  ]);
+  }, [navigation.getState()]);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -87,9 +81,8 @@ const Profile = ({ navigation }) => {
       ) : null}
       <Text
         style={{
-          fontSize: 34,
-          color: "#434aa8",
-          fontFamily: "Nautilus",
+          fontSize: 22,
+          fontWeight: "200",
           padding: 5,
         }}
       >

@@ -33,18 +33,15 @@ const Questionnaires = ({ navigation }) => {
       >
         <Ionicons name="ios-create" size={28} color="black" />
       </View>
-      <View>
-        <Text
-          style={{
-            fontSize: 34,
-            color: "#434aa8",
-            fontFamily: "Nautilus",
-            padding: 5,
-          }}
-        >
-          Questionnaires
-        </Text>
-      </View>
+      <Text
+        style={{
+          fontSize: 22,
+          fontWeight: "200",
+          padding: 5,
+        }}
+      >
+        Questionnaires
+      </Text>
       <TouchableCmp
         onPress={() => {
           navigation.navigate("CreateSurvey1");
