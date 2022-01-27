@@ -28,64 +28,66 @@ const ImageWithMessage = (props) => {
         }}
         style={{ height: width, width: width, marginRight: 15 }}
       />
-      <TouchableCmp onPress={props.onOpen}>
-        <View
-          style={{
-            position: "absolute",
-            backgroundColor: "white",
-            justifyContent: "center",
-            alignItems: "center",
-            alignSelf: "flex-end",
-            right: 20,
-            bottom: 20,
-            height: 50,
-            width: 50,
-            shadowOffset: {
-              width: 0,
-              height: 0,
-            },
-            shadowColor: "black",
-            shadowOpacity: 0.1,
-            shadowRadius: 6,
-            borderRadius: 50 / 2,
-          }}
-        >
-          <MaskedView
-            style={{ flex: 1 }}
-            maskElement={
-              <View
+      {props.showMessage ? (
+        <TouchableCmp onPress={props.onOpen}>
+          <View
+            style={{
+              position: "absolute",
+              backgroundColor: "white",
+              justifyContent: "center",
+              alignItems: "center",
+              alignSelf: "flex-end",
+              right: 20,
+              bottom: 20,
+              height: 50,
+              width: 50,
+              shadowOffset: {
+                width: 0,
+                height: 0,
+              },
+              shadowColor: "black",
+              shadowOpacity: 0.1,
+              shadowRadius: 6,
+              borderRadius: 50 / 2,
+            }}
+          >
+            <MaskedView
+              style={{ flex: 1 }}
+              maskElement={
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FontAwesome
+                    name="envelope-o"
+                    size={28}
+                    color="black"
+                    style={{ position: "absolute" }}
+                  />
+                  <FontAwesome5
+                    name="heart"
+                    size={11}
+                    color="black"
+                    style={{ marginBottom: 5 }}
+                  />
+                </View>
+              }
+            >
+              <LinearGradient
+                colors={["#A700D1", "#434aa8"]}
                 style={{
                   flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
+                  height: 50,
+                  width: 50,
                 }}
-              >
-                <FontAwesome
-                  name="envelope-o"
-                  size={28}
-                  color="black"
-                  style={{ position: "absolute" }}
-                />
-                <FontAwesome5
-                  name="heart"
-                  size={11}
-                  color="black"
-                  style={{ marginBottom: 5 }}
-                />
-              </View>
-            }
-          >
-            <LinearGradient
-              colors={["#A700D1", "#434aa8"]}
-              style={{
-                flex: 1,
-                height: 50,
-                width: 50,
-              }}
-            />
-          </MaskedView>
-        </View>
-      </TouchableCmp>
+              />
+            </MaskedView>
+          </View>
+        </TouchableCmp>
+      ) : null}
     </View>
   );
 };

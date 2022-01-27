@@ -3,7 +3,7 @@ import { StyleSheet, Text, Image, View, Dimensions } from "react-native";
 import {
   FontAwesome,
   EvilIcons,
-  MaterialIcons,
+  FontAwesome5,
   Feather,
   Entypo,
   MaterialCommunityIcons,
@@ -269,7 +269,7 @@ const FullProfile = (props) => {
               alignItems: "center",
             }}
           >
-            <Entypo name="graduation-cap" size={22} color="black" />
+            <FontAwesome5 name="school" size={18} color="black" />
             <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
               {props.school}
             </Text>

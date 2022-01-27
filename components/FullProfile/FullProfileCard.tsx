@@ -30,7 +30,11 @@ const FullProfileCard = (props) => {
 
   return (
     <View style={{ backgroundColor: "#FAFAFA" }}>
-      <ImageWithMessage image={props.Image1} onOpen={props.onOpen} />
+      <ImageWithMessage
+        image={props.Image1}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
       <View
         style={{
           marginVertical: 30,
@@ -281,7 +285,7 @@ const FullProfileCard = (props) => {
             alignItems: "center",
           }}
         >
-          <Entypo name="graduation-cap" size={22} color="black" />
+          <FontAwesome5 name="school" size={18} color="black" />
           <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
             {props.school}
           </Text>
@@ -299,26 +303,49 @@ const FullProfileCard = (props) => {
           </Text>
         </View>
       </View>
-      <ImageWithMessage image={props.Image2} onOpen={props.onOpen} />
+      <ImageWithMessage
+        image={props.Image2}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
       <PromptWithMessage
         prompt="If I could as you any question about the universe, it would be..."
         answer="Do you believe in a higher power? like god and stuff?"
         onOpen={props.onOpen}
+        showMessage={props.showMessage}
       />
-      <ImageWithMessage image={props.Image3} onOpen={props.onOpen} />
+      <ImageWithMessage
+        image={props.Image3}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
       <PromptWithMessage
         prompt="One of my favorite things to ask someone is..."
         answer="What's your favorite color, and why?"
         onOpen={props.onOpen}
+        showMessage={props.showMessage}
       />
-      <ImageWithMessage image={props.Image4} onOpen={props.onOpen} />
+      <ImageWithMessage
+        image={props.Image4}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
       <PromptWithMessage
         prompt="Something I'd like to know about you..."
         answer="What's your craziest story?"
         onOpen={props.onOpen}
+        showMessage={props.showMessage}
       />
-      <ImageWithMessage image={props.Image5} onOpen={props.onOpen} />
-      <ImageWithMessage image={props.Image6} onOpen={props.onOpen} />
+      <ImageWithMessage
+        image={props.Image5}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
+      <ImageWithMessage
+        image={props.Image6}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
     </View>
   );
 };

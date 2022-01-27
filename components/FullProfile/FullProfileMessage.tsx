@@ -34,14 +34,10 @@ const FullProfileMessage = (props) => {
   return (
     <View style={{ backgroundColor: "#FAFAFA" }}>
       <View>
-        <View>
-          <Image
-            source={{
-              uri: props.Image1,
-            }}
-            style={{ height: width, width: width, marginRight: 15 }}
-          />
-        </View>
+        <ImageWithoutMessage
+          image={props.Image1}
+          showMessage={props.showMessage}
+        />
         <View
           style={{
             marginVertical: 30,
@@ -292,7 +288,7 @@ const FullProfileMessage = (props) => {
               alignItems: "center",
             }}
           >
-            <Entypo name="graduation-cap" size={22} color="black" />
+            <FontAwesome5 name="school" size={18} color="black" />
             <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
               {props.school}
             </Text>
@@ -311,23 +307,40 @@ const FullProfileMessage = (props) => {
           </View>
         </View>
       </View>
-      <ImageWithoutMessage image={props.Image2} />
+      <ImageWithoutMessage
+        image={props.Image2}
+        showMessage={props.showMessage}
+      />
       <PromptWithoutMessage
         prompt="One of my favorite things to ask someone is..."
         answer="What's your favorite color, and why?"
+        showMessage={props.showMessage}
       />
-      <ImageWithoutMessage image={props.Image3} />
+      <ImageWithoutMessage
+        image={props.Image3}
+        showMessage={props.showMessage}
+      />
       <PromptWithoutMessage
         prompt="If I could as you any question about the universe, it would be..."
         answer="Do you believe in a higher power? like god and stuff?"
       />
-      <ImageWithoutMessage image={props.Image4} />
+      <ImageWithoutMessage
+        image={props.Image4}
+        showMessage={props.showMessage}
+      />
       <PromptWithoutMessage
         prompt="Something I'd like to know about you..."
         answer="What's your craziest story?"
+        showMessage={props.showMessage}
       />
-      <ImageWithoutMessage image={props.Image5} />
-      <ImageWithoutMessage image={props.Image6} />
+      <ImageWithoutMessage
+        image={props.Image5}
+        showMessage={props.showMessage}
+      />
+      <ImageWithoutMessage
+        image={props.Image6}
+        showMessage={props.showMessage}
+      />
     </View>
   );
 };
