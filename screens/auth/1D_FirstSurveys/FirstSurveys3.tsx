@@ -17,8 +17,8 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import Slider from "@react-native-community/slider";
 
 const FirstSurveys3 = (props) => {
-  const [sliderValue, setSliderValue] = useState(1);
-  const [secondSliderValue, setSecondSliderValue] = useState(1);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [secondSliderValue, setSecondSliderValue] = useState(0);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;

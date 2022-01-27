@@ -17,8 +17,8 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import Slider from "@react-native-community/slider";
 
 const FirstSurveys4 = (props) => {
-  const [sliderValue, setSliderValue] = useState(1);
-  const [secondSliderValue, setSecondSliderValue] = useState(1);
+  const [sliderValue, setSliderValue] = useState(0);
+  const [secondSliderValue, setSecondSliderValue] = useState(0);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -46,7 +46,7 @@ const FirstSurveys4 = (props) => {
             style={{ margin: 20 }}
           />
         </TouchableCmp>
-        <View style={{ flex: 1, marginTop: 40 }}>
+        <View style={{ flex: 1, marginTop: 20 }}>
           <View
             style={{
               flexDirection: "row",
@@ -88,7 +88,9 @@ const FirstSurveys4 = (props) => {
                 flexDirection: "row",
               }}
             >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>0% least ever</Text>
+              <Text style={{ flex: 1, marginHorizontal: 10 }}>
+                0% least ever
+              </Text>
               <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
                 100% most ever
               </Text>
@@ -145,7 +147,9 @@ const FirstSurveys4 = (props) => {
                 flexDirection: "row",
               }}
             >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>0% the least</Text>
+              <Text style={{ flex: 1, marginHorizontal: 10 }}>
+                0% the least
+              </Text>
               <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
                 100% the most
               </Text>
