@@ -17,7 +17,7 @@ import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import AwesomeButton from "react-native-really-awesome-button";
 
-const BuildProfile8 = (props) => {
+const BuildProfile11 = (props) => {
   const [isOften, setIsOften] = useState(false);
   const [isSometimes, setIsSometimes] = useState(false);
   const [isSocially, setIsSocially] = useState(false);
@@ -39,7 +39,7 @@ const BuildProfile8 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.5));
+            dispatch(setProgress(0.8));
             props.navigation.goBack();
           }}
         >
@@ -52,9 +52,11 @@ const BuildProfile8 = (props) => {
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.youAreAText}>Do you drink alcohol?</Text>
+            <Text style={styles.youAreAText}>
+              Do you use recreational drugs?
+            </Text>
             <MaterialCommunityIcons
-              name="glass-cocktail"
+              name="pill"
               size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
@@ -364,8 +366,8 @@ const BuildProfile8 = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0.7));
-              props.navigation.navigate("BuildProfile9");
+              dispatch(setProgress(1));
+              props.navigation.navigate("BuildProfile12");
             }}
           >
             <View
@@ -407,7 +409,7 @@ const styles = StyleSheet.create({
   youAreAText: {
     marginLeft: "10%",
     color: "black",
-    fontSize: 29,
+    fontSize: 22,
     fontWeight: "500",
   },
 
@@ -417,4 +419,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BuildProfile8;
+export default BuildProfile11;

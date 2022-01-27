@@ -189,7 +189,7 @@ const ReadyToBuild = (props) => {
             onPress={() => {
               props.navigation.navigate("BuildProfile1");
               setTimeout(() => {
-                dispatch(setProgress(0.1));
+                dispatch(setProgress(0.09));
               }, 400);
             }}
           >

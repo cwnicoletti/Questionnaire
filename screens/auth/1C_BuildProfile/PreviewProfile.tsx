@@ -19,6 +19,7 @@ import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
 import LottieView from "lottie-react-native";
+import FullProfile from "../../../components/FullProfile/FullProfile";
 
 const PreviewProfile = (props) => {
   const dispatch = useAppDispatch();
@@ -110,95 +111,101 @@ const PreviewProfile = (props) => {
         </SafeAreaView>
       </Animated.View>
       <ScrollView directionalLockEnabled={true}>
-        <View style={{ flex: 1, alignItems: "center" }}>
-          <View style={{}}>
-            <Image
-              style={{
-                height: 400,
-                width: width,
-                alignSelf: "flex-start",
-              }}
-              source={{
-                uri: "https://res.cloudinary.com/personaluse1234/image/upload/v1641866787/image2_xajcrq.jpg",
-              }}
-            />
-          </View>
-        </View>
+        <FullProfile
+          name="Christian Nicoletti"
+          age={25}
+          height={`"6' 0"`}
+          worksOut="Sometimes"
+          city="Castaic"
+          jobTitle="Software Engineer"
+          smokesTobacco="Never"
+          smokesWeed="Rarely"
+          drinks="Socially"
+          drugs="Rarely"
+          education="Undergraduate Degree"
+          school="University of California, Santa Cruz"
+          Image1="https://res.cloudinary.com/personaluse1234/image/upload/v1641866787/Naire/my%20profile%20pictures/image2_xajcrq.jpg"
+          Image2="https://res.cloudinary.com/personaluse1234/image/upload/v1643244835/Naire/image0_9_oa2qhz.jpg"
+          Image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642563759/Naire/my%20profile%20pictures/image0_16_1_tgu2ic.png"
+          Image4="https://res.cloudinary.com/personaluse1234/image/upload/v1641866786/Naire/my%20profile%20pictures/image1_5_pgbyec.jpg"
+          Image5="https://res.cloudinary.com/personaluse1234/image/upload/v1643244829/Naire/image2_1_ixidvf.jpg"
+          Image6="https://res.cloudinary.com/personaluse1234/image/upload/v1643244829/Naire/image1_7_lga2kv.jpg"
+        />
       </ScrollView>
-      <SafeAreaView>
+      <View
+        style={{
+          marginTop: 20,
+          marginBottom: 30,
+          flexDirection: "row",
+          justifyContent: "flex-end",
+          alignItems: "flex-end",
+        }}
+      >
         <View
           style={{
+            flex: 1,
+            marginLeft: 20,
             flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
+            alignSelf: "center",
+            alignItems: "center",
+            justifyContent: "flex-start",
+          }}
+        >
+          <Text style={{ fontSize: 13, marginHorizontal: 5 }}>
+            Just one more step
+          </Text>
+          <LottieView
+            source={require("../../../assets/lottie_anims/70797-arrows.json")}
+            autoPlay={true}
+            loop={true}
+            colorFilters={[
+              {
+                keypath: "Shape Layer 2",
+                color: "#434aa8 ",
+              },
+              {
+                keypath: "Shape Layer 3",
+                color: "#434aa8 ",
+              },
+              {
+                keypath: "Shape Layer 1",
+                color: "#434aa8 ",
+              },
+            ]}
+            speed={1.2}
+            style={{ height: 50, width: 50 }}
+          />
+        </View>
+        <TouchableCmp
+          onPress={() => {
+            props.navigation.navigate("ReadyForFirstSurveys");
           }}
         >
           <View
             style={{
-              flex: 1,
-              marginLeft: 20,
-              flexDirection: "row",
-              alignSelf: "center",
+              borderColor: "#A1A1A1",
+              borderWidth: 1,
+              marginRight: 20,
+              height: 70,
+              width: 70,
               alignItems: "center",
-              justifyContent: "flex-start",
+              justifyContent: "center",
+              flexDirection: "row",
+              borderRadius: 35,
+              backgroundColor: "#ffffff",
+              shadowOffset: {
+                width: -2,
+                height: 2,
+              },
+              shadowColor: "black",
+              shadowOpacity: 0.3,
+              shadowRadius: 2,
             }}
           >
-            <Text style={{ fontSize: 13, marginHorizontal: 5 }}>
-              Just one more step
-            </Text>
-            <LottieView
-              source={require("../../../assets/lottie_anims/70797-arrows.json")}
-              autoPlay={true}
-              loop={true}
-              colorFilters={[
-                {
-                  keypath: "Shape Layer 2",
-                  color: "#434aa8 ",
-                },
-                {
-                  keypath: "Shape Layer 3",
-                  color: "#434aa8 ",
-                },
-                {
-                  keypath: "Shape Layer 1",
-                  color: "#434aa8 ",
-                },
-              ]}
-              speed={1.2}
-              style={{ height: 50, width: 50 }}
-            />
+            <Feather name="arrow-right" size={28} color={"#616161"} />
           </View>
-          <TouchableCmp
-            onPress={() => {
-              props.navigation.navigate("ReadyForFirstSurveys");
-            }}
-          >
-            <View
-              style={{
-                borderColor: "#A1A1A1",
-                borderWidth: 1,
-                marginRight: 20,
-                height: 70,
-                width: 70,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
-                borderRadius: 35,
-                backgroundColor: "#ffffff",
-                shadowOffset: {
-                  width: -2,
-                  height: 2,
-                },
-                shadowColor: "black",
-                shadowOpacity: 0.3,
-                shadowRadius: 2,
-              }}
-            >
-              <Feather name="arrow-right" size={28} color={"#616161"} />
-            </View>
-          </TouchableCmp>
-        </View>
-      </SafeAreaView>
+        </TouchableCmp>
+      </View>
     </KeyboardAvoidingView>
   );
 };

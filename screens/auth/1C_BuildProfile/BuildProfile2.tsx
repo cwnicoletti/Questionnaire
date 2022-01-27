@@ -44,17 +44,14 @@ const formReducer = (state, action) => {
 };
 
 const BuildProfile2 = (props) => {
-  const [isMan, setIsMan] = useState(false);
-  const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState(false);
   const dispatch = useAppDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      jobPosition: "",
+      city: "",
     },
     inputValidities: {
-      jobPosition: false,
+      city: false,
     },
     formIsValid: false,
   });
@@ -86,7 +83,7 @@ const BuildProfile2 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.1));
+            dispatch(setProgress(0.09));
             props.navigation.goBack();
           }}
         >
@@ -105,9 +102,11 @@ const BuildProfile2 = (props) => {
               marginHorizontal: "10%",
             }}
           >
-            <Text style={styles.youAreAText}>What is your occupation?</Text>
-            <Feather
-              name="briefcase"
+            <Text style={styles.youAreAText}>
+              What city are you currently living in?
+            </Text>
+            <Ionicons
+              name="ios-pin"
               size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
@@ -115,12 +114,12 @@ const BuildProfile2 = (props) => {
           </View>
           <View style={styles.buttonsContainer}>
             <Input
-              id="jobPosition"
-              placeholder="Job title"
+              id="city"
+              placeholder="City name"
               required
               keyboardType="default"
               returnKeyType="next"
-              textContentType="jobTitle"
+              textContentType="addressCity"
               autoFocus={true}
               autoCorrect={false}
               contextMenuHidden={true}
@@ -162,7 +161,7 @@ const BuildProfile2 = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0.3));
+              dispatch(setProgress(0.27));
               props.navigation.navigate("BuildProfile3");
             }}
           >
@@ -204,7 +203,7 @@ const styles = StyleSheet.create({
 
   youAreAText: {
     color: "black",
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: "500",
   },
 

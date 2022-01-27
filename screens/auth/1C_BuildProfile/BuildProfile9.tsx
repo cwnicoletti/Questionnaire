@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, Ionicons, Entypo } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
@@ -39,7 +39,7 @@ const BuildProfile9 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.8));
+            dispatch(setProgress(0.6));
             props.navigation.goBack();
           }}
         >
@@ -52,11 +52,9 @@ const BuildProfile9 = (props) => {
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.youAreAText}>
-              Do you use recreational drugs?
-            </Text>
-            <MaterialCommunityIcons
-              name="pill"
+            <Text style={styles.youAreAText}>Do you smoke weed?</Text>
+            <Entypo
+              name="leaf"
               size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
@@ -366,8 +364,8 @@ const BuildProfile9 = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0));
-              props.navigation.navigate("PreviewProfile");
+              dispatch(setProgress(0.8));
+              props.navigation.navigate("BuildProfile10");
             }}
           >
             <View
@@ -409,7 +407,7 @@ const styles = StyleSheet.create({
   youAreAText: {
     marginLeft: "10%",
     color: "black",
-    fontSize: 22,
+    fontSize: 29,
     fontWeight: "500",
   },
 

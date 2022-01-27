@@ -14,16 +14,9 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import AwesomeButton from "react-native-really-awesome-button";
+import { Picker } from "react-native-wheel-datepicker";
 
 const BuildProfile5 = (props) => {
-  const [isHighschool, setIsHighSchool] = useState(false);
-  const [isTradeSchool, setIsTradeSchool] = useState(false);
-  const [isInCollege, setIsInCollege] = useState(false);
-  const [isUndergraduateDegree, setIsUndergraduateDegree] = useState(false);
-  const [isInGradSchool, setIsInGradSchool] = useState(false);
-  const [isGraduateDegree, setIsGraduateDegree] = useState(false);
   const dispatch = useAppDispatch();
 
   let TouchableCmp: any = TouchableOpacity;
@@ -40,7 +33,7 @@ const BuildProfile5 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.4));
+            dispatch(setProgress(0.27));
             props.navigation.goBack();
           }}
         >
@@ -52,364 +45,97 @@ const BuildProfile5 = (props) => {
           />
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
-            }}
-          >
-            <Text style={styles.youAreAText}>What's your education?</Text>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <Text style={styles.youAreAText}>What is your height?</Text>
             <Entypo
-              name="graduation-cap"
-              size={28}
+              name="ruler"
+              size={24}
               color="black"
               style={{ marginHorizontal: 5 }}
             />
           </View>
           <View style={styles.buttonsContainer}>
-            <AwesomeButton
-              raiseLevel={1}
+            <Picker
               style={{
-                marginVertical: 10,
+                backgroundColor: "rgba(0,0,0,0)",
               }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsHighSchool((prevState) => !prevState);
-                setIsTradeSchool(false);
-                setIsInCollege(false);
-                setIsUndergraduateDegree(false);
-                setIsInGradSchool(false);
-                setIsGraduateDegree(false);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isHighschool}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  High school
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsHighSchool(false);
-                setIsTradeSchool((prevState) => !prevState);
-                setIsInCollege(false);
-                setIsUndergraduateDegree(false);
-                setIsInGradSchool(false);
-                setIsGraduateDegree(false);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isTradeSchool}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  Trade school
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsHighSchool(false);
-                setIsTradeSchool(false);
-                setIsInCollege((prevState) => !prevState);
-                setIsUndergraduateDegree(false);
-                setIsInGradSchool(false);
-                setIsGraduateDegree(false);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isInCollege}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  In college
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsHighSchool(false);
-                setIsTradeSchool(false);
-                setIsInCollege(false);
-                setIsUndergraduateDegree((prevState) => !prevState);
-                setIsInGradSchool(false);
-                setIsGraduateDegree(false);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isUndergraduateDegree}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  Undergraduate
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsHighSchool(false);
-                setIsTradeSchool(false);
-                setIsInCollege(false);
-                setIsUndergraduateDegree(false);
-                setIsInGradSchool((prevState) => !prevState);
-                setIsGraduateDegree(false);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isInGradSchool}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  In grad school
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsHighSchool(false);
-                setIsTradeSchool(false);
-                setIsInCollege(false);
-                setIsUndergraduateDegree(false);
-                setIsInGradSchool(false);
-                setIsGraduateDegree((prevState) => !prevState);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isGraduateDegree}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  Graduate degree
-                </Text>
-              </View>
-            </AwesomeButton>
+              selectedValue={"<3'0\""}
+              pickerData={[
+                "< 3' 0\"",
+                "3' 1\"",
+                "3' 2\"",
+                "3' 3\"",
+                "3' 4\"",
+                "3' 5\"",
+                "3' 6\"",
+                "3' 7\"",
+                "3' 8\"",
+                "3' 9\"",
+                "3' 10\"",
+                "3' 11\"",
+                "4' 0\"",
+                "4' 1\"",
+                "4' 2\"",
+                "4' 3\"",
+                "4' 4\"",
+                "4' 5\"",
+                "4' 6\"",
+                "4' 7\"",
+                "4' 8\"",
+                "4' 9\"",
+                "4' 10\"",
+                "4' 11\"",
+                "5' 0\"",
+                "5' 1\"",
+                "5' 2\"",
+                "5' 3\"",
+                "5' 4\"",
+                "5' 5\"",
+                "5' 6\"",
+                "5' 7\"",
+                "5' 8\"",
+                "5' 9\"",
+                "5' 10\"",
+                "5' 11\"",
+                "6' 0\"",
+                "6' 1\"",
+                "6' 2\"",
+                "6' 3\"",
+                "6' 4\"",
+                "6' 5\"",
+                "6' 6\"",
+                "6' 7\"",
+                "6' 8\"",
+                "6' 9\"",
+                "6' 10\"",
+                "6' 11\"",
+                "7' 0\"",
+                "7' 1\"",
+                "7' 2\"",
+                "7' 3\"",
+                "7' 4\"",
+                "7' 5\"",
+                "7' 6\"",
+                "7' 7\"",
+                "7' 8\"",
+                "7' 10\"",
+                "7' 11\"",
+                "8' 0\"",
+                "8' 1\"",
+                "8' 2\"",
+                "8' 3\"",
+                "8' 4\"",
+                "8' 5\"",
+                "8' 6\"",
+                "8' 7\"",
+                "8' 8\"",
+                "8' 9\"",
+                "8' 10\"",
+                "8' 11\"",
+                "> 9' 0\"",
+              ]}
+              onValueChange={() => {}}
+            />
           </View>
         </View>
         <View
@@ -433,7 +159,7 @@ const BuildProfile5 = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0.6));
+              dispatch(setProgress(0.42));
               props.navigation.navigate("BuildProfile6");
             }}
           >
@@ -474,6 +200,7 @@ const styles = StyleSheet.create({
   },
 
   youAreAText: {
+    marginLeft: "10%",
     color: "black",
     fontSize: 22,
     fontWeight: "500",

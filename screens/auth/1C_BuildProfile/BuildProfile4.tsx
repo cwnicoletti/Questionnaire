@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useReducer, useState } from "react";
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -9,24 +9,70 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import AwesomeButton from "react-native-really-awesome-button";
+import Input from "../../../components/Input";
+
+const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+
+const formReducer = (state, action) => {
+  if (action.type === "FORM_INPUT_UPDATE") {
+    const updateValues = {
+      ...state.inputValues,
+      [action.input]: action.value,
+    };
+    const updatedValidities = {
+      ...state.inputValidities,
+      [action.input]: action.isValid,
+    };
+    let updatedFormIsValid = true;
+    for (const key in updatedValidities) {
+      if (updatedValidities.hasOwnProperty(key)) {
+        updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+      }
+    }
+    return {
+      formIsValid: updatedFormIsValid,
+      inputValidities: updatedValidities,
+      inputValues: updateValues,
+    };
+  }
+  return state;
+};
 
 const BuildProfile4 = (props) => {
-  const [isOften, setIsOften] = useState(false);
-  const [isSometimes, setIsSometimes] = useState(false);
-  const [isRarely, setIsRarely] = useState(false);
   const dispatch = useAppDispatch();
+
+  const [formState, dispatchFormState] = useReducer(formReducer, {
+    inputValues: {
+      jobPosition: "",
+    },
+    inputValidities: {
+      jobPosition: false,
+    },
+    formIsValid: false,
+  });
+
+  const inputChangeHandler = useCallback(
+    (inputIdentifier, inputValue, inputValidity) => {
+      dispatchFormState({
+        type: FORM_INPUT_UPDATE,
+        value: inputValue,
+        isValid: inputValidity,
+        input: inputIdentifier,
+      });
+    },
+    [dispatchFormState]
+  );
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
     TouchableCmp = TouchableNativeFeedback;
   }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -37,7 +83,7 @@ const BuildProfile4 = (props) => {
         <StatusBar barStyle={"dark-content"} animated={true} />
         <TouchableCmp
           onPress={() => {
-            dispatch(setProgress(0.3));
+            dispatch(setProgress(0.18));
             props.navigation.goBack();
           }}
         >
@@ -49,176 +95,47 @@ const BuildProfile4 = (props) => {
           />
         </TouchableCmp>
         <View style={{ flex: 1, marginTop: 80 }}>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text style={styles.youAreAText}>Do you work out?</Text>
-            <MaterialCommunityIcons
-              name="dumbbell"
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginHorizontal: "10%",
+            }}
+          >
+            <Text style={styles.youAreAText}>What is your occupation?</Text>
+            <Feather
+              name="briefcase"
               size={28}
               color="black"
               style={{ marginHorizontal: 5 }}
             />
           </View>
           <View style={styles.buttonsContainer}>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
+            <Input
+              id="jobPosition"
+              placeholder="Job title"
+              required
+              keyboardType="default"
+              returnKeyType="next"
+              textContentType="jobTitle"
+              autoFocus={true}
+              autoCorrect={false}
+              contextMenuHidden={true}
+              maxLength={25}
+              blurOnSubmit={false}
+              onInputChange={inputChangeHandler}
+              onSubmitEditing={() => {
+                dispatch(setProgress(1));
+                props.navigation.navigate("BuildProfile10");
               }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsOften((prevState) => !prevState);
-                setIsSometimes(false);
-                setIsRarely(false);
+              initialValue=""
+              styleInput={{
+                fontSize: 28,
+                fontWeight: "300",
+                backgroundColor: "#ffffff",
+                marginHorizontal: "10%",
               }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isOften}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  Often
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsOften(false);
-                setIsSometimes((prevState) => !prevState);
-                setIsRarely(false);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isSometimes}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  Sometimes
-                </Text>
-              </View>
-            </AwesomeButton>
-            <AwesomeButton
-              raiseLevel={1}
-              style={{
-                marginVertical: 10,
-              }}
-              stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
-              borderWidth={1}
-              borderColor={"#A1A1A1"}
-              onPress={() => {
-                setIsRarely((prevState) => !prevState);
-              }}
-            >
-              <View
-                style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                <BouncyCheckbox
-                  size={25}
-                  fillColor="#434aa8"
-                  unfillColor="#FFFFFF"
-                  isChecked={isRarely}
-                  disableBuiltInState={true}
-                  iconStyle={{
-                    marginLeft: 20,
-                    borderColor: "#434aa8",
-                    borderRadius: 5,
-                  }}
-                />
-              </View>
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
-                  Rarely
-                </Text>
-              </View>
-            </AwesomeButton>
+            />
           </View>
         </View>
         <View
@@ -242,7 +159,7 @@ const BuildProfile4 = (props) => {
           </View>
           <TouchableCmp
             onPress={() => {
-              dispatch(setProgress(0.5));
+              dispatch(setProgress(0.35));
               props.navigation.navigate("BuildProfile5");
             }}
           >
@@ -283,7 +200,6 @@ const styles = StyleSheet.create({
   },
 
   youAreAText: {
-    marginLeft: "10%",
     color: "black",
     fontSize: 22,
     fontWeight: "500",
