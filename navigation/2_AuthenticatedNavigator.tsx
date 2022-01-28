@@ -11,21 +11,26 @@ import CreateUser3 from "../screens/auth/1B_CreateUser/CreateUser3";
 import CreateUser4 from "../screens/auth/1B_CreateUser/CreateUser4";
 import CreateUser5 from "../screens/auth/1B_CreateUser/CreateUser5";
 import ReadyToBuild from "../screens/auth/1B_CreateUser/ReadyToBuild";
-import BuildProfile1 from "../screens/auth/1C_BuildProfile/BuildProfile1";
-import BuildProfile2 from "../screens/auth/1C_BuildProfile/BuildProfile2";
-import BuildProfile3 from "../screens/auth/1C_BuildProfile/BuildProfile3";
-import BuildProfile4 from "../screens/auth/1C_BuildProfile/BuildProfile4";
-import BuildProfile5 from "../screens/auth/1C_BuildProfile/BuildProfile5";
-import BuildProfile6 from "../screens/auth/1C_BuildProfile/BuildProfile6";
-import BuildProfile7 from "../screens/auth/1C_BuildProfile/BuildProfile7";
-import BuildProfile8 from "../screens/auth/1C_BuildProfile/BuildProfile8";
-import BuildProfile9 from "../screens/auth/1C_BuildProfile/BuildProfile9";
-import PreviewProfile from "../screens/auth/1C_BuildProfile/PreviewProfile";
-import ReadyForFirstSurveys from "../screens/auth/1C_BuildProfile/ReadyForFirstSurveys";
+import BuildProfile1 from "../screens/auth/1C_BuildProfile/1_BuildProfile1";
+import BuildProfile2 from "../screens/auth/1C_BuildProfile/1_BuildProfile2";
+import BuildProfile3 from "../screens/auth/1C_BuildProfile/1_BuildProfile3";
+import BuildProfile4 from "../screens/auth/1C_BuildProfile/1_BuildProfile4";
+import BuildProfile5 from "../screens/auth/1C_BuildProfile/1_BuildProfile5";
+import BuildProfile6 from "../screens/auth/1C_BuildProfile/1_BuildProfile6";
+import BuildProfile7 from "../screens/auth/1C_BuildProfile/1_BuildProfile7";
+import BuildProfile8 from "../screens/auth/1C_BuildProfile/1_BuildProfile8";
+import BuildProfile9 from "../screens/auth/1C_BuildProfile/1_BuildProfile9";
+import BuildProfile10 from "../screens/auth/1C_BuildProfile/1_BuildProfile10";
+import BuildProfile11 from "../screens/auth/1C_BuildProfile/1_BuildProfile11";
+import BuildProfile12 from "../screens/auth/1C_BuildProfile/1_BuildProfile12";
+import PickPrompt from "../screens/auth/1C_BuildProfile/1_PickPrompt";
+import WritePrompt from "../screens/auth/1C_BuildProfile/2_WritePrompt";
+import PreviewProfile from "../screens/auth/1C_BuildProfile/3_PreviewProfile";
+import ReadyForFirstSurveys from "../screens/auth/1C_BuildProfile/3_ReadyForFirstSurveys";
 import AFirstSurveysIntroduction from "../screens/auth/1D_FirstSurveys/AFirstSurveysIntroduction";
 import FirstSurveys2 from "../screens/auth/1D_FirstSurveys/FirstSurveys2";
 import FirstSurveys3 from "../screens/auth/1D_FirstSurveys/FirstSurveys3";
-import FirstSurveys4 from "../screens/main/4_QuestionnaireTab/CreateSurvey/CreateSurvey3";
+import FirstSurveys4 from "../screens/auth/1D_FirstSurveys/FirstSurveys4";
 import FirstSurveys5 from "../screens/auth/1D_FirstSurveys/FirstSurveys5";
 import FirstSurveys6 from "../screens/auth/1D_FirstSurveys/FirstSurveys6";
 import FirstSurveys7 from "../screens/auth/1D_FirstSurveys/FirstSurveys7";
@@ -207,6 +212,48 @@ function AuthenticatedNavigator() {
         name="BuildProfile9"
         component={BuildProfile9}
         options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="BuildProfile10"
+        component={BuildProfile10}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="BuildProfile11"
+        component={BuildProfile11}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="BuildProfile12"
+        component={BuildProfile12}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="PickPrompt"
+        component={PickPrompt}
+        options={{
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="WritePrompt"
+        component={WritePrompt}
+        options={{
+          ...TransitionPresets.ModalSlideFromBottomIOS,
           gestureEnabled: false,
           headerShown: false,
         }}
