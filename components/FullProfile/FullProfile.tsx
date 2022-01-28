@@ -290,17 +290,17 @@ const FullProfile = (props) => {
       </View>
       <ImageWithoutMessage image={props.Image2} />
       <PromptWithoutMessage
-        prompt="A very important question for our relationship is..."
+        prompt="A very important question for our relationship"
         answer="What're we gonna cook together? 😊"
       />
       <ImageWithoutMessage image={props.Image3} />
       <PromptWithoutMessage
-        prompt="Something I'd love to know about your family is..."
+        prompt="Something I'd love to know about your family"
         answer="Do you guys have any family traditions?"
       />
       <ImageWithoutMessage image={props.Image4} />
       <PromptWithoutMessage
-        prompt="The first thing I gotta know is..."
+        prompt="The first thing I gotta know"
         answer="Do bears beat battlestar galactica?"
       />
       <ImageWithoutMessage image={props.Image5} />

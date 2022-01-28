@@ -170,53 +170,29 @@ const ProfileScreen = ({ navigation }) => {
       <StatusBar barStyle={"dark-content"} animated={true} />
       <View style={{ height: 10 }} />
       <ScrollView>
-        {!showLottie ? (
-          <FullProfileCard
-            name={params.name}
-            predictionValue={params.predictionValue}
-            age={params.age}
-            height={params.height}
-            worksOut={params.worksOut}
-            smokesTobacco={params.smokesTobacco}
-            smokesWeed={params.smokesWeed}
-            drinks={params.drinks}
-            drugs={params.drugs}
-            city={params.city}
-            school={params.school}
-            education={params.education}
-            jobTitle={params.jobTitle}
-            Image1={params.image1}
-            Image2={params.image2}
-            Image3={params.image3}
-            Image4={params.image4}
-            Image5={params.image5}
-            Image6={params.image6}
-            onOpen={onOpen}
-          />
-        ) : (
-          <FullProfileMessage
-            name={params.name}
-            predictionValue={params.predictionValue}
-            age={params.age}
-            height={params.height}
-            worksOut={params.worksOut}
-            smokesTobacco={params.smokesTobacco}
-            smokesWeed={params.smokesWeed}
-            drinks={params.drinks}
-            drugs={params.drugs}
-            city={params.city}
-            school={params.school}
-            education={params.education}
-            jobTitle={params.jobTitle}
-            Image1={params.image1}
-            Image2={params.image2}
-            Image3={params.image3}
-            Image4={params.image4}
-            Image5={params.image5}
-            Image6={params.image6}
-            onOpen={onOpen}
-          />
-        )}
+        <FullProfileCard
+          name={params.name}
+          predictionValue={params.predictionValue}
+          age={params.age}
+          height={params.height}
+          worksOut={params.worksOut}
+          smokesTobacco={params.smokesTobacco}
+          smokesWeed={params.smokesWeed}
+          drinks={params.drinks}
+          drugs={params.drugs}
+          city={params.city}
+          school={params.school}
+          education={params.education}
+          jobTitle={params.jobTitle}
+          Image1={params.image1}
+          Image2={params.image2}
+          Image3={params.image3}
+          Image4={params.image4}
+          Image5={params.image5}
+          Image6={params.image6}
+          onOpen={onOpen}
+          showMessage={!showLottie}
+        />
       </ScrollView>
       <Modalize
         ref={modalizeRef}
@@ -327,7 +303,7 @@ const ProfileScreen = ({ navigation }) => {
               name="x"
               size={24}
               color="black"
-              style={{ paddingLeft: 20, opacity: 0 }}
+              style={{ paddingLeft: 30, opacity: 0 }}
             />
             <View
               style={{
@@ -370,9 +346,7 @@ const ProfileScreen = ({ navigation }) => {
                   }}
                 />
               </MaskedView>
-              <Text
-                style={{ fontSize: 20, fontWeight: "200", paddingRight: 20 }}
-              >
+              <Text style={{ fontSize: 20, fontWeight: "200" }}>
                 Send a message
               </Text>
             </View>
@@ -381,7 +355,7 @@ const ProfileScreen = ({ navigation }) => {
                 name="x"
                 size={24}
                 color="black"
-                style={{ padding: 20 }}
+                style={{ padding: 20, paddingRight: 30 }}
               />
             </TouchableCmp>
           </View>
@@ -430,14 +404,12 @@ const ProfileScreen = ({ navigation }) => {
                 onInputChange={inputChangeHandler}
                 initialValue=""
                 styleInput={{
-                  height: 40,
+                  height: "100%",
                   width: "100%",
                   backgroundColor: "rgba(0,0,0,0)",
                   paddingHorizontal: 15,
                   paddingRight: 45,
                   marginHorizontal: 0,
-                  marginVertical: 5,
-                  marginTop: 10,
                   fontSize: 16,
                   fontWeight: "300",
                   color: "black",
