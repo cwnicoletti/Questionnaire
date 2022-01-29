@@ -309,8 +309,8 @@ const FullProfileCard = (props) => {
         showMessage={props.showMessage}
       />
       <PromptWithMessage
-        prompt="If I could as you any question about the universe, it would be..."
-        answer="Do you believe in a higher power? like god and stuff?"
+        prompt={props.prompt1}
+        answer={props.answer1}
         onOpen={props.onOpen}
         showMessage={props.showMessage}
       />
@@ -320,8 +320,8 @@ const FullProfileCard = (props) => {
         showMessage={props.showMessage}
       />
       <PromptWithMessage
-        prompt="One of my favorite things to ask someone is..."
-        answer="What's your favorite color, and why?"
+        prompt={props.prompt2}
+        answer={props.answer2}
         onOpen={props.onOpen}
         showMessage={props.showMessage}
       />
@@ -331,8 +331,8 @@ const FullProfileCard = (props) => {
         showMessage={props.showMessage}
       />
       <PromptWithMessage
-        prompt="Something I'd like to know about you..."
-        answer="What's your craziest story?"
+        prompt={props.prompt3}
+        answer={props.answer3}
         onOpen={props.onOpen}
         showMessage={props.showMessage}
       />
