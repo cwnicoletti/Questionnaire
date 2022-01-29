@@ -31,7 +31,7 @@ import {
   SimpleLineIcons,
 } from "@expo/vector-icons";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import FullProfileCard from "../../../components/FullProfile/FullProfileCard";
+import FullProfile from "../../../components/FullProfile/FullProfile";
 import * as Progress from "react-native-progress";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
@@ -39,6 +39,8 @@ import { Modalize } from "react-native-modalize";
 import Input from "../../../components/Input";
 import KeyboardSpacer from "react-native-keyboard-spacer";
 import LottieView from "lottie-react-native";
+import { CommonActions } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -166,6 +168,27 @@ const CardMainScreen = ({ navigation }) => {
     }).start();
   };
 
+  // TODO: hide tabbar on scroll
+  // let offset = 0;
+  // const onScrollHandler = (e) => {
+  //   const currentOffset = e.nativeEvent.contentOffset.y;
+  //   if (currentOffset > 100) {
+  //     offset = currentOffset;
+  //     navigation.getParent().setParams({
+  //       tabBarStyle: "none",
+  //       offset: offset,
+  //     });
+  //   }
+
+  //   if (currentOffset < 100) {
+  //     offset = currentOffset;
+  //     navigation.getParent().setParams({
+  //       tabBarStyle: null,
+  //       offset: offset,
+  //     });
+  //   }
+  // };
+
   useEffect(() => {
     setLoading(true);
     fadeInLoading();
@@ -179,53 +202,57 @@ const CardMainScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      enabled={true}
-      style={styles.screen}
-    >
+    <View style={styles.screen}>
       <StatusBar barStyle={"dark-content"} animated={true} />
       {!loading ? (
         <Animated.View style={{ opacity: fadeAnim, justifyContent: "center" }}>
-          <ScrollView>
-            <TouchableCmp
-              onPress={() => {
-                navigation.navigate("CardPreferencesScreen");
-              }}
-            >
-              <EvilIcons
-                name="search"
-                size={32}
-                color="black"
-                style={{
-                  alignSelf: "flex-end",
-                  paddingBottom: 23,
-                  paddingRight: 25,
+          <ScrollView
+          // TODO: hide tabbar on scroll
+          // onScroll={onScrollHandler}
+          // showsVerticalScrollIndicator={false}
+          // scrollEventThrottle={1}
+          >
+            <SafeAreaView>
+              <TouchableCmp
+                onPress={() => {
+                  navigation.navigate("CardPreferencesScreen");
                 }}
+              >
+                <EvilIcons
+                  name="search"
+                  size={32}
+                  color="black"
+                  style={{
+                    alignSelf: "flex-end",
+                    paddingBottom: 23,
+                    paddingRight: 25,
+                  }}
+                />
+              </TouchableCmp>
+              <FullProfile
+                name="Sonya"
+                predictionValue={98.67}
+                age={27}
+                height={`5' 6"`}
+                worksOut="Sometimes"
+                smokesTobacco="Never"
+                smokesWeed="Never"
+                drinks="Socially"
+                drugs="Rarely"
+                education="Undergraduate Degree"
+                city="San Jose"
+                school="University of California, Berkley"
+                jobTitle="Product Marketing Manager at SoundCloud"
+                Image1="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic2_hzqqeq.jpg"
+                Image2="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic4_oswkd9.jpg"
+                Image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic9_g0qjfe.jpg"
+                Image4="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic10_cxnyt4.jpg"
+                Image5="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic11_frgkta.jpg"
+                Image6="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic5_gsigto.jpg"
+                onOpen={onOpen}
+                showMessage={!showLottie}
               />
-            </TouchableCmp>
-            <FullProfileCard
-              name="Sonya"
-              predictionValue={98.67}
-              age={27}
-              height={`5' 6"`}
-              worksOut="Sometimes"
-              smokesTobacco="Never"
-              smokesWeed="Never"
-              drinks="Socially"
-              drugs="Rarely"
-              education="Undergraduate Degree"
-              city="San Jose"
-              school="University of California, Berkley"
-              jobTitle="Product Marketing Manager at SoundCloud"
-              Image1="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic2_hzqqeq.jpg"
-              Image2="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic4_oswkd9.jpg"
-              Image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic9_g0qjfe.jpg"
-              Image4="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic10_cxnyt4.jpg"
-              Image5="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic11_frgkta.jpg"
-              Image6="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic5_gsigto.jpg"
-              onOpen={onOpen}
-            />
+            </SafeAreaView>
           </ScrollView>
           <TouchableCmp
             onPress={() => {
@@ -342,7 +369,7 @@ const CardMainScreen = ({ navigation }) => {
                   <Text
                     style={{ fontSize: 16, fontWeight: "200", marginTop: 5 }}
                   >
-                    They'll recieve your notifcation soon
+                    They'll recieve your notifcation soon!
                   </Text>
                 </View>
               </Animated.View>
@@ -368,7 +395,7 @@ const CardMainScreen = ({ navigation }) => {
                   name="x"
                   size={24}
                   color="black"
-                  style={{ paddingLeft: 20, opacity: 0 }}
+                  style={{ paddingLeft: 30, opacity: 0 }}
                 />
                 <View
                   style={{
@@ -411,13 +438,7 @@ const CardMainScreen = ({ navigation }) => {
                       }}
                     />
                   </MaskedView>
-                  <Text
-                    style={{
-                      fontSize: 20,
-                      fontWeight: "200",
-                      paddingRight: 20,
-                    }}
-                  >
+                  <Text style={{ fontSize: 20, fontWeight: "200" }}>
                     Send a message
                   </Text>
                 </View>
@@ -426,7 +447,7 @@ const CardMainScreen = ({ navigation }) => {
                     name="x"
                     size={24}
                     color="black"
-                    style={{ padding: 20 }}
+                    style={{ padding: 20, paddingRight: 30 }}
                   />
                 </TouchableCmp>
               </View>
@@ -475,14 +496,12 @@ const CardMainScreen = ({ navigation }) => {
                     onInputChange={inputChangeHandler}
                     initialValue=""
                     styleInput={{
-                      height: 40,
+                      height: "100%",
                       width: "100%",
                       backgroundColor: "rgba(0,0,0,0)",
                       paddingHorizontal: 15,
                       paddingRight: 45,
                       marginHorizontal: 0,
-                      marginVertical: 5,
-                      marginTop: 10,
                       fontSize: 16,
                       fontWeight: "300",
                       color: "black",
@@ -570,6 +589,7 @@ const CardMainScreen = ({ navigation }) => {
         <MaskedView
           style={{
             height: "100%",
+            marginTop: 15,
             alignItems: "center",
             justifyContent: "center",
           }}
@@ -582,18 +602,20 @@ const CardMainScreen = ({ navigation }) => {
                 opacity: fadeLoadingAnim,
               }}
             >
-              <Progress.Circle
-                size={150}
-                color={"#434aa8"}
-                borderWidth={1}
-                strokeCap={"round"}
-                thickness={2}
-                indeterminate={true}
-                style={{
-                  paddingTop: 10,
-                  alignItems: "center",
-                }}
-              ></Progress.Circle>
+              <SafeAreaView>
+                <Progress.Circle
+                  size={150}
+                  color={"#434aa8"}
+                  borderWidth={1}
+                  strokeCap={"round"}
+                  thickness={2}
+                  indeterminate={true}
+                  style={{
+                    paddingTop: 10,
+                    alignItems: "center",
+                  }}
+                />
+              </SafeAreaView>
             </Animated.View>
           }
         >
@@ -606,7 +628,7 @@ const CardMainScreen = ({ navigation }) => {
           />
         </MaskedView>
       )}
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

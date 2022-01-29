@@ -1,314 +1,355 @@
-import React, { useEffect } from "react";
-import { StyleSheet, Text, Image, View, Dimensions } from "react-native";
+import React, { useEffect, useRef } from "react";
 import {
-  FontAwesome,
+  StyleSheet,
+  Text,
+  Image,
+  View,
+  Dimensions,
+  TouchableOpacity,
+  TouchableNativeFeedback,
+  Platform,
+} from "react-native";
+import {
+  Ionicons,
   EvilIcons,
-  FontAwesome5,
   Feather,
   Entypo,
   MaterialCommunityIcons,
-  Ionicons,
+  SimpleLineIcons,
+  FontAwesome,
+  FontAwesome5,
 } from "@expo/vector-icons";
-import ImageWithoutMessage from "./FullProfile_components/Image/ImageWithoutMessage";
-import PromptWithoutMessage from "./FullProfile_components/Prompt/PromptWithoutMessage";
+import PromptWithMessage from "./FullProfile_components/Prompt/PromptWithMessage";
+import ImageWithMessage from "./FullProfile_components/Image/ImageWithMessage";
 
-const FullProfile = (props) => {
-  const width = Dimensions.get("window").width;
+const FullProfileCard = (props) => {
+  let TouchableCmp: any = TouchableOpacity;
+  if (Platform.OS === "android") {
+    TouchableCmp = TouchableNativeFeedback;
+  }
 
   return (
-    <View>
-      <View>
-        <ImageWithoutMessage image={props.Image1} />
-        <View
+    <View style={{ backgroundColor: "#FAFAFA" }}>
+      <ImageWithMessage
+        image={props.Image1}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
+      <View
+        style={{
+          marginVertical: 30,
+          justifyContent: "center",
+        }}
+      >
+        <Text
           style={{
-            marginVertical: 30,
-            justifyContent: "center",
+            fontSize: 36,
+            fontWeight: "200",
+            marginLeft: 20,
           }}
         >
-          <Text
-            style={{
-              fontSize: 36,
-              fontWeight: "200",
-              marginLeft: 20,
-            }}
-          >
-            {props.name}
-          </Text>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "300",
-              color: "#434aa8",
-              marginLeft: 20,
-              marginTop: 10,
-            }}
-          >
-            {`99.99% chance of a better date`}
-          </Text>
+          {props.name}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: "300",
+            color: "#434aa8",
+            marginLeft: 20,
+            marginTop: 10,
+          }}
+        >
+          {`${props.predictionValue}% chance of a better date`}
+        </Text>
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            marginVertical: 10,
+            marginHorizontal: 18,
+          }}
+        >
           <View
             style={{
               flexDirection: "row",
-              flexWrap: "wrap",
-              marginVertical: 10,
-              marginHorizontal: 18,
-            }}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                paddingHorizontal: 15,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                margin: 2,
-              }}
-            >
-              <Ionicons name="ios-hourglass" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.age}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                margin: 2,
-                paddingHorizontal: 15,
-              }}
-            >
-              <Entypo name="ruler" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginLeft: 10,
-                }}
-              >
-                {props.height}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                paddingHorizontal: 15,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                margin: 2,
-              }}
-            >
-              <MaterialCommunityIcons name="dumbbell" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.worksOut}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                paddingHorizontal: 15,
-                margin: 2,
-              }}
-            >
-              <MaterialCommunityIcons name="smoking" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.smokesTobacco}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                paddingHorizontal: 15,
-                margin: 2,
-              }}
-            >
-              <Entypo name="leaf" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.smokesWeed}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                paddingHorizontal: 15,
-                margin: 2,
-              }}
-            >
-              <MaterialCommunityIcons
-                name="glass-cocktail"
-                size={16}
-                color="black"
-              />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.drinks}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                paddingHorizontal: 15,
-                margin: 2,
-              }}
-            >
-              <MaterialCommunityIcons name="pill" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.drugs}
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 0.7,
-                height: 30,
-                borderColor: "black",
-                borderRadius: 50,
-                paddingHorizontal: 15,
-                margin: 2,
-              }}
-            >
-              <Entypo name="graduation-cap" size={16} color="black" />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontWeight: "300",
-                  marginHorizontal: 5,
-                }}
-              >
-                {props.education}
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              marginHorizontal: 20,
               alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              paddingHorizontal: 15,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              margin: 2,
             }}
           >
-            <Ionicons name="ios-pin" size={22} color="black" />
-            <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
-              {props.city}
+            <Ionicons name="ios-hourglass" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.age}
             </Text>
           </View>
           <View
             style={{
               flexDirection: "row",
-              marginHorizontal: 20,
               alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              margin: 2,
+              paddingHorizontal: 15,
             }}
           >
-            <FontAwesome5 name="school" size={18} color="black" />
-            <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
-              {props.school}
+            <Entypo name="ruler" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginLeft: 10,
+              }}
+            >
+              {props.height}
             </Text>
           </View>
           <View
             style={{
               flexDirection: "row",
-              marginHorizontal: 20,
               alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              paddingHorizontal: 15,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              margin: 2,
             }}
           >
-            <Feather name="briefcase" size={22} color="black" />
-            <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
-              {props.jobTitle}
+            <MaterialCommunityIcons name="dumbbell" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.worksOut}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              paddingHorizontal: 15,
+              margin: 2,
+            }}
+          >
+            <MaterialCommunityIcons name="smoking" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.smokesTobacco}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              paddingHorizontal: 15,
+              margin: 2,
+            }}
+          >
+            <Entypo name="leaf" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.smokesWeed}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              paddingHorizontal: 15,
+              margin: 2,
+            }}
+          >
+            <MaterialCommunityIcons
+              name="glass-cocktail"
+              size={16}
+              color="black"
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.drinks}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              paddingHorizontal: 15,
+              margin: 2,
+            }}
+          >
+            <MaterialCommunityIcons name="pill" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.drugs}
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              borderWidth: 0.7,
+              height: 30,
+              borderColor: "black",
+              borderRadius: 50,
+              paddingHorizontal: 15,
+              margin: 2,
+            }}
+          >
+            <Entypo name="graduation-cap" size={16} color="black" />
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "300",
+                marginHorizontal: 5,
+              }}
+            >
+              {props.education}
             </Text>
           </View>
         </View>
+        <View
+          style={{
+            flexDirection: "row",
+            marginHorizontal: 20,
+            alignItems: "center",
+          }}
+        >
+          <Ionicons name="ios-pin" size={22} color="black" />
+          <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
+            {props.city}
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            marginHorizontal: 20,
+            alignItems: "center",
+          }}
+        >
+          <FontAwesome5 name="school" size={18} color="black" />
+          <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
+            {props.school}
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            marginHorizontal: 20,
+            alignItems: "center",
+          }}
+        >
+          <Feather name="briefcase" size={22} color="black" />
+          <Text style={{ fontSize: 18, fontWeight: "300", margin: 10 }}>
+            {props.jobTitle}
+          </Text>
+        </View>
       </View>
-      <ImageWithoutMessage image={props.Image2} />
-      <PromptWithoutMessage
-        prompt="A very important question for our relationship"
-        answer="What're we gonna cook together? 😊"
+      <ImageWithMessage
+        image={props.Image2}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
       />
-      <ImageWithoutMessage image={props.Image3} />
-      <PromptWithoutMessage
-        prompt="Something I'd love to know about your family"
-        answer="Do you guys have any family traditions?"
+      <PromptWithMessage
+        prompt={props.prompt1}
+        answer={props.answer1}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
       />
-      <ImageWithoutMessage image={props.Image4} />
-      <PromptWithoutMessage
-        prompt="The first thing I gotta know"
-        answer="Do bears beat battlestar galactica?"
+      <ImageWithMessage
+        image={props.Image3}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
       />
-      <ImageWithoutMessage image={props.Image5} />
-      <ImageWithoutMessage image={props.Image6} />
+      <PromptWithMessage
+        prompt={props.prompt2}
+        answer={props.answer2}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
+      <ImageWithMessage
+        image={props.Image4}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
+      <PromptWithMessage
+        prompt={props.prompt3}
+        answer={props.answer3}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
+      <ImageWithMessage
+        image={props.Image5}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
+      <ImageWithMessage
+        image={props.Image6}
+        onOpen={props.onOpen}
+        showMessage={props.showMessage}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({});
 
-export default FullProfile;
+export default FullProfileCard;

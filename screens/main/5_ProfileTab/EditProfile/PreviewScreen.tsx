@@ -50,6 +50,7 @@ const PreviewScreen = ({ navigation }) => {
         <ScrollView>
           <FullProfile
             name="Christian Nicoletti"
+            predictionValue={99.99}
             age={25}
             height={`"6' 0"`}
             worksOut="Sometimes"
@@ -67,6 +68,7 @@ const PreviewScreen = ({ navigation }) => {
             Image4="https://res.cloudinary.com/personaluse1234/image/upload/v1641866786/Naire/my%20profile%20pictures/image1_5_pgbyec.jpg"
             Image5="https://res.cloudinary.com/personaluse1234/image/upload/v1642563737/Naire/my%20profile%20pictures/image1_6_v4kvyb.jpg"
             Image6="https://res.cloudinary.com/personaluse1234/image/upload/v1642563729/Naire/my%20profile%20pictures/DSC_6411_1_1_eqvpwm.jpg"
+            showMessage={false}
           />
         </ScrollView>
       ) : null}

@@ -12,7 +12,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { EvilIcons, Feather, SimpleLineIcons } from "@expo/vector-icons";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";
-import FullProfileMessage from "../../../../components/FullProfile/FullProfileMessage";
+import FullProfile from "../../../../components/FullProfile/FullProfile";
 
 const CardMainScreen = ({ navigation }) => {
   const dispatch = useAppDispatch();
@@ -41,7 +41,7 @@ const CardMainScreen = ({ navigation }) => {
     >
       <StatusBar barStyle={"dark-content"} animated={true} />
       <ScrollView>
-        <FullProfileMessage
+        <FullProfile
           name={params.name}
           predictionValue={params.predictionValue}
           age={params.age}
@@ -61,6 +61,7 @@ const CardMainScreen = ({ navigation }) => {
           Image4={params.image4}
           Image5={params.image5}
           Image6={params.image6}
+          showMessage={false}
         />
       </ScrollView>
     </KeyboardAvoidingView>

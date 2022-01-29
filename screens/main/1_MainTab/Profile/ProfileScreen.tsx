@@ -30,7 +30,7 @@ import {
   SimpleLineIcons,
 } from "@expo/vector-icons";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";
-import FullProfileCard from "../../../../components/FullProfile/FullProfileCard";
+import FullProfile from "../../../../components/FullProfile/FullProfile";
 import { Modalize } from "react-native-modalize";
 import { Host, Portal } from "react-native-portalize";
 import Input from "../../../../components/Input";
@@ -38,7 +38,6 @@ import KeyboardSpacer from "react-native-keyboard-spacer";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 import LottieView from "lottie-react-native";
-import FullProfileMessage from "../../../../components/FullProfile/FullProfileMessage";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -67,7 +66,7 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const ProfileScreen = ({ navigation }) => {
+const ProfileScreen = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const [params, setParams] = useState({});
   const [showLottie, setShowLottie] = useState(false);
@@ -139,19 +138,10 @@ const ProfileScreen = ({ navigation }) => {
   }
 
   useEffect(() => {
-    let params = {};
-    if (
-      typeof navigation
-        .getState()
-        .routes.filter((screen) => screen.name === "ProfileScreen")[0] !==
-      "undefined"
-    ) {
-      params = navigation
-        .getState()
-        .routes.filter((screen) => screen.name === "ProfileScreen")[0].params;
+    if (route.params) {
+      setParams(route.params);
     }
-    setParams(params);
-  }, []);
+  }, [route.params]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
@@ -170,7 +160,7 @@ const ProfileScreen = ({ navigation }) => {
       <StatusBar barStyle={"dark-content"} animated={true} />
       <View style={{ height: 10 }} />
       <ScrollView>
-        <FullProfileCard
+        <FullProfile
           name={params.name}
           predictionValue={params.predictionValue}
           age={params.age}
