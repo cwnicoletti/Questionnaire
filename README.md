@@ -20,9 +20,9 @@ https://user-images.githubusercontent.com/56566033/151604918-b02ec624-7a49-4118-
 
 https://user-images.githubusercontent.com/56566033/151604981-0f38b94e-789c-4da5-9ecc-941594379d7b.MP4
 
-https://user-images.githubusercontent.com/56566033/151605013-ac6e46f5-8bac-4f80-9f12-7ea3f6425511.mov
+https://user-images.githubusercontent.com/56566033/152053399-6f104cf8-91a3-47d1-b0f6-3948a37ff6b3.MP4
 
-https://user-images.githubusercontent.com/56566033/151605067-7f969fce-8ca0-4fee-8588-f2a60be0426c.MP4
+https://user-images.githubusercontent.com/56566033/152052763-cd1a9624-f58d-4701-8802-6ddb2d8c3286.MP4
 
 ## Getting started
 
@@ -39,7 +39,6 @@ All contributions should be referenced to the [CONTRIBUTIONS](https://github.com
 
 ## Dependencies
 [Package.json](https://github.com/cwnicoletti/Naire/blob/main/package.json)
-
 "@ptomasroos/react-native-multi-slider": "^2.2.2",<br />
 "@rainbow-me/animated-charts": "^1.0.0-alpha.6",<br />
 "@react-native-async-storage/async-storage": "~1.15.0",<br />
@@ -78,6 +77,7 @@ All contributions should be referenced to the [CONTRIBUTIONS](https://github.com
 "react-native-progress": "^5.0.0",<br />
 "react-native-really-awesome-button": "^1.6.0",<br />
 "react-native-reanimated": "^2.2.4",<br />
+"react-native-responsive-linechart": "^5.7.1",<br />
 "react-native-safe-area-context": "3.3.2",<br />
 "react-native-screens": "~3.8.0",<br />
 "react-native-search-box": "0.0.20",<br />
