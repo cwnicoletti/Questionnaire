@@ -15,10 +15,8 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import * as Progress from "react-native-progress";
 import useDidMountEffect from "../../../helper/useDidMountEffect";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import LottieView from "lottie-react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
-import Modal from "react-native-modal";
 import LockedItem from "../../../components/MainScreenPredictions/LockedItem";
 import Prediction from "../../../components/MainScreenPredictions/Prediction";
 
@@ -28,7 +26,6 @@ const MainScreen = ({ navigation }) => {
   const [showPercent, setShowPercent] = useState(false);
   const [showLoadingText, setShowLoadingText] = useState(false);
   const [loadTopPredictions, setLoadTopPredictions] = useState(false);
-  const [isModalVisible, setModalVisible] = useState(false);
 
   const fadeProgressAnim = useRef(new Animated.Value(0)).current;
   const fadeTextAnim = useRef(new Animated.Value(1)).current;
@@ -49,6 +46,12 @@ const MainScreen = ({ navigation }) => {
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642782746/Naire/Genevieve%20Hannelius/1111hfgdhgfh_bls1ng.jpg",
       image6:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642782745/Naire/Genevieve%20Hannelius/tweyruyti909090_khanw3.jpg",
+      prompt1: "If I could ask you any question about the universe",
+      answer1: "Do you believe in a higher power? like god and stuff?",
+      prompt2: "One of my favorite things to ask someone",
+      answer2: "What's your favorite color, and why?",
+      prompt3: "Something I'd like to know about you",
+      answer3: "What's your craziest story?",
       predictionRank: 1,
       predictionValue: 99.37,
       name: "Stephanie",
@@ -79,11 +82,19 @@ const MainScreen = ({ navigation }) => {
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642785596/Naire/Park%20Min%20Young/uhhgdfuihkdf388759436_esluux.png",
       image6:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642785593/Naire/Park%20Min%20Young/wequytrrwe7564352435_vsw8zl.jpg",
+      prompt1: "Something I'd like to know about your interests",
+      answer1:
+        "Does it require hand-eye coordination? cuz I don't have the energy for that lmao",
+      prompt2: "One of my favorite deep questions",
+      answer2:
+        "Which parallel universe versions of yourself would you want to meet and why?",
+      prompt3: "Something I'd like to know about you",
+      answer3: "What do you love most about yourself? :)",
       predictionRank: 2,
       predictionValue: 85.32,
       name: "Hana",
       age: 24,
-      height: `"5' 6"`,
+      height: `"5' 8"`,
       worksOut: "Rarely",
       city: "West Hollywood",
       smokesTobacco: "Never",
@@ -91,7 +102,7 @@ const MainScreen = ({ navigation }) => {
       drinks: "Socially",
       drugs: "Rarely",
       education: "Undergraduate Degree",
-      school: "University of California, Santa Cruz",
+      school: "Standford University",
       jobTitle: "Product Marketing Manager at SoundCloud",
       locked: false,
     },
@@ -109,20 +120,26 @@ const MainScreen = ({ navigation }) => {
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642784323/Naire/Anna%20Schumate/foijgrtoiyoyu98768_awblee.jpg",
       image6:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642784323/Naire/Anna%20Schumate/uieywtiero94365_pv9srz.jpg",
+      prompt1: "A very important question for our relationship",
+      answer1: "Is a hot dog a sandwich?",
+      prompt2: "Something I'd like to know about you",
+      answer2: "What is the greatest accomplishment of your life? (:",
+      prompt3: "Something I'd like to know about our first date",
+      answer3: "Is sushi involved? sushi better be involved",
       predictionRank: 3,
       predictionValue: 82.64,
       name: "Emma",
       age: 26,
       height: `"5' 5"`,
       worksOut: "Actively",
-      city: "Santa clarita",
+      city: "Santa Clarita",
       smokesTobacco: "Never",
       smokesWeed: "Socially",
-      drinks: "Socially",
+      drinks: "Often",
       drugs: "Rarely",
       education: "Undergraduate Degree",
-      school: "University of California, Santa Cruz",
-      jobTitle: "Product Marketing Manager at SoundCloud",
+      school: "CSUN",
+      jobTitle: "Model at Nous Model Management",
       locked: false,
     },
     {
@@ -143,7 +160,7 @@ const MainScreen = ({ navigation }) => {
       predictionValue: 72.51,
       name: "Nicole",
       age: 22,
-      height: `"5' 8"`,
+      height: `"5' 6"`,
       worksOut: "Rarely",
       city: "Castaic",
       smokesTobacco: "Never",
@@ -347,6 +364,12 @@ const MainScreen = ({ navigation }) => {
     image4,
     image5,
     image6,
+    prompt1,
+    answer1,
+    prompt2,
+    answer2,
+    prompt3,
+    answer3,
     age,
     height,
     worksOut,
@@ -422,6 +445,12 @@ const MainScreen = ({ navigation }) => {
           image4={image4}
           image5={image5}
           image6={image6}
+          prompt1={prompt1}
+          answer1={answer1}
+          prompt2={prompt2}
+          answer2={answer2}
+          prompt3={prompt3}
+          answer3={answer3}
           age={age}
           height={height}
           worksOut={worksOut}
@@ -496,6 +525,12 @@ const MainScreen = ({ navigation }) => {
       image4={item.image4}
       image5={item.image5}
       image6={item.image6}
+      prompt1={item.prompt1}
+      answer1={item.answer1}
+      prompt2={item.prompt2}
+      answer2={item.answer2}
+      prompt3={item.prompt3}
+      answer3={item.answer3}
       age={item.age}
       height={item.height}
       worksOut={item.worksOut}
