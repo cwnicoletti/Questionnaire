@@ -55,12 +55,18 @@ const CardMainScreen = ({ navigation }) => {
           education={params.education}
           school={params.school}
           jobTitle={params.jobTitle}
-          Image1={params.image1}
-          Image2={params.image2}
-          Image3={params.image3}
-          Image4={params.image4}
-          Image5={params.image5}
-          Image6={params.image6}
+          image1={params.image1}
+          image2={params.image2}
+          image3={params.image3}
+          image4={params.image4}
+          image5={params.image5}
+          image6={params.image6}
+          prompt1={params.prompt1}
+          answer1={params.answer1}
+          prompt2={params.prompt2}
+          answer2={params.answer2}
+          prompt3={params.prompt3}
+          answer3={params.answer3}
           showMessage={false}
         />
       </ScrollView>

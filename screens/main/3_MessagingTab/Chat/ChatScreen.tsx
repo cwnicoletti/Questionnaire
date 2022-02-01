@@ -15,14 +15,15 @@ import {
   View,
   FlatList,
   Dimensions,
-  Keyboard,
-  Animated,
+  UIManager,
+  LayoutAnimation,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";
 import { AntDesign } from "@expo/vector-icons";
 import Input from "../../../../components/Input";
-import KeyboardSpacer from "react-native-keyboard-spacer";
+import useDidMountEffect from "../../../../helper/useDidMountEffect";
+import KeyboardSpacer from "../../../../components/KeyboardSpacer";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -51,31 +52,25 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const ChatScreen = ({ navigation }) => {
+const ChatScreen = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const width = Dimensions.get("window").width;
   const [chat, setChat] = useState([]);
 
-  const flatListRef = useRef();
+  useEffect(() => {
+    if (route.params?.chat) {
+      setChat(route.params?.chat);
+    }
+  }, [route.params?.chat]);
 
-  let params = {};
-  if (
-    typeof navigation
-      .getState()
-      .routes.filter((screen) => screen.name === "ChatScreen")[0] !==
-    "undefined"
-  ) {
-    params = navigation
-      .getState()
-      .routes.filter((screen) => screen.name === "ChatScreen")[0].params;
-  }
+  const flatListRef = useRef();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      messageBar: "",
+      message: "",
     },
     inputValidities: {
-      messageBar: false,
+      message: false,
     },
     formIsValid: false,
   });
@@ -159,19 +154,26 @@ const ChatScreen = ({ navigation }) => {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    setChat(params.chat);
-  }, []);
+  const messageRef = useRef();
 
-  // const onKeyboardDidShow = (e) => {
-  //   if (flatListRef.current) {
-  //     flatListRef.current.scrollToEnd({ animated: true });
-  //   }
-  // };
+  const layoutAnimConfig = {
+    duration: 300,
+    update: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+    delete: {
+      duration: 50,
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+  };
 
-  // useEffect(() => {
-  //   Keyboard.addListener("keyboardDidShow", onKeyboardDidShow);
-  // }, []);
+  if (Platform.OS === "android") {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
 
   return (
     <View
@@ -184,11 +186,15 @@ const ChatScreen = ({ navigation }) => {
       <FlatList
         ref={flatListRef}
         data={chat}
+        inverted
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{
           paddingHorizontal: 10,
           paddingTop: 10,
+          paddingBottom: 10,
+          flexDirection: "column-reverse",
+          flexGrow: 1,
         }}
       />
       <View
@@ -213,14 +219,13 @@ const ChatScreen = ({ navigation }) => {
           }}
         >
           <Input
-            id="messageBar"
+            inputRef={messageRef}
+            id="message"
             placeholder="Message"
             required
             keyboardType="default"
-            returnKeyType="send"
             autoCorrect={false}
             contextMenuHidden={true}
-            multiline={true}
             onFocus={() => {
               setTimeout(() => {
                 if (flatListRef.current) {
@@ -232,26 +237,38 @@ const ChatScreen = ({ navigation }) => {
               nativeEvent: {
                 contentSize: { width, height },
               },
-            }) => {
-            }}
+            }) => {}}
             onInputChange={inputChangeHandler}
             initialValue=""
             styleInput={{
-              height: 40,
+              height: "100%",
               width: "100%",
               backgroundColor: "rgba(0,0,0,0)",
               paddingHorizontal: 15,
               paddingRight: 45,
               marginHorizontal: 0,
-              marginVertical: 5,
-              marginTop: 10,
+              marginVertical: 0,
+              marginTop: 0,
               fontSize: 16,
               fontWeight: "300",
               color: "black",
             }}
           />
           <View style={{ position: "absolute", right: 1 }}>
-            <TouchableCmp>
+            <TouchableCmp
+              onPress={() => {
+                LayoutAnimation.configureNext(layoutAnimConfig);
+                setChat((prevState) => [
+                  ...prevState,
+                  {
+                    id: Math.random().toString(16).substring(2, 8),
+                    fromMe: true,
+                    text: formState.inputValues.message,
+                  },
+                ]);
+                messageRef.current?.clear();
+              }}
+            >
               <View
                 style={{
                   height: 35,
