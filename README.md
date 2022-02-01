@@ -39,6 +39,7 @@ All contributions should be referenced to the [CONTRIBUTIONS](https://github.com
 
 ## Dependencies
 [Package.json](https://github.com/cwnicoletti/Naire/blob/main/package.json)
+
 "@ptomasroos/react-native-multi-slider": "^2.2.2",<br />
 "@rainbow-me/animated-charts": "^1.0.0-alpha.6",<br />
 "@react-native-async-storage/async-storage": "~1.15.0",<br />
