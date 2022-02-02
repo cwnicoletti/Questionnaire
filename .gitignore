@@ -26,3 +26,4 @@ test.js
 .vscode/.react/debuggerWorker.js
 .vscode/.react/AppEntry.map
 node_modules/
+data/
