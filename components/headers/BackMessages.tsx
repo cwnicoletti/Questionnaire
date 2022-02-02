@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -8,54 +8,28 @@ import {
   Platform,
   Image,
 } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, Entypo } from "@expo/vector-icons";
+import { Modalize } from "react-native-modalize";
+import { Host, Portal } from "react-native-portalize";
 
-const BackMessages = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [image1, setImage1] = useState(
-    "https://res.cloudinary.com/personaluse1234/image/upload/v1642534555/Naire/rthrehtjtj_wgi4xx.jpg"
-  );
-  const [image2, setImage2] = useState("");
-  const [image3, setImage3] = useState("");
-  const [image4, setImage4] = useState("");
-  const [image5, setImage5] = useState("");
-  const [image6, setImage6] = useState("");
-  const [age, setAge] = useState("");
-  const [height, setHeight] = useState("");
-  const [worksOut, setWorksOut] = useState("");
-  const [city, setCity] = useState("");
-  const [jobTitle, setJobTitle] = useState("");
-  const [predictionValue, setPredictionValue] = useState("");
+const BackMessages = ({ navigation, route }) => {
   const [params, setParams] = useState({});
 
-  useEffect(() => {
-    let params = {};
-    if (
-      typeof navigation
-        .getState()
-        .routes.filter((screen) => screen.name === "ChatScreen")[0] !==
-      "undefined"
-    ) {
-      params = navigation
-        .getState()
-        .routes.filter((screen) => screen.name === "ChatScreen")[0].params;
-    }
-    setParams(params);
-    setName(params.name);
-    setImage1(params.image1);
-    setImage2(params.image2);
-    setImage3(params.image3);
-    setImage4(params.image4);
-    setImage5(params.image5);
-    setImage6(params.image6);
-    setAge(params.age);
-    setHeight(params.height);
-    setWorksOut(params.worksOut);
+  const modalizeRef = useRef<Modalize>(null);
 
-    setCity(params.city);
-    setJobTitle(params.jobTitle);
-    setPredictionValue(params.predictionValue);
-  }, []);
+  const onOpen = () => {
+    modalizeRef.current?.open();
+  };
+
+  const onClose = () => {
+    modalizeRef.current?.close();
+  };
+
+  useEffect(() => {
+    if (route.params) {
+      setParams(route.params);
+    }
+  }, [route.params]);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -85,30 +59,36 @@ const BackMessages = ({ navigation }) => {
       <TouchableCmp
         onPress={() => {
           navigation.navigate("ViewProfile", {
-            image1,
-            image2,
-            image3,
-            image4,
-            image5,
-            image6,
-            age,
-            height,
-            worksOut,
-            city,
+            image1: params.image1,
+            image2: params.image2,
+            image3: params.image3,
+            image4: params.image4,
+            image5: params.image5,
+            image6: params.image6,
+            prompt1: params.prompt1,
+            answer1: params.answer1,
+            prompt2: params.prompt2,
+            answer2: params.answer2,
+            prompt3: params.prompt3,
+            answer3: params.answer3,
+            age: params.age,
+            height: params.height,
+            worksOut: params.worksOut,
+            city: params.city,
             smokesTobacco: params.smokesTobacco,
             smokesWeed: params.smokesWeed,
             drinks: params.drinks,
             drugs: params.drugs,
             education: params.education,
             school: params.school,
-            jobTitle,
-            predictionValue,
+            jobTitle: params.jobTitle,
+            predictionValue: params.predictionValue,
           });
         }}
       >
         <View style={{ justifyContent: "center", alignItems: "center" }}>
           <Image
-            source={{ uri: image1 }}
+            source={{ uri: params.image1 }}
             style={{
               height: 60,
               width: 60,
@@ -116,16 +96,81 @@ const BackMessages = ({ navigation }) => {
             }}
           />
           <Text style={{ fontSize: 16, fontWeight: "200", margin: 5 }}>
-            {name}
+            {params.name}
           </Text>
         </View>
       </TouchableCmp>
-      <Ionicons
-        name="ios-arrow-back"
-        size={28}
-        color="black"
-        style={{ marginRight: 20, opacity: 0 }}
-      />
+      <TouchableCmp
+        onPress={() => {
+          onOpen();
+        }}
+      >
+        <Entypo
+          name="dots-three-vertical"
+          size={24}
+          color="black"
+          style={{ marginRight: 20 }}
+        />
+      </TouchableCmp>
+      <Portal>
+        <Modalize
+          ref={modalizeRef}
+          modalHeight={250}
+          scrollViewProps={{
+            keyboardShouldPersistTaps: "handled",
+            scrollEnabled: false,
+          }}
+          rootStyle={{ backgroundColor: "rgba(0,0,0,0)" }}
+          modalStyle={{ backgroundColor: "rgba(0,0,0,0)" }}
+        >
+          <View style={{ alignItems: "center" }}>
+            <TouchableCmp>
+              <View
+                style={{
+                  height: 60,
+                  width: 400,
+                  backgroundColor: "white",
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: 5,
+                }}
+              >
+                <Text style={{ color: "red", fontSize: 16 }}>Remove match</Text>
+              </View>
+            </TouchableCmp>
+            <TouchableCmp>
+              <View
+                style={{
+                  height: 60,
+                  width: 400,
+                  backgroundColor: "white",
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginBottom: 20,
+                }}
+              >
+                <Text style={{ color: "red", fontSize: 16 }}>Report</Text>
+              </View>
+            </TouchableCmp>
+            <TouchableCmp onPress={onClose}>
+              <View
+                style={{
+                  height: 60,
+                  width: 400,
+                  backgroundColor: "white",
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ fontSize: 16 }}>Cancel</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+        </Modalize>
+      </Portal>
     </SafeAreaView>
   );
 };
