@@ -28,10 +28,6 @@
 
 Systematically improve dates and relationships through the use of survey feedback on previous dates and relationships
 
-## Mission
-
-Bring a smarter approach to dating and relationships
-
 ## How it works
 
 1. User A estimates certain qualities of the date or relationship (i.e. Enjoyment, Compatibility, Communication) with sliders (All private)
