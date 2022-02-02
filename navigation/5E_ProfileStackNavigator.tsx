@@ -2,6 +2,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { TransitionPresets } from "@react-navigation/stack";
 import ProfileMainScreen from "../screens/main/5_ProfileTab/ProfileMainScreen";
+import PerformanceScreen from "../screens/main/5_ProfileTab/Performance/PerformanceScreen";
+import SettingsScreen from "../screens/main/5_ProfileTab/Settings/SettingsScreen";
+import EditPickPrompt from "../screens/main/5_ProfileTab/EditProfile/EditPrompt/EditPickPrompt";
+import EditWritePrompt from "../screens/main/5_ProfileTab/EditProfile/EditPrompt/EditWritePrompt";
 import TopTabEditProfileNavigator from "./6_TopTabEditProfileNavigator";
 
 const Stack = createStackNavigator();
@@ -27,6 +31,40 @@ function ProfileStackNavigator() {
       <Stack.Screen
         name="TopTabEditProfileNavigator"
         component={TopTabEditProfileNavigator}
+        options={{
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="EditPickPrompt"
+        component={EditPickPrompt}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="EditWritePrompt"
+        component={EditWritePrompt}
+        options={{
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="PerformanceScreen"
+        component={PerformanceScreen}
+        options={{
+          ...TransitionPresets.ModalSlideFromBottomIOS,
+          gestureEnabled: false,
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="SettingsScreen"
+        component={SettingsScreen}
         options={{
           ...TransitionPresets.ModalSlideFromBottomIOS,
           gestureEnabled: false,

@@ -50,6 +50,27 @@ const screenOptions = (route, color) => {
   return <View />;
 };
 
+// TODO: hide tabbar on scroll
+// const getTabBarVisible = (route) => {
+//   const params = route.params;
+//   if (params) {
+//     if (params.tabBarStyle === "none") {
+//       return "none";
+//     }
+//   }
+//   return "flex";
+// };
+
+// const getOffset = (route) => {
+//   const params = route.params;
+//   if (params) {
+//     if (params.offset > 0) {
+//       return params.offset;
+//     }
+//   }
+//   return 0;
+// };
+
 function TopTabNavigator() {
   return (
     <Tab.Navigator
@@ -67,8 +88,6 @@ function TopTabNavigator() {
         name="MainStackNavigator"
         component={MainStackNavigator}
         options={{
-          tabBarShowIcon: true,
-          cardStyleInterpolator: forFade,
           header: ({ navigation }) => (
             <TitleOnlyHeader navigation={navigation} />
           ),
@@ -77,17 +96,24 @@ function TopTabNavigator() {
       <Tab.Screen
         name="CardStackNavigator"
         component={CardStackNavigator}
-        options={{
-          tabBarShowIcon: true,
-          cardStyleInterpolator: forFade,
+        options={({ route }) => ({
           headerShown: false,
-        }}
+          // TODO: hide tabbar on scroll
+          // tabBarStyle: {
+          //   backgroundColor: "rgba(0,0,0,0)",
+          //   display: getTabBarVisible(route),
+          //   transform: [
+          //     {
+          //       translateY: getOffset(route),
+          //     },
+          //   ],
+          // },
+        })}
       />
       <Tab.Screen
         name="MessagingStackNavigator"
         component={MessagingStackNavigator}
         options={{
-          tabBarShowIcon: true,
           headerShown: false,
         }}
       />
@@ -95,7 +121,6 @@ function TopTabNavigator() {
         name="QuestionnaireStackNavigator"
         component={QuestionnaireStackNavigator}
         options={{
-          tabBarShowIcon: true,
           headerShown: false,
         }}
       />
@@ -103,8 +128,9 @@ function TopTabNavigator() {
         name="ProfileStackNavigator"
         component={ProfileStackNavigator}
         options={{
-          tabBarShowIcon: true,
-          header: ({ navigation }) => <Profile navigation={navigation} />,
+          header: ({ navigation, route }) => (
+            <Profile navigation={navigation} route={route} />
+          ),
         }}
       />
     </Tab.Navigator>

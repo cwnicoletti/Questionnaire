@@ -9,12 +9,12 @@ const Tab = createMaterialTopTabNavigator();
 function TopTabEditProfileNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={({ navigation, route }) => ({
         tabBarBounces: true,
         tabBarShowLabel: true,
         tabBarActiveTintColor: "#434aa8",
         swipeEnabled: true,
-        header: () => <Profile />,
+        header: () => <Profile navigation={navigation} route={route} />,
         tabBarIndicatorStyle: { backgroundColor: "#434aa8" },
       })}
     >

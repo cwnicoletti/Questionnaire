@@ -8,7 +8,6 @@ import {
 } from "@react-navigation/stack";
 import CardMainScreen from "../screens/main/2_CardTab/CardMainScreen";
 import Card1 from "../screens/main/2_CardTab/CardCycle/Card1";
-import Card2 from "../screens/main/2_CardTab/CardCycle/Card2";
 import InterCard from "../screens/main/2_CardTab/CardCycle/InterCard";
 import CardPreferencesScreen from "../screens/main/2_CardTab/CardPreferences/CardPreferencesScreen";
 import Explore from "../components/headers/Explore";
@@ -25,11 +24,11 @@ const configClose = {
   animation: "spring",
   config: {
     stiffness: 1,
-    damping: 4000,
-    mass: 0.09,
-    overshootClamping: false,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
+    damping: 2,
+    mass: 0.002,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.2,
+    restSpeedThreshold: 0.2,
   },
 };
 
@@ -37,11 +36,11 @@ const configOpen = {
   animation: "spring",
   config: {
     stiffness: 1,
-    damping: 4000,
-    mass: 0.09,
-    overshootClamping: false,
-    restDisplacementThreshold: 0.01,
-    restSpeedThreshold: 0.01,
+    damping: 2,
+    mass: 0.005,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.2,
+    restSpeedThreshold: 0.2,
   },
 };
 
@@ -54,13 +53,13 @@ const MyTransition = {
   cardStyleInterpolator: ({ current, next, layouts }) => {
     const progress = Animated.add(
       current.progress.interpolate({
-        inputRange: [0, 0.5, 1],
-        outputRange: [layouts.screen.height, layouts.screen.height, 0],
+        inputRange: [0, 1],
+        outputRange: [layouts.screen.width, 0],
       }),
       next
         ? next.progress.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, -layouts.screen.height, -layouts.screen.height],
+            inputRange: [0, 1],
+            outputRange: [0, -layouts.screen.width],
           })
         : 0
     );
@@ -69,7 +68,7 @@ const MyTransition = {
       cardStyle: {
         transform: [
           {
-            translateY: progress,
+            translateX: progress,
           },
         ],
       },
@@ -83,11 +82,11 @@ function CardStackNavigator() {
       <Stack.Screen
         name="CardMainScreen"
         component={CardMainScreen}
-        options={{
+        options={({ route, navigation }) => ({
           cardStyleInterpolator: forFade,
           gestureEnabled: false,
-          header: ({ navigation }) => <Explore navigation={navigation} />,
-        }}
+          headerShown: false,
+        })}
       />
       <Stack.Screen
         name="CardPreferencesScreen"
@@ -102,7 +101,7 @@ function CardStackNavigator() {
         name="InterCard"
         component={InterCard}
         options={{
-          ...MyTransition,
+          cardStyleInterpolator: forFade,
           header: ({ navigation }) => <Explore navigation={navigation} />,
         }}
       />
@@ -110,16 +109,8 @@ function CardStackNavigator() {
         name="Card1"
         component={Card1}
         options={{
-          ...MyTransition,
-          header: ({ navigation }) => <Explore navigation={navigation} />,
-        }}
-      />
-      <Stack.Screen
-        name="Card2"
-        component={Card2}
-        options={{
-          ...MyTransition,
-          header: ({ navigation }) => <Explore navigation={navigation} />,
+          cardStyleInterpolator: forFade,
+          headerShown: false,
         }}
       />
     </Stack.Navigator>

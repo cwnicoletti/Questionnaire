@@ -6,6 +6,7 @@ import { Dimensions, SafeAreaView, Animated } from "react-native";
 import * as Progress from "react-native-progress";
 import useDidMountEffect from "../helper/useDidMountEffect";
 import MainNavigator from "./3_MainNavigator";
+import { Host, Portal } from "react-native-portalize";
 
 const AppNavigator = () => {
   const progress = useSelector((state) => state.progressbar.progress);
@@ -45,28 +46,30 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer theme={MyTheme}>
-      <SafeAreaView
-        style={{
-          position: "absolute",
-          justifyContent: "center",
-          zIndex: 2,
-        }}
-      >
-        <Animated.View style={{ transform: [{ scaleX: growAnim }] }}>
-          <Progress.Bar
-            progress={progress}
-            width={width - 20}
-            style={{
-              backgroundColor: "#F2F2F2",
-            }}
-            color={"#434aa8"}
-            borderRadius={5}
-            borderWidth={0}
-          />
-        </Animated.View>
-      </SafeAreaView>
-      {!isUsingMain && <AuthenticatedNavigator />}
-      {isUsingMain && <MainNavigator />}
+      <Host>
+        <SafeAreaView
+          style={{
+            position: "absolute",
+            alignSelf: "center",
+            zIndex: 2,
+          }}
+        >
+          <Animated.View style={{ transform: [{ scaleX: growAnim }] }}>
+            <Progress.Bar
+              progress={progress}
+              width={width - 20}
+              style={{
+                backgroundColor: "#F2F2F2",
+              }}
+              color={"#434aa8"}
+              borderRadius={5}
+              borderWidth={0}
+            />
+          </Animated.View>
+        </SafeAreaView>
+        {!isUsingMain && <AuthenticatedNavigator />}
+        {isUsingMain && <MainNavigator />}
+      </Host>
     </NavigationContainer>
   );
 };

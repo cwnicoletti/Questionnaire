@@ -1,11 +1,13 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import ChatScreen from "../screens/main/3_MessagingTab/ChatScreen/ChatScreen";
-import ViewProfile from "../screens/main/3_MessagingTab/ChatScreen/ViewProfile";
+import NotificationsScreen from "../screens/main/3_MessagingTab/Notifications/NotificationsScreen";
+import ChatScreen from "../screens/main/3_MessagingTab/Chat/ChatScreen";
+import ViewProfile from "../screens/main/3_MessagingTab/Chat/ViewProfile";
 import MessagingMainScreen from "../screens/main/3_MessagingTab/MessagingMainScreen";
 import Messages from "../components/headers/Messages";
 import BackMessages from "../components/headers/BackMessages";
 import BackMessagesTitle from "../components/headers/BackMessagesTitle";
+import BackNotifications from "../components/headers/BackNotifications";
 
 const Stack = createStackNavigator();
 
@@ -28,10 +30,21 @@ function QuestionnaireStackNavigator() {
         }}
       />
       <Stack.Screen
+        name="NotificationsScreen"
+        component={NotificationsScreen}
+        options={{
+          header: ({ navigation, route }) => (
+            <BackNotifications navigation={navigation} route={route} />
+          ),
+        }}
+      />
+      <Stack.Screen
         name="ChatScreen"
         component={ChatScreen}
         options={{
-          header: ({ navigation }) => <BackMessages navigation={navigation} />,
+          header: ({ navigation, route }) => (
+            <BackMessages navigation={navigation} route={route} />
+          ),
         }}
       />
       <Stack.Screen
