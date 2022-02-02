@@ -6,23 +6,8 @@ import AppNavigator from "./navigation/1_AppNavigator";
 import signupReducer from "./store/reducers/signup";
 import progressbarReducer from "./store/reducers/progressbar";
 import toptabbarReducer from "./store/reducers/toptabbar";
-import firebase from "firebase/app";
 import * as Notifications from "expo-notifications";
-import FirebaseConfig from "./config";
 import { useFonts } from "expo-font";
-import "react-native-gesture-handler";
-
-// Initialize Firebase
-const firebaseConfig = {
-  apiKey: FirebaseConfig.apikey,
-  authDomain: FirebaseConfig.authDomain,
-  databaseURL: FirebaseConfig.databaseURL,
-  storageBucket: FirebaseConfig.storageBucket,
-};
-
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
-}
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
