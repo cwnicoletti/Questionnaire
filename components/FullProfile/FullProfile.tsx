@@ -31,8 +31,9 @@ const FullProfileCard = (props) => {
   return (
     <View style={{ backgroundColor: "#FAFAFA" }}>
       <ImageWithMessage
-        image={props.Image1}
+        image={props.image1}
         onOpen={props.onOpen}
+        setPicture={props.setPicture}
         showMessage={props.showMessage}
       />
       <View
@@ -304,46 +305,57 @@ const FullProfileCard = (props) => {
         </View>
       </View>
       <ImageWithMessage
-        image={props.Image2}
+        image={props.image2}
         onOpen={props.onOpen}
+        setPicture={props.setPicture}
         showMessage={props.showMessage}
       />
       <PromptWithMessage
         prompt={props.prompt1}
         answer={props.answer1}
         onOpen={props.onOpen}
+        setPrompt={props.setPrompt}
+        getPromptHeight={props.getPromptHeight}
         showMessage={props.showMessage}
       />
       <ImageWithMessage
-        image={props.Image3}
+        image={props.image3}
         onOpen={props.onOpen}
+        setPicture={props.setPicture}
         showMessage={props.showMessage}
       />
       <PromptWithMessage
         prompt={props.prompt2}
         answer={props.answer2}
         onOpen={props.onOpen}
+        setPrompt={props.setPrompt}
+        getPromptHeight={props.getPromptHeight}
         showMessage={props.showMessage}
       />
       <ImageWithMessage
-        image={props.Image4}
+        image={props.image4}
         onOpen={props.onOpen}
+        setPicture={props.setPicture}
         showMessage={props.showMessage}
       />
       <PromptWithMessage
         prompt={props.prompt3}
         answer={props.answer3}
         onOpen={props.onOpen}
+        setPrompt={props.setPrompt}
+        getPromptHeight={props.getPromptHeight}
         showMessage={props.showMessage}
       />
       <ImageWithMessage
-        image={props.Image5}
+        image={props.image5}
         onOpen={props.onOpen}
+        setPicture={props.setPicture}
         showMessage={props.showMessage}
       />
       <ImageWithMessage
-        image={props.Image6}
+        image={props.image6}
         onOpen={props.onOpen}
+        setPicture={props.setPicture}
         showMessage={props.showMessage}
       />
     </View>

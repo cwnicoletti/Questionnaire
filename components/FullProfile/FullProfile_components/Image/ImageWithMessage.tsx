@@ -29,7 +29,14 @@ const ImageWithMessage = (props) => {
         style={{ height: width, width: width, marginRight: 15 }}
       />
       {props.showMessage ? (
-        <TouchableCmp onPress={props.onOpen}>
+        <TouchableCmp
+          onPress={() => {
+            if (props.setPicture) {
+              props.setPicture(props.image);
+            }
+            props.onOpen();
+          }}
+        >
           <View
             style={{
               position: "absolute",
