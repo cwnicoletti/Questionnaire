@@ -28,6 +28,7 @@ const Prediction = (props) => {
             name: props.name,
             predictionRank: props.predictionRank,
             predictionValue: props.predictionValue,
+            previewImage: props.previewImage,
             image1: props.image1,
             image2: props.image2,
             image3: props.image3,
@@ -80,7 +81,7 @@ const Prediction = (props) => {
             {`#${props.predictionRank}`}
           </Text>
           <Image
-            source={{ uri: props.image1 }}
+            source={{ uri: props.previewImage }}
             style={{
               height: 75,
               width: 75,
