@@ -7,8 +7,8 @@ import {
   StatusBar,
   View,
   KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { EvilIcons, Feather, SimpleLineIcons } from "@expo/vector-icons";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";

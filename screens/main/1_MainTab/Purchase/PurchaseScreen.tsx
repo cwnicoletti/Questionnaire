@@ -11,7 +11,6 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";
 import {

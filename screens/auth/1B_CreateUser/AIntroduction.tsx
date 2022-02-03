@@ -84,7 +84,7 @@ const AIntroduction = (props) => {
             color: "#434aa8",
           }}
         >
-          Naire is a survey-based dating app
+          Naire is a survey-based dating experience
         </Text>
         <Text style={{ fontSize: 16, marginTop: 10, fontWeight: "300" }}>
           This means you will be provided with:

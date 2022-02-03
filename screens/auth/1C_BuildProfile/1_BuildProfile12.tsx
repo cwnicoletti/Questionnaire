@@ -203,7 +203,6 @@ const BuildProfile12 = (props) => {
               ) : null}
             </View>
           </View>
-          <View style={styles.buttonsContainer}></View>
         </View>
         <View
           style={{

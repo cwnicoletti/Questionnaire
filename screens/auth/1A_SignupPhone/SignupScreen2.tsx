@@ -9,9 +9,9 @@ import {
   TouchableOpacity,
   View,
   StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Ionicons } from "@expo/vector-icons";
 import VerifyCodeInput from "../../../components/VerifyCodeInput";
@@ -77,6 +77,7 @@ const SignupScreen2 = (props) => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       enabled={true}
+      keyboardVerticalOffset={20}
       style={styles.screen}
     >
       <SafeAreaView style={{ flex: 1 }}>
