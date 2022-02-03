@@ -62,9 +62,10 @@ const SignupOrLoginScreen = (props) => {
           >
             <View
               style={{
+                backgroundColor: "black",
                 borderColor: "white",
                 borderWidth: 1,
-                margin: 5,
+                margin: 10,
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "row",
@@ -93,7 +94,7 @@ const SignupOrLoginScreen = (props) => {
                   color: "white",
                 }}
               >
-                Sign up with Apple
+                Sign in with Apple
               </Text>
             </View>
           </TouchableCmp>
@@ -104,9 +105,10 @@ const SignupOrLoginScreen = (props) => {
           >
             <View
               style={{
+                backgroundColor: "#3b5999",
                 borderColor: "white",
                 borderWidth: 1,
-                margin: 5,
+                margin: 10,
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "row",
@@ -135,7 +137,7 @@ const SignupOrLoginScreen = (props) => {
                   color: "white",
                 }}
               >
-                Sign up with Facebook
+                Sign in with Facebook
               </Text>
             </View>
           </TouchableCmp>
@@ -148,7 +150,7 @@ const SignupOrLoginScreen = (props) => {
               style={{
                 borderColor: "white",
                 borderWidth: 1,
-                margin: 5,
+                margin: 10,
                 alignItems: "center",
                 justifyContent: "center",
                 flexDirection: "row",
@@ -177,13 +179,13 @@ const SignupOrLoginScreen = (props) => {
                   color: "white",
                 }}
               >
-                Sign up with Phone Number
+                Sign in with Phone Number
               </Text>
             </View>
           </TouchableCmp>
-          <View style={{ margin: 15, alignItems: "center" }}>
+          <View style={{ margin: 15, marginTop: 5, alignItems: "center" }}>
             <Text style={{ color: "white", marginBottom: 5 }}>
-              By pressing a sign up option, you agree to our{" "}
+              By pressing a sign in option, you agree to our{" "}
               <Text
                 style={{ fontWeight: "500", textDecorationLine: "underline" }}
               >
