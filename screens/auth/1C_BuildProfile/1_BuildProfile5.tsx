@@ -14,10 +14,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 
-import { Picker } from "react-native-wheel-datepicker";
+import { Picker } from "@react-native-picker/picker";
 
 const BuildProfile5 = (props) => {
   const dispatch = useAppDispatch();
+  const [height, setHeight] = useState("5' 7\"");
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -59,83 +60,84 @@ const BuildProfile5 = (props) => {
               style={{
                 backgroundColor: "rgba(0,0,0,0)",
               }}
-              selectedValue={"<3'0\""}
-              pickerData={[
-                "< 3' 0\"",
-                "3' 1\"",
-                "3' 2\"",
-                "3' 3\"",
-                "3' 4\"",
-                "3' 5\"",
-                "3' 6\"",
-                "3' 7\"",
-                "3' 8\"",
-                "3' 9\"",
-                "3' 10\"",
-                "3' 11\"",
-                "4' 0\"",
-                "4' 1\"",
-                "4' 2\"",
-                "4' 3\"",
-                "4' 4\"",
-                "4' 5\"",
-                "4' 6\"",
-                "4' 7\"",
-                "4' 8\"",
-                "4' 9\"",
-                "4' 10\"",
-                "4' 11\"",
-                "5' 0\"",
-                "5' 1\"",
-                "5' 2\"",
-                "5' 3\"",
-                "5' 4\"",
-                "5' 5\"",
-                "5' 6\"",
-                "5' 7\"",
-                "5' 8\"",
-                "5' 9\"",
-                "5' 10\"",
-                "5' 11\"",
-                "6' 0\"",
-                "6' 1\"",
-                "6' 2\"",
-                "6' 3\"",
-                "6' 4\"",
-                "6' 5\"",
-                "6' 6\"",
-                "6' 7\"",
-                "6' 8\"",
-                "6' 9\"",
-                "6' 10\"",
-                "6' 11\"",
-                "7' 0\"",
-                "7' 1\"",
-                "7' 2\"",
-                "7' 3\"",
-                "7' 4\"",
-                "7' 5\"",
-                "7' 6\"",
-                "7' 7\"",
-                "7' 8\"",
-                "7' 10\"",
-                "7' 11\"",
-                "8' 0\"",
-                "8' 1\"",
-                "8' 2\"",
-                "8' 3\"",
-                "8' 4\"",
-                "8' 5\"",
-                "8' 6\"",
-                "8' 7\"",
-                "8' 8\"",
-                "8' 9\"",
-                "8' 10\"",
-                "8' 11\"",
-                "> 9' 0\"",
-              ]}
-              onValueChange={() => {}}
-            />
+              selectedValue={height}
+              onValueChange={(value) => {
+                setHeight(value);
+              }}
+            >
+              <Picker.Item label={"< 3' 0\""} value={"< 3' 0\""} />
+              <Picker.Item label={"3' 1\""} value={"3' 1\""} />
+              <Picker.Item label={"3' 2\""} value={"3' 2\""} />
+              <Picker.Item label={"3' 3\""} value={"3' 3\""} />
+              <Picker.Item label={"3' 4\""} value={"3' 4\""} />
+              <Picker.Item label={"3' 5\""} value={"3' 5\""} />
+              <Picker.Item label={"3' 6\""} value={"3' 6\""} />
+              <Picker.Item label={"3' 7\""} value={"3' 7\""} />
+              <Picker.Item label={"3' 8\""} value={"3' 8\""} />
+              <Picker.Item label={"3' 9\""} value={"3' 9\""} />
+              <Picker.Item label={"3' 10\""} value={"3' 10\""} />
+              <Picker.Item label={"3' 11\""} value={"3' 11\""} />
+              <Picker.Item label={"4' 0\""} value={"4' 0\""} />
+              <Picker.Item label={"4' 1\""} value={"4' 1\""} />
+              <Picker.Item label={"4' 2\""} value={"4' 2\""} />
+              <Picker.Item label={"4' 3\""} value={"4' 3\""} />
+              <Picker.Item label={"4' 4\""} value={"4' 4\""} />
+              <Picker.Item label={"4' 5\""} value={"4' 5\""} />
+              <Picker.Item label={"4' 6\""} value={"4' 6\""} />
+              <Picker.Item label={"4' 7\""} value={"4' 7\""} />
+              <Picker.Item label={"4' 8\""} value={"4' 8\""} />
+              <Picker.Item label={"4' 9\""} value={"4' 9\""} />
+              <Picker.Item label={"4' 10\""} value={"4' 10\""} />
+              <Picker.Item label={"4' 11\""} value={"4' 11\""} />
+              <Picker.Item label={"5' 0\""} value={"5' 0\""} />
+              <Picker.Item label={"5' 1\""} value={"5' 1\""} />
+              <Picker.Item label={"5' 2\""} value={"5' 2\""} />
+              <Picker.Item label={"5' 3\""} value={"5' 3\""} />
+              <Picker.Item label={"5' 4\""} value={"5' 4\""} />
+              <Picker.Item label={"5' 5\""} value={"5' 5\""} />
+              <Picker.Item label={"5' 6\""} value={"5' 6\""} />
+              <Picker.Item label={"5' 7\""} value={"5' 7\""} />
+              <Picker.Item label={"5' 8\""} value={"5' 8\""} />
+              <Picker.Item label={"5' 9\""} value={"5' 9\""} />
+              <Picker.Item label={"5' 10\""} value={"5' 10\""} />
+              <Picker.Item label={"5' 11\""} value={"5' 11\""} />
+              <Picker.Item label={"6' 0\""} value={"6' 0\""} />
+              <Picker.Item label={"6' 1\""} value={"6' 1\""} />
+              <Picker.Item label={"6' 2\""} value={"6' 2\""} />
+              <Picker.Item label={"6' 3\""} value={"6' 3\""} />
+              <Picker.Item label={"6' 4\""} value={"6' 4\""} />
+              <Picker.Item label={"6' 5\""} value={"6' 5\""} />
+              <Picker.Item label={"6' 6\""} value={"6' 6\""} />
+              <Picker.Item label={"6' 7\""} value={"6' 7\""} />
+              <Picker.Item label={"6' 8\""} value={"6' 8\""} />
+              <Picker.Item label={"6' 9\""} value={"6' 9\""} />
+              <Picker.Item label={"6' 10\""} value={"6' 10\""} />
+              <Picker.Item label={"6' 11\""} value={"6' 11\""} />
+              <Picker.Item label={"7' 0\""} value={"7' 0\""} />
+              <Picker.Item label={"7' 1\""} value={"7' 1\""} />
+              <Picker.Item label={"7' 2\""} value={"7' 2\""} />
+              <Picker.Item label={"7' 3\""} value={"7' 3\""} />
+              <Picker.Item label={"7' 4\""} value={"7' 4\""} />
+              <Picker.Item label={"7' 5\""} value={"7' 5\""} />
+              <Picker.Item label={"7' 6\""} value={"7' 6\""} />
+              <Picker.Item label={"7' 7\""} value={"7' 7\""} />
+              <Picker.Item label={"7' 8\""} value={"7' 8\""} />
+              <Picker.Item label={"7' 10\""} value={"7' 10\""} />
+              <Picker.Item label={"7' 11\""} value={"7' 11\""} />
+              <Picker.Item label={"8' 0\""} value={"8' 0\""} />
+              <Picker.Item label={"8' 1\""} value={"8' 1\""} />
+              <Picker.Item label={"8' 2\""} value={"8' 2\""} />
+              <Picker.Item label={"8' 3\""} value={"8' 3\""} />
+              <Picker.Item label={"8' 4\""} value={"8' 4\""} />
+              <Picker.Item label={"8' 5\""} value={"8' 5\""} />
+              <Picker.Item label={"8' 6\""} value={"8' 6\""} />
+              <Picker.Item label={"8' 7\""} value={"8' 7\""} />
+              <Picker.Item label={"8' 8\""} value={"8' 8\""} />
+              <Picker.Item label={"8' 9\""} value={"8' 9\""} />
+              <Picker.Item label={"8' 10\""} value={"8' 10\""} />
+              <Picker.Item label={"8' 11\""} value={"8' 11\""} />
+              <Picker.Item label={"> 9' 0\""} value={"> 9' 0\""} />
+            </Picker>
           </View>
         </View>
         <View

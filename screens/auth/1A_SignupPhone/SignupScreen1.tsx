@@ -1,4 +1,10 @@
-import React, { useCallback, useReducer, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -9,14 +15,14 @@ import {
   View,
   Keyboard,
   StatusBar,
+  SafeAreaView,
 } from "react-native";
 import { useAppDispatch } from "../../../hooks";
 import { Feather, Entypo, FontAwesome } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Ionicons } from "@expo/vector-icons";
 import VerifyCodeInput from "../../../components/VerifyCodeInput";
-import { Picker } from "react-native-wheel-datepicker";
+import { Picker } from "@react-native-picker/picker";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -49,241 +55,7 @@ const SignupScreen1 = (props) => {
   const dispatch = useAppDispatch();
   const [isPickingContryCode, setIsPickingCountryCode] = useState(false);
   const [countryCode, setCountryCode] = useState("US +1");
-  const [currentSelectedCode, setCurrentSelectedCode] = useState(
-    "United States of America +1"
-  );
-
-  const book = [
-    { "United States of America +1": "US +1" },
-    { "Afghanistan +93": "AF +93" },
-    { "Albania +355": "AL +355" },
-    { "Algeria +213": "DZ +213" },
-    { "American Samoa +684": "AS +684" },
-    { "Andorra +376": "AD +376" },
-    { "Angola +244": "AO +244" },
-    { "Anguilla +809": "AI +809" },
-    { "Antigua +268": "AG +268" },
-    { "Argentina +54": "AR +54" },
-    { "Armenia +374": "AM +374" },
-    { "Aruba +297": "AW +297" },
-    { "Ascension Island +247": "AC +247" },
-    { "Australia +61": "AU +61" },
-    { "Australian External Territories +672": "AU +672" },
-    { "Austria +43": "AT +43" },
-    { "Azerbaijan +994": "AZ +994" },
-    { "Bahamas +242": "BS +242" },
-    { "Barbados +246": "BB +246" },
-    { "Bahrain +973": "BH +973" },
-    { "Bangladesh +880": "BD +880" },
-    { "Belarus +375": "BY +375" },
-    { "Belgium +32": "BE +32" },
-    { "Belize +501": "BZ +501" },
-    { "Benin +229": "BJ +229" },
-    { "Bermuda +809": "BM +809" },
-    { "Bhutan +975": "BT +975" },
-    { "British Virgin Islands +284": "VG +284" },
-    { "Bolivia +591": "BO +591" },
-    { "Bosnia and Hercegovina +387": "BA +387" },
-    { "Botswana +267": "BW +267" },
-    { "Brazil +55": "BR +55" },
-    { "Brunei Darussalm +673": "BN +673" },
-    { "Bulgaria +359": "BG +359" },
-    { "Burkina Faso +226": "BF +226" },
-    { "Burundi +257": "BI +257" },
-    { "Cambodia +855": "KH +855" },
-    { "Cameroon +237": "CM +237" },
-    { "Canada +1": "CA +1" },
-    { "Cape Verde Islands +238": "CV +238" },
-    { "Caribbean Nations +599": "BQ +599" },
-    { "Cayman Islands +345": "KY +345" },
-    { "Central African Republic +236": "CF +236" },
-    { "Chad +235": "TD +235" },
-    { "Chile +56": "CL +56" },
-    { "China (People's Republic) +86": "CN +86" },
-    { "Taiwan +886": "TW +886" },
-    { "Colombia +57": "CO +57" },
-    { "Comoros and Mayotte +269": "KM +269" },
-    { "Congo +242": "CD +242" },
-    { "Cook Islands +682": "CK +682" },
-    { "Costa Rica +506": "CR +506" },
-    { "Croatia +385": "HR +385" },
-    { "Cuba +53": "CU +53" },
-    { "Cyprus +357": "CY +357" },
-    { "Czech Republic +420": "CZ +420" },
-    { "Denmark +45": "DK +45" },
-    { "Diego Garcia +246": "IO +246" },
-    { "Dominca +767": "DM +767" },
-    { "Dominican Republic +809": "DO +809" },
-    { "Djibouti +253": "DJ +253" },
-    { "Ecuador +593": "EC +593" },
-    { "Egypt +20": "EG +20" },
-    { "El Salvador +503": "SV +503" },
-    { "Equatorial Guinea +240": "GQ +240" },
-    { "Eritrea +291": "ER +291" },
-    { "Estonia +372": "EE +372" },
-    { "Ethiopia +251": "ET +251" },
-    { "Falkland Islands +500": "FK +500" },
-    { "Faroe (Faeroe) Islands (Denmark) +298": "FO +298" },
-    { "Fiji +679": "FJ +679" },
-    { "Finland +358": "FI +358" },
-    { "France +33": "FR +33" },
-    { "French Antilles +596": "TF +596" },
-    { "French Guiana +594": "GF +594" },
-    { "Gabon (Gabonese Republic) +241": "GA +241" },
-    { "Gambia +220": "GM +220" },
-    { "Georgia +995": "GE +995" },
-    { "Germany +49": "DE +49" },
-    { "Ghana +233": "GH +233" },
-    { "Gibraltar +350": "GI +350" },
-    { "Greece +30": "GR +30" },
-    { "Greenland +299": "GL +299" },
-    { "Grenada/Carricou +473": "GD +473" },
-    { "Guam +671": "GU +671" },
-    { "Guatemala +502": "GT +502" },
-    { "Guinea +224": "GN +224" },
-    { "Guinea-Bissau +245": "GW +245" },
-    { "Guyana +592": "GY +592" },
-    { "Haiti +509": "HT +509" },
-    { "Honduras +504": "HN +504" },
-    { "Hong Kong +852": "HK +852" },
-    { "Hungary +36": "HU +36" },
-    { "Iceland +354": "IS +354" },
-    { "India +91": "IN +91" },
-    { "Indonesia +62": "ID +62" },
-    { "Iran +98": "IR +98" },
-    { "Iraq +964": "IQ +964" },
-    { "Ireland (Irish Republic; Eire) +353": "IE +353" },
-    { "Israel +972": "IL +972" },
-    { "Italy +39": "IT +39" },
-    { "Ivory Coast (La Cote d'Ivoire) +225": "CI +225" },
-    { "Jamaica +876": "JM +876" },
-    { "Japan +81": "JP +81" },
-    { "Jordan +962": "JO +962" },
-    { "Kazakhstan +7": "KZ +7" },
-    { "Kenya +254": "KE +254" },
-    { "Kiribati +686 Republic (Gilbert Islands)": "KI +686" },
-    { "Korea, Republic of (South Korea) +82": "KR +82" },
-    { "Korea +850, People's Republic of (North Korea)": "KP +850" },
-    { "Kuwait +965": "KW +965" },
-    { "Kyrgyz Republic +996": "KG +996" },
-    { "Latvia +371": "LV +371" },
-    { "Laos +856": "LA +856" },
-    { "Lebanon +961": "LB +961" },
-    { "Lesotho +266": "LS +266" },
-    { "Liberia +231": "LR +231" },
-    { "Lithuania +370": "LT +370" },
-    { "Libya +218": "LY +218" },
-    { "Liechtenstein +423": "LI +423" },
-    { "Luxembourg +352": "LU +352" },
-    { "Macao +853": "MO +853" },
-    { "Macedonia +389": "MK +389" },
-    { "Madagascar +261": "MG +261" },
-    { "Malawi +265": "MW +265" },
-    { "Malaysia +60": "MY +60" },
-    { "Maldives +960": "MV +960" },
-    { "Mali +223": "ML +223" },
-    { "Malta +356": "MT +356" },
-    { "Marshall Islands +692": "MH +692" },
-    { "Martinique (French Antilles) +596": "MQ +596" },
-    { "Mauritania +222": "MR +222" },
-    { "Mauritius +230": "MU +230" },
-    { "Mayolte +269": "YT +269" },
-    { "Mexico +52": "MX +52" },
-    { "Micronesia (F.S. of Polynesia) +691": "FM +691" },
-    { "Moldova +373": "MD +373" },
-    { "Monaco +33": "MC +33" },
-    { "Mongolia +976": "MN +976" },
-    { "Montserrat +473": "MS +473" },
-    { "Morocco +212": "MA +212" },
-    { "Mozambique +258": "MZ +258" },
-    { "Myanmar (former Burma) +95": "MM +95" },
-    { "Namibia (former South-West Africa) +264": "NA +264" },
-    { "Nauru +674": "NR +674" },
-    { "Nepal +977": "NP +977" },
-    { "Netherlands +31": "NL +31" },
-    { "Netherlands Antilles +599": "AN +599" },
-    { "Nevis +869": "KN +869" },
-    { "New Caledonia +687": "NC +687" },
-    { "New Zealand +64": "NZ +64" },
-    { "Nicaragua +505": "NI +505" },
-    { "Niger +227": "NE +227" },
-    { "Nigeria +234": "NG +234" },
-    { "Niue +683": "NU +683" },
-    { "North Korea +850": "KP +850" },
-    { "North Mariana Islands (Saipan) +1670": "MP +1670" },
-    { "Norway +47": "NO +47" },
-    { "Oman +968": "OM +968" },
-    { "Pakistan +92": "PK +92" },
-    { "Palau +680": "PW +680" },
-    { "Panama +507": "PA +507" },
-    { "Papua New Guinea +675": "PG +675" },
-    { "Paraguay +595": "PY +595" },
-    { "Peru +51": "PE +51" },
-    { "Philippines +63": "PH +63" },
-    { "Poland +48": "PL +48" },
-    { "Portugal (includes Azores) +351": "PT +351" },
-    { "Puerto Rico +1787": "PR +1787" },
-    { "Qatar +974": "QA +974" },
-    { "Reunion (France) +262": "RE +262" },
-    { "Romania +40": "RO +40" },
-    { "Russia +7": "RU +7" },
-    { "Rwanda (Rwandese Republic) +250": "RW +250" },
-    { "San Marino +378": "SM +378" },
-    { "Sao Tome and Principe +239": "ST +239" },
-    { "Saudi Arabia +966": "SA +966" },
-    { "Senegal +221": "SN +221" },
-    { "Serbia and Montenegro +381": "RS +381" },
-    { "Seychelles +248": "SC +248" },
-    { "Sierra Leone +232": "SL +232" },
-    { "Singapore +65": "SG +65" },
-    { "Slovakia +421": "SK +421" },
-    { "Slovenia +386": "SI +386" },
-    { "Solomon Islands +677": "SB +677" },
-    { "Somalia +252": "SO +252" },
-    { "South Africa +27": "ZA +27" },
-    { "Spain +34": "ES +34" },
-    { "Sri Lanka +94": "LK +94" },
-    { "St. Helena +290": "SH +290" },
-    { "St. Kitts/Nevis +869": "KN +869" },
-    { "St. Pierre (et) Miquelon (France) +508": "PM +508" },
-    { "Sudan +249": "SD +249" },
-    { "Suriname +597": "SR +597" },
-    { "Swaziland +268": "SZ +268" },
-    { "Sweden +46": "SE +46" },
-    { "Switzerland +41": "CH +41" },
-    { "Syrian Arab Republic (Syria) +963": "SY +963" },
-    { "Tahiti (French Polynesia) +689": "PF +689" },
-    { "Taiwan +886": "TW +886" },
-    { "Tajikistan +7": "TJ +7" },
-    { "Tanzania (includes Zanzibar) +255": "TZ +255" },
-    { "Thailand +66": "TH +66" },
-    { "Togo (Togolese Republic) +228": "TG +228" },
-    { "Tokelau +690": "TK +690" },
-    { "Tonga +676": "TO +676" },
-    { "Trinidad and Tobago +1868": "TT +1868" },
-    { "Tunisia +216": "TN +216" },
-    { "Turkey +90": "TR +90" },
-    { "Turkmenistan +993": "TM +993" },
-    { "Tuvalu (Ellice Islands) +688": "TV +688" },
-    { "Uganda +256": "UG +256" },
-    { "Ukraine +380": "UA +380" },
-    { "United Arab Emirates +971": "AE +971" },
-    { "United Kingdom +44": "GB +44" },
-    { "Uruguay +598": "UY +598" },
-    { "USA +1": "US +1" },
-    { "Uzbekistan +7": "UZ +7" },
-    { "Vanuatu (New Hebrides) +678": "VU +678" },
-    { "Vatican City +39": "VA +39" },
-    { "Venezuela +58": "VE +58" },
-    { "Viet Nam +84": "VN +84" },
-    { "Virgin Islands +1340": "VG +1" },
-    { "Wallis and Futuna +681": "WF +681" },
-    { "Western Samoa +685": "WS +685" },
-    { "Yemen (People's Democratic Republic of) +381": "YE +381" },
-    { "Yemen Arab Republic (North Yemen) +967": "YE +967" },
-    { "Zambia +260": "ZM +260" },
-    { "Zimbabwe +263": "ZW +263" },
-  ];
+  const [enabledAvoidView, setEnabledAvoidView] = useState(true);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -300,13 +72,6 @@ const SignupScreen1 = (props) => {
     formIsValid: false,
   });
 
-  const authHandler = async () => {
-    await setIsLoading(true);
-    // await dispatch(setEmail(formState.inputValues.numbers));
-    await setIsLoading(false);
-    await props.navigation.navigate("SignupPhoneScreen2");
-  };
-
   const inputChangeHandler = useCallback(
     (inputIdentifier, inputValue, inputValidity) => {
       dispatchFormState({
@@ -321,9 +86,19 @@ const SignupScreen1 = (props) => {
 
   const phoneNumberInputRef = useRef<Input>(null);
 
+  useEffect(() => {
+    const unsubscribe = props.navigation.addListener("focus", async () => {
+      setEnabledAvoidView(true);
+    });
+
+    return unsubscribe;
+  }, [props.navigation]);
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
+      enabled={enabledAvoidView}
+      keyboardVerticalOffset={20}
       style={styles.screen}
     >
       <SafeAreaView style={{ flex: 1 }}>
@@ -379,10 +154,12 @@ const SignupScreen1 = (props) => {
                   placeholderTextColor={"grey"}
                   onKeyPress={({ nativeEvent: { key: keyValue } }) => {
                     if (keyValue.length > 1 && keyValue !== "Backspace") {
+                      setEnabledAvoidView(false);
                       props.navigation.navigate("SignupPhoneScreen2");
                     }
                   }}
                   onSubmitEditing={() => {
+                    setEnabledAvoidView(false);
                     props.navigation.navigate("SignupPhoneScreen2");
                   }}
                   onFocus={() => setIsPickingCountryCode(false)}
@@ -414,6 +191,7 @@ const SignupScreen1 = (props) => {
           >
             <TouchableCmp
               onPress={() => {
+                setEnabledAvoidView(false);
                 props.navigation.navigate("SignupPhoneScreen2");
               }}
               disabled={formState.formIsValid === false}
@@ -495,246 +273,321 @@ const SignupScreen1 = (props) => {
               style={{
                 backgroundColor: "rgba(0,0,0,0)",
               }}
-              selectedValue={currentSelectedCode}
-              pickerData={[
-                "United States of America +1",
-                "Afghanistan +93",
-                "Albania +355",
-                "Algeria +213",
-                "American Samoa +684",
-                "Andorra +376",
-                "Angola +244",
-                "Anguilla +809",
-                "Antigua +268",
-                "Argentina +54",
-                "Armenia +374",
-                "Aruba +297",
-                "Ascension Island +247",
-                "Australia +61",
-                "Australian External Territories +672",
-                "Austria +43",
-                "Azerbaijan +994",
-                "Bahamas +242",
-                "Barbados +246",
-                "Bahrain +973",
-                "Bangladesh +880",
-                "Belarus +375",
-                "Belgium +32",
-                "Belize +501",
-                "Benin +229",
-                "Bermuda +809",
-                "Bhutan +975",
-                "British Virgin Islands +284",
-                "Bolivia +591",
-                "Bosnia and Hercegovina +387",
-                "Botswana +267",
-                "Brazil +55",
-                "Brunei Darussalm +673",
-                "Bulgaria +359",
-                "Burkina +226 Faso",
-                "Burundi +257",
-                "Cambodia +855",
-                "Cameroon +237",
-                "Canada +1",
-                "Cape Verde Islands +238",
-                "Caribbean Nations +599",
-                "Cayman Islands +345",
-                "Central African Republic +236",
-                "Chad +235",
-                "Chile +56",
-                "China (People's Republic) +86",
-                "Taiwan +886",
-                "Colombia +57",
-                "Comoros and Mayotte +269",
-                "Congo +242",
-                "Cook Islands +682",
-                "Costa Rica +506",
-                "Croatia +385",
-                "Cuba +53",
-                "Cyprus +357",
-                "Czech Republic +420",
-                "Denmark +45",
-                "Diego Garcia +246",
-                "Dominca +767",
-                "Dominican Republic +809",
-                "Djibouti +253",
-                "Ecuador +593",
-                "Egypt +20",
-                "El Salvador +503",
-                "Equatorial Guinea +240",
-                "Eritrea +291",
-                "Estonia +372",
-                "Ethiopia +251",
-                "Falkland Islands +500",
-                "Faroe (Faeroe) Islands (Denmark) +298",
-                "Fiji +679",
-                "Finland +358",
-                "France +33",
-                "French Antilles +596",
-                "French Guiana +594",
-                "Gabon (Gabonese Republic) +241",
-                "Gambia +220",
-                "Georgia +995",
-                "Germany +49",
-                "Ghana +233",
-                "Gibraltar +350",
-                "Greece +30",
-                "Greenland +299",
-                "Grenada/Carricou +473",
-                "Guam +671",
-                "Guatemala +502",
-                "Guinea +224",
-                "Guinea-Bissau +245",
-                "Guyana +592",
-                "Haiti +509",
-                "Honduras +504",
-                "Hong Kong +852",
-                "Hungary +36",
-                "Iceland +354",
-                "India +91",
-                "Indonesia +62",
-                "Iran +98",
-                "Iraq +964",
-                "Ireland (Irish Republic; Eire) +353",
-                "Israel +972",
-                "Italy +39",
-                "Ivory Coast (La Cote d'Ivoire) +225",
-                "Jamaica +876",
-                "Japan +81",
-                "Jordan +962",
-                "Kazakhstan +7",
-                "Kenya +254",
-                "Kiribati Republic (Gilbert Islands) +686",
-                "Korea, Republic of (South Korea) +82",
-                "Korea, People's Republic of (North Korea) +850",
-                "Kuwait +965",
-                "Kyrgyz Republic +996",
-                "Latvia +371",
-                "Laos +856",
-                "Lebanon +961",
-                "Lesotho +266",
-                "Liberia +231",
-                "Lithuania +370",
-                "Libya +218",
-                "Liechtenstein +423",
-                "Luxembourg +352",
-                "Macao +853",
-                "Macedonia +389",
-                "Madagascar +261",
-                "Malawi +265",
-                "Malaysia +60",
-                "Maldives +960",
-                "Mali +223",
-                "Malta +356",
-                "Marshall Islands +692",
-                "Martinique (French Antilles) +596",
-                "Mauritania +222",
-                "Mauritius +230",
-                "Mayolte +269",
-                "Mexico +52",
-                "Micronesia (F.S. of Polynesia) +691",
-                "Moldova +373",
-                "Monaco +33",
-                "Mongolia +976",
-                "Montserrat +473",
-                "Morocco +212",
-                "Mozambique +258",
-                "Myanmar (former Burma) +95",
-                "Namibia (former South-West Africa) +264",
-                "Nauru +674",
-                "Nepal +977",
-                "Netherlands +31",
-                "Netherlands Antilles +599",
-                "Nevis +869",
-                "New Caledonia +687",
-                "New Zealand +64",
-                "Nicaragua +505",
-                "Niger +227",
-                "Nigeria +234",
-                "Niue +683",
-                "North Korea +850",
-                "North Mariana Islands (Saipan) +1670",
-                "Norway +47",
-                "Oman +968",
-                "Pakistan +92",
-                "Palau +680",
-                "Panama +507",
-                "Papua New Guinea +675",
-                "Paraguay +595",
-                "Peru +51",
-                "Philippines +63",
-                "Poland +48",
-                "Portugal (includes Azores) +351",
-                "Puerto Rico +1787",
-                "Qatar +974",
-                "Reunion +262 (France)",
-                "Romania +40",
-                "Russia +7",
-                "Rwanda (Rwandese Republic) +250",
-                "San Marino +378",
-                "Sao Tome and Principe +239",
-                "Saudi Arabia +966",
-                "Senegal +221",
-                "Serbia and Montenegro +381",
-                "Seychelles +248",
-                "Sierra Leone +232",
-                "Singapore +65",
-                "Slovakia +421",
-                "Slovenia +386",
-                "Solomon Islands +677",
-                "Somalia +252",
-                "South Africa +27",
-                "Spain +34",
-                "Sri Lanka +94",
-                "St. Helena +290",
-                "St. Kitts/Nevis +869",
-                "St. Pierre (et) Miquelon (France) +508",
-                "Sudan +249",
-                "Suriname +597",
-                "Swaziland +268",
-                "Sweden +46",
-                "Switzerland +41",
-                "Syrian Arab Republic (Syria) +963",
-                "Tahiti (French Polynesia) +689",
-                "Taiwan +886",
-                "Tajikistan +7",
-                "Tanzania (includes Zanzibar) +255",
-                "Thailand +66",
-                "Togo (Togolese Republic) +228",
-                "Tokelau +690",
-                "Tonga +676",
-                "Trinidad and Tobago +1868",
-                "Tunisia +216",
-                "Turkey +90",
-                "Turkmenistan +993",
-                "Tuvalu (Ellice Islands) +688",
-                "Uganda +256",
-                "Ukraine +380",
-                "United Arab Emirates +971",
-                "United Kingdom +44",
-                "Uruguay +598",
-                "USA +1",
-                "Uzbekistan +7",
-                "Vanuatu (New Hebrides) +678",
-                "Vatican City +39",
-                "Venezuela +58",
-                "Viet Nam +84",
-                "Virgin Islands +1340",
-                "Wallis and Futuna +681",
-                "Western Samoa +685",
-                "Yemen (People's Democratic Republic of) +381",
-                "Yemen Arab Republic (North Yemen) +967",
-                "Zambia +260",
-                "Zimbabwe +263",
-              ]}
+              selectedValue={countryCode}
               onValueChange={(value) => {
-                const found = book.find(
-                  (country) => Object.keys(country)[0] === value
-                );
-                setCurrentSelectedCode(value);
-                setCountryCode(Object.values(found));
+                setCountryCode(value);
               }}
-            />
+            >
+              <Picker.Item label="Afghanistan +93" value="AF +93" />
+              <Picker.Item label="Albania +355" value="AL +355" />
+              <Picker.Item label="Algeria +213" value="DZ +213" />
+              <Picker.Item label="American Samoa +684" value="AS +684" />
+              <Picker.Item label="Andorra +376" value="AD +376" />
+              <Picker.Item label="Angola +244" value="AO +244" />
+              <Picker.Item label="Anguilla +809" value="AI +809" />
+              <Picker.Item label="Antigua +268" value="AG +268" />
+              <Picker.Item label="Argentina +54" value="AR +54" />
+              <Picker.Item label="Armenia +374" value="AM +374" />
+              <Picker.Item label="Aruba +297" value="AW +297" />
+              <Picker.Item label="Ascension Island +247" value="AC +247" />
+              <Picker.Item label="Australia +61" value="AU +61" />
+              <Picker.Item
+                label="Australian External Territories +672"
+                value="AU +672"
+              />
+              <Picker.Item label="Austria +43" value="AT +43" />
+              <Picker.Item label="Azerbaijan +994" value="AZ +994" />
+              <Picker.Item label="Bahamas +242" value="BS +242" />
+              <Picker.Item label="Barbados +246" value="BB +246" />
+              <Picker.Item label="Bahrain +973" value="BH +973" />
+              <Picker.Item label="Bangladesh +880" value="BD +880" />
+              <Picker.Item label="Belarus +375" value="BY +375" />
+              <Picker.Item label="Belgium +32" value="BE +32" />
+              <Picker.Item label="Belize +501" value="BZ +501" />
+              <Picker.Item label="Benin +229" value="BJ +229" />
+              <Picker.Item label="Bermuda +809" value="BM +809" />
+              <Picker.Item label="Bhutan +975" value="BT +975" />
+              <Picker.Item
+                label="British Virgin Islands +284"
+                value="VG +284"
+              />
+              <Picker.Item label="Bolivia +591" value="BO +591" />
+              <Picker.Item
+                label="Bosnia and Hercegovina +387"
+                value="BA +387"
+              />
+              <Picker.Item label="Botswana +267" value="BW +267" />
+              <Picker.Item label="Brazil +55" value="BR +55" />
+              <Picker.Item label="Brunei Darussalm +673" value="BN +673" />
+              <Picker.Item label="Bulgaria +359" value="BG +359" />
+              <Picker.Item label="Burkina +226 Faso" value="BF +226" />
+              <Picker.Item label="Burundi +257" value="BI +257" />
+              <Picker.Item label="Cambodia +855" value="KH +855" />
+              <Picker.Item label="Cameroon +237" value="CM +237" />
+              <Picker.Item label="Canada +1" value="CA +1" />
+              <Picker.Item label="Cape Verde Islands +238" value="CV +238" />
+              <Picker.Item label="Caribbean Nations +599" value="BQ +599" />
+              <Picker.Item label="Cayman Islands +345" value="KY +345" />
+              <Picker.Item
+                label="Central African Republic +236"
+                value="CF +236"
+              />
+              <Picker.Item label="Chad +235" value="TD +235" />
+              <Picker.Item label="Chile +56" value="CL +56" />
+              <Picker.Item
+                label="China (People's Republic) +86"
+                value="CN +86"
+              />
+              <Picker.Item label="Taiwan +886" value="TW +886" />
+              <Picker.Item label="Colombia +57" value="CO +57" />
+              <Picker.Item label="Comoros and Mayotte +269" value="KM +269" />
+              <Picker.Item label="Congo +242" value="CD +242" />
+              <Picker.Item label="Cook Islands +682" value="CK +682" />
+              <Picker.Item label="Costa Rica +506" value="CR +506" />
+              <Picker.Item label="Croatia +385" value="HR +385" />
+              <Picker.Item label="Cuba +53" value="CU +53" />
+              <Picker.Item label="Cyprus +357" value="CY +357" />
+              <Picker.Item label="Czech Republic +420" value="CZ +420" />
+              <Picker.Item label="Denmark +45" value="DK +45" />
+              <Picker.Item label="Diego Garcia +246" value="IO +246" />
+              <Picker.Item label="Dominca +767" value="DM +767" />
+              <Picker.Item label="Dominican Republic +809" value="DO +809" />
+              <Picker.Item label="Djibouti +253" value="DJ +253" />
+              <Picker.Item label="Ecuador +593" value="EC +593" />
+              <Picker.Item label="Egypt +20" value="EG +20" />
+              <Picker.Item label="El Salvador +503" value="SV +503" />
+              <Picker.Item label="Equatorial Guinea +240" value="GQ +240" />
+              <Picker.Item label="Eritrea +291" value="ER +291" />
+              <Picker.Item label="Estonia +372" value="EE +372" />
+              <Picker.Item label="Ethiopia +251" value="ET +251" />
+              <Picker.Item label="Falkland Islands +500" value="FK +500" />
+              <Picker.Item
+                label="Faroe (Faeroe) Islands (Denmark) +298"
+                value="FO +298"
+              />
+              <Picker.Item label="Fiji +679" value="FJ +679" />
+              <Picker.Item label="Finland +358" value="FI +358" />
+              <Picker.Item label="France +33" value="FR +33" />
+              <Picker.Item label="French Antilles +596" value="TF +596" />
+              <Picker.Item label="French Guiana +594" value="GF +594" />
+              <Picker.Item
+                label="Gabon (Gabonese Republic) +241"
+                value="GA +241"
+              />
+              <Picker.Item label="Gambia +220" value="GM +220" />
+              <Picker.Item label="Georgia +995" value="GE +995" />
+              <Picker.Item label="Germany +49" value="DE +49" />
+              <Picker.Item label="Ghana +233" value="GH +233" />
+              <Picker.Item label="Gibraltar +350" value="GI +350" />
+              <Picker.Item label="Greece +30" value="GR +30" />
+              <Picker.Item label="Greenland +299" value="GL +299" />
+              <Picker.Item label="Grenada/Carricou +473" value="GD +473" />
+              <Picker.Item label="Guam +671" value="GU +671" />
+              <Picker.Item label="Guatemala +502" value="GT +502" />
+              <Picker.Item label="Guinea +224" value="GN +224" />
+              <Picker.Item label="Guinea-Bissau +245" value="GW +245" />
+              <Picker.Item label="Guyana +592" value="GY +592" />
+              <Picker.Item label="Haiti +509" value="HT +509" />
+              <Picker.Item label="Honduras +504" value="HN +504" />
+              <Picker.Item label="Hong Kong +852" value="HK +852" />
+              <Picker.Item label="Hungary +36" value="HU +36" />
+              <Picker.Item label="Iceland +354" value="IS +354" />
+              <Picker.Item label="India +91" value="IN +91" />
+              <Picker.Item label="Indonesia +62" value="ID +62" />
+              <Picker.Item label="Iran +98" value="IR +98" />
+              <Picker.Item label="Iraq +964" value="IQ +964" />
+              <Picker.Item
+                label="Ireland (Irish Republic; Eire) +353"
+                value="IE +353"
+              />
+              <Picker.Item label="Israel +972" value="IL +972" />
+              <Picker.Item label="Italy +39" value="IT +39" />
+              <Picker.Item
+                label="Ivory Coast (La Cote d'Ivoire) +225"
+                value="CI +225"
+              />
+              <Picker.Item label="Jamaica +876" value="JM +876" />
+              <Picker.Item label="Japan +81" value="JP +81" />
+              <Picker.Item label="Jordan +962" value="JO +962" />
+              <Picker.Item label="Kazakhstan +7" value="KZ +7" />
+              <Picker.Item label="Kenya +254" value="KE +254" />
+              <Picker.Item
+                label="Kiribati Republic (Gilbert Islands) +686"
+                value="KI +686"
+              />
+              <Picker.Item
+                label="Korea, Republic of (South Korea) +82"
+                value="KR +82"
+              />
+              <Picker.Item
+                label="Korea, People's Republic of (North Korea) +850"
+                value="KP +850"
+              />
+              <Picker.Item label="Kuwait +965" value="KW +965" />
+              <Picker.Item label="Kyrgyz Republic +996" value="KG +996" />
+              <Picker.Item label="Latvia +371" value="LV +371" />
+              <Picker.Item label="Laos +856" value="LA +856" />
+              <Picker.Item label="Lebanon +961" value="LB +961" />
+              <Picker.Item label="Lesotho +266" value="LS +266" />
+              <Picker.Item label="Liberia +231" value="LR +231" />
+              <Picker.Item label="Lithuania +370" value="LT +370" />
+              <Picker.Item label="Libya +218" value="LY +218" />
+              <Picker.Item label="Liechtenstein +423" value="LI +423" />
+              <Picker.Item label="Luxembourg +352" value="LU +352" />
+              <Picker.Item label="Macao +853" value="MO +853" />
+              <Picker.Item label="Macedonia +389" value="MK +389" />
+              <Picker.Item label="Madagascar +261" value="MG +261" />
+              <Picker.Item label="Malawi +265" value="MW +265" />
+              <Picker.Item label="Malaysia +60" value="MY +60" />
+              <Picker.Item label="Maldives +960" value="MV +960" />
+              <Picker.Item label="Mali +223" value="ML +223" />
+              <Picker.Item label="Malta +356" value="MT +356" />
+              <Picker.Item label="Marshall Islands +692" value="MH +692" />
+              <Picker.Item
+                label="Martinique (French Antilles) +596"
+                value="MQ +596"
+              />
+              <Picker.Item label="Mauritania +222" value="MR +222" />
+              <Picker.Item label="Mauritius +230" value="MU +230" />
+              <Picker.Item label="Mayolte +269" value="YT +269" />
+              <Picker.Item label="Mexico +52" value="MX +52" />
+              <Picker.Item
+                label="Micronesia (F.S. of Polynesia) +691"
+                value="FM +691"
+              />
+              <Picker.Item label="Moldova +373" value="MD +373" />
+              <Picker.Item label="Monaco +33" value="MC +33" />
+              <Picker.Item label="Mongolia +976" value="MN +976" />
+              <Picker.Item label="Montserrat +473" value="MS +473" />
+              <Picker.Item label="Morocco +212" value="MA +212" />
+              <Picker.Item label="Mozambique +258" value="MZ +258" />
+              <Picker.Item label="Myanmar (former Burma) +95" value="MM +95" />
+              <Picker.Item
+                label="Namibia (former South-West Africa) +264"
+                value="NA +264"
+              />
+              <Picker.Item label="Nauru +674" value="NR +674" />
+              <Picker.Item label="Nepal +977" value="NP +977" />
+              <Picker.Item label="Netherlands +31" value="NL +31" />
+              <Picker.Item label="Netherlands Antilles +599" value="AN +599" />
+              <Picker.Item label="Nevis +869" value="KN +869" />
+              <Picker.Item label="New Caledonia +687" value="NC +687" />
+              <Picker.Item label="New Zealand +64" value="NZ +64" />
+              <Picker.Item label="Nicaragua +505" value="NI +505" />
+              <Picker.Item label="Niger +227" value="NE +227" />
+              <Picker.Item label="Nigeria +234" value="NG +234" />
+              <Picker.Item label="Niue +683" value="NU +683" />
+              <Picker.Item label="North Korea +850" value="KP +850" />
+              <Picker.Item
+                label="North Mariana Islands (Saipan) +1670"
+                value="MP +1670"
+              />
+              <Picker.Item label="Norway +47" value="NO +47" />
+              <Picker.Item label="Oman +968" value="OM +968" />
+              <Picker.Item label="Pakistan +92" value="PK +92" />
+              <Picker.Item label="Palau +680" value="PW +680" />
+              <Picker.Item label="Panama +507" value="PA +507" />
+              <Picker.Item label="Papua New Guinea +675" value="PG +675" />
+              <Picker.Item label="Paraguay +595" value="PY +595" />
+              <Picker.Item label="Peru +51" value="PE +51" />
+              <Picker.Item label="Philippines +63" value="PH +63" />
+              <Picker.Item label="Poland +48" value="PL +48" />
+              <Picker.Item
+                label="Portugal (includes Azores) +351"
+                value="PT +351"
+              />
+              <Picker.Item label="Puerto Rico +1787" value="PR +1787" />
+              <Picker.Item label="Qatar +974" value="QA +974" />
+              <Picker.Item label="Reunion +262 (France)" value="RE +262" />
+              <Picker.Item label="Romania +40" value="RO +40" />
+              <Picker.Item label="Russia +7" value="RU +7" />
+              <Picker.Item
+                label="Rwanda (Rwandese Republic) +250"
+                value="RW +250"
+              />
+              <Picker.Item label="San Marino +378" value="SM +378" />
+              <Picker.Item label="Sao Tome and Principe +239" value="ST +239" />
+              <Picker.Item label="Saudi Arabia +966" value="SA +966" />
+              <Picker.Item label="Senegal +221" value="SN +221" />
+              <Picker.Item label="Serbia and Montenegro +381" value="RS +381" />
+              <Picker.Item label="Seychelles +248" value="SC +248" />
+              <Picker.Item label="Sierra Leone +232" value="SL +232" />
+              <Picker.Item label="Singapore +65" value="SG +65" />
+              <Picker.Item label="Slovakia +421" value="SK +421" />
+              <Picker.Item label="Slovenia +386" value="SI +386" />
+              <Picker.Item label="Solomon Islands +677" value="SB +677" />
+              <Picker.Item label="Somalia +252" value="SO +252" />
+              <Picker.Item label="South Africa +27" value="ZA +27" />
+              <Picker.Item label="Spain +34" value="ES +34" />
+              <Picker.Item label="Sri Lanka +94" value="LK +94" />
+              <Picker.Item label="St. Helena +290" value="SH +290" />
+              <Picker.Item label="St. Kitts/Nevis +869" value="KN +869" />
+              <Picker.Item
+                label="St. Pierre (et) Miquelon (France) +508"
+                value="PM +508"
+              />
+              <Picker.Item label="Sudan +249" value="SD +249" />
+              <Picker.Item label="Suriname +597" value="SR +597" />
+              <Picker.Item label="Swaziland +268" value="SZ +268" />
+              <Picker.Item label="Sweden +46" value="SE +46" />
+              <Picker.Item label="Switzerland +41" value="CH +41" />
+              <Picker.Item
+                label="Syrian Arab Republic (Syria) +963"
+                value="SY +963"
+              />
+              <Picker.Item
+                label="Tahiti (French Polynesia) +689"
+                value="PF +689"
+              />
+              <Picker.Item label="Taiwan +886" value="TW +886" />
+              <Picker.Item label="Tajikistan +7" value="TJ +7" />
+              <Picker.Item
+                label="Tanzania (includes Zanzibar) +255"
+                value="TZ +255"
+              />
+              <Picker.Item label="Thailand +66" value="TH +66" />
+              <Picker.Item
+                label="Togo (Togolese Republic) +228"
+                value="TG +228"
+              />
+              <Picker.Item label="Tokelau +690" value="TK +690" />
+              <Picker.Item label="Tonga +676" value="TO +676" />
+              <Picker.Item label="Trinidad and Tobago +1868" value="TT +1868" />
+              <Picker.Item label="Tunisia +216" value="TN +216" />
+              <Picker.Item label="Turkey +90" value="TR +90" />
+              <Picker.Item label="Turkmenistan +993" value="TM +993" />
+              <Picker.Item
+                label="Tuvalu (Ellice Islands) +688"
+                value="TV +688"
+              />
+              <Picker.Item label="Uganda +256" value="UG +256" />
+              <Picker.Item label="Ukraine +380" value="UA +380" />
+              <Picker.Item label="United Arab Emirates +971" value="AE +971" />
+              <Picker.Item label="United Kingdom +44" value="GB +44" />
+              <Picker.Item label="Uruguay +598" value="UY +598" />
+              <Picker.Item label="United States of America +1" value="US +1" />
+              <Picker.Item label="Uzbekistan +7" value="UZ +7" />
+              <Picker.Item
+                label="Vanuatu (New Hebrides) +678"
+                value="VU +678"
+              />
+              <Picker.Item label="Vatican City +39" value="VA +39" />
+              <Picker.Item label="Venezuela +58" value="VE +58" />
+              <Picker.Item label="Viet Nam +84" value="VN +84" />
+              <Picker.Item label="Virgin Islands +1340" value="VG +1" />
+              <Picker.Item label="Wallis and Futuna +681" value="WF +681" />
+              <Picker.Item label="Western Samoa +685" value="WS +685" />
+              <Picker.Item
+                label="Yemen (People's Democratic Republic of) +381"
+                value="YE +381"
+              />
+              <Picker.Item
+                label="Yemen Arab Republic (North Yemen) +967"
+                value="YE +967"
+              />
+              <Picker.Item label="Zambia +260" value="ZM +260" />
+              <Picker.Item label="Zimbabwe +263" value="ZW +263" />
+            </Picker>
           </View>
         )}
       </SafeAreaView>
