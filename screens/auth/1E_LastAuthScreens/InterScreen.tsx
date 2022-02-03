@@ -10,7 +10,6 @@ const InterScreen = (props) => {
   useEffect(() => {
     setTimeout(() => {
       dispatch(isUsingMain(true));
-      console.log("hit1");
     }, 400);
   }, []);
 

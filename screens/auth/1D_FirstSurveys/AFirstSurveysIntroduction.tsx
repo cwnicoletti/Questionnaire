@@ -8,13 +8,13 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
+  ScrollView,
 } from "react-native";
 import { Feather, Ionicons, MaterialIcons, Octicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../hooks";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import AwesomeButton from "react-native-really-awesome-button";
-import { ScrollView } from "react-native-gesture-handler";
 
 const AFirstSurveysIntroduction = (props) => {
   const [isMan, setIsMan] = useState(false);
