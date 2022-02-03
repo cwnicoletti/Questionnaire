@@ -8,6 +8,7 @@
     <img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-critical" alt="CC BY-NC 4.0">
   </a>
   <img src="https://img.shields.io/github/repo-size/cwnicoletti/Naire" alt="Repo Size">
+  <img src="https://img.shields.io/github/commit-activity/m/cwnicoletti/Naire" alt="Repo Size">
   <a href="https://app.codacy.com/gh/cwnicoletti/Naire/dashboard">
     <img src="https://img.shields.io/codacy/grade/a5a52184b36940d9aac4438344861370" alt="Codacy Grade">
   </a>
