@@ -11,15 +11,11 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   StatusBar,
-  Text,
-  Image,
   Keyboard,
   View,
-  KeyboardAvoidingView,
   Animated,
-  Dimensions,
+  ScrollView,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import {
   FontAwesome,
@@ -30,60 +26,23 @@ import {
   MaterialCommunityIcons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import FullProfile from "../../../components/FullProfile/FullProfile";
 import * as Progress from "react-native-progress";
 import MaskedView from "@react-native-masked-view/masked-view";
 import { LinearGradient } from "expo-linear-gradient";
 import { Modalize } from "react-native-modalize";
-import Input from "../../../components/Input";
-import KeyboardSpacer from "react-native-keyboard-spacer";
-import LottieView from "lottie-react-native";
-import { CommonActions } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
-
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
-
-const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
-    const updateValues = {
-      ...state.inputValues,
-      [action.input]: action.value,
-    };
-    const updatedValidities = {
-      ...state.inputValidities,
-      [action.input]: action.isValid,
-    };
-    let updatedFormIsValid = true;
-    for (const key in updatedValidities) {
-      if (updatedValidities.hasOwnProperty(key)) {
-        updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
-      }
-    }
-    return {
-      formIsValid: updatedFormIsValid,
-      inputValidities: updatedValidities,
-      inputValues: updateValues,
-    };
-  }
-  return state;
-};
+import Modal from "../../../components/FullProfile/FullProfile_components/Modal/Modal";
 
 const CardMainScreen = ({ navigation }) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [indeterminate, setIndeterminate] = useState(true);
-  const [showLottie, setShowLottie] = useState(false);
-  const [extraModalHeightKeyboard, setExtraModalHeightKeyboard] = useState(0);
-  const width = Dimensions.get("window").width;
-  const [extraModalHeightPictureOrPrompt, setExtraModalHeightPictureOrPrompt] =
-    useState(width / 1.5);
-  const sentLottieFadeAnim = useRef(new Animated.Value(0)).current;
+  const [showMessageButton, setShowMessageButton] = useState(true);
+  const [pickedPicture, setPickedPicture] = useState("");
+  const [pickedPrompt, setPickedPrompt] = useState({});
+  const [pickedPromptHeight, setPickedPromptHeight] = useState(0);
   const fadeLoadingAnim = useRef(new Animated.Value(0)).current;
-  const fadeModalAnim = useRef(new Animated.Value(1)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const lottieRef = useRef();
 
   const modalizeRef = useRef<Modalize>(null);
 
@@ -91,13 +50,11 @@ const CardMainScreen = ({ navigation }) => {
     modalizeRef.current?.open();
   };
 
-  const onClose = () => {
-    setExtraModalHeightKeyboard(0);
-    modalizeRef.current?.close();
-  };
-
   const onCloseModal = () => {
-    setExtraModalHeightKeyboard(0);
+    setTimeout(() => {
+      setPickedPrompt({});
+      setPickedPicture("");
+    }, 500);
     Keyboard.dismiss();
   };
 
@@ -105,28 +62,6 @@ const CardMainScreen = ({ navigation }) => {
   if (Platform.OS === "android") {
     TouchableCmp = TouchableNativeFeedback;
   }
-
-  const [formState, dispatchFormState] = useReducer(formReducer, {
-    inputValues: {
-      messageBar: "",
-    },
-    inputValidities: {
-      messageBar: false,
-    },
-    formIsValid: false,
-  });
-
-  const inputChangeHandler = useCallback(
-    (inputIdentifier, inputValue, inputValidity) => {
-      dispatchFormState({
-        type: FORM_INPUT_UPDATE,
-        value: inputValue,
-        isValid: inputValidity,
-        input: inputIdentifier,
-      });
-    },
-    [dispatchFormState]
-  );
 
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -152,20 +87,16 @@ const CardMainScreen = ({ navigation }) => {
     }).start();
   };
 
-  const fadeOutModal = () => {
-    Animated.timing(fadeModalAnim, {
-      toValue: 0,
-      duration: 200,
-      useNativeDriver: true,
-    }).start();
+  const setPicture = (imageUrl) => {
+    setPickedPicture(imageUrl);
   };
 
-  const sentLottieFadeIn = () => {
-    Animated.timing(sentLottieFadeAnim, {
-      toValue: 1,
-      duration: 800,
-      useNativeDriver: true,
-    }).start();
+  const setPrompt = (prompt) => {
+    setPickedPrompt(prompt);
+  };
+
+  const getPromptHeight = (height) => {
+    setPickedPromptHeight(height);
   };
 
   // TODO: hide tabbar on scroll
@@ -233,24 +164,32 @@ const CardMainScreen = ({ navigation }) => {
                 name="Sonya"
                 predictionValue={98.67}
                 age={27}
-                height={`5' 6"`}
+                height={`5' 7"`}
                 worksOut="Sometimes"
                 smokesTobacco="Never"
-                smokesWeed="Never"
+                smokesWeed="Sometimes"
                 drinks="Socially"
-                drugs="Rarely"
+                drugs="Never"
                 education="Undergraduate Degree"
                 city="San Jose"
-                school="University of California, Berkley"
-                jobTitle="Product Marketing Manager at SoundCloud"
-                Image1="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic2_hzqqeq.jpg"
-                Image2="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic4_oswkd9.jpg"
-                Image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic9_g0qjfe.jpg"
-                Image4="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic10_cxnyt4.jpg"
-                Image5="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic11_frgkta.jpg"
-                Image6="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic5_gsigto.jpg"
+                school="UC Berkley"
+                jobTitle="Media Planner"
+                image1="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic2_hzqqeq.jpg"
+                image2="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic4_oswkd9.jpg"
+                image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic9_g0qjfe.jpg"
+                image4="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic10_cxnyt4.jpg"
+                image5="https://res.cloudinary.com/personaluse1234/image/upload/v1642454903/Naire/Sonya/cardpic11_frgkta.jpg"
+                image6="https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic5_gsigto.jpg"
+                prompt1="I'm really wondering"
+                answer1="What's your favorite place in the entire world?"
+                prompt2="Something random I'd like to know"
+                answer2="What's your biggest pet peeve?"
+                prompt3="Something I'd like to know about our first date"
+                answer3="Will it include a beach scene? 👀"
                 onOpen={onOpen}
-                showMessage={!showLottie}
+                showMessage={showMessageButton}
+                setPicture={setPicture}
+                setPrompt={setPrompt}
               />
             </SafeAreaView>
           </ScrollView>
@@ -284,306 +223,15 @@ const CardMainScreen = ({ navigation }) => {
               <Feather name="fast-forward" size={24} color="black" />
             </View>
           </TouchableCmp>
-          <Modalize
-            ref={modalizeRef}
-            modalHeight={
-              150 + extraModalHeightKeyboard + extraModalHeightPictureOrPrompt
-            }
-            onClose={onCloseModal}
-            scrollViewProps={{
-              keyboardShouldPersistTaps: "handled",
-              scrollEnabled: false,
-            }}
-          >
-            {showLottie ? (
-              <Animated.View
-                style={{
-                  opacity: sentLottieFadeAnim,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "40%",
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Feather
-                      name="x"
-                      size={24}
-                      color="black"
-                      style={{
-                        flex: 1,
-                        paddingLeft: 20,
-                        paddingTop: 20,
-                        opacity: 0,
-                      }}
-                    />
-                    <View
-                      style={{
-                        flex: 1,
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    />
-                    <TouchableCmp onPress={onClose}>
-                      <Feather
-                        name="x"
-                        size={24}
-                        color="black"
-                        style={{ flex: 1, paddingRight: 20, paddingTop: 20 }}
-                      />
-                    </TouchableCmp>
-                  </View>
-                  <LottieView
-                    ref={lottieRef}
-                    source={require("../../../assets/lottie_anims/19666-love-message-pop.json")}
-                    autoPlay={false}
-                    loop={false}
-                    colorFilters={[
-                      {
-                        keypath: "HEART",
-                        color: "#ffffff",
-                      },
-                      {
-                        keypath: "BALOON",
-                        color: "#434aa8",
-                      },
-                    ]}
-                    style={{ height: 150 }}
-                  />
-                  <Text style={{ fontSize: 22, fontWeight: "500" }}>
-                    Your message has been sent!
-                  </Text>
-                  <Text
-                    style={{ fontSize: 16, fontWeight: "200", marginTop: 5 }}
-                  >
-                    They'll recieve your notifcation soon!
-                  </Text>
-                </View>
-              </Animated.View>
-            ) : null}
-            <Animated.View
-              style={{
-                flex: 1,
-                borderRadius: 25,
-                backgroundColor: "white",
-                paddingTop: 5,
-                opacity: fadeModalAnim,
-              }}
-            >
-              <View
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Feather
-                  name="x"
-                  size={24}
-                  color="black"
-                  style={{ paddingLeft: 30, opacity: 0 }}
-                />
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <MaskedView
-                    style={{}}
-                    maskElement={
-                      <View
-                        style={{
-                          flex: 1,
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <FontAwesome
-                          name="envelope-o"
-                          size={28}
-                          color="black"
-                          style={{ position: "absolute" }}
-                        />
-                        <FontAwesome5
-                          name="heart"
-                          size={11}
-                          color="black"
-                          style={{ marginBottom: 5 }}
-                        />
-                      </View>
-                    }
-                  >
-                    <LinearGradient
-                      colors={["#A700D1", "#434aa8"]}
-                      style={{
-                        flex: 1,
-                        height: 50,
-                        width: 50,
-                      }}
-                    />
-                  </MaskedView>
-                  <Text style={{ fontSize: 20, fontWeight: "200" }}>
-                    Send a message
-                  </Text>
-                </View>
-                <TouchableCmp onPress={onClose}>
-                  <Feather
-                    name="x"
-                    size={24}
-                    color="black"
-                    style={{ padding: 20, paddingRight: 30 }}
-                  />
-                </TouchableCmp>
-              </View>
-              <Image
-                source={{
-                  uri: "https://res.cloudinary.com/personaluse1234/image/upload/v1642454905/Naire/Sonya/cardpic2_hzqqeq.jpg",
-                }}
-                style={{
-                  height: width / 1.5,
-                  width: width / 1.5,
-                  marginBottom: 20,
-                  alignSelf: "center",
-                }}
-              />
-              <View
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  flexDirection: "row",
-                }}
-              >
-                <View
-                  style={{
-                    height: 40,
-                    width: "70%",
-                    backgroundColor: "white",
-                    borderWidth: 1,
-                    borderColor: "grey",
-                    justifyContent: "center",
-                    borderRadius: 20,
-                  }}
-                >
-                  <Input
-                    id="messageBar"
-                    placeholder="Message"
-                    required
-                    keyboardType="default"
-                    returnKeyType="send"
-                    autoCorrect={false}
-                    contextMenuHidden={true}
-                    onContentSizeChange={({
-                      nativeEvent: {
-                        contentSize: { width, height },
-                      },
-                    }) => {}}
-                    onInputChange={inputChangeHandler}
-                    initialValue=""
-                    styleInput={{
-                      height: "100%",
-                      width: "100%",
-                      backgroundColor: "rgba(0,0,0,0)",
-                      paddingHorizontal: 15,
-                      paddingRight: 45,
-                      marginHorizontal: 0,
-                      fontSize: 16,
-                      fontWeight: "300",
-                      color: "black",
-                    }}
-                  />
-                </View>
-                <View style={{ marginLeft: 20 }}>
-                  <TouchableCmp
-                    onPress={() => {
-                      fadeOutModal();
-                      Keyboard.dismiss();
-                      setTimeout(async () => {
-                        setShowLottie(true);
-                        sentLottieFadeIn();
-                        setExtraModalHeightKeyboard(0);
-                        if (lottieRef.current) {
-                          lottieRef.current.play();
-                        }
-                      }, 200);
-                    }}
-                  >
-                    <View
-                      style={{
-                        backgroundColor: "white",
-                        justifyContent: "flex-end",
-                        alignSelf: "flex-end",
-                        height: 50,
-                        width: 50,
-                        shadowOffset: {
-                          width: 0,
-                          height: 0,
-                        },
-                        shadowColor: "black",
-                        shadowOpacity: 0.1,
-                        shadowRadius: 6,
-                        borderRadius: 50 / 2,
-                      }}
-                    >
-                      <MaskedView
-                        style={{ flex: 1 }}
-                        maskElement={
-                          <View
-                            style={{
-                              flex: 1,
-                              justifyContent: "center",
-                              alignItems: "center",
-                            }}
-                          >
-                            <FontAwesome
-                              name="send-o"
-                              size={28}
-                              color="black"
-                            />
-                          </View>
-                        }
-                      >
-                        <LinearGradient
-                          colors={
-                            formState.formIsValid
-                              ? ["#A700D1", "#434aa8"]
-                              : ["#000000", "grey"]
-                          }
-                          style={{
-                            flex: 1,
-                            height: 50,
-                            width: 50,
-                            borderRadius: 50 / 2,
-                          }}
-                        />
-                      </MaskedView>
-                    </View>
-                  </TouchableCmp>
-                </View>
-              </View>
-            </Animated.View>
-            <KeyboardSpacer
-              topSpacing={-80}
-              onToggle={(toggleState, keyboardSpace) => {
-                setExtraModalHeightKeyboard(keyboardSpace);
-              }}
-            />
-          </Modalize>
+          <Modal
+            modalizeRef={modalizeRef}
+            pickedPicture={pickedPicture}
+            pickedPrompt={pickedPrompt}
+            pickedPromptHeight={pickedPromptHeight}
+            onCloseModal={onCloseModal}
+            getPromptHeight={getPromptHeight}
+            setShowMessageButton={setShowMessageButton}
+          />
         </Animated.View>
       ) : (
         <MaskedView

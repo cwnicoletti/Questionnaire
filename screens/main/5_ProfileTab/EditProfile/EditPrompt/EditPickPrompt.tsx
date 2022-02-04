@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
 import {
   StatusBar,
-  KeyboardAvoidingView,
   Platform,
   StyleSheet,
   Text,
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
-  Dimensions,
   FlatList,
-  ScrollView,
 } from "react-native";
 import { Feather, Ionicons, AntDesign } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../../../../hooks";
 
 const data = [
   {
@@ -42,7 +38,7 @@ const data = [
     prompt: "Something I'd like to know about your interests",
   },
   {
-    id: "67859437h-5-4h6h-5h54fgvsfds45654gh6h",
+    id: "67859437h-5-4h6h-5h54fgvsfyyuuuds45654gh6h",
     prompt: "I'm really wondering",
   },
   {
@@ -63,7 +59,7 @@ const data = [
   },
 ];
 
-const PickPrompt = (props) => {
+const EditPickPrompt = (props) => {
   const dispatch = useAppDispatch();
   const [editingIndex, setEditingIndex] = useState(undefined);
   const [promptIds, setPromptIds] = useState([]);
@@ -85,8 +81,6 @@ const PickPrompt = (props) => {
     }
   }, [props.route.params?.promptIds]);
 
-  console.log(promptIds);
-
   const renderItem = ({ item }) => {
     return (
       <View
@@ -102,7 +96,7 @@ const PickPrompt = (props) => {
       >
         <TouchableCmp
           onPress={() => {
-            props.navigation.navigate("WritePrompt", {
+            props.navigation.navigate("EditWritePrompt", {
               prompt: {
                 prompt: item.prompt,
                 id: item.id,
@@ -137,7 +131,7 @@ const PickPrompt = (props) => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
       }}
@@ -148,7 +142,6 @@ const PickPrompt = (props) => {
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
-          marginTop: 20,
         }}
       >
         <TouchableCmp
@@ -187,7 +180,7 @@ const PickPrompt = (props) => {
           />
         )}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -210,4 +203,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default PickPrompt;
+export default EditPickPrompt;

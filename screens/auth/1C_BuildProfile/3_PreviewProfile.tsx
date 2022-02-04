@@ -113,6 +113,7 @@ const PreviewProfile = (props) => {
       <ScrollView directionalLockEnabled={true}>
         <FullProfile
           name="Christian Nicoletti"
+          predictionValue={99.99}
           age={25}
           height={`"6' 0"`}
           worksOut="Sometimes"
@@ -124,12 +125,19 @@ const PreviewProfile = (props) => {
           drugs="Rarely"
           education="Undergraduate Degree"
           school="University of California, Santa Cruz"
-          Image1="https://res.cloudinary.com/personaluse1234/image/upload/v1641866787/Naire/my%20profile%20pictures/image2_xajcrq.jpg"
-          Image2="https://res.cloudinary.com/personaluse1234/image/upload/v1643244835/Naire/image0_9_oa2qhz.jpg"
-          Image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642563759/Naire/my%20profile%20pictures/image0_16_1_tgu2ic.png"
-          Image4="https://res.cloudinary.com/personaluse1234/image/upload/v1641866786/Naire/my%20profile%20pictures/image1_5_pgbyec.jpg"
-          Image5="https://res.cloudinary.com/personaluse1234/image/upload/v1643244829/Naire/image2_1_ixidvf.jpg"
-          Image6="https://res.cloudinary.com/personaluse1234/image/upload/v1643244829/Naire/image1_7_lga2kv.jpg"
+          image1="https://res.cloudinary.com/personaluse1234/image/upload/v1641866787/Naire/my%20profile%20pictures/image2_xajcrq.jpg"
+          image2="https://res.cloudinary.com/personaluse1234/image/upload/v1642562428/Naire/my%20profile%20pictures/DSC_3955_1_sfknqc.png"
+          image3="https://res.cloudinary.com/personaluse1234/image/upload/v1642563759/Naire/my%20profile%20pictures/image0_16_1_tgu2ic.png"
+          image4="https://res.cloudinary.com/personaluse1234/image/upload/v1641866786/Naire/my%20profile%20pictures/image1_5_pgbyec.jpg"
+          image5="https://res.cloudinary.com/personaluse1234/image/upload/v1642563737/Naire/my%20profile%20pictures/image1_6_v4kvyb.jpg"
+          image6="https://res.cloudinary.com/personaluse1234/image/upload/v1642563729/Naire/my%20profile%20pictures/DSC_6411_1_1_eqvpwm.jpg"
+          prompt1="A very important question for our relationship"
+          answer1="What're we gonna cook together? 😊"
+          prompt2="I'm really wondering"
+          answer2="Do bears beat battlestar galactica?"
+          prompt3="My favorite question to ask people"
+          answer3="What's your idea of happiness?"
+          showMessage={false}
         />
       </ScrollView>
       <View
