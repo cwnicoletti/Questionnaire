@@ -45,9 +45,11 @@ Systematically improve dates and relationships through the use of survey feedbac
 
 5. This prediction of a better overall quality of date or relationship is displayed to the user as a percent(%). (note: this isn't predicting a "100% quality" date or relationship. It's predicting whether or not the next date or relationship will simply be better than any other they have had)
 
-6. The user finds/messages the best prediction and goes on a date or enters a relationship with that other user
+6. User A finds/messages the best prediction and goes on a date or enters a relationship with that other user B
 
 7. Cycle repeats
+
+8. (Optional) User A and user B can choose to lock their app (or tell the app they've gone into a relationship. idea: both users hold a button for a certain amount of time for this feature. And either one can end it from their own individual screen.) This assuress user A or user B can't use the app while they're in a relationship, and so that neither user can look at each other's statisics. (The only stat(%) that any user should see of each other is the prediction of whether their next date or relationship should improve).
 
 ## Features
 
