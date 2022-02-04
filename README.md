@@ -49,7 +49,7 @@ Systematically improve dates and relationships through the use of survey feedbac
 
 7. Cycle repeats
 
-8. (Optional) User A and user B can choose to lock their app (or tell the app they've gone into a relationship. idea: both users hold a button for a certain amount of time for this feature. And either one can end it from their own individual screen.) This assuress user A or user B can't use the app while they're in a relationship, and so that neither user can look at each other's statisics. (The only stat(%) that any user should see of each other is the prediction of whether their next date or relationship should improve).
+8. (Optional) User A and user B can choose to lock their app (or tell the app they've gone into a relationship. Both users hold a button for a certain amount of time to enable feature, and either one can disable it from their own individual screen. Which obviously disables it for both users, signaling that the dating or relationship has ended) This assuress user A or user B can't use the app while they're in a relationship, and so that neither user can look at each other's statisics. (The only stat(%) that any user should see of each other is the prediction of whether their next date or relationship should improve).
 
 ## Features
 
