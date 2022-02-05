@@ -34,6 +34,8 @@ const MainScreen = ({ navigation }) => {
   const DATA = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742678/Naire/Genevieve%20Hannelius/nbvmnmbn3333_1_yw6lh7.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642782746/Naire/Genevieve%20Hannelius/nbvmnmbn3333_pzyg8g.jpg",
       image2:
@@ -70,6 +72,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742650/Naire/Park%20Min%20Young/wdifjrew8546546_1_wbnfiw.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642785593/Naire/Park%20Min%20Young/wdifjrew8546546_bbijdl.jpg",
       image2:
@@ -108,6 +112,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742262/Naire/Anna%20Schumate/iuhyurteitr965757_1_pah0kt.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642784324/Naire/Anna%20Schumate/iuhyurteitr965757_vgww12.jpg",
       image2:
@@ -144,6 +150,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-546456466",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742630/Naire/Bae%20Suzy/fekjthrte868476547_1_chic5y.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642784861/Naire/Bae%20Suzy/fekjthrte868476547_n35kuw.jpg",
       image2:
@@ -174,6 +182,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-5678888",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742748/Naire/Anna%20Zak/kkljkfjdg675_1_ckn1rx.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642783650/Naire/Anna%20Zak/kkljkfjdg675_djwuri.jpg",
       image2:
@@ -204,6 +214,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-56788675656565656565656488",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742798/Naire/Payton%20List/lskjdjjffhd485_1_mdv5fb.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642860392/Naire/Payton%20List/lskjdjjffhd485_gigstq.jpg",
       image2:
@@ -234,6 +246,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-5678hfgjytr888",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742842/Naire/Sydney%20Sweeney/bbbcjhgdfshfeu853_1_xpg5vw.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642860618/Naire/Sydney%20Sweeney/bbbcjhgdfshfeu853_xgh3m2.jpg",
       image2:
@@ -264,6 +278,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-5678gjhk5467888",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742908/Naire/Lili%20Reinhart/iiioitoiyituryou9567_1_oevxxn.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642861011/Naire/Lili%20Reinhart/iiioitoiyituryou9567_ud9enq.jpg",
       image2:
@@ -294,6 +310,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-56788898ly8",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643742977/Naire/Hailee%20Steinfeld/iuuiiiuter84353_1_vwmdrq.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642860833/Naire/Hailee%20Steinfeld/iuuiiiuter84353_p7wdxq.jpg",
       image2:
@@ -324,6 +342,8 @@ const MainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-567888d645eu8",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1643743018/Naire/Madison%20Lintz/kgjdhsgfd94936_1_mcb78g.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642860270/Naire/Madison%20Lintz/kgjdhsgfd94936_zwihwh.jpg",
       image2:
@@ -358,6 +378,7 @@ const MainScreen = ({ navigation }) => {
     name,
     predictionRank,
     predictionValue,
+    previewImage,
     image1,
     image2,
     image3,
@@ -439,6 +460,7 @@ const MainScreen = ({ navigation }) => {
           name={name}
           predictionRank={predictionRank}
           predictionValue={predictionValue}
+          previewImage={previewImage}
           image1={image1}
           image2={image2}
           image3={image3}
@@ -519,6 +541,7 @@ const MainScreen = ({ navigation }) => {
       name={item.name}
       predictionRank={item.predictionRank}
       predictionValue={item.predictionValue}
+      previewImage={item.previewImage}
       image1={item.image1}
       image2={item.image2}
       image3={item.image3}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Platform,
   StyleSheet,
@@ -9,6 +9,8 @@ import {
   View,
   Image,
   FlatList,
+  UIManager,
+  LayoutAnimation,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import { LinearGradient } from "expo-linear-gradient";
@@ -19,9 +21,11 @@ import MaskedView from "@react-native-masked-view/masked-view";
 const MessagingMainScreen = ({ navigation }) => {
   const dispatch = useAppDispatch();
 
-  const DATA = [
+  const initialData = [
     {
       id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image2:
@@ -34,18 +38,24 @@ const MessagingMainScreen = ({ navigation }) => {
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642783894/Naire/Riley%20Hubatka/lkjrhewuitwoeirty5489_blbwv3.jpg",
       image6:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642783892/Naire/Riley%20Hubatka/iowcsjqioejwt85439_nzfoat.jpg",
+      prompt1: "I'm really wondering",
+      answer1: "Do you chew with your mouth open? 😷",
+      prompt2: "If I could ask _____ one question",
+      answer2: "God. How did you do that whole Mary thing? lol",
+      prompt3: "Something I'd like to know about you",
+      answer3: "Who's your favorite music artist? :)",
       name: "Jennifer Mouser",
       age: 23,
       height: `"5' 3"`,
       worksOut: "Actively",
-      city: "Santa Clarita",
-      smokesTobacco: "Never",
+      city: "Long Beach",
+      smokesTobacco: "Rarely",
       smokesWeed: "Socially",
-      drinks: "Socially",
+      drinks: "Often",
       drugs: "Rarely",
-      education: "Undergraduate Degree",
-      school: "University of California, Santa Cruz",
-      jobTitle: "Teacher",
+      education: "In college",
+      school: "Long Beach State University",
+      jobTitle: "Nurse",
       predictionValue: 89.97,
       topPrediction: false,
       newMatch: true,
@@ -62,6 +72,8 @@ const MessagingMainScreen = ({ navigation }) => {
     },
     {
       id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642782746/Naire/Genevieve%20Hannelius/nbvmnmbn3333_pzyg8g.jpg",
       image2:
@@ -168,55 +180,37 @@ const MessagingMainScreen = ({ navigation }) => {
           fromMe: false,
           text: "Test",
         },
-        // {
-        //   id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-        //   fromMe: true,
-        //   text: "Hellooo! :) So apparently having a giraffe lick your face isn't a good thing? Wrong multiverse I guess",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-145571e29d72",
-        //   fromMe: false,
-        //   text: "I mean maybe if he bought me a drink first LOL",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-09879607098776",
-        //   fromMe: true,
-        //   text: "Hahahaha",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-546456466",
-        //   fromMe: true,
-        //   text: "Does that mean If I buy you a drink I can lick your face too?",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-76867869",
-        //   fromMe: false,
-        //   text: "hahha well I guess we'll just have to wait and see what multiverse we end up in ;)",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-66666",
-        //   fromMe: true,
-        //   text: "Does that mean If I buy you a drink I can lick your face too?",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-0980-8-8-",
-        //   fromMe: false,
-        //   text: "hahha well I guess we'll just have to wait and see what multiverse we end up in ;)",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96-96876999999",
-        //   fromMe: true,
-        //   text: "Does that mean If I buy you a drink I can lick your face too?",
-        // },
-        // {
-        //   id: "58694a0f-3da1-471f-bd96---98777777790",
-        //   fromMe: false,
-        //   text: "hahha well I guess we'll just have to wait and see what multiverse we end up in ;)",
-        // },
+        {
+          id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+          fromMe: true,
+          text: "Hellooo! :) So apparently having a giraffe lick your face isn't a good thing? Wrong multiverse I guess",
+        },
+        {
+          id: "58694a0f-3da1-471f-bd96-145571e29d72",
+          fromMe: false,
+          text: "I mean maybe if he bought me a drink first LOL",
+        },
+        {
+          id: "58694a0f-3da1-471f-bd96-09879607098776",
+          fromMe: true,
+          text: "Hahahaha",
+        },
+        {
+          id: "58694a0f-3da1-471f-bd96-546456466",
+          fromMe: true,
+          text: "Does that mean If I buy you a drink I can lick your face too?",
+        },
+        {
+          id: "58694a0f-3da1-471f-bd96-76867869",
+          fromMe: false,
+          text: "hahha well I guess we'll just have to wait and see what multiverse we end up in ;)",
+        },
       ],
     },
     {
       id: "58694a0f-3da1-471f-bd96-145571e29d72",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642783121/Naire/Annalise%20Basso/tyu76875869thr_jpzomq.jpg",
       image2:
@@ -246,7 +240,7 @@ const MessagingMainScreen = ({ navigation }) => {
       newMatch: false,
       notify: true,
       online: true,
-      text: "so I've just been chillin ever since :p",
+      text: "so I've just been chillin ever since",
       chat: [
         {
           id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
@@ -256,7 +250,7 @@ const MessagingMainScreen = ({ navigation }) => {
         {
           id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
           fromMe: true,
-          text: "Hey! :) How's the ol' vet job going?",
+          text: "Hey! :) How's being a vet??",
         },
         {
           id: "58694a0f-3da1-471f-bd96-145571e29d72",
@@ -282,6 +276,8 @@ const MessagingMainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-546456466",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642784061/Naire/Daisy%20Keech/ireufgewhgier4395_jsh2n7.jpg",
       image2:
@@ -337,6 +333,8 @@ const MessagingMainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-76777",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642457993/Naire/Luna%20Wedler/messagespic6_nlcqvu.jpg",
       image2:
@@ -382,6 +380,8 @@ const MessagingMainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-53433",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642785593/Naire/Park%20Min%20Young/wdifjrew8546546_bbijdl.jpg",
       image2:
@@ -394,6 +394,14 @@ const MessagingMainScreen = ({ navigation }) => {
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642785596/Naire/Park%20Min%20Young/uhhgdfuihkdf388759436_esluux.png",
       image6:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642785593/Naire/Park%20Min%20Young/wequytrrwe7564352435_vsw8zl.jpg",
+      prompt1: "Something I'd like to know about your interests",
+      answer1:
+        "Does it require hand-eye coordination? cuz I don't have the energy for that lmao",
+      prompt2: "One of my favorite deep questions",
+      answer2:
+        "Which parallel universe versions of yourself would you want to meet and why?",
+      prompt3: "Something I'd like to know about you",
+      answer3: "What do you love most about yourself? :)",
       name: "Hana Campbell",
       age: 25,
       height: `"5' 10"`,
@@ -437,6 +445,8 @@ const MessagingMainScreen = ({ navigation }) => {
     },
     {
       id: "58694a0f-3da1-471f-bd96-2315535246",
+      previewImage:
+        "https://res.cloudinary.com/personaluse1234/image/upload/v1642783893/Naire/Riley%20Hubatka/dksghfjdsg098356346_qzoyu5.jpg",
       image1:
         "https://res.cloudinary.com/personaluse1234/image/upload/v1642457993/Naire/Emily%20Robinson/messagespic4_ett44w.jpg",
       image2:
@@ -512,215 +522,224 @@ const MessagingMainScreen = ({ navigation }) => {
     },
   ];
 
-  const TopRowItem = ({
-    image1,
-    image2,
-    image3,
-    image4,
-    image5,
-    image6,
-    age,
-    height,
-    worksOut,
-    city,
-    smokesTobacco,
-    smokesWeed,
-    drinks,
-    drugs,
-    education,
-    school,
-    jobTitle,
-    predictionValue,
-    topPrediction,
-    newMatch,
-    notify,
-    online,
-    name,
-    chat,
-  }) => (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+  const [listColumnData, setListColumnData] = useState(initialData);
+
+  const layoutAnimConfig = {
+    duration: 300,
+    update: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+    },
+    delete: {
+      duration: 50,
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+  };
+
+  if (Platform.OS === "android") {
+    if (UIManager.setLayoutAnimationEnabledExperimental) {
+      UIManager.setLayoutAnimationEnabledExperimental(true);
+    }
+  }
+
+  const TopRowItem = ({ image1, topPrediction, newMatch, notify, online }) => (
+    <View
+      style={{
+        paddingBottom: 40,
+      }}
+    >
       {notify || online ? (
         <TouchableCmp
           onPress={() => {
-            navigation.navigate("ChatScreen", {
-              image1,
-              image2,
-              image3,
-              image4,
-              image5,
-              image6,
-              age,
-              height,
-              worksOut,
-              city,
-              smokesTobacco,
-              smokesWeed,
-              drinks,
-              drugs,
-              education,
-              school,
-              jobTitle,
-              predictionValue,
-              name,
-              chat,
-            });
+            if (topPrediction && notify) {
+              setListColumnData(() =>
+                initialData.filter(
+                  (match) => match.topPrediction && match.notify
+                )
+              );
+              LayoutAnimation.configureNext(layoutAnimConfig);
+            }
+            if (topPrediction && online) {
+              setListColumnData(() =>
+                initialData.filter(
+                  (match) => match.topPrediction && match.online
+                )
+              );
+              LayoutAnimation.configureNext(layoutAnimConfig);
+            }
+            if (newMatch && notify) {
+              setListColumnData(() =>
+                initialData.filter((match) => match.newMatch && match.notify)
+              );
+              LayoutAnimation.configureNext(layoutAnimConfig);
+            }
+            if (newMatch && online) {
+              setListColumnData(() =>
+                initialData.filter((match) => match.newMatch && match.online)
+              );
+              LayoutAnimation.configureNext(layoutAnimConfig);
+            }
+            if (notify && !newMatch && !topPrediction) {
+              setListColumnData(() =>
+                initialData.filter(
+                  (match) =>
+                    match.notify && !match.newMatch && !match.topPrediction
+                )
+              );
+              LayoutAnimation.configureNext(layoutAnimConfig);
+            }
+            if (online && !notify && !newMatch && !topPrediction) {
+              setListColumnData(() =>
+                initialData.filter(
+                  (match) =>
+                    match.online &&
+                    !match.notify &&
+                    !match.newMatch &&
+                    !match.topPrediction
+                )
+              );
+              LayoutAnimation.configureNext(layoutAnimConfig);
+            }
           }}
         >
-          <View style={{ alignItems: "center" }}>
-            <MaskedView
+          <MaskedView
+            style={{
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+            }}
+            maskElement={
+              <View
+                style={{
+                  height: "100%",
+                  width: "100%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Progress.Circle
+                  progress={online ? (newMatch || topPrediction ? 0.83 : 1) : 0}
+                  size={90}
+                  color={
+                    newMatch ? "#00D6DE" : topPrediction ? "#FF0000" : "#434aa8"
+                  }
+                  borderWidth={0}
+                  showsText={false}
+                  strokeCap={"round"}
+                  thickness={2}
+                  style={{
+                    position: "absolute",
+                    transform: [{ rotate: "211deg" }],
+                  }}
+                />
+              </View>
+            }
+          >
+            <LinearGradient
+              colors={
+                newMatch
+                  ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                  : topPrediction
+                  ? ["#FF0000", "#D10081", "#D100C3"]
+                  : ["#A700D1", "#602C91", "#434aa8"]
+              }
               style={{
                 position: "absolute",
                 height: "100%",
                 width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
               }}
-              maskElement={
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Progress.Circle
-                    progress={
-                      online ? (newMatch || topPrediction ? 0.83 : 1) : 0
-                    }
-                    size={90}
-                    color={
-                      newMatch
-                        ? "#00D6DE"
-                        : topPrediction
-                        ? "#FF0000"
-                        : "#434aa8"
-                    }
-                    borderWidth={0}
-                    showsText={false}
-                    strokeCap={"round"}
-                    thickness={2}
-                    style={{
-                      position: "absolute",
-                      transform: [{ rotate: "211deg" }],
-                    }}
-                  />
-                </View>
-              }
+            />
+          </MaskedView>
+          {notify ? (
+            <View
+              style={{
+                left: 5,
+                zIndex: 99999,
+              }}
             >
               <LinearGradient
                 colors={
                   newMatch
-                    ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                    ? ["#00D6DE", "#00C8D6", "#45F9FF"]
                     : topPrediction
                     ? ["#FF0000", "#D10081", "#D100C3"]
                     : ["#A700D1", "#602C91", "#434aa8"]
                 }
                 style={{
                   position: "absolute",
-                  alignItems: "center",
-                  height: "100%",
-                  width: "100%",
+                  top: 10,
+                  left: 10,
+                  height: 13,
+                  width: 13,
+                  borderRadius: 13 / 2,
+                  backgroundColor: "#434aa8",
                 }}
               />
-            </MaskedView>
-            <View
+            </View>
+          ) : null}
+          <View
+            style={{
+              alignItems: "center",
+              marginVertical: 10,
+            }}
+          >
+            <Image
+              source={{ uri: image1 }}
               style={{
-                zIndex: 3,
+                height: 75,
+                width: 75,
+                marginHorizontal: 15,
+                borderRadius: 75 / 2,
               }}
-            >
-              {notify ? (
-                <View
-                  style={{
-                    left: 5,
-                    zIndex: 99999,
-                  }}
-                >
-                  <LinearGradient
-                    colors={
-                      newMatch
-                        ? ["#00D6DE", "#00C8D6", "#45F9FF"]
-                        : topPrediction
-                        ? ["#FF0000", "#D10081", "#D100C3"]
-                        : ["#A700D1", "#602C91", "#434aa8"]
-                    }
-                    style={{
-                      position: "absolute",
-                      top: 10,
-                      left: 10,
-                      height: 13,
-                      width: 13,
-                      borderRadius: 13 / 2,
-                      backgroundColor: "#434aa8",
-                    }}
-                  />
-                </View>
-              ) : null}
-              <View
+            />
+            {newMatch ? (
+              <LinearGradient
+                colors={["#45F9FF", "#00C8D6", "#00D6DE"]}
                 style={{
-                  alignItems: "center",
-                  marginVertical: 10,
+                  position: "absolute",
+                  bottom: -16,
+                  backgroundColor: "#434aa8",
+                  borderRadius: 15 / 2,
+                  height: 15,
+                  width: 40,
                 }}
               >
-                <Image
-                  source={{ uri: image1 }}
+                <Text
                   style={{
-                    height: 75,
-                    width: 75,
-                    marginHorizontal: 15,
-                    borderRadius: 75 / 2,
+                    fontSize: 13,
+                    fontWeight: "500",
+                    color: "white",
+                    textAlign: "center",
                   }}
-                />
-                {newMatch ? (
-                  <LinearGradient
-                    colors={["#45F9FF", "#00C8D6", "#00D6DE"]}
-                    style={{
-                      position: "absolute",
-                      bottom: -16,
-                      backgroundColor: "#434aa8",
-                      borderRadius: 15 / 2,
-                      height: 15,
-                      width: 40,
-                      alignItems: "center",
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 13,
-                        fontWeight: "500",
-                        color: "white",
-                        textAlign: "center",
-                      }}
-                    >
-                      New
-                    </Text>
-                  </LinearGradient>
-                ) : null}
-                {topPrediction ? (
-                  <LinearGradient
-                    colors={["#FF0000", "#D10081", "#D100C3"]}
-                    style={{
-                      position: "absolute",
-                      bottom: -16,
-                      backgroundColor: "#434aa8",
-                      borderRadius: 15 / 2,
-                      height: 15,
-                      width: 40,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 13,
-                        fontWeight: "500",
-                        color: "white",
-                        textAlign: "center",
-                      }}
-                    >
-                      Top
-                    </Text>
-                  </LinearGradient>
-                ) : null}
-              </View>
-            </View>
+                >
+                  New
+                </Text>
+              </LinearGradient>
+            ) : null}
+            {topPrediction ? (
+              <LinearGradient
+                colors={["#FF0000", "#D10081", "#D100C3"]}
+                style={{
+                  position: "absolute",
+                  bottom: -16,
+                  backgroundColor: "#434aa8",
+                  borderRadius: 15 / 2,
+                  height: 15,
+                  width: 40,
+                }}
+              >
+                <Text
+                  style={{
+                    fontSize: 13,
+                    fontWeight: "500",
+                    color: "white",
+                    textAlign: "center",
+                  }}
+                >
+                  Top
+                </Text>
+              </LinearGradient>
+            ) : null}
           </View>
         </TouchableCmp>
       ) : null}
@@ -735,6 +754,12 @@ const MessagingMainScreen = ({ navigation }) => {
     image4,
     image5,
     image6,
+    prompt1,
+    answer1,
+    prompt2,
+    answer2,
+    prompt3,
+    answer3,
     age,
     height,
     worksOut,
@@ -754,289 +779,186 @@ const MessagingMainScreen = ({ navigation }) => {
     text,
     chat,
   }) => (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      <TouchableCmp
-        onPress={() => {
-          navigation.navigate("ChatScreen", {
-            image1,
-            image2,
-            image3,
-            image4,
-            image5,
-            image6,
-            age,
-            height,
-            worksOut,
-            city,
-            smokesTobacco,
-            smokesWeed,
-            drinks,
-            drugs,
-            education,
-            school,
-            jobTitle,
-            predictionValue,
-            name,
-            chat,
-          });
+    <TouchableCmp
+      onPress={() => {
+        navigation.navigate("ChatScreen", {
+          image1,
+          image2,
+          image3,
+          image4,
+          image5,
+          image6,
+          prompt1,
+          answer1,
+          prompt2,
+          answer2,
+          prompt3,
+          answer3,
+          age,
+          height,
+          worksOut,
+          city,
+          smokesTobacco,
+          smokesWeed,
+          drinks,
+          drugs,
+          education,
+          school,
+          jobTitle,
+          predictionValue,
+          name,
+          chat,
+        });
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          paddingVertical: 5,
         }}
       >
-        {/* <MaskedView
-          style={{
-            height: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          maskElement={
-            <View
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Animated.View
+        <View>
+          <MaskedView
+            style={{
+              position: "absolute",
+              height: "100%",
+              width: "100%",
+            }}
+            maskElement={
+              <View
                 style={{
-                  justifyContent: "center",
+                  height: "100%",
+                  width: "100%",
                   alignItems: "center",
-                  opacity: fadeProgressAnim,
+                  justifyContent: "center",
                 }}
               >
                 <Progress.Circle
-                  progress={testProgress}
-                  size={150}
-                  color={"#434aa8"}
+                  progress={online ? 0.81 : 0}
+                  size={90}
+                  color={
+                    newMatch ? "#00D6DE" : topPrediction ? "#FF0000" : "#434aa8"
+                  }
                   borderWidth={0}
-                  showsText={showPercent}
+                  showsText={false}
                   strokeCap={"round"}
                   thickness={2}
-                  textStyle={{ fontWeight: "300" }}
-                  formatText={(percent) => (
-                    <Animated.Text
-                      style={{ opacity: percent * 9 }}
-                    >{`${parseInt(percent.toFixed(2) * 100)}%`}</Animated.Text>
-                  )}
                   style={{
-                    paddingBottom: 30,
-                    alignItems: "center",
-                    justifyContent: !showLoadingText ? "center" : "flex-end",
+                    position: "absolute",
+                    transform: [{ rotate: "215deg" }],
                   }}
-                >
-                  {showLoadingText ? (
-                    <Text
-                      style={{
-                        position: "absolute",
-                        alignSelf: "center",
-                        fontSize: 12,
-                        color: "#434aa8",
-                        fontWeight: "300",
-                      }}
-                    >
-                      Uploading surveys...
-                    </Text>
-                  ) : null}
-                  <Animated.Text
-                    style={{
-                      position: "absolute",
-                      fontSize: 32,
-                      paddingBottom: 30,
-                      color: "#434aa8",
-                      fontWeight: "300",
-                      opacity: fadeTextAnim,
-                    }}
-                  >
-                    Start
-                  </Animated.Text>
-                </Progress.Circle>
-              </Animated.View>
-            </View>
-          }
-        >
-          <LinearGradient
-            colors={["#A700D1", "#434aa8"]}
-            style={{
-              height: 180,
-              width: "100%",
-            }}
-          />
-        </MaskedView> */}
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginVertical: 10,
-          }}
-        >
-          <View
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-            }}
+                />
+              </View>
+            }
           >
-            <MaskedView
+            <LinearGradient
+              colors={
+                newMatch
+                  ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                  : topPrediction
+                  ? ["#FF0000", "#D10081", "#D100C3"]
+                  : ["#A700D1", "#602C91", "#434aa8"]
+              }
               style={{
                 position: "absolute",
                 height: "100%",
                 width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
               }}
-              maskElement={
-                <View
-                  style={{
-                    flex: 1,
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <Progress.Circle
-                    progress={online ? 0.81 : 0}
-                    size={90}
-                    color={
-                      newMatch
-                        ? "#00D6DE"
-                        : topPrediction
-                        ? "#FF0000"
-                        : "#434aa8"
-                    }
-                    borderWidth={0}
-                    showsText={false}
-                    strokeCap={"round"}
-                    thickness={2}
-                    style={{
-                      position: "absolute",
-                      transform: [{ rotate: "215deg" }],
-                    }}
-                  />
-                </View>
-              }
-            >
-              <LinearGradient
-                colors={
-                  newMatch
-                    ? ["#45F9FF", "#00C8D6", "#00D6DE"]
-                    : topPrediction
-                    ? ["#FF0000", "#D10081", "#D100C3"]
-                    : ["#A700D1", "#602C91", "#434aa8"]
-                }
-                style={{
-                  position: "absolute",
-                  alignItems: "center",
-                  height: "100%",
-                  width: "100%",
-                }}
-              />
-            </MaskedView>
-            <View
-              style={{
-                zIndex: 3,
-              }}
-            >
-              {notify ? (
-                <View
-                  style={{
-                    position: "absolute",
-                    zIndex: 99999,
-                    left: 5,
-                  }}
-                >
-                  <LinearGradient
-                    colors={
-                      newMatch
-                        ? ["#45F9FF", "#00C8D6", "#00D6DE"]
-                        : topPrediction
-                        ? ["#FF0000", "#D10081", "#D100C3"]
-                        : ["#A700D1", "#602C91", "#434aa8"]
-                    }
-                    style={{
-                      position: "absolute",
-                      top: 10,
-                      left: 7,
-                      height: 15,
-                      width: 15,
-                      borderRadius: 15 / 2,
-                      backgroundColor: "#434aa8",
-                    }}
-                  />
-                </View>
-              ) : null}
-              <View
-                style={{
-                  alignItems: "center",
-                  marginVertical: 10,
-                }}
-              >
-                <Image
-                  source={{ uri: image1 }}
-                  style={{
-                    height: 75,
-                    width: 75,
-                    marginHorizontal: 15,
-                    borderRadius: 75 / 2,
-                  }}
-                />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    position: "absolute",
-                    bottom: -16,
-                    fontWeight: "300",
-                    color: newMatch
-                      ? "#00D6DE"
-                      : topPrediction
-                      ? "#FF0000"
-                      : "#434aa8",
-                  }}
-                >{`${predictionValue}%`}</Text>
-              </View>
-            </View>
-          </View>
+            />
+          </MaskedView>
           <View
             style={{
-              flex: 1,
-              height: 75,
-              marginVertical: 5,
+              zIndex: 3,
             }}
           >
+            {notify ? (
+              <View
+                style={{
+                  position: "absolute",
+                  zIndex: 99999,
+                  left: 5,
+                }}
+              >
+                <LinearGradient
+                  colors={
+                    newMatch
+                      ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                      : topPrediction
+                      ? ["#FF0000", "#D10081", "#D100C3"]
+                      : ["#A700D1", "#602C91", "#434aa8"]
+                  }
+                  style={{
+                    position: "absolute",
+                    top: 10,
+                    left: 7,
+                    height: 15,
+                    width: 15,
+                    borderRadius: 15 / 2,
+                    backgroundColor: "#434aa8",
+                  }}
+                />
+              </View>
+            ) : null}
             <View
               style={{
-                flexDirection: "row",
                 alignItems: "center",
+                marginVertical: 10,
               }}
             >
+              <Image
+                source={{ uri: image1 }}
+                style={{
+                  height: 75,
+                  width: 75,
+                  marginHorizontal: 15,
+                  borderRadius: 75 / 2,
+                }}
+              />
               <Text
                 style={{
-                  flex: 1,
-                  fontSize: 18,
-                  fontWeight: notify ? "600" : "200",
+                  textAlign: "center",
+                  position: "absolute",
+                  bottom: -16,
+                  fontWeight: "300",
+                  color: newMatch
+                    ? "#00D6DE"
+                    : topPrediction
+                    ? "#FF0000"
+                    : "#434aa8",
                 }}
-              >
-                {name}
-              </Text>
-            </View>
-            <View
-              style={{
-                flex: 2,
-                flexDirection: "row",
-                marginVertical: 5,
-              }}
-            >
-              <Text
-                numberOfLines={2}
-                style={{
-                  fontSize: 18,
-                  fontWeight: notify ? "500" : "300",
-                  color: "grey",
-                }}
-              >
-                {text}
-              </Text>
+              >{`${predictionValue}%`}</Text>
             </View>
           </View>
         </View>
-      </TouchableCmp>
-    </View>
+        <View>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: notify ? "600" : "200",
+            }}
+          >
+            {name}
+          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              marginVertical: 5,
+            }}
+          >
+            <Text
+              numberOfLines={2}
+              style={{
+                fontSize: 18,
+                fontWeight: notify ? "500" : "300",
+                color: "grey",
+              }}
+            >
+              {text}
+            </Text>
+          </View>
+        </View>
+      </View>
+    </TouchableCmp>
   );
 
   const renderItem = ({ item }) => (
@@ -1048,6 +970,12 @@ const MessagingMainScreen = ({ navigation }) => {
       image4={item.image4}
       image5={item.image5}
       image6={item.image6}
+      prompt1={item.prompt1}
+      answer1={item.answer1}
+      prompt2={item.prompt2}
+      answer2={item.answer2}
+      prompt3={item.prompt3}
+      answer3={item.answer3}
       age={item.age}
       height={item.height}
       worksOut={item.worksOut}
@@ -1069,32 +997,188 @@ const MessagingMainScreen = ({ navigation }) => {
     />
   );
 
+  const headerTopComponent = () => (
+    <TouchableCmp
+      onPress={() => {
+        setListColumnData(initialData);
+        LayoutAnimation.configureNext(layoutAnimConfig);
+      }}
+    >
+      <View
+        style={{
+          alignItems: "center",
+          paddingBottom: 10,
+        }}
+      >
+        <MaskedView
+          style={{
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          maskElement={
+            <View
+              style={{
+                height: "100%",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Progress.Circle
+                progress={1}
+                size={70}
+                color={"#434aa8"}
+                borderWidth={0}
+                showsText={false}
+                strokeCap={"round"}
+                thickness={2}
+                style={{
+                  position: "absolute",
+                  transform: [{ rotate: "211deg" }],
+                }}
+              />
+            </View>
+          }
+        >
+          <LinearGradient
+            colors={["#A700D1", "#602C91", "#434aa8"]}
+            style={{
+              position: "absolute",
+              alignItems: "center",
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        </MaskedView>
+        <MaskedView
+          style={{
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          maskElement={
+            <View
+              style={{
+                height: "100%",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Progress.Circle
+                progress={1}
+                size={80}
+                color={"#434aa8"}
+                borderWidth={0}
+                showsText={false}
+                strokeCap={"round"}
+                thickness={2}
+                style={{
+                  position: "absolute",
+                  transform: [{ rotate: "211deg" }],
+                }}
+              />
+            </View>
+          }
+        >
+          <LinearGradient
+            colors={["#FF0000", "#D10081", "#D100C3"]}
+            style={{
+              position: "absolute",
+              alignItems: "center",
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        </MaskedView>
+        <MaskedView
+          style={{
+            position: "absolute",
+            height: "100%",
+            width: "100%",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          maskElement={
+            <View
+              style={{
+                height: "100%",
+                width: "100%",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Progress.Circle
+                progress={1}
+                size={90}
+                color={"#434aa8"}
+                borderWidth={0}
+                showsText={false}
+                strokeCap={"round"}
+                thickness={2}
+                style={{
+                  position: "absolute",
+                  transform: [{ rotate: "211deg" }],
+                }}
+              />
+            </View>
+          }
+        >
+          <LinearGradient
+            colors={["#45F9FF", "#00C8D6", "#00D6DE"]}
+            style={{
+              position: "absolute",
+              alignItems: "center",
+              height: "100%",
+              width: "100%",
+            }}
+          />
+        </MaskedView>
+        <View
+          style={{
+            zIndex: 3,
+          }}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              marginVertical: 10,
+            }}
+          >
+            <View
+              style={{
+                height: 75,
+                width: 75,
+                marginHorizontal: 15,
+                borderRadius: 75 / 2,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                style={{ fontWeight: "600", fontSize: 18, color: "#434aa8" }}
+              >
+                ALL
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </TouchableCmp>
+  );
+
   const renderTopRowItem = ({ item }) => (
     <TopRowItem
       image1={item.image1}
-      image2={item.image2}
-      image3={item.image3}
-      image4={item.image4}
-      image5={item.image5}
-      image6={item.image6}
-      age={item.age}
-      height={item.height}
-      worksOut={item.worksOut}
-      city={item.city}
-      smokesTobacco={item.smokesTobacco}
-      smokesWeed={item.smokesWeed}
-      drinks={item.drinks}
-      drugs={item.drugs}
-      education={item.education}
-      school={item.school}
-      jobTitle={item.jobTitle}
-      predictionValue={item.predictionValue}
       topPrediction={item.topPrediction}
       newMatch={item.newMatch}
       notify={item.notify}
       online={item.online}
-      name={item.name}
-      chat={item.chat}
     />
   );
 
@@ -1114,34 +1198,40 @@ const MessagingMainScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} animated={true} />
-      <FlatList
-        data={DATA}
-        horizontal={true}
-        renderItem={renderTopRowItem}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          justifyContent: "center",
-          marginTop: 10,
-          paddingBottom: 40,
-        }}
-      />
+      <View style={{ height: 120 }}>
+        <FlatList
+          data={initialData}
+          horizontal={true}
+          inverted={true}
+          renderItem={renderTopRowItem}
+          ListHeaderComponent={headerTopComponent}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={{
+            marginTop: 10,
+          }}
+        />
+      </View>
       <View
         style={{
           width: "80%",
           borderColor: "#EDEDED",
           borderBottomWidth: 1,
           alignSelf: "center",
-          marginTop: 5,
+          marginVertical: 5,
         }}
       />
       <FlatList
-        data={DATA}
+        data={listColumnData}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          marginTop: 5,
-          justifyContent: "center",
-        }}
+        scrollEnabled={listColumnData.length <= 1 ? false : true}
+        ItemSeparatorComponent={(e) => (
+          <View
+            style={{
+              marginVertical: 5,
+            }}
+          />
+        )}
       />
     </View>
   );
