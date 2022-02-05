@@ -31,11 +31,11 @@ Systematically improve dates and relationships through the use of survey feedbac
 
 ## How it works
 
-1. User A estimates certain qualities of the date or relationship (i.e. Enjoyment, Compatibility, Communication) with sliders (All private)
+1. User A estimates certain qualities of the date or relationship (i.e. Enjoyment, Compatibility, Communication) with user B using sliders (All private)
 
 2. User A determines the importance of each of these qualities
 
-3. User A ties these specific qualities to previous dates or relationships (if possible) creating a relational reference [database] of users' qualities
+3. User A ties these specific qualities of user B to previous dates or relationships (if possible) creating a relational reference [database] of users' qualities
 
 4. User(s) B that are most similar (relational) in qualities to other user(s) B and have higher positive experiences determined by user A (and those similar to user A determined by user(s) B) are considered for predicting the next user B that will improve the next date or relationship for user A (or a new user C). 
    - This creates a web (or graph) of users that are similar in certain qualities in relation to certain users
