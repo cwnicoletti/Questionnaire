@@ -20,7 +20,7 @@
   - [How it works](#how-it-works)
   - [Features](#features)
   - [Images Demo](#images)
-  - [Videos Demo](#videos)
+  - [Videos Demo (works best on desktop)](#videos)
   - [Contributions](#contributions)
   - [Dependencies](#dependencies)
   - [Licensing](#licensing)
