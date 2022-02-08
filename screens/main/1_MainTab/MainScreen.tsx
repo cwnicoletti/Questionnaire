@@ -8,8 +8,7 @@ import {
   StatusBar,
   Animated,
   Text,
-  Image,
-  SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import * as Progress from "react-native-progress";
@@ -26,6 +25,7 @@ const MainScreen = ({ navigation }) => {
   const [showPercent, setShowPercent] = useState(false);
   const [showLoadingText, setShowLoadingText] = useState(false);
   const [loadTopPredictions, setLoadTopPredictions] = useState(false);
+  const height = Dimensions.get("window").height;
 
   const fadeProgressAnim = useRef(new Animated.Value(0)).current;
   const fadeTextAnim = useRef(new Animated.Value(1)).current;
@@ -579,7 +579,16 @@ const MainScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: "white",
+        position: "absolute",
+        height: height - 100,
+        width: "100%",
+        zIndex: -99999,
+      }}
+    >
       <StatusBar barStyle={"dark-content"} animated={true} />
       {!loadTopPredictions ? (
         <TouchableCmp
@@ -690,6 +699,11 @@ const MainScreen = ({ navigation }) => {
         <View
           style={{
             flex: 1,
+            backgroundColor: "white",
+            position: "absolute",
+            height: height - 160,
+            width: "100%",
+            zIndex: -99999,
             justifyContent: "center",
           }}
         >
@@ -710,7 +724,6 @@ const MainScreen = ({ navigation }) => {
             style={{
               flex: 1,
               opacity: fadeTopPredictionsAnim,
-              paddingTop: 20,
             }}
           />
         </View>

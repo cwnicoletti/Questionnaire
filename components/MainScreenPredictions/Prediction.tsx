@@ -24,6 +24,9 @@ const Prediction = (props) => {
     >
       <TouchableCmp
         onPress={() => {
+          props.navigation.getParent()?.setOptions({
+            tabBarStyle: { display: "none" },
+          });
           props.navigation.navigate("ProfileScreen", {
             name: props.name,
             predictionRank: props.predictionRank,

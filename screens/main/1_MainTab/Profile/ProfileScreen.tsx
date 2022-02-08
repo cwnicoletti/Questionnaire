@@ -18,7 +18,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Animated,
-  ScrollView
+  ScrollView,
 } from "react-native";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";
@@ -80,13 +80,8 @@ const ProfileScreen = ({ navigation, route }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      enabled={true}
-      style={styles.screen}
-    >
+    <View style={styles.screen}>
       <StatusBar barStyle={"dark-content"} animated={true} />
-      <View style={{ height: 10 }} />
       <ScrollView>
         <FullProfile
           name={params.name}
@@ -129,7 +124,7 @@ const ProfileScreen = ({ navigation, route }) => {
         getPromptHeight={getPromptHeight}
         setShowMessageButton={setShowMessageButton}
       />
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 

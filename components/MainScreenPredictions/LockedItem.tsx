@@ -35,6 +35,9 @@ const LockedItem = (props) => {
       >
         <TouchableCmp
           onPress={() => {
+            props.navigation.getParent()?.setOptions({
+              tabBarStyle: { display: "none" },
+            });
             props.navigation.navigate("PurchaseScreen");
           }}
         >
