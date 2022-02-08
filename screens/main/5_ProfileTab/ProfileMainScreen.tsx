@@ -16,7 +16,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import {
   MaterialCommunityIcons,
   Ionicons,
-  FontAwesome,
+  AntDesign,
 } from "@expo/vector-icons";
 import { setProgress } from "../../../store/actions/progressbar/progressbar";
 import MaskedView from "@react-native-masked-view/masked-view";
@@ -59,7 +59,7 @@ const ProfileMainScreen = ({ navigation }) => {
     smoothingStrategy: "bezier",
   };
 
-  const { width: SIZE } = Dimensions.get("window");
+  const height = Dimensions.get("window").height;
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -69,13 +69,24 @@ const ProfileMainScreen = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
       dispatch(setProgress(0));
+      navigation.getParent()?.setOptions({
+        tabBarStyle: { position: "absolute" },
+      });
     });
 
     return unsubscribe;
   }, [navigation]);
 
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        position: "absolute",
+        height: height - 160,
+        width: "100%",
+        zIndex: -99999,
+      }}
+    >
       <StatusBar barStyle={"dark-content"} animated={true} />
       <View
         style={{
@@ -86,6 +97,9 @@ const ProfileMainScreen = ({ navigation }) => {
       >
         <TouchableCmp
           onPress={() => {
+            navigation.getParent()?.setOptions({
+              tabBarStyle: { display: "none" },
+            });
             navigation.navigate("TopTabEditProfileNavigator");
           }}
         >
@@ -203,6 +217,9 @@ const ProfileMainScreen = ({ navigation }) => {
         >
           <TouchableCmp
             onPress={() => {
+              navigation.getParent()?.setOptions({
+                tabBarStyle: { display: "none" },
+              });
               navigation.navigate("TopTabEditProfileNavigator");
             }}
           >
@@ -235,21 +252,29 @@ const ProfileMainScreen = ({ navigation }) => {
             justifyContent: "center",
           }}
         >
-          <TouchableCmp>
+          <TouchableCmp
+            onPress={() => {
+              navigation.getParent()?.setOptions({
+                tabBarStyle: { display: "none" },
+              });
+              navigation.navigate("PerformanceScreen");
+            }}
+          >
             <View
               style={{
                 paddingVertical: 20,
+                borderColor: "#E8E8E8",
                 alignItems: "center",
                 flexDirection: "row",
               }}
             >
-              <FontAwesome
-                name="line-chart"
+              <AntDesign
+                name="linechart"
                 size={24}
                 color="black"
                 style={{ marginLeft: 20 }}
               />
-              <Text style={{ marginLeft: 10 }}>How it works</Text>
+              <Text style={{ marginLeft: 10 }}>Performance</Text>
             </View>
           </TouchableCmp>
         </View>
@@ -266,6 +291,9 @@ const ProfileMainScreen = ({ navigation }) => {
         >
           <TouchableCmp
             onPress={() => {
+              navigation.getParent()?.setOptions({
+                tabBarStyle: { display: "none" },
+              });
               navigation.navigate("SettingsScreen");
             }}
           >
@@ -286,6 +314,12 @@ const ProfileMainScreen = ({ navigation }) => {
             </View>
           </TouchableCmp>
         </View>
+        <View
+          style={{
+            borderBottomWidth: 1,
+            borderColor: "#E8E8E8",
+          }}
+        />
       </View>
     </View>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Platform,
   StyleSheet,
@@ -6,26 +6,21 @@ import {
   TouchableOpacity,
   StatusBar,
   Text,
-  Image,
+  ScrollView,
   Dimensions,
   View,
   SafeAreaView,
+  Image,
+  Switch,
 } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import { useAppDispatch, useAppSelector } from "../../../../hooks";
 import { setProgress } from "../../../../store/actions/progressbar/progressbar";
-import {
-  MaterialCommunityIcons,
-  Ionicons,
-  FontAwesome,
-} from "@expo/vector-icons";
+import { Feather, Ionicons, FontAwesome, AntDesign } from "@expo/vector-icons";
+import { Host, Portal } from "react-native-portalize";
 
 const SettingsScreen = ({ navigation }) => {
   const dispatch = useAppDispatch();
-  const hideCardScreen = useAppSelector(
-    (state) => state.toptabbar.hideCardScreen
-  );
-  const width = Dimensions.get("window").width;
+  const [hibernate, setHibernate] = useState(false);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -41,99 +36,434 @@ const SettingsScreen = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={{ flex: 1, marginTop: 20 }}>
+    <View style={{ flex: 1, marginTop: 20 }}>
       <StatusBar barStyle={"dark-content"} animated={true} />
-      {!hideCardScreen ? (
-        <ScrollView>
-          <View style={{ flex: 1 }}>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: "#E8E8E8",
-              }}
-            />
-            <View
-              style={{
-                justifyContent: "center",
-              }}
+      <ScrollView>
+        <View style={{ flex: 1 }}>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp
+              onPress={() => setHibernate((prevState) => !prevState)}
             >
-              <TouchableCmp onPress={() => {}}>
-                <View
-                  style={{
-                    paddingVertical: 20,
-                    borderColor: "#E8E8E8",
-                    alignItems: "center",
-                    flexDirection: "row",
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="sleep"
-                    size={24}
-                    color="black"
-                    style={{ marginLeft: 20 }}
-                  />
-                  <Text style={{ marginLeft: 10 }}>Snooze</Text>
-                </View>
-              </TouchableCmp>
-            </View>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: "#E8E8E8",
-              }}
-            />
-            <View
-              style={{
-                justifyContent: "center",
-              }}
-            >
-              <TouchableCmp>
-                <View
-                  style={{
-                    paddingVertical: 20,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                  }}
-                >
-                  <Text style={{ marginLeft: 10 }}>Logout</Text>
-                </View>
-              </TouchableCmp>
-            </View>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: "#E8E8E8",
-              }}
-            />
-            <View
-              style={{
-                justifyContent: "center",
-              }}
-            >
-              <TouchableCmp>
-                <View
-                  style={{
-                    paddingVertical: 20,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexDirection: "row",
-                  }}
-                >
-                  <Text style={{ marginLeft: 10 }}>Delete Account</Text>
-                </View>
-              </TouchableCmp>
-            </View>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderColor: "#E8E8E8",
-              }}
-            />
+              <View
+                style={{
+                  paddingVertical: 20,
+                  paddingBottom: 10,
+                  marginHorizontal: 10,
+                  alignItems: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Text style={{ marginLeft: 10 }}>Hibernate</Text>
+                <Switch
+                  trackColor={{ false: "#767577", true: "#434aa8" }}
+                  thumbColor={"#FFFFFF"}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={() => setHibernate((prevState) => !prevState)}
+                  value={hibernate}
+                />
+              </View>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: "grey",
+                  margin: 20,
+                  marginTop: 10,
+                }}
+              >
+                Hibernate puts your account on hold from new users. This
+                prevents new users from finding your profile unless they are
+                matched with you.
+              </Text>
+            </TouchableCmp>
           </View>
-        </ScrollView>
-      ) : null}
-    </SafeAreaView>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View style={{ marginTop: 40, margin: 10 }}>
+            <Text style={{ fontSize: 16, fontWeight: "700" }}>Status</Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Ionicons
+                  name="ios-checkmark"
+                  size={15}
+                  color="green"
+                  style={{ marginLeft: 10, opacity: 1 }}
+                />
+                <View
+                  style={{
+                    marginLeft: 10,
+                    height: 10,
+                    width: 10,
+                    borderRadius: 25,
+                    backgroundColor: "green",
+                  }}
+                />
+                <Text style={{ marginLeft: 10 }}>Online</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Ionicons
+                  name="ios-checkmark"
+                  size={15}
+                  color="green"
+                  style={{ marginLeft: 10, opacity: 0 }}
+                />
+                <View
+                  style={{
+                    marginLeft: 10,
+                    height: 10,
+                    width: 10,
+                    borderRadius: 25,
+                    backgroundColor: "grey",
+                  }}
+                />
+                <Text style={{ marginLeft: 10 }}>Invisible</Text>
+              </View>
+              <Text
+                style={{
+                  fontSize: 12,
+                  color: "grey",
+                  margin: 20,
+                  marginLeft: 10,
+                  marginTop: 0,
+                }}
+              >
+                You will not appear online to anyone
+              </Text>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View style={{ marginTop: 40, margin: 10 }}>
+            <Text style={{ fontSize: 16, fontWeight: "700" }}>
+              Account info
+            </Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <FontAwesome
+                  name="envelope-o"
+                  size={15}
+                  color="black"
+                  style={{ marginLeft: 10, opacity: 1 }}
+                />
+                <Text style={{ marginLeft: 10 }}>cwnicoletti@gmail.com</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Feather
+                  name="phone"
+                  size={15}
+                  color="black"
+                  style={{ marginLeft: 10, opacity: 1 }}
+                />
+                <Text style={{ marginLeft: 10 }}>+1 661 904 4124</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View style={{ marginTop: 40, margin: 10 }}>
+            <Text style={{ fontSize: 16, fontWeight: "700" }}>Permissions</Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <AntDesign
+                  name="picture"
+                  size={15}
+                  color="black"
+                  style={{ marginLeft: 10 }}
+                />
+                <Text style={{ marginLeft: 10 }}>Picture library</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Ionicons
+                  name="ios-notifications"
+                  size={15}
+                  color="black"
+                  style={{ marginLeft: 10 }}
+                />
+                <Text style={{ marginLeft: 10 }}>Notifications</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View style={{ marginTop: 40, margin: 10 }}>
+            <Text style={{ fontSize: 16, fontWeight: "700" }}>Legal info</Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Ionicons
+                  name="ios-lock-open-outline"
+                  size={15}
+                  color="black"
+                  style={{ marginLeft: 10 }}
+                />
+                <Text style={{ marginLeft: 10 }}>Privacy Policy</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <AntDesign
+                  name="user"
+                  size={15}
+                  color="black"
+                  style={{ marginLeft: 10 }}
+                />
+                <Text style={{ marginLeft: 10 }}>Terms of use</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View style={{ paddingVertical: 30 }}>
+            <Image
+              source={require("../../../../assets/naire_icon/full_transparent_colored.png")}
+              resizeMode="contain"
+              style={{ width: 150, height: 80, alignSelf: "center" }}
+            />
+            <Text style={{ color: "grey", fontSize: 18, textAlign: "center" }}>
+              v0.0.1
+            </Text>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Text style={{ marginLeft: 10, color: "red" }}>Logout</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              justifyContent: "center",
+            }}
+          >
+            <TouchableCmp>
+              <View
+                style={{
+                  paddingVertical: 20,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Text style={{ marginLeft: 10 }}>Delete Account</Text>
+              </View>
+            </TouchableCmp>
+          </View>
+          <View
+            style={{
+              borderBottomWidth: 1,
+              borderColor: "#E8E8E8",
+            }}
+          />
+          <View
+            style={{
+              paddingVertical: 40,
+            }}
+          />
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

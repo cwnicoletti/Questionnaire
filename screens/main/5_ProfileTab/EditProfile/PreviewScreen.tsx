@@ -44,7 +44,7 @@ const PreviewScreen = ({ navigation }) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} animated={true} />
       {!hideCardScreen ? (
         <ScrollView>
@@ -78,7 +78,7 @@ const PreviewScreen = ({ navigation }) => {
           />
         </ScrollView>
       ) : null}
-    </SafeAreaView>
+    </View>
   );
 };
 
