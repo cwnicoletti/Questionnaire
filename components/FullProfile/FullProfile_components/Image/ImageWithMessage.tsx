@@ -34,6 +34,11 @@ const ImageWithMessage = (props) => {
             if (props.setPicture) {
               props.setPicture(props.image);
             }
+            if (props.navigation) {
+              props.navigation.getParent()?.setOptions({
+                tabBarStyle: { display: "none" },
+              });
+            }
             props.onOpen();
           }}
         >

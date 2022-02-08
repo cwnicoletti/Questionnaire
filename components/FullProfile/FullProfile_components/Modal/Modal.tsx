@@ -66,8 +66,6 @@ const Modal = (props) => {
   const sentLottieFadeAnim = useRef(new Animated.Value(0)).current;
   const lottieRef = useRef();
 
-  const modalizeRef = useRef<Modalize>(null);
-
   const fadeOutLoading = () => {
     Animated.timing(fadeAnim, {
       toValue: 0,
@@ -86,7 +84,8 @@ const Modal = (props) => {
 
   const onClose = () => {
     setExtraModalHeightKeyboard(0);
-    modalizeRef.current?.close();
+    Keyboard.dismiss();
+    props.modalizeRef.current?.close();
   };
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
@@ -121,11 +120,11 @@ const Modal = (props) => {
       ref={props.modalizeRef}
       modalHeight={
         props.pickedPicture
-          ? 160 + extraModalHeightKeyboard + extraModalHeightPictureOrPrompt
+          ? 200 + extraModalHeightKeyboard + extraModalHeightPictureOrPrompt
           : props.pickedPromptHeight +
             extraModalHeightKeyboard +
             extraModalHeightPictureOrPrompt -
-            120
+            80
       }
       onClose={props.onCloseModal}
       scrollViewProps={{
@@ -421,7 +420,7 @@ const Modal = (props) => {
         </View>
       </Animated.View>
       <KeyboardSpacer
-        topSpacing={-80}
+        topSpacing={-40}
         onToggle={(toggleState, keyboardSpace) => {
           setExtraModalHeightKeyboard(keyboardSpace);
         }}

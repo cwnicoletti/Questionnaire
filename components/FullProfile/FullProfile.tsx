@@ -35,6 +35,7 @@ const FullProfileCard = (props) => {
         onOpen={props.onOpen}
         setPicture={props.setPicture}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <View
         style={{
@@ -309,6 +310,7 @@ const FullProfileCard = (props) => {
         onOpen={props.onOpen}
         setPicture={props.setPicture}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <PromptWithMessage
         prompt={props.prompt1}
@@ -317,12 +319,14 @@ const FullProfileCard = (props) => {
         setPrompt={props.setPrompt}
         getPromptHeight={props.getPromptHeight}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <ImageWithMessage
         image={props.image3}
         onOpen={props.onOpen}
         setPicture={props.setPicture}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <PromptWithMessage
         prompt={props.prompt2}
@@ -331,12 +335,14 @@ const FullProfileCard = (props) => {
         setPrompt={props.setPrompt}
         getPromptHeight={props.getPromptHeight}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <ImageWithMessage
         image={props.image4}
         onOpen={props.onOpen}
         setPicture={props.setPicture}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <PromptWithMessage
         prompt={props.prompt3}
@@ -345,18 +351,21 @@ const FullProfileCard = (props) => {
         setPrompt={props.setPrompt}
         getPromptHeight={props.getPromptHeight}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <ImageWithMessage
         image={props.image5}
         onOpen={props.onOpen}
         setPicture={props.setPicture}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
       <ImageWithMessage
         image={props.image6}
         onOpen={props.onOpen}
         setPicture={props.setPicture}
         showMessage={props.showMessage}
+        navigation={props.navigation}
       />
     </View>
   );
