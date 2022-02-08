@@ -19,20 +19,21 @@ const ChooseChartDataButton = (props) => {
         props.setData(props.data);
         props.setChartLabel(props.label);
         props.setChartValue(props.initialChartValue);
+        props.setChartLineColor(props.chartLineColor);
+        props.setChartGradient(props.chartGradient);
       }}
     >
       <View
         style={{
-          paddingTop: 10,
-          paddingBottom: 20,
-          height: 120,
+          height: 80,
+          justifyContent: "center",
         }}
       >
         <View
           style={{
-            backgroundColor: "rgba(0,0,0,0.05)",
-            paddingHorizontal: 15,
-            borderRadius: 100,
+            backgroundColor: props.chosen ? "black" : "rgba(0,0,0,0)",
+            paddingHorizontal: 10,
+            borderRadius: 5,
             marginHorizontal: 5,
             padding: 5,
             flexDirection: "row",
@@ -49,7 +50,15 @@ const ChooseChartDataButton = (props) => {
               marginRight: 5,
             }}
           />
-          <Text>{props.label}</Text>
+          <Text
+            style={{
+              fontWeight: "400",
+              fontSize: 12,
+              color: props.chosen ? "white" : "grey",
+            }}
+          >
+            {props.label}
+          </Text>
         </View>
       </View>
     </TouchableCmp>
