@@ -109,44 +109,58 @@ const TitleOnlyHeader = ({ navigation }) => {
       }}
     >
       {showX ? (
-        <TouchableCmp
-          onPress={() => {
-            removeOpacityX();
-            navigation.navigate("MainScreen");
-          }}
-        >
-          <Animated.View
-            style={{
-              opacity: opacityXAnim,
-              marginLeft: 30,
+        <View>
+          <TouchableCmp
+            onPress={() => {
+              removeOpacityX();
+              navigation.setOptions({
+                tabBarStyle: { display: "flex" },
+              });
+              setTimeout(() => {
+                navigation.navigate("MainScreen");
+              }, 50);
             }}
           >
-            <Feather name="x" size={24} color="black" />
-          </Animated.View>
-        </TouchableCmp>
+            <Animated.View
+              style={{
+                opacity: opacityXAnim,
+                marginLeft: 30,
+              }}
+            >
+              <Feather name="x" size={24} color="black" />
+            </Animated.View>
+          </TouchableCmp>
+        </View>
       ) : null}
       {showBack ? (
-        <TouchableCmp
-          onPress={() => {
-            removeOpacityBack();
-            navigation.navigate("MainScreen");
-          }}
-        >
-          <Animated.View
-            style={{
-              opacity: opacityBackAnim,
-              marginLeft: 30,
+        <View>
+          <TouchableCmp
+            onPress={() => {
+              removeOpacityBack();
+              navigation.setOptions({
+                tabBarStyle: { display: "flex" },
+              });
+              setTimeout(() => {
+                navigation.navigate("MainScreen");
+              }, 50);
             }}
           >
-            <Feather name="x" size={24} color="black" />
-          </Animated.View>
-        </TouchableCmp>
+            <Animated.View
+              style={{
+                opacity: opacityBackAnim,
+                marginLeft: 30,
+              }}
+            >
+              <Feather name="x" size={24} color="black" />
+            </Animated.View>
+          </TouchableCmp>
+        </View>
       ) : null}
       {showX ? (
         <MaskedView
           style={{
             flex: 1,
-            height: 38,
+            height: 50,
             backgroundColor: "black",
           }}
           maskElement={
@@ -183,7 +197,7 @@ const TitleOnlyHeader = ({ navigation }) => {
       ) : (
         <MaskedView
           style={{
-            height: 38,
+            height: 50,
             width: 100,
             alignItems: "center",
             justifyContent: "center",

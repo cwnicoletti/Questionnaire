@@ -86,7 +86,14 @@ const BackMessages = ({ navigation, route }) => {
           });
         }}
       >
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        <View
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "row",
+            paddingVertical: 10,
+          }}
+        >
           <Image
             source={{ uri: params.image1 }}
             style={{
@@ -95,7 +102,7 @@ const BackMessages = ({ navigation, route }) => {
               borderRadius: 60 / 2,
             }}
           />
-          <Text style={{ fontSize: 16, fontWeight: "200", margin: 5 }}>
+          <Text style={{ fontSize: 18, fontWeight: "200", margin: 5 }}>
             {params.name}
           </Text>
         </View>
@@ -115,7 +122,7 @@ const BackMessages = ({ navigation, route }) => {
       <Portal>
         <Modalize
           ref={modalizeRef}
-          modalHeight={250}
+          modalHeight={240}
           scrollViewProps={{
             keyboardShouldPersistTaps: "handled",
             scrollEnabled: false,
@@ -123,14 +130,14 @@ const BackMessages = ({ navigation, route }) => {
           rootStyle={{ backgroundColor: "rgba(0,0,0,0)" }}
           modalStyle={{ backgroundColor: "rgba(0,0,0,0)" }}
         >
-          <View style={{ alignItems: "center" }}>
+          <SafeAreaView style={{ alignItems: "center" }}>
             <TouchableCmp>
               <View
                 style={{
                   height: 60,
                   width: 400,
                   backgroundColor: "white",
-                  borderRadius: 20,
+                  borderRadius: 30,
                   justifyContent: "center",
                   alignItems: "center",
                   marginBottom: 5,
@@ -145,10 +152,10 @@ const BackMessages = ({ navigation, route }) => {
                   height: 60,
                   width: 400,
                   backgroundColor: "white",
-                  borderRadius: 20,
+                  borderRadius: 30,
                   justifyContent: "center",
                   alignItems: "center",
-                  marginBottom: 20,
+                  marginBottom: 15,
                 }}
               >
                 <Text style={{ color: "red", fontSize: 16 }}>Report</Text>
@@ -160,7 +167,7 @@ const BackMessages = ({ navigation, route }) => {
                   height: 60,
                   width: 400,
                   backgroundColor: "white",
-                  borderRadius: 20,
+                  borderRadius: 30,
                   justifyContent: "center",
                   alignItems: "center",
                 }}
@@ -168,7 +175,7 @@ const BackMessages = ({ navigation, route }) => {
                 <Text style={{ fontSize: 16 }}>Cancel</Text>
               </View>
             </TouchableCmp>
-          </View>
+          </SafeAreaView>
         </Modalize>
       </Portal>
     </SafeAreaView>

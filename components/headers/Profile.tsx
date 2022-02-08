@@ -9,9 +9,12 @@ import {
   Animated,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import { useNavigationState } from "@react-navigation/native";
 
-const Profile = ({ navigation }) => {
+const Profile = ({ navigation, routes }) => {
   const [showX, setShowX] = useState(false);
+  const [headerTitle, setHeaderTitle] = useState("Profile");
+  const state = useNavigationState((state) => state);
   const opacityXAnim = useRef(new Animated.Value(0)).current;
 
   const showOpacityX = () => {
@@ -31,23 +34,31 @@ const Profile = ({ navigation }) => {
   };
 
   useEffect(() => {
-    if (
-      typeof navigation
-        .getState()
-        .routes.find(
-          (stackNavigator) => stackNavigator.name === "ProfileStackNavigator"
-        ).state !== "undefined"
-    ) {
-      setShowX(
-        navigation
-          .getState()
-          .routes.find(
-            (stackNavigator) => stackNavigator.name === "ProfileStackNavigator"
-          ).state.index === 1
-      );
-      showOpacityX();
+    if (state.routes[4].state?.routes[1] !== undefined) {
+      switch (state.routes[4].state?.routes[1].name) {
+        case "TopTabEditProfileNavigator":
+          setShowX(true);
+          showOpacityX();
+          setHeaderTitle("Edit Profile");
+          break;
+        case "PerformanceScreen":
+          setShowX(true);
+          showOpacityX();
+          setHeaderTitle("Performance");
+          break;
+        case "SettingsScreen":
+          setShowX(true);
+          showOpacityX();
+          setHeaderTitle("Settings");
+          break;
+        default:
+          break;
+      }
+    } else {
+      removeOpacityX();
+      setHeaderTitle("Profile");
     }
-  }, [navigation.getState()]);
+  }, [state]);
 
   let TouchableCmp: any = TouchableOpacity;
   if (Platform.OS === "android") {
@@ -63,21 +74,14 @@ const Profile = ({ navigation }) => {
       }}
     >
       {showX ? (
-        <TouchableCmp
-          onPress={() => {
-            removeOpacityX();
-            navigation.navigate("ProfileMainScreen");
+        <View
+          style={{
+            opacity: 0,
+            marginLeft: 30,
           }}
         >
-          <Animated.View
-            style={{
-              opacity: opacityXAnim,
-              marginLeft: 30,
-            }}
-          >
-            <Feather name="x" size={24} color="black" />
-          </Animated.View>
-        </TouchableCmp>
+          <Feather name="x" size={24} color="black" />
+        </View>
       ) : null}
       <Text
         style={{
@@ -86,17 +90,30 @@ const Profile = ({ navigation }) => {
           padding: 5,
         }}
       >
-        Profile
+        {headerTitle}
       </Text>
+
       {showX ? (
-        <View
-          style={{
-            opacity: 0,
-            marginRight: 30,
+        <TouchableCmp
+          onPress={() => {
+            removeOpacityX();
+            navigation.setOptions({
+              tabBarStyle: { display: "flex" },
+            });
+            setTimeout(() => {
+              navigation.navigate("ProfileMainScreen");
+            }, 50);
           }}
         >
-          <Feather name="x" size={24} color="black" />
-        </View>
+          <Animated.View
+            style={{
+              opacity: opacityXAnim,
+              marginRight: 30,
+            }}
+          >
+            <Feather name="x" size={24} color="black" />
+          </Animated.View>
+        </TouchableCmp>
       ) : null}
     </SafeAreaView>
   );

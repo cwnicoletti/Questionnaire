@@ -44,6 +44,9 @@ const Questionnaires = ({ navigation }) => {
       </Text>
       <TouchableCmp
         onPress={() => {
+          navigation.getParent()?.setOptions({
+            tabBarStyle: { display: "none" },
+          });
           navigation.navigate("CreateSurvey1");
           setTimeout(() => {
             dispatch(setProgress(0.1));
