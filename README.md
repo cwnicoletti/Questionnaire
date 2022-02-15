@@ -20,7 +20,7 @@
   - [How it works](#how-it-works)
   - [Features](#features)
   - [Images Demo](#images)
-  - [Videos Demo (works best on desktop)](#videos)
+  - [Videos Demo (works best on web/desktop)](#videos)
   - [Contributions](#contributions)
   - [Dependencies](#dependencies)
   - [Licensing](#licensing)
@@ -73,7 +73,9 @@ Systematically improve dates and relationships through the use of survey feedbac
 <img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/153035593-16ba7390-032d-4211-9db9-1c6577566d18.png">
 <img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152895806-917681a5-f047-4b06-a3f7-f11f5524cd40.PNG">
 
-## Videos (works best on desktop)
+## Videos
+(works best on web/desktop)
+
 https://user-images.githubusercontent.com/56566033/151604866-04605d5e-ebe8-4bbc-96b8-34fbb8b931d8.MOV
 
 https://user-images.githubusercontent.com/56566033/151604918-b02ec624-7a49-4118-ac96-3d03d3c3a61f.MOV
