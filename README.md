@@ -4,9 +4,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/cwnicoletti/Naire/blob/main/LICENSE">
-    <img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-critical" alt="CC BY-NC 4.0">
-  </a>
+  <a href="https://github.com/cwnicoletti/Naire/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-critical" alt="CC BY-NC 4.0"></a>
   <img src="https://img.shields.io/github/repo-size/cwnicoletti/Naire" alt="Repo Size">
   <img src="https://img.shields.io/github/commit-activity/m/cwnicoletti/Naire" alt="Repo Size">
   <a href="https://app.codacy.com/gh/cwnicoletti/Naire/dashboard">
