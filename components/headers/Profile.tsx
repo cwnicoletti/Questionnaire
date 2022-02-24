@@ -44,7 +44,7 @@ const Profile = ({ navigation, routes }) => {
         case "PerformanceScreen":
           setShowX(true);
           showOpacityX();
-          setHeaderTitle("Performance");
+          setHeaderTitle("History & Metrics");
           break;
         case "SettingsScreen":
           setShowX(true);
