@@ -274,7 +274,7 @@ const ProfileMainScreen = ({ navigation }) => {
                 color="black"
                 style={{ marginLeft: 20 }}
               />
-              <Text style={{ marginLeft: 10 }}>Performance</Text>
+              <Text style={{ marginLeft: 10 }}>{"History & Metrics"}</Text>
             </View>
           </TouchableCmp>
         </View>
