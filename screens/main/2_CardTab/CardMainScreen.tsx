@@ -33,6 +33,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Modalize } from "react-native-modalize";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Modal from "../../../components/FullProfile/FullProfile_components/Modal/Modal";
+import { Host, Portal } from "react-native-portalize";
 
 const CardMainScreen = ({ navigation }) => {
   const dispatch = useAppDispatch();
@@ -132,6 +133,16 @@ const CardMainScreen = ({ navigation }) => {
     }, 3000);
   }, []);
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", async () => {
+      navigation.getParent()?.setOptions({
+        tabBarStyle: { display: "flex" },
+      });
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
   return (
     <View style={styles.screen}>
       <StatusBar barStyle={"dark-content"} animated={true} />
@@ -146,6 +157,9 @@ const CardMainScreen = ({ navigation }) => {
             <SafeAreaView>
               <TouchableCmp
                 onPress={() => {
+                  navigation.getParent()?.setOptions({
+                    tabBarStyle: { display: "none" },
+                  });
                   navigation.navigate("CardPreferencesScreen");
                 }}
               >
@@ -223,15 +237,17 @@ const CardMainScreen = ({ navigation }) => {
               <Feather name="fast-forward" size={24} color="black" />
             </View>
           </TouchableCmp>
-          <Modal
-            modalizeRef={modalizeRef}
-            pickedPicture={pickedPicture}
-            pickedPrompt={pickedPrompt}
-            pickedPromptHeight={pickedPromptHeight}
-            onCloseModal={onCloseModal}
-            getPromptHeight={getPromptHeight}
-            setShowMessageButton={setShowMessageButton}
-          />
+          <Portal>
+            <Modal
+              modalizeRef={modalizeRef}
+              pickedPicture={pickedPicture}
+              pickedPrompt={pickedPrompt}
+              pickedPromptHeight={pickedPromptHeight}
+              onCloseModal={onCloseModal}
+              getPromptHeight={getPromptHeight}
+              setShowMessageButton={setShowMessageButton}
+            />
+          </Portal>
         </Animated.View>
       ) : (
         <MaskedView
