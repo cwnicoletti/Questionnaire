@@ -82,6 +82,14 @@ function TopTabNavigator() {
         header: () => <TitleOnlyHeader />,
         tabBarIcon: ({ color }) => screenOptions(route, color),
         tabBarIndicatorStyle: { backgroundColor: "#434aa8" },
+        tabBarStyle: {
+          borderTopColor: "transparent",
+          shadowColor: "transparent",
+          borderTopWidth: 0,
+          elevation: 0,
+          position: "absolute",
+          zIndex: 9999,
+        },
       })}
     >
       <Tab.Screen
@@ -128,8 +136,8 @@ function TopTabNavigator() {
         name="ProfileStackNavigator"
         component={ProfileStackNavigator}
         options={{
-          header: ({ navigation, route }) => (
-            <Profile navigation={navigation} route={route} />
+          header: ({ navigation, routes }) => (
+            <Profile navigation={navigation} routes={routes} />
           ),
         }}
       />
