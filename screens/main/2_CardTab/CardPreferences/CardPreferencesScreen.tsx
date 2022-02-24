@@ -8,10 +8,8 @@ import {
   TouchableOpacity,
   View,
   ScrollView,
-  Keyboard,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useAppDispatch } from "../../../../hooks";
 import Slider from "@react-native-community/slider";
 import MultiSlider from "@ptomasroos/react-native-multi-slider";
@@ -50,7 +48,12 @@ const CardPreferencesScreen = ({ navigation }) => {
       <View style={{ alignSelf: "flex-end" }}>
         <TouchableCmp
           onPress={() => {
-            navigation.pop();
+            navigation.getParent()?.setOptions({
+              tabBarStyle: { display: "flex" },
+            });
+            setTimeout(() => {
+              navigation.pop();
+            }, 50);
           }}
         >
           <Feather

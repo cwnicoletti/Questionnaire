@@ -930,7 +930,7 @@ const MessagingMainScreen = ({ navigation }) => {
             </View>
           </View>
         </View>
-        <View>
+        <View style={{ flex: 1 }}>
           <Text
             style={{
               fontSize: 18,
@@ -951,6 +951,8 @@ const MessagingMainScreen = ({ navigation }) => {
                 fontSize: 18,
                 fontWeight: notify ? "500" : "300",
                 color: "grey",
+                flex: 1,
+                flexWrap: "wrap",
               }}
             >
               {text}
@@ -1190,6 +1192,9 @@ const MessagingMainScreen = ({ navigation }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
       dispatch(setProgress(0));
+      navigation.getParent()?.setOptions({
+        tabBarStyle: { display: "flex" },
+      });
     });
 
     return unsubscribe;
