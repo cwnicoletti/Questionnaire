@@ -130,9 +130,11 @@ const CurrentSurvey1 = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} animated={true} />
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <SafeAreaView
+        style={{ flexDirection: "row", justifyContent: "space-between" }}
+      >
         <TouchableCmp
           onPress={() => {
             navigation.goBack();
@@ -161,8 +163,8 @@ const CurrentSurvey1 = ({ navigation }) => {
             Save
           </Text>
         </TouchableCmp>
-      </View>
-      <View style={{ flex: 1, marginTop: 20 }}>
+      </SafeAreaView>
+      <View style={{ flex: 1 }}>
         <ScrollView>
           <View
             style={{
@@ -687,7 +689,7 @@ const CurrentSurvey1 = ({ navigation }) => {
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

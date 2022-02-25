@@ -79,9 +79,9 @@ const Priorities = ({ navigation }) => {
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
       <StatusBar barStyle={"dark-content"} animated={true} />
-      <View
+      <SafeAreaView
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
@@ -116,12 +116,11 @@ const Priorities = ({ navigation }) => {
             Save
           </Text>
         </TouchableCmp>
-      </View>
-      <View style={{ flex: 1, marginTop: 20 }}>
+      </SafeAreaView>
+      <View style={{ flex: 1 }}>
         <ScrollView>
           <View
             style={{
-              marginTop: 10,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "center",
@@ -672,7 +671,7 @@ const Priorities = ({ navigation }) => {
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
