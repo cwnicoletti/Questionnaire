@@ -55,6 +55,7 @@ const formReducer = (state, action) => {
 const ChatScreen = ({ navigation, route }) => {
   const dispatch = useAppDispatch();
   const width = Dimensions.get("window").width;
+  const height = Dimensions.get("window").height;
   const [chat, setChat] = useState([]);
 
   useEffect(() => {
@@ -149,6 +150,9 @@ const ChatScreen = ({ navigation, route }) => {
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", async () => {
       dispatch(setProgress(0));
+      navigation.getParent()?.setOptions({
+        tabBarStyle: { display: "none" },
+      });
     });
 
     return unsubscribe;
@@ -180,6 +184,10 @@ const ChatScreen = ({ navigation, route }) => {
       style={{
         flex: 1,
         backgroundColor: "#F5F5F5",
+        position: "absolute",
+        height: height - 120,
+        width: "100%",
+        zIndex: -99999,
       }}
     >
       <StatusBar barStyle={"dark-content"} animated={true} />
@@ -187,6 +195,7 @@ const ChatScreen = ({ navigation, route }) => {
         ref={flatListRef}
         data={chat}
         inverted
+        initialNumToRender={20}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{
@@ -203,13 +212,14 @@ const ChatScreen = ({ navigation, route }) => {
           justifyContent: "center",
           alignItems: "center",
           marginTop: 5,
-          marginVertical: 5,
+          marginVertical: 20,
+          paddingBottom: 40,
         }}
       >
         <View
           style={{
             height: 40,
-            width: "80%",
+            width: "90%",
             backgroundColor: "#F5F5F5",
             borderWidth: 1,
             borderColor: "grey",
@@ -257,16 +267,18 @@ const ChatScreen = ({ navigation, route }) => {
           <View style={{ position: "absolute", right: 1 }}>
             <TouchableCmp
               onPress={() => {
-                LayoutAnimation.configureNext(layoutAnimConfig);
-                setChat((prevState) => [
-                  ...prevState,
-                  {
-                    id: Math.random().toString(16).substring(2, 8),
-                    fromMe: true,
-                    text: formState.inputValues.message,
-                  },
-                ]);
-                messageRef.current?.clear();
+                if (formState.inputValues.message.length > 0) {
+                  LayoutAnimation.configureNext(layoutAnimConfig);
+                  setChat((prevState) => [
+                    ...prevState,
+                    {
+                      id: Math.random().toString(16).substring(2, 8),
+                      fromMe: true,
+                      text: formState.inputValues.message,
+                    },
+                  ]);
+                  messageRef.current?.clear();
+                }
               }}
             >
               <View
@@ -292,7 +304,7 @@ const ChatScreen = ({ navigation, route }) => {
           </View>
         </View>
       </View>
-      <KeyboardSpacer topSpacing={-80} />
+      <KeyboardSpacer topSpacing={-40} />
     </View>
   );
 };
