@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ImageWithMessage /> renders <ImageWithMessage /> with custom props 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": "https://res.cloudinary.com/personaluse1234/image/upload/v1643742678/Naire/Genevieve%20Hannelius/nbvmnmbn3333_1_yw6lh7.jpg",
+      }
+    }
+    style={
+      Object {
+        "height": 750,
+        "marginRight": 15,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "opacity": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "alignSelf": "flex-end",
+          "backgroundColor": "white",
+          "borderRadius": 25,
+          "bottom": 20,
+          "height": 50,
+          "justifyContent": "center",
+          "position": "absolute",
+          "right": 20,
+          "shadowColor": "black",
+          "shadowOffset": Object {
+            "height": 0,
+            "width": 0,
+          },
+          "shadowOpacity": 0.1,
+          "shadowRadius": 6,
+          "width": 50,
+        }
+      }
+    >
+      <RNCMaskedView
+        style={
+          Object {
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text />
+            <Text />
+          </View>
+        </View>
+        <ViewManagerAdapter_ExpoLinearGradient
+          proxiedProperties={
+            Object {
+              "colors": Array [
+                4289134801,
+                4282600104,
+              ],
+              "endPoint": undefined,
+              "locations": undefined,
+              "startPoint": undefined,
+            }
+          }
+          style={
+            Object {
+              "flex": 1,
+              "height": 50,
+              "width": 50,
+            }
+          }
+        />
+      </RNCMaskedView>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`<ImageWithMessage /> renders enabled ImageWithMessage 1`] = `
+<View>
+  <Image
+    source={
+      Object {
+        "uri": undefined,
+      }
+    }
+    style={
+      Object {
+        "height": 750,
+        "marginRight": 15,
+        "width": 750,
+      }
+    }
+  />
+</View>
+`;
