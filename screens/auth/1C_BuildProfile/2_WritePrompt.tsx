@@ -4,7 +4,7 @@ import React, {
   useReducer,
   useRef,
   useState,
-} from "react";
+} from 'react';
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -14,18 +14,17 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
-  Keyboard,
-} from "react-native";
-import { Feather, Ionicons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch } from "../../../hooks";
+} from 'react-native';
+import {Feather, Ionicons} from '@expo/vector-icons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useAppDispatch} from '../../../hooks';
 
-import Input from "../../../components/Input";
+import Input from '../../../components/Input';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
+  if (action.type === 'FORM_INPUT_UPDATE') {
     const updateValues = {
       ...state.inputValues,
       [action.input]: action.value,
@@ -51,13 +50,13 @@ const formReducer = (state, action) => {
 
 const WritePrompt = (props) => {
   const dispatch = useAppDispatch();
-  const [prompt, setPrompt] = useState("");
-  const [promptId, setPromptId] = useState("");
+  const [prompt, setPrompt] = useState('');
+  const [promptId, setPromptId] = useState('');
   const [editingIndex, setEditingIndex] = useState(undefined);
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      response: "",
+      response: '',
     },
     inputValidities: {
       response: false,
@@ -74,11 +73,11 @@ const WritePrompt = (props) => {
         input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [dispatchFormState],
   );
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -107,43 +106,39 @@ const WritePrompt = (props) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={true}
-      style={styles.screen}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={"dark-content"} animated={true} />
+      style={styles.screen}>
+      <SafeAreaView style={{flex: 1}}>
+        <StatusBar barStyle={'dark-content'} animated={true} />
         <TouchableCmp
           onPress={() => {
             props.navigation.goBack();
-          }}
-        >
+          }}>
           <Ionicons
             name="ios-arrow-back"
             size={30}
             color="black"
-            style={{ margin: 20 }}
+            style={{margin: 20}}
           />
         </TouchableCmp>
-        <View style={{ flex: 1, marginTop: 80, alignItems: "center" }}>
+        <View style={{flex: 1, marginTop: 80, alignItems: 'center'}}>
           <View
             style={{
               borderWidth: 0.7,
-              borderColor: "black",
+              borderColor: 'black',
               borderRadius: 15,
               width: 350,
-            }}
-          >
+            }}>
             <Text
               style={{
                 fontSize: 16,
-                color: "grey",
+                color: 'grey',
                 margin: 15,
-              }}
-            >
+              }}>
               {prompt}
             </Text>
-            <View style={{ marginHorizontal: "5%" }}>
+            <View style={{marginHorizontal: '5%'}}>
               <Input
                 inputRef={inputRefer}
                 id="response"
@@ -157,7 +152,7 @@ const WritePrompt = (props) => {
                 blurOnSubmit={false}
                 onInputChange={inputChangeHandler}
                 onSubmitEditing={() => {
-                  props.navigation.navigate("BuildProfile12", {
+                  props.navigation.navigate('BuildProfile12', {
                     prompt: {
                       prompt: prompt,
                       id: promptId,
@@ -169,8 +164,8 @@ const WritePrompt = (props) => {
                 initialValue=""
                 styleInput={{
                   fontSize: 24,
-                  fontWeight: "200",
-                  backgroundColor: "#ffffff",
+                  fontWeight: '200',
+                  backgroundColor: '#ffffff',
                 }}
               />
             </View>
@@ -178,14 +173,13 @@ const WritePrompt = (props) => {
         </View>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-          }}
-        >
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+          }}>
           <TouchableCmp
             onPress={() => {
-              props.navigation.navigate("BuildProfile12", {
+              props.navigation.navigate('BuildProfile12', {
                 prompt: {
                   prompt: prompt,
                   id: promptId,
@@ -193,30 +187,28 @@ const WritePrompt = (props) => {
                 },
                 editingIndex: editingIndex,
               });
-            }}
-          >
+            }}>
             <View
               style={{
-                borderColor: "#A1A1A1",
+                borderColor: '#A1A1A1',
                 borderWidth: 1,
                 marginRight: 20,
                 height: 70,
                 width: 70,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-                backgroundColor: "#ffffff",
+                backgroundColor: '#ffffff',
                 shadowOffset: {
                   width: -2,
                   height: 2,
                 },
-                shadowColor: "black",
+                shadowColor: 'black',
                 shadowOpacity: 0.3,
                 shadowRadius: 2,
-              }}
-            >
-              <Feather name="arrow-right" size={28} color={"#616161"} />
+              }}>
+              <Feather name="arrow-right" size={28} color={'#616161'} />
             </View>
           </TouchableCmp>
         </View>
@@ -228,18 +220,18 @@ const WritePrompt = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   youAreAText: {
-    color: "black",
+    color: 'black',
     fontSize: 18,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   buttonsContainer: {
     paddingTop: 40,
-    marginHorizontal: "2%",
+    marginHorizontal: '2%',
     paddingBottom: 120,
   },
 });

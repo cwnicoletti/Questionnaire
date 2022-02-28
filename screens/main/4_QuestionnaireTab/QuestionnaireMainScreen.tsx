@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -9,35 +9,32 @@ import {
   View,
   UIManager,
   LayoutAnimation,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+} from 'react-native';
+import {useAppDispatch} from '../../../hooks';
 import {
   Ionicons,
   MaterialCommunityIcons,
   MaterialIcons,
-  EvilIcons,
-} from "@expo/vector-icons";
-import Animated, { useAnimatedStyle } from "react-native-reanimated";
+} from '@expo/vector-icons';
+import Animated, {useAnimatedStyle} from 'react-native-reanimated';
 import SwipeableItem, {
   useSwipeableItemParams,
-} from "react-native-swipeable-item";
+} from 'react-native-swipeable-item';
 import DraggableFlatList, {
-  RenderItemParams,
   ScaleDecorator,
-} from "react-native-draggable-flatlist";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import { LinearGradient } from "expo-linear-gradient";
-import useDidMountEffect from "../../../helper/useDidMountEffect";
-import { questionnaireData } from "../../../data/questionnaireData";
+} from 'react-native-draggable-flatlist';
+import {setProgress} from '../../../store/actions/progressbar/progressbar';
+import {LinearGradient} from 'expo-linear-gradient';
+import {questionnaireData} from '../../../data/questionnaireData';
 
-const QuestionnaireMainScreen = ({ navigation }) => {
+const QuestionnaireMainScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
-  const [data, setData] = useState(initialData);
+  const [data, setData] = useState(questionnaireData);
   const itemRefs = useRef(new Map());
 
   const OVERSWIPE_DIST = 80;
 
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
@@ -100,11 +97,13 @@ const QuestionnaireMainScreen = ({ navigation }) => {
               itemRefs.current.set(item.id, ref);
             }
           }}
-          onChange={({ open }) => {
+          onChange={({open}) => {
             if (open) {
               // Close all other open items
               [...itemRefs.current.entries()].forEach(([key, ref]) => {
-                if (key !== item.id && ref) ref.close();
+                if (key !== item.id && ref) {
+                  ref.close();
+                }
               });
             }
           }}
@@ -112,33 +111,31 @@ const QuestionnaireMainScreen = ({ navigation }) => {
           renderUnderlayLeft={() => (
             <UnderlayLeft drag={drag} itemRefs={itemRefs} />
           )}
-          snapPointsLeft={[70]}
-        >
+          snapPointsLeft={[70]}>
           <View
             style={{
               flex: 1,
-              backgroundColor: "white",
-              justifyContent: "center",
+              backgroundColor: 'white',
+              justifyContent: 'center',
               marginBottom: 1,
               borderWidth: 1,
-              borderColor: "#BDBDBD",
-            }}
-          >
+              borderColor: '#BDBDBD',
+            }}>
             <Ionicons
               name="ios-menu"
               size={32}
               color="#BDBDBD"
               style={{
-                position: "absolute",
+                position: 'absolute',
                 zIndex: 99999,
                 left: 10,
-                alignSelf: "center",
+                alignSelf: 'center',
               }}
             />
             <TouchableCmp
               onLongPress={drag}
               onPress={() => {
-                navigation.navigate("CurrentSurvey1", {
+                navigation.navigate('CurrentSurvey1', {
                   label,
                   enjoyment,
                   compatibility,
@@ -150,18 +147,16 @@ const QuestionnaireMainScreen = ({ navigation }) => {
                   instinctualAttraction,
                   emotionAttraction,
                 });
-              }}
-            >
+              }}>
               <View
                 style={{
                   flex: 1,
                   height: 75,
                   marginLeft: 65,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 18, fontWeight: "200" }}>
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontSize: 18, fontWeight: '200'}}>
                   {item.label}
                 </Text>
               </View>
@@ -172,13 +167,13 @@ const QuestionnaireMainScreen = ({ navigation }) => {
     </View>
   );
 
-  const UnderlayLeft = ({ drag, itemRefs }: { drag: () => void }) => {
-    const { item, percentOpen } = useSwipeableItemParams<Item>();
+  const UnderlayLeft = ({drag, itemRefs}: {drag: () => void}) => {
+    const {item, percentOpen} = useSwipeableItemParams<typeof Item>();
     const animStyle = useAnimatedStyle(
       () => ({
         opacity: percentOpen.value,
       }),
-      [percentOpen]
+      [percentOpen],
     );
 
     return (
@@ -191,22 +186,20 @@ const QuestionnaireMainScreen = ({ navigation }) => {
             itemRefs.current.get(item.id).close();
             LayoutAnimation.configureNext(layoutAnimConfig);
             setData((prevState) =>
-              prevState.filter((obj) => obj.id !== item.id)
+              prevState.filter((obj) => obj.id !== item.id),
             );
-          }}
-        >
+          }}>
           <View
             style={{
               flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
             <MaterialIcons
               name="delete-forever"
               size={24}
               color="red"
-              style={{ padding: 20 }}
+              style={{padding: 20}}
             />
           </View>
         </TouchableOpacity>
@@ -215,39 +208,37 @@ const QuestionnaireMainScreen = ({ navigation }) => {
   };
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
     UIManager.setLayoutAnimationEnabledExperimental &&
       UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       dispatch(setProgress(0));
     });
 
     return unsubscribe;
-  }, [navigation]);
+  }, [dispatch, navigation]);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
       <View
         style={{
           flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <View
           style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <Ionicons name="ios-lock-closed-outline" size={18} color="grey" />
-          <Text style={{ fontSize: 16, margin: 5, color: "grey" }}>
+          <Text style={{fontSize: 16, margin: 5, color: 'grey'}}>
             Every questionnaire is private
           </Text>
         </View>
@@ -256,38 +247,34 @@ const QuestionnaireMainScreen = ({ navigation }) => {
         style={{
           flex: 1,
           marginBottom: 10,
-          alignSelf: "center",
-        }}
-      >
+          alignSelf: 'center',
+        }}>
         <TouchableCmp
           onPress={() => {
-            navigation.navigate("Priorities");
-          }}
-        >
+            navigation.navigate('Priorities');
+          }}>
           <LinearGradient
-            colors={["#A700D1", "#434aa8"]}
+            colors={['#A700D1', '#434aa8']}
             style={{
               height: 50,
-              justifyContent: "center",
+              justifyContent: 'center',
               width: 175,
               borderRadius: 25,
-              alignItems: "center",
+              alignItems: 'center',
               shadowOffset: {
                 width: -2,
                 height: 2,
               },
-              shadowColor: "black",
+              shadowColor: 'black',
               shadowOpacity: 0.8,
               shadowRadius: 2,
-            }}
-          >
+            }}>
             <View
               style={{
-                flexDirection: "row",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
               <MaterialCommunityIcons
                 name="account-heart"
                 size={24}
@@ -296,11 +283,10 @@ const QuestionnaireMainScreen = ({ navigation }) => {
               <Text
                 style={{
                   fontSize: 18,
-                  fontWeight: "200",
-                  color: "white",
+                  fontWeight: '200',
+                  color: 'white',
                   margin: 5,
-                }}
-              >
+                }}>
                 Priorities
               </Text>
             </View>
@@ -310,14 +296,13 @@ const QuestionnaireMainScreen = ({ navigation }) => {
       <View
         style={{
           flex: 10,
-        }}
-      >
+        }}>
         <DraggableFlatList
           keyExtractor={(item) => item.id}
           data={data}
           renderItem={renderItem}
           initialNumToRender={9}
-          onDragEnd={({ data }) => setData(data)}
+          onDragEnd={({data}) => setData(data)}
           activationDistance={10}
           dragItemOverflow={true}
         />
@@ -331,14 +316,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   row: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   underlayLeft: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
   },
 });
 

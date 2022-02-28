@@ -1,45 +1,42 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from 'react';
 import {
   Platform,
   StyleSheet,
   TouchableNativeFeedback,
   TouchableOpacity,
   StatusBar,
-  View,
   KeyboardAvoidingView,
   ScrollView,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { EvilIcons, Feather, SimpleLineIcons } from "@expo/vector-icons";
-import { setProgress } from "../../../../store/actions/progressbar/progressbar";
-import FullProfile from "../../../../components/FullProfile/FullProfile";
+} from 'react-native';
+import {useAppDispatch} from '../../../../hooks';
+import {setProgress} from '../../../../store/actions/progressbar/progressbar';
+import FullProfile from '../../../../components/FullProfile/FullProfile';
 
-const CardMainScreen = ({ navigation }) => {
+const CardMainScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
   const params = navigation
     .getState()
-    .routes.filter((screen) => screen.name === "ChatScreen")[0].params;
+    .routes.filter((screen) => screen.name === 'ChatScreen')[0].params;
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       dispatch(setProgress(0));
     });
 
     return unsubscribe;
-  }, [navigation]);
+  }, [dispatch, navigation]);
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={true}
-      style={styles.screen}
-    >
-      <StatusBar barStyle={"dark-content"} animated={true} />
+      style={styles.screen}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
       <ScrollView>
         <FullProfile
           name={params.name}
@@ -77,19 +74,19 @@ const CardMainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

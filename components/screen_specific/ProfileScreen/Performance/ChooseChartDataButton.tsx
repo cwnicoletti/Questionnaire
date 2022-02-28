@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
-} from "react-native";
+} from 'react-native';
 
 const ChooseChartDataButton = (props) => {
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -21,26 +21,23 @@ const ChooseChartDataButton = (props) => {
         props.setChartValue(props.initialChartValue);
         props.setChartLineColor(props.chartLineColor);
         props.setChartGradient(props.chartGradient);
-      }}
-    >
+      }}>
       <View
         style={{
           height: 80,
-          justifyContent: "center",
-        }}
-      >
+          justifyContent: 'center',
+        }}>
         <View
           style={{
-            backgroundColor: props.chosen ? "black" : "rgba(0,0,0,0)",
+            backgroundColor: props.chosen ? 'black' : 'rgba(0,0,0,0)',
             paddingHorizontal: 10,
             borderRadius: 5,
             marginHorizontal: 5,
             padding: 5,
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
           <View
             style={{
               height: 5,
@@ -52,11 +49,10 @@ const ChooseChartDataButton = (props) => {
           />
           <Text
             style={{
-              fontWeight: "400",
+              fontWeight: '400',
               fontSize: 12,
-              color: props.chosen ? "white" : "grey",
-            }}
-          >
+              color: props.chosen ? 'white' : 'grey',
+            }}>
             {props.label}
           </Text>
         </View>

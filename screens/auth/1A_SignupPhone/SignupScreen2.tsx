@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useState } from "react";
+import React, {useCallback, useReducer, useState} from 'react';
 import {
   ActivityIndicator,
   KeyboardAvoidingView,
@@ -10,16 +10,16 @@ import {
   View,
   StatusBar,
   SafeAreaView,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
+} from 'react-native';
+import {Feather} from '@expo/vector-icons';
 
-import { Ionicons } from "@expo/vector-icons";
-import VerifyCodeInput from "../../../components/VerifyCodeInput";
+import {Ionicons} from '@expo/vector-icons';
+import VerifyCodeInput from '../../../components/VerifyCodeInput';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
+  if (action.type === 'FORM_INPUT_UPDATE') {
     const updateValues = {
       ...state.inputValues,
       [action.input]: action.value,
@@ -47,13 +47,13 @@ const SignupScreen2 = (props) => {
   const [loading, setLoading] = useState(false);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      numbers: "",
+      numbers: '',
     },
     inputValidities: {
       numbers: false,
@@ -70,47 +70,45 @@ const SignupScreen2 = (props) => {
         input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [dispatchFormState],
   );
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={true}
       keyboardVerticalOffset={20}
-      style={styles.screen}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={"dark-content"} animated={true} />
+      style={styles.screen}>
+      <SafeAreaView style={{flex: 1}}>
+        <StatusBar barStyle={'dark-content'} animated={true} />
         <TouchableCmp
           onPress={() => {
-            props.navigation.goBack("");
-          }}
-        >
+            props.navigation.goBack('');
+          }}>
           <Ionicons
             name="ios-arrow-back"
             size={30}
             color="black"
-            style={{ margin: 20 }}
+            style={{margin: 20}}
           />
         </TouchableCmp>
-        <View style={{ marginTop: 80 }}>
+        <View style={{marginTop: 80}}>
           <Text style={styles.yourCode}>Your verification code is</Text>
           <View style={styles.authContainer}>
             <VerifyCodeInput
               id="numbers"
               keyboardType="number-pad"
-              textContentType={"oneTimeCode"}
+              textContentType={'oneTimeCode'}
               autoFocus={true}
               onInputChange={inputChangeHandler}
               maxLength={6}
               initialValue=""
               styleInput={{
                 fontSize: 28,
-                fontWeight: "300",
-                backgroundColor: "#ffffff",
+                fontWeight: '300',
+                backgroundColor: '#ffffff',
                 width: 155,
-                alignSelf: "center",
+                alignSelf: 'center',
                 letterSpacing: 10,
               }}
             />
@@ -119,44 +117,41 @@ const SignupScreen2 = (props) => {
         <View
           style={{
             flex: 1,
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-          }}
-        >
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+          }}>
           <TouchableCmp
             onPress={async () => {
               setLoading(true);
               props.navigation.pop();
               props.navigation.pop();
               setTimeout(() => {
-                props.navigation.navigate("AIntroduction");
+                props.navigation.navigate('AIntroduction');
               }, 500);
             }}
-            disabled={formState.formIsValid === false}
-          >
+            disabled={formState.formIsValid === false}>
             <View
               style={{
-                borderColor: "#A1A1A1",
+                borderColor: '#A1A1A1',
                 borderWidth: 1,
                 marginRight: 20,
                 height: 70,
                 width: 70,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-                backgroundColor: "#ffffff",
+                backgroundColor: '#ffffff',
                 shadowOffset: {
                   width: -2,
                   height: 2,
                 },
-                shadowColor: "black",
+                shadowColor: 'black',
                 shadowOpacity: 0.3,
                 shadowRadius: 2,
-              }}
-            >
+              }}>
               {!loading ? (
-                <Feather name="arrow-right" size={28} color={"#616161"} />
+                <Feather name="arrow-right" size={28} color={'#616161'} />
               ) : (
                 <ActivityIndicator color="#616161" />
               )}
@@ -171,19 +166,19 @@ const SignupScreen2 = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

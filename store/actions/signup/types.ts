@@ -1,8 +1,8 @@
-export const INTROING = "INTROING";
-export const SIGNUP_EMAIL = "SIGNUP_EMAIL";
-export const SIGNUP_FULLNAME = "SIGNUP_FULLNAME";
-export const SIGNUP_USERNAME = "SIGNUP_USERNAME";
-export const IS_USING_MAIN = "IS_USING_MAIN";
+export const INTROING = 'INTROING';
+export const SIGNUP_EMAIL = 'SIGNUP_EMAIL';
+export const SIGNUP_FULLNAME = 'SIGNUP_FULLNAME';
+export const SIGNUP_USERNAME = 'SIGNUP_USERNAME';
+export const IS_USING_MAIN = 'IS_USING_MAIN';
 
 export interface SignUpState {
   email: string;

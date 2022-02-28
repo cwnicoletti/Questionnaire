@@ -2,7 +2,7 @@ import {
   SET_PROGRESS,
   ProgressState,
   Action,
-} from "../actions/progressbar/types";
+} from '../actions/progressbar/types';
 
 const intialState: ProgressState = {
   progress: 0,

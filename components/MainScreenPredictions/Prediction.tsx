@@ -1,18 +1,16 @@
-import React, { useState } from "react";
+import React from 'react';
 import {
-  Animated,
   View,
-  SafeAreaView,
   Text,
   TouchableOpacity,
   TouchableNativeFeedback,
   Platform,
   Image,
-} from "react-native";
+} from 'react-native';
 
 const Prediction = (props) => {
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -20,14 +18,13 @@ const Prediction = (props) => {
     <View
       style={{
         width: 400,
-      }}
-    >
+      }}>
       <TouchableCmp
         onPress={() => {
           props.navigation.getParent()?.setOptions({
-            tabBarStyle: { display: "none" },
+            tabBarStyle: {display: 'none'},
           });
-          props.navigation.navigate("ProfileScreen", {
+          props.navigation.navigate('ProfileScreen', {
             name: props.name,
             predictionRank: props.predictionRank,
             predictionValue: props.predictionValue,
@@ -56,35 +53,32 @@ const Prediction = (props) => {
             school: props.school,
             jobTitle: props.jobTitle,
           });
-        }}
-      >
+        }}>
         <View
           style={{
             paddingVertical: 40,
             paddingHorizontal: 20,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
           <Text
             style={{
               fontSize: 36,
-              fontWeight: "100",
+              fontWeight: '100',
               color:
                 props.predictionRank <= 1
-                  ? "red"
+                  ? 'red'
                   : props.predictionRank === 2
-                  ? "#FF6200"
+                  ? '#FF6200'
                   : props.predictionRank === 3
-                  ? "#FFAE00"
-                  : "#434aa8",
+                  ? '#FFAE00'
+                  : '#434aa8',
               marginRight: 10,
-            }}
-          >
+            }}>
             {`#${props.predictionRank}`}
           </Text>
           <Image
-            source={{ uri: props.previewImage }}
+            source={{uri: props.previewImage}}
             style={{
               height: 75,
               width: 75,
@@ -92,31 +86,28 @@ const Prediction = (props) => {
               borderRadius: 5,
             }}
           />
-          <View style={{ alignSelf: "flex-start" }}>
+          <View style={{alignSelf: 'flex-start'}}>
             {props.predictionRank <= 1 ? (
-              <Text style={{ fontSize: 12, fontWeight: "300", color: "red" }}>
+              <Text style={{fontSize: 12, fontWeight: '300', color: 'red'}}>
                 TOP PREDICTION
               </Text>
             ) : null}
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: "300",
+                fontWeight: '300',
                 color:
                   props.predictionRank <= 1
-                    ? "red"
+                    ? 'red'
                     : props.predictionRank === 2
-                    ? "#FF6200"
+                    ? '#FF6200'
                     : props.predictionRank === 3
-                    ? "#FFAE00"
-                    : "#434aa8",
-              }}
-            >
+                    ? '#FFAE00'
+                    : '#434aa8',
+              }}>
               {`${props.predictionValue}% chance of a better date`}
             </Text>
-            <Text style={{ fontSize: 20, fontWeight: "200" }}>
-              {props.name}
-            </Text>
+            <Text style={{fontSize: 20, fontWeight: '200'}}>{props.name}</Text>
           </View>
         </View>
       </TouchableCmp>

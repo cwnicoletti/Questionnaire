@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer } from "react";
+import React, {useCallback, useReducer} from 'react';
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -8,18 +8,18 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
-} from "react-native";
-import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch } from "../../../../hooks";
-import { setProgress } from "../../../../store/actions/progressbar/progressbar";
+} from 'react-native';
+import {Feather, Ionicons} from '@expo/vector-icons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useAppDispatch} from '../../../../hooks';
+import {setProgress} from '../../../../store/actions/progressbar/progressbar';
 
-import Input from "../../../../components/Input";
+import Input from '../../../../components/Input';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
+  if (action.type === 'FORM_INPUT_UPDATE') {
     const updateValues = {
       ...state.inputValues,
       [action.input]: action.value,
@@ -43,12 +43,12 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const CreateSurvey1 = ({ navigation }) => {
+const CreateSurvey1 = ({navigation}) => {
   const dispatch = useAppDispatch();
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      jobPosition: "",
+      jobPosition: '',
     },
     inputValidities: {
       jobPosition: false,
@@ -65,43 +65,40 @@ const CreateSurvey1 = ({ navigation }) => {
         input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [dispatchFormState],
   );
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={true}
-      style={styles.screen}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={"dark-content"} animated={true} />
+      style={styles.screen}>
+      <SafeAreaView style={{flex: 1}}>
+        <StatusBar barStyle={'dark-content'} animated={true} />
         <TouchableCmp
           onPress={() => {
             dispatch(setProgress(0));
             navigation.goBack();
-          }}
-        >
+          }}>
           <Ionicons
             name="ios-arrow-back"
             size={30}
             color="black"
-            style={{ margin: 20, marginVertical: 40 }}
+            style={{margin: 20, marginVertical: 40}}
           />
         </TouchableCmp>
-        <View style={{ flex: 1, marginTop: 20 }}>
+        <View style={{flex: 1, marginTop: 20}}>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
-            }}
-          >
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               What should the label for this survey be?
             </Text>
@@ -121,65 +118,61 @@ const CreateSurvey1 = ({ navigation }) => {
               onInputChange={inputChangeHandler}
               onSubmitEditing={() => {
                 dispatch(setProgress(0.2));
-                navigation.navigate("FirstSurveys3");
+                navigation.navigate('FirstSurveys3');
               }}
               initialValue=""
               styleInput={{
                 fontSize: 28,
-                fontWeight: "300",
-                backgroundColor: "#ffffff",
-                marginHorizontal: "10%",
+                fontWeight: '300',
+                backgroundColor: '#ffffff',
+                marginHorizontal: '10%',
               }}
             />
           </View>
         </View>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-          }}
-        >
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+          }}>
           <View
             style={{
               flex: 1,
               marginLeft: 20,
-              flexDirection: "row",
-              alignSelf: "center",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
-            <Text style={{ fontSize: 13, marginHorizontal: 10 }}>Skip</Text>
+              flexDirection: 'row',
+              alignSelf: 'center',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+            }}>
+            <Text style={{fontSize: 13, marginHorizontal: 10}}>Skip</Text>
           </View>
           <TouchableCmp
             onPress={() => {
               dispatch(setProgress(0.2));
-              navigation.navigate("CreateSurvey2");
-            }}
-          >
+              navigation.navigate('CreateSurvey2');
+            }}>
             <View
               style={{
-                borderColor: "#A1A1A1",
+                borderColor: '#A1A1A1',
                 borderWidth: 1,
                 marginRight: 20,
                 height: 70,
                 width: 70,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-                backgroundColor: "#ffffff",
+                backgroundColor: '#ffffff',
                 shadowOffset: {
                   width: -2,
                   height: 2,
                 },
-                shadowColor: "black",
+                shadowColor: 'black',
                 shadowOpacity: 0.3,
                 shadowRadius: 2,
-              }}
-            >
-              <Feather name="arrow-right" size={28} color={"#616161"} />
+              }}>
+              <Feather name="arrow-right" size={28} color={'#616161'} />
             </View>
           </TouchableCmp>
         </View>
@@ -191,13 +184,13 @@ const CreateSurvey1 = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   youAreAText: {
-    color: "black",
+    color: 'black',
     fontSize: 22,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   buttonsContainer: {

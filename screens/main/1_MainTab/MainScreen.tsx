@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Platform,
@@ -9,24 +9,24 @@ import {
   Animated,
   Text,
   Dimensions,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import * as Progress from "react-native-progress";
-import useDidMountEffect from "../../../helper/useDidMountEffect";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { LinearGradient } from "expo-linear-gradient";
-import LockedItem from "../../../components/MainScreenPredictions/LockedItem";
-import Prediction from "../../../components/MainScreenPredictions/Prediction";
-import { mainScreenData } from "../../../data/mainScreenData";
+} from 'react-native';
+import {useAppDispatch} from '../../../hooks';
+import * as Progress from 'react-native-progress';
+import useDidMountEffect from '../../../helper/useDidMountEffect';
+import {setProgress} from '../../../store/actions/progressbar/progressbar';
+import MaskedView from '@react-native-masked-view/masked-view';
+import {LinearGradient} from 'expo-linear-gradient';
+import LockedItem from '../../../components/MainScreenPredictions/LockedItem';
+import Prediction from '../../../components/MainScreenPredictions/Prediction';
+import {mainScreenData} from '../../../data/mainScreenData';
 
-const MainScreen = ({ navigation }) => {
+const MainScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
   const [testProgress, setTestProgress] = useState(1);
   const [showPercent, setShowPercent] = useState(false);
   const [showLoadingText, setShowLoadingText] = useState(false);
   const [loadTopPredictions, setLoadTopPredictions] = useState(false);
-  const height = Dimensions.get("window").height;
+  const height = Dimensions.get('window').height;
 
   const fadeProgressAnim = useRef(new Animated.Value(0)).current;
   const fadeTextAnim = useRef(new Animated.Value(1)).current;
@@ -100,12 +100,11 @@ const MainScreen = ({ navigation }) => {
       <Animated.View
         style={{
           flex: 1,
-          alignItems: "center",
+          alignItems: 'center',
           opacity: fadeItemProgressAnim,
           marginVertical: 5,
-          justifyContent: "center",
-        }}
-      >
+          justifyContent: 'center',
+        }}>
         {locked ? (
           <LockedItem
             fadeItemLockedProgressAnim={fadeItemLockedProgressAnim}
@@ -187,14 +186,14 @@ const MainScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       dispatch(setProgress(0));
     });
 
     return unsubscribe;
-  }, [navigation]);
+  }, [dispatch, navigation]);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <Item
       name={item.name}
       predictionRank={item.predictionRank}
@@ -232,7 +231,7 @@ const MainScreen = ({ navigation }) => {
   }, [loadTopPredictions]);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -240,14 +239,13 @@ const MainScreen = ({ navigation }) => {
     <View
       style={{
         flex: 1,
-        backgroundColor: "white",
-        position: "absolute",
+        backgroundColor: 'white',
+        position: 'absolute',
         height: height - 100,
-        width: "100%",
+        width: '100%',
         zIndex: -99999,
-      }}
-    >
-      <StatusBar barStyle={"dark-content"} animated={true} />
+      }}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
       {!loadTopPredictions ? (
         <TouchableCmp
           onPress={() => {
@@ -257,7 +255,7 @@ const MainScreen = ({ navigation }) => {
               setShowPercent(true);
               setTimeout(() => {
                 setTestProgress(
-                  parseFloat((Math.random() * (0.2 - 0.1) + 0.1).toFixed(2))
+                  parseFloat((Math.random() * (0.2 - 0.1) + 0.1).toFixed(2)),
                 );
                 setShowLoadingText(true);
                 setTimeout(() => {
@@ -269,86 +267,78 @@ const MainScreen = ({ navigation }) => {
                 }, 800);
               }, 300);
             }, 800);
-          }}
-        >
+          }}>
           <MaskedView
             style={{
-              height: "100%",
-              alignItems: "center",
-              justifyContent: "center",
+              height: '100%',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}
             maskElement={
               <View
                 style={{
                   flex: 1,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <Animated.View
                   style={{
-                    justifyContent: "center",
-                    alignItems: "center",
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     opacity: fadeProgressAnim,
-                  }}
-                >
+                  }}>
                   <Progress.Circle
                     progress={testProgress}
                     size={150}
-                    color={"#434aa8"}
+                    color={'#434aa8'}
                     borderWidth={0}
                     showsText={showPercent}
-                    strokeCap={"round"}
+                    strokeCap={'round'}
                     thickness={2}
-                    textStyle={{ fontWeight: "300" }}
+                    textStyle={{fontWeight: '300'}}
                     formatText={(percent) => (
                       <Animated.Text
-                        style={{ opacity: percent * 9 }}
-                      >{`${parseInt(
-                        percent.toFixed(2) * 100
+                        style={{opacity: percent * 9}}>{`${parseInt(
+                        percent.toFixed(2) * 100,
                       )}%`}</Animated.Text>
                     )}
                     style={{
                       paddingBottom: 30,
-                      alignItems: "center",
-                      justifyContent: !showLoadingText ? "center" : "flex-end",
-                    }}
-                  >
+                      alignItems: 'center',
+                      justifyContent: !showLoadingText ? 'center' : 'flex-end',
+                    }}>
                     {showLoadingText ? (
                       <Text
                         style={{
-                          position: "absolute",
-                          alignSelf: "center",
+                          position: 'absolute',
+                          alignSelf: 'center',
                           fontSize: 12,
-                          color: "#434aa8",
-                          fontWeight: "300",
-                        }}
-                      >
+                          color: '#434aa8',
+                          fontWeight: '300',
+                        }}>
                         Uploading surveys...
                       </Text>
                     ) : null}
                     <Animated.Text
                       style={{
-                        position: "absolute",
+                        position: 'absolute',
                         fontSize: 32,
                         paddingBottom: 30,
-                        color: "#434aa8",
-                        fontWeight: "300",
+                        color: '#434aa8',
+                        fontWeight: '300',
                         opacity: fadeTextAnim,
-                      }}
-                    >
+                      }}>
                       Start
                     </Animated.Text>
                   </Progress.Circle>
                 </Animated.View>
               </View>
-            }
-          >
+            }>
             <LinearGradient
-              colors={["#A700D1", "#434aa8"]}
+              colors={['#A700D1', '#434aa8']}
               style={{
                 height: 180,
-                width: "100%",
+                width: '100%',
               }}
             />
           </MaskedView>
@@ -357,14 +347,13 @@ const MainScreen = ({ navigation }) => {
         <View
           style={{
             flex: 1,
-            backgroundColor: "white",
-            position: "absolute",
+            backgroundColor: 'white',
+            position: 'absolute',
             height: height - 160,
-            width: "100%",
+            width: '100%',
             zIndex: -99999,
-            justifyContent: "center",
-          }}
-        >
+            justifyContent: 'center',
+          }}>
           <Animated.FlatList
             data={mainScreenData}
             renderItem={renderItem}
@@ -372,10 +361,10 @@ const MainScreen = ({ navigation }) => {
             ItemSeparatorComponent={(e) => (
               <View
                 style={{
-                  alignSelf: "center",
+                  alignSelf: 'center',
                   width: 300,
                   borderBottomWidth: 0.5,
-                  borderColor: "#C2C2C2",
+                  borderColor: '#C2C2C2',
                 }}
               />
             )}
@@ -393,19 +382,19 @@ const MainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

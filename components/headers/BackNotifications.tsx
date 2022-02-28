@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -7,12 +7,11 @@ import {
   TouchableNativeFeedback,
   Platform,
   Image,
-} from "react-native";
-import { Ionicons, Entypo } from "@expo/vector-icons";
-import { Modalize } from "react-native-modalize";
-import { Host, Portal } from "react-native-portalize";
+} from 'react-native';
+import {Ionicons, Entypo} from '@expo/vector-icons';
+import {Modalize} from 'react-native-modalize';
 
-const BackNotifications = ({ navigation, route }) => {
+const BackNotifications = ({navigation, route}) => {
   const [params, setParams] = useState({});
 
   const modalizeRef = useRef<Modalize>(null);
@@ -32,33 +31,31 @@ const BackNotifications = ({ navigation, route }) => {
   }, [route.params]);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
     <SafeAreaView
       style={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: "row",
-      }}
-    >
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
       <TouchableCmp
         onPress={() => {
           navigation.pop();
-        }}
-      >
+        }}>
         <Ionicons
           name="ios-arrow-back"
           size={28}
           color="black"
-          style={{ marginLeft: 20 }}
+          style={{marginLeft: 20}}
         />
       </TouchableCmp>
       <TouchableCmp
         onPress={() => {
-          navigation.navigate("ViewProfile", {
+          navigation.navigate('ViewProfile', {
             image1: params.image1,
             image2: params.image2,
             image3: params.image3,
@@ -84,18 +81,17 @@ const BackNotifications = ({ navigation, route }) => {
             jobTitle: params.jobTitle,
             predictionValue: params.predictionValue,
           });
-        }}
-      >
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
+        }}>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Image
-            source={{ uri: params.image1 }}
+            source={{uri: params.image1}}
             style={{
               height: 60,
               width: 60,
               borderRadius: 60 / 2,
             }}
           />
-          <Text style={{ fontSize: 16, fontWeight: "200", margin: 5 }}>
+          <Text style={{fontSize: 16, fontWeight: '200', margin: 5}}>
             {params.name}
           </Text>
         </View>
@@ -103,13 +99,12 @@ const BackNotifications = ({ navigation, route }) => {
       <TouchableCmp
         onPress={() => {
           onOpen();
-        }}
-      >
+        }}>
         <Entypo
           name="dots-three-vertical"
           size={24}
           color="black"
-          style={{ marginRight: 20 }}
+          style={{marginRight: 20}}
         />
       </TouchableCmp>
     </SafeAreaView>

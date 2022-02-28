@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer, useRef, useState } from "react";
+import React, {useCallback, useReducer, useRef, useState} from 'react';
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -9,22 +9,22 @@ import {
   TouchableOpacity,
   View,
   Keyboard,
-} from "react-native";
-import { Feather, EvilIcons, MaterialIcons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch } from "../../../hooks";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import { Ionicons } from "@expo/vector-icons";
-import { Modalize } from "react-native-modalize";
+} from 'react-native';
+import {Feather, EvilIcons, MaterialIcons} from '@expo/vector-icons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useAppDispatch} from '../../../hooks';
+import {setProgress} from '../../../store/actions/progressbar/progressbar';
+import {Ionicons} from '@expo/vector-icons';
+import {Modalize} from 'react-native-modalize';
 
-import BouncyCheckbox from "react-native-bouncy-checkbox";
-import AwesomeButton from "react-native-really-awesome-button";
-import Input from "../../../components/Input";
+import BouncyCheckbox from 'react-native-bouncy-checkbox';
+import AwesomeButton from 'react-native-really-awesome-button';
+import Input from '../../../components/Input';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
+  if (action.type === 'FORM_INPUT_UPDATE') {
     const updateValues = {
       ...state.inputValues,
       [action.input]: action.value,
@@ -52,7 +52,7 @@ const CreateUser3 = (props) => {
   const dispatch = useAppDispatch();
   const [isMan, setIsMan] = useState(false);
   const [isWoman, setIsWoman] = useState(false);
-  const [isMore, setIsMore] = useState("More");
+  const [isMore, setIsMore] = useState('More');
   const [isAFAB, setIsAFAB] = useState(false);
   const [isAgender, setIsAgender] = useState(false);
   const [isAliagender, setIsAliagender] = useState(false);
@@ -98,209 +98,209 @@ const CreateUser3 = (props) => {
   const [isTwoSpirit, setIsTwoSpirit] = useState(false);
 
   const genderData = [
-    { value: "AFAB", buttonValue: isAFAB, setButtonValue: setIsAFAB },
-    { value: "Agender", buttonValue: isAgender, setButtonValue: setIsAgender },
+    {value: 'AFAB', buttonValue: isAFAB, setButtonValue: setIsAFAB},
+    {value: 'Agender', buttonValue: isAgender, setButtonValue: setIsAgender},
     {
-      value: "Aliagender",
+      value: 'Aliagender',
       buttonValue: isAliagender,
       setButtonValue: setIsAliagender,
     },
-    { value: "AMAB", buttonValue: isAMAB, setButtonValue: setIsAMAB },
+    {value: 'AMAB', buttonValue: isAMAB, setButtonValue: setIsAMAB},
     {
-      value: "Androgyne",
+      value: 'Androgyne',
       buttonValue: isAndrogyne,
       setButtonValue: setIsAndrogyne,
     },
     {
-      value: "Aporagender",
+      value: 'Aporagender',
       buttonValue: isAporagender,
       setButtonValue: setIsAporagender,
     },
     {
-      value: "Bigender",
+      value: 'Bigender',
       buttonValue: isBigender,
       setButtonValue: setIsBigender,
     },
     {
-      value: "Binarism",
+      value: 'Binarism',
       buttonValue: isBinarism,
       setButtonValue: setIsBinarism,
     },
     {
-      value: "Body Dysphoria",
+      value: 'Body Dysphoria',
       buttonValue: isBodyDysphoria,
       setButtonValue: setIsBodyDysphoria,
     },
     {
-      value: "Boi",
+      value: 'Boi',
       buttonValue: isBoi,
       setButtonValue: setIsBoi,
     },
     {
-      value: "Butch",
+      value: 'Butch',
       buttonValue: isButch,
       setButtonValue: setIsButch,
     },
     {
-      value: "Cisgender",
+      value: 'Cisgender',
       buttonValue: isCisgender,
       setButtonValue: setIsCisgender,
     },
     {
-      value: "Cisnormativity",
+      value: 'Cisnormativity',
       buttonValue: isCisnormativity,
       setButtonValue: setIsCisnormativity,
     },
     {
-      value: "Cissexism",
+      value: 'Cissexism',
       buttonValue: isCissexism,
       setButtonValue: setIsCissexism,
     },
-    { value: "Demiboy", buttonValue: isDemiboy, setButtonValue: setIsDemiboy },
+    {value: 'Demiboy', buttonValue: isDemiboy, setButtonValue: setIsDemiboy},
     {
-      value: "Demigender",
+      value: 'Demigender',
       buttonValue: isDemigender,
       setButtonValue: setIsDemigender,
     },
     {
-      value: "Demigirl",
+      value: 'Demigirl',
       buttonValue: isDemigirl,
       setButtonValue: setIsDemigirl,
     },
     {
-      value: "Dyadic",
+      value: 'Dyadic',
       buttonValue: isDyadic,
       setButtonValue: setIsDyadic,
     },
     {
-      value: "Feminine-of-center",
+      value: 'Feminine-of-center',
       buttonValue: isFeminineOfCenter,
       setButtonValue: setIsFeminineOfCenter,
     },
     {
-      value: "Feminine-presenting",
+      value: 'Feminine-presenting',
       buttonValue: isFemininePresenting,
       setButtonValue: setIsFemininePresenting,
     },
     {
-      value: "Femme",
+      value: 'Femme',
       buttonValue: isFemme,
       setButtonValue: setIsFemme,
     },
     {
-      value: "Female-to-male (FTM)",
+      value: 'Female-to-male (FTM)',
       buttonValue: isFTM,
       setButtonValue: setIsFTM,
     },
     {
-      value: "Graygender",
+      value: 'Graygender',
       buttonValue: isGraygender,
       setButtonValue: setIsGraygender,
     },
     {
-      value: "Intergender",
+      value: 'Intergender',
       buttonValue: isIntergender,
       setButtonValue: setIsIntergender,
     },
     {
-      value: "Intersex",
+      value: 'Intersex',
       buttonValue: isIntersex,
       setButtonValue: setIsIntersex,
     },
     {
-      value: "Masculine-of-center",
+      value: 'Masculine-of-center',
       buttonValue: isMasculineOfCenter,
       setButtonValue: setIsMasculineOfCenter,
     },
     {
-      value: "Maverique",
+      value: 'Maverique',
       buttonValue: isMaverique,
       setButtonValue: setIsMaverique,
     },
     {
-      value: "Male-to-female (MTF)",
+      value: 'Male-to-female (MTF)',
       buttonValue: isMTF,
       setButtonValue: setIsMTF,
     },
     {
-      value: "MultiGender",
+      value: 'MultiGender',
       buttonValue: isMultiGender,
       setButtonValue: setIsMultiGender,
     },
     {
-      value: "Neutrois",
+      value: 'Neutrois',
       buttonValue: isNeutrois,
       setButtonValue: setIsNeutrois,
     },
     {
-      value: "Nonbinary",
+      value: 'Nonbinary',
       buttonValue: isNonbinary,
       setButtonValue: setIsNonbinary,
     },
     {
-      value: "Novigender",
+      value: 'Novigender',
       buttonValue: isNovigender,
       setButtonValue: setIsNovigender,
     },
     {
-      value: "Pangender",
+      value: 'Pangender',
       buttonValue: isPangender,
       setButtonValue: setIsPangender,
     },
     {
-      value: "Polygender",
+      value: 'Polygender',
       buttonValue: isPolygender,
       setButtonValue: setIsPolygender,
     },
     {
-      value: "Soft butch",
+      value: 'Soft butch',
       buttonValue: isSoftButch,
       setButtonValue: setIsSoftButch,
     },
     {
-      value: "Stone butch",
+      value: 'Stone butch',
       buttonValue: isStoneButch,
       setButtonValue: setIsStoneButch,
     },
     {
-      value: "Third gender",
+      value: 'Third gender',
       buttonValue: isThirdGender,
       setButtonValue: setIsThirdGender,
     },
     {
-      value: "Transfeminine",
+      value: 'Transfeminine',
       buttonValue: isTransfeminine,
       setButtonValue: setIsTransfeminine,
     },
     {
-      value: "Transgender",
+      value: 'Transgender',
       buttonValue: isTransgender,
       setButtonValue: setIsTransgender,
     },
     {
-      value: "Transmasculine",
+      value: 'Transmasculine',
       buttonValue: isTransmasculine,
       setButtonValue: setIsTransmasculine,
     },
     {
-      value: "Transsexual",
+      value: 'Transsexual',
       buttonValue: isTranssexual,
       setButtonValue: setIsTranssexual,
     },
     {
-      value: "Trigender",
+      value: 'Trigender',
       buttonValue: isTrigender,
       setButtonValue: setIsTrigender,
     },
     {
-      value: "Two-spirit",
+      value: 'Two-spirit',
       buttonValue: isTwoSpirit,
       setButtonValue: setIsTwoSpirit,
     },
   ];
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
   const modalizeRef = useRef<Modalize>(null);
@@ -315,14 +315,13 @@ const CreateUser3 = (props) => {
     modalizeRef.current?.close();
   };
 
-  const renderItem = ({ item }) => {
+  const renderItem = ({item}) => {
     return (
       <View
         style={{
           borderTopWidth: 1,
-          borderColor: "grey",
-        }}
-      >
+          borderColor: 'grey',
+        }}>
         <TouchableCmp
           onPress={async () => {
             setIsAFAB(false);
@@ -372,22 +371,19 @@ const CreateUser3 = (props) => {
             setIsWoman(false);
             setIsMan(false);
             setIsMore(item.value);
-          }}
-        >
+          }}>
           <View
             style={{
               height: 65,
-              justifyContent: "center",
-            }}
-          >
+              justifyContent: 'center',
+            }}>
             <View
               style={{
-                height: "100%",
-                width: "100%",
-                position: "absolute",
-                justifyContent: "center",
-              }}
-            >
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+                justifyContent: 'center',
+              }}>
               <BouncyCheckbox
                 size={25}
                 fillColor="#434aa8"
@@ -446,12 +442,12 @@ const CreateUser3 = (props) => {
                 }}
                 iconStyle={{
                   marginLeft: 20,
-                  borderColor: "#434aa8",
+                  borderColor: '#434aa8',
                   borderRadius: 5,
                 }}
               />
             </View>
-            <Text style={{ marginLeft: 70 }}>{item.value}</Text>
+            <Text style={{marginLeft: 70}}>{item.value}</Text>
           </View>
         </TouchableCmp>
       </View>
@@ -461,41 +457,33 @@ const CreateUser3 = (props) => {
   const modalSearchHeader = () => (
     <View
       style={{
-        position: "absolute",
+        position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
         zIndex: 9000,
         height: 65,
-        overflow: "hidden",
+        overflow: 'hidden',
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12,
-        flexDirection: "row",
-        backgroundColor: "white",
-      }}
-    >
+        flexDirection: 'row',
+        backgroundColor: 'white',
+      }}>
       <View
         style={{
           flex: 3,
-        }}
-      >
+        }}>
         <View
           style={{
             flex: 1,
             margin: 10,
             marginLeft: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            backgroundColor: "#F2F2F2",
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: '#F2F2F2',
             borderRadius: 10,
-          }}
-        >
-          <EvilIcons
-            name="search"
-            size={24}
-            color="grey"
-            style={{ margin: 5 }}
-          />
+          }}>
+          <EvilIcons name="search" size={24} color="grey" style={{margin: 5}} />
           <Input
             inputRef={searchBarRef}
             id="searchBar"
@@ -509,13 +497,13 @@ const CreateUser3 = (props) => {
             onInputChange={inputChangeHandler}
             initialValue=""
             styleInput={{
-              height: "100%",
-              backgroundColor: "rgba(0,0,0,0)",
+              height: '100%',
+              backgroundColor: 'rgba(0,0,0,0)',
               paddingHorizontal: 0,
               paddingVertical: 0,
               marginHorizontal: 0,
               fontSize: 16,
-              fontWeight: "300",
+              fontWeight: '300',
             }}
           />
         </View>
@@ -523,19 +511,17 @@ const CreateUser3 = (props) => {
       <View
         style={{
           flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
         <TouchableCmp onPress={onClose}>
           <View
             style={{
               flex: 1,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ fontSize: 18, color: "#434aa8" }}>Done</Text>
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text style={{fontSize: 18, color: '#434aa8'}}>Done</Text>
           </View>
         </TouchableCmp>
       </View>
@@ -544,7 +530,7 @@ const CreateUser3 = (props) => {
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      searchBar: "",
+      searchBar: '',
     },
     inputValidities: {
       searchBar: false,
@@ -561,31 +547,29 @@ const CreateUser3 = (props) => {
         input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [dispatchFormState],
   );
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={true}
-      style={styles.screen}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={"dark-content"} animated={true} />
+      style={styles.screen}>
+      <SafeAreaView style={{flex: 1}}>
+        <StatusBar barStyle={'dark-content'} animated={true} />
         <TouchableCmp
           onPress={() => {
             dispatch(setProgress(0.4));
             props.navigation.goBack();
-          }}
-        >
+          }}>
           <Ionicons
             name="ios-arrow-back"
             size={30}
             color="black"
-            style={{ margin: 20 }}
+            style={{margin: 20}}
           />
         </TouchableCmp>
-        <View style={{ flex: 1, marginTop: 80 }}>
+        <View style={{flex: 1, marginTop: 80}}>
           <Text style={styles.youAreAText}>You are a....</Text>
           <View style={styles.buttonsContainer}>
             <AwesomeButton
@@ -594,10 +578,10 @@ const CreateUser3 = (props) => {
                 marginVertical: 10,
               }}
               stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
+              backgroundColor={'#ffffff'}
+              backgroundActive={'rgba(0,0,0,0)'}
               borderWidth={1}
-              borderColor={"#A1A1A1"}
+              borderColor={'#A1A1A1'}
               onPress={async () => {
                 setIsAFAB(false);
                 setIsAgender(false);
@@ -644,17 +628,15 @@ const CreateUser3 = (props) => {
                 setIsTwoSpirit(false);
                 setIsMan((prevState) => !prevState);
                 setIsWoman(false);
-                setIsMore("More");
-              }}
-            >
+                setIsMore('More');
+              }}>
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                }}>
                 <BouncyCheckbox
                   size={25}
                   fillColor="#434aa8"
@@ -663,7 +645,7 @@ const CreateUser3 = (props) => {
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
-                    borderColor: "#434aa8",
+                    borderColor: '#434aa8',
                     borderRadius: 5,
                   }}
                 />
@@ -671,16 +653,14 @@ const CreateUser3 = (props) => {
               <View
                 style={{
                   flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
                 <Text
                   style={{
                     fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
+                    fontWeight: '300',
+                  }}>
                   Man
                 </Text>
               </View>
@@ -691,10 +671,10 @@ const CreateUser3 = (props) => {
                 marginVertical: 10,
               }}
               stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
+              backgroundColor={'#ffffff'}
+              backgroundActive={'rgba(0,0,0,0)'}
               borderWidth={1}
-              borderColor={"#A1A1A1"}
+              borderColor={'#A1A1A1'}
               onPress={async () => {
                 setIsAFAB(false);
                 setIsAgender(false);
@@ -740,18 +720,16 @@ const CreateUser3 = (props) => {
                 setIsTrigender(false);
                 setIsTwoSpirit(false);
                 setIsMan(false);
-                setIsMore("More");
+                setIsMore('More');
                 setIsWoman((prevState) => !prevState);
-              }}
-            >
+              }}>
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                }}>
                 <BouncyCheckbox
                   size={25}
                   fillColor="#434aa8"
@@ -760,7 +738,7 @@ const CreateUser3 = (props) => {
                   disableBuiltInState={true}
                   iconStyle={{
                     marginLeft: 20,
-                    borderColor: "#434aa8",
+                    borderColor: '#434aa8',
                     borderRadius: 5,
                   }}
                 />
@@ -768,16 +746,14 @@ const CreateUser3 = (props) => {
               <View
                 style={{
                   flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
                 <Text
                   style={{
                     fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
+                    fontWeight: '300',
+                  }}>
                   Woman
                 </Text>
               </View>
@@ -788,68 +764,63 @@ const CreateUser3 = (props) => {
                 marginVertical: 10,
               }}
               stretch={true}
-              backgroundColor={"#ffffff"}
-              backgroundActive={"rgba(0,0,0,0)"}
+              backgroundColor={'#ffffff'}
+              backgroundActive={'rgba(0,0,0,0)'}
               borderWidth={1}
-              borderColor={"#A1A1A1"}
+              borderColor={'#A1A1A1'}
               onPress={() => {
                 onOpen();
-              }}
-            >
+              }}>
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
-                {isMore !== "More" ? (
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                }}>
+                {isMore !== 'More' ? (
                   <BouncyCheckbox
                     size={25}
                     fillColor="#434aa8"
                     unfillColor="#FFFFFF"
-                    isChecked={isMore !== "More" ? true : false}
+                    isChecked={isMore !== 'More' ? true : false}
                     disableBuiltInState={true}
                     iconStyle={{
                       marginLeft: 20,
-                      borderColor: "#434aa8",
+                      borderColor: '#434aa8',
                       borderRadius: 5,
                     }}
                   />
                 ) : null}
               </View>
-              {isMore === "More" ? (
+              {isMore === 'More' ? (
                 <View
                   style={{
-                    height: "100%",
-                    width: "100%",
-                    position: "absolute",
-                    alignItems: "flex-end",
-                    justifyContent: "center",
-                  }}
-                >
+                    height: '100%',
+                    width: '100%',
+                    position: 'absolute',
+                    alignItems: 'flex-end',
+                    justifyContent: 'center',
+                  }}>
                   <MaterialIcons
                     name="keyboard-arrow-up"
                     size={25}
                     color="black"
-                    style={{ marginRight: 20 }}
+                    style={{marginRight: 20}}
                   />
                 </View>
               ) : null}
               <View
                 style={{
                   flex: 1,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                }}
-              >
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
                 <Text
                   style={{
                     fontSize: 22,
-                    fontWeight: "300",
-                  }}
-                >
+                    fontWeight: '300',
+                  }}>
                   {isMore}
                 </Text>
               </View>
@@ -858,85 +829,81 @@ const CreateUser3 = (props) => {
         </View>
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
-          }}
-        >
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+          }}>
           <View
             style={{
               flex: 1,
               marginLeft: 20,
-              flexDirection: "row",
-              alignSelf: "center",
-              alignItems: "center",
-              justifyContent: "flex-start",
-            }}
-          >
+              flexDirection: 'row',
+              alignSelf: 'center',
+              alignItems: 'center',
+              justifyContent: 'flex-start',
+            }}>
             <BouncyCheckbox
               size={25}
               fillColor="#434aa8"
               unfillColor="#FFFFFF"
-              iconStyle={{ borderColor: "#434aa8", borderRadius: 5 }}
+              iconStyle={{borderColor: '#434aa8', borderRadius: 5}}
               disableText={true}
             />
-            <Text style={{ fontSize: 13, marginHorizontal: 10 }}>
+            <Text style={{fontSize: 13, marginHorizontal: 10}}>
               Display gender on my profile
             </Text>
           </View>
           <TouchableCmp
             onPress={() => {
               dispatch(setProgress(0.8));
-              props.navigation.navigate("CreateUser4");
-            }}
-          >
+              props.navigation.navigate('CreateUser4');
+            }}>
             <View
               style={{
-                borderColor: "#A1A1A1",
+                borderColor: '#A1A1A1',
                 borderWidth: 1,
                 marginRight: 20,
                 height: 70,
                 width: 70,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-                backgroundColor: "#ffffff",
+                backgroundColor: '#ffffff',
                 shadowOffset: {
                   width: -2,
                   height: 2,
                 },
-                shadowColor: "black",
+                shadowColor: 'black',
                 shadowOpacity: 0.3,
                 shadowRadius: 2,
-              }}
-            >
-              <Feather name="arrow-right" size={28} color={"#616161"} />
+              }}>
+              <Feather name="arrow-right" size={28} color={'#616161'} />
             </View>
           </TouchableCmp>
         </View>
       </SafeAreaView>
       <Modalize
         ref={modalizeRef}
-        rootStyle={{ borderRadius: 10 }}
+        rootStyle={{borderRadius: 10}}
         HeaderComponent={modalSearchHeader}
         childrenStyle={{
           marginTop: 65,
         }}
         flatListProps={{
-          keyboardShouldPersistTaps: "handled",
+          keyboardShouldPersistTaps: 'handled',
           data: genderData.filter(
             (gender) =>
               gender.value.toLowerCase() ===
                 formState.inputValues.searchBar.toLowerCase() ||
               gender.value
                 .toLowerCase()
-                .includes(formState.inputValues.searchBar.toLowerCase())
+                .includes(formState.inputValues.searchBar.toLowerCase()),
           ),
           renderItem: renderItem,
           keyExtractor: (item, index) => `${index}-${item.value}`,
         }}
-      ></Modalize>
+      />
     </KeyboardAvoidingView>
   );
 };
@@ -944,14 +911,14 @@ const CreateUser3 = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   youAreAText: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   buttonsContainer: {

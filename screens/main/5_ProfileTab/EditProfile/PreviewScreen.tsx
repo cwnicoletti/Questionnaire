@@ -1,58 +1,33 @@
-import React, { useEffect } from "react";
-import {
-  Platform,
-  StyleSheet,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  StatusBar,
-  Text,
-  Image,
-  Dimensions,
-  View,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import {
-  FontAwesome,
-  EvilIcons,
-  Feather,
-  Entypo,
-  MaterialCommunityIcons,
-} from "@expo/vector-icons";
-import { setProgress } from "../../../../store/actions/progressbar/progressbar";
-import FullProfile from "../../../../components/FullProfile/FullProfile";
+import React, {useEffect} from 'react';
+import {StyleSheet, StatusBar, View, ScrollView} from 'react-native';
+import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {setProgress} from '../../../../store/actions/progressbar/progressbar';
+import FullProfile from '../../../../components/FullProfile/FullProfile';
 
-const PreviewScreen = ({ navigation }) => {
+const PreviewScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
   const hideCardScreen = useAppSelector(
-    (state) => state.toptabbar.hideCardScreen
+    (state) => state.toptabbar.hideCardScreen,
   );
-  const width = Dimensions.get("window").width;
-
-  let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
-    TouchableCmp = TouchableNativeFeedback;
-  }
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       dispatch(setProgress(0));
     });
 
     return unsubscribe;
-  }, [navigation]);
+  }, [dispatch, navigation]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
+    <View style={{flex: 1}}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
       {!hideCardScreen ? (
         <ScrollView>
           <FullProfile
             name="Christian Nicoletti"
             predictionValue={99.99}
             age={25}
-            height={`"6' 0"`}
+            height={'"6\' 0"'}
             worksOut="Sometimes"
             city="Castaic"
             jobTitle="Software Engineer"
@@ -85,19 +60,19 @@ const PreviewScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

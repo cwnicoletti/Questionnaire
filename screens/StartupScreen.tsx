@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState, useRef } from "react";
-import { Image, StyleSheet, Animated } from "react-native";
-import * as SplashScreen from "expo-splash-screen";
-import { Asset } from "expo-asset";
-import AppLoading from "expo-app-loading";
+import React, {useCallback, useEffect, useState, useRef} from 'react';
+import {Image, StyleSheet, Animated} from 'react-native';
+import * as SplashScreen from 'expo-splash-screen';
+import {Asset} from 'expo-asset';
+import AppLoading from 'expo-app-loading';
 
 const StartupScreen = (props) => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -27,7 +27,7 @@ const StartupScreen = (props) => {
       duration: 400,
       useNativeDriver: true,
     }).start(() => {
-      props.navigation.navigate("StartAuth");
+      props.navigation.navigate('StartAuth');
     });
   };
 
@@ -49,8 +49,8 @@ const StartupScreen = (props) => {
 
   const cacheResourcesAsync = async () => {
     const images = [
-      require("../assets/naire_icon/transparent_colored.png"),
-      require("../assets/background.jpg"),
+      require('../assets/naire_icon/transparent_colored.png'),
+      require('../assets/background.jpg'),
     ];
 
     const cacheImages = images.map((image) => {
@@ -78,12 +78,11 @@ const StartupScreen = (props) => {
       style={{
         ...styles.screen,
         opacity: fadeAnim,
-        transform: [{ translateY: slideAnim1 }],
-      }}
-    >
+        transform: [{translateY: slideAnim1}],
+      }}>
       <Image
-        source={require("../assets/naire_icon/transparent_colored.png")}
-        style={{ height: "100%", width: "100%" }}
+        source={require('../assets/naire_icon/transparent_colored.png')}
+        style={{height: '100%', width: '100%'}}
         resizeMode="contain"
       />
     </Animated.View>
@@ -92,11 +91,11 @@ const StartupScreen = (props) => {
 
 const styles = StyleSheet.create({
   screen: {
-    height: "100%",
-    width: "100%",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "white",
+    height: '100%',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
 });
 

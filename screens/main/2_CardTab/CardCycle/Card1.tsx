@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -14,24 +8,22 @@ import {
   Keyboard,
   View,
   Animated,
-  Dimensions,
   ScrollView,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { EvilIcons, Feather } from "@expo/vector-icons";
-import FullProfile from "../../../../components/FullProfile/FullProfile";
-import * as Progress from "react-native-progress";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { LinearGradient } from "expo-linear-gradient";
-import { Modalize } from "react-native-modalize";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Modal from "../../../../components/FullProfile/FullProfile_components/Modal/Modal";
+} from 'react-native';
+import {useAppDispatch} from '../../../../hooks';
+import {EvilIcons, Feather} from '@expo/vector-icons';
+import FullProfile from '../../../../components/FullProfile/FullProfile';
+import * as Progress from 'react-native-progress';
+import MaskedView from '@react-native-masked-view/masked-view';
+import {LinearGradient} from 'expo-linear-gradient';
+import {Modalize} from 'react-native-modalize';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import Modal from '../../../../components/FullProfile/FullProfile_components/Modal/Modal';
 
-const Card1 = ({ navigation }) => {
-  const dispatch = useAppDispatch();
+const Card1 = ({navigation}) => {
   const [loading, setLoading] = useState(false);
   const [showMessageButton, setShowMessageButton] = useState(true);
-  const [pickedPicture, setPickedPicture] = useState("");
+  const [pickedPicture, setPickedPicture] = useState('');
   const [pickedPrompt, setPickedPrompt] = useState({});
   const [pickedPromptHeight, setPickedPromptHeight] = useState(0);
   const fadeLoadingAnim = useRef(new Animated.Value(0)).current;
@@ -46,13 +38,13 @@ const Card1 = ({ navigation }) => {
   const onCloseModal = () => {
     setTimeout(() => {
       setPickedPrompt({});
-      setPickedPicture("");
+      setPickedPicture('');
     }, 500);
     Keyboard.dismiss();
   };
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -103,9 +95,9 @@ const Card1 = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
+      <StatusBar barStyle={'dark-content'} animated={true} />
       {!loading ? (
-        <Animated.View style={{ opacity: fadeAnim, justifyContent: "center" }}>
+        <Animated.View style={{opacity: fadeAnim, justifyContent: 'center'}}>
           <ScrollView
           // TODO: hide tabbar on scroll
           // onScroll={onScrollHandler}
@@ -115,15 +107,14 @@ const Card1 = ({ navigation }) => {
             <SafeAreaView>
               <TouchableCmp
                 onPress={() => {
-                  navigation.navigate("CardPreferencesScreen");
-                }}
-              >
+                  navigation.navigate('CardPreferencesScreen');
+                }}>
                 <EvilIcons
                   name="search"
                   size={32}
                   color="black"
                   style={{
-                    alignSelf: "flex-end",
+                    alignSelf: 'flex-end',
                     paddingBottom: 23,
                     paddingRight: 25,
                   }}
@@ -133,7 +124,7 @@ const Card1 = ({ navigation }) => {
                 name="Son Ye-Jin"
                 predictionValue={67.21}
                 age={20}
-                height={`5' 5"`}
+                height={'5\' 5"'}
                 worksOut="Rarely"
                 smokesTobacco="Never"
                 smokesWeed="Never"
@@ -164,17 +155,16 @@ const Card1 = ({ navigation }) => {
           </ScrollView>
           <TouchableCmp
             onPress={() => {
-              navigation.push("InterCard");
-            }}
-          >
+              navigation.push('InterCard');
+            }}>
             <View
               style={{
-                position: "absolute",
+                position: 'absolute',
                 zIndex: 9999,
-                backgroundColor: "white",
-                justifyContent: "center",
-                alignItems: "center",
-                borderColor: "black",
+                backgroundColor: 'white',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderColor: 'black',
                 left: 20,
                 bottom: 20,
                 height: 75,
@@ -183,12 +173,11 @@ const Card1 = ({ navigation }) => {
                   width: -1,
                   height: 1,
                 },
-                shadowColor: "black",
+                shadowColor: 'black',
                 shadowOpacity: 0.1,
                 shadowRadius: 2,
                 borderRadius: 75 / 2,
-              }}
-            >
+              }}>
               <Feather name="fast-forward" size={24} color="black" />
             </View>
           </TouchableCmp>
@@ -205,42 +194,40 @@ const Card1 = ({ navigation }) => {
       ) : (
         <MaskedView
           style={{
-            height: "100%",
+            height: '100%',
             marginTop: 15,
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           maskElement={
             <Animated.View
               style={{
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                justifyContent: 'center',
+                alignItems: 'center',
                 opacity: fadeLoadingAnim,
-              }}
-            >
+              }}>
               <SafeAreaView>
                 <Progress.Circle
                   size={150}
-                  color={"#434aa8"}
+                  color={'#434aa8'}
                   borderWidth={1}
-                  strokeCap={"round"}
+                  strokeCap={'round'}
                   thickness={2}
                   indeterminate={true}
                   style={{
                     paddingTop: 10,
-                    alignItems: "center",
+                    alignItems: 'center',
                   }}
                 />
               </SafeAreaView>
             </Animated.View>
-          }
-        >
+          }>
           <LinearGradient
-            colors={["#A700D1", "#434aa8"]}
+            colors={['#A700D1', '#434aa8']}
             style={{
               height: 180,
-              width: "100%",
+              width: '100%',
             }}
           />
         </MaskedView>
@@ -252,19 +239,19 @@ const Card1 = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

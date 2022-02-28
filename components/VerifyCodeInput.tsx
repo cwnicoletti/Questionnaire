@@ -1,8 +1,8 @@
-import React, { useEffect, useReducer } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
+import React, {useEffect, useReducer} from 'react';
+import {StyleSheet, TextInput, View} from 'react-native';
 
-const INPUT_CHANGE = "INPUT_CHANGE";
-const INPUT_BLUR = "INPUT_BLUR";
+const INPUT_CHANGE = 'INPUT_CHANGE';
+const INPUT_BLUR = 'INPUT_BLUR';
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -23,11 +23,11 @@ const inputReducer = (state, action) => {
 
 const VerifyCodeInput = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.initialValue ? props.initialValue : "",
+    value: props.initialValue ? props.initialValue : '',
     touched: false,
   });
 
-  const { onInputChange, id } = props;
+  const {onInputChange, id} = props;
 
   useEffect(() => {
     onInputChange(id, inputState.value, inputState.isValid);
@@ -52,10 +52,10 @@ const VerifyCodeInput = (props) => {
         {...props}
         style={{
           ...styles.input,
-          backgroundColor: "#eeeeee",
+          backgroundColor: '#eeeeee',
           ...props.styleInput,
         }}
-        color={"Black"}
+        color={'Black'}
         value={inputState.value}
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     marginLeft: 10,
     borderBottomWidth: 1,
-    borderColor: "black",
+    borderColor: 'black',
   },
 });
 

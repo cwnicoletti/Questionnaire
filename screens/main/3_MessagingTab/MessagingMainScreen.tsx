@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -11,15 +11,15 @@ import {
   FlatList,
   UIManager,
   LayoutAnimation,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { LinearGradient } from "expo-linear-gradient";
-import * as Progress from "react-native-progress";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { messageData } from "../../../data/messageData";
+} from 'react-native';
+import {useAppDispatch, useAppSelector} from '../../../hooks';
+import {LinearGradient} from 'expo-linear-gradient';
+import * as Progress from 'react-native-progress';
+import {setProgress} from '../../../store/actions/progressbar/progressbar';
+import MaskedView from '@react-native-masked-view/masked-view';
+import {messageData} from '../../../data/messageData';
 
-const MessagingMainScreen = ({ navigation }) => {
+const MessagingMainScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
   const [listColumnData, setListColumnData] = useState(messageData);
 
@@ -35,117 +35,113 @@ const MessagingMainScreen = ({ navigation }) => {
     },
   };
 
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     if (UIManager.setLayoutAnimationEnabledExperimental) {
       UIManager.setLayoutAnimationEnabledExperimental(true);
     }
   }
 
-  const TopRowItem = ({ image1, topPrediction, newMatch, notify, online }) => (
+  const TopRowItem = ({image1, topPrediction, newMatch, notify, online}) => (
     <View
       style={{
         paddingBottom: 40,
-      }}
-    >
+      }}>
       {notify || online ? (
         <TouchableCmp
           onPress={() => {
             if (topPrediction && notify) {
               setListColumnData(() =>
-                initialData.filter(
-                  (match) => match.topPrediction && match.notify
-                )
+                messageData.filter(
+                  (match) => match.topPrediction && match.notify,
+                ),
               );
               LayoutAnimation.configureNext(layoutAnimConfig);
             }
             if (topPrediction && online) {
               setListColumnData(() =>
-                initialData.filter(
-                  (match) => match.topPrediction && match.online
-                )
+                messageData.filter(
+                  (match) => match.topPrediction && match.online,
+                ),
               );
               LayoutAnimation.configureNext(layoutAnimConfig);
             }
             if (newMatch && notify) {
               setListColumnData(() =>
-                initialData.filter((match) => match.newMatch && match.notify)
+                messageData.filter((match) => match.newMatch && match.notify),
               );
               LayoutAnimation.configureNext(layoutAnimConfig);
             }
             if (newMatch && online) {
               setListColumnData(() =>
-                initialData.filter((match) => match.newMatch && match.online)
+                messageData.filter((match) => match.newMatch && match.online),
               );
               LayoutAnimation.configureNext(layoutAnimConfig);
             }
             if (notify && !newMatch && !topPrediction) {
               setListColumnData(() =>
-                initialData.filter(
+                messageData.filter(
                   (match) =>
-                    match.notify && !match.newMatch && !match.topPrediction
-                )
+                    match.notify && !match.newMatch && !match.topPrediction,
+                ),
               );
               LayoutAnimation.configureNext(layoutAnimConfig);
             }
             if (online && !notify && !newMatch && !topPrediction) {
               setListColumnData(() =>
-                initialData.filter(
+                messageData.filter(
                   (match) =>
                     match.online &&
                     !match.notify &&
                     !match.newMatch &&
-                    !match.topPrediction
-                )
+                    !match.topPrediction,
+                ),
               );
               LayoutAnimation.configureNext(layoutAnimConfig);
             }
-          }}
-        >
+          }}>
           <MaskedView
             style={{
-              position: "absolute",
-              height: "100%",
-              width: "100%",
+              position: 'absolute',
+              height: '100%',
+              width: '100%',
             }}
             maskElement={
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
                 <Progress.Circle
                   progress={online ? (newMatch || topPrediction ? 0.83 : 1) : 0}
                   size={90}
                   color={
-                    newMatch ? "#00D6DE" : topPrediction ? "#FF0000" : "#434aa8"
+                    newMatch ? '#00D6DE' : topPrediction ? '#FF0000' : '#434aa8'
                   }
                   borderWidth={0}
                   showsText={false}
-                  strokeCap={"round"}
+                  strokeCap={'round'}
                   thickness={2}
                   style={{
-                    position: "absolute",
-                    transform: [{ rotate: "211deg" }],
+                    position: 'absolute',
+                    transform: [{rotate: '211deg'}],
                   }}
                 />
               </View>
-            }
-          >
+            }>
             <LinearGradient
               colors={
                 newMatch
-                  ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                  ? ['#45F9FF', '#00C8D6', '#00D6DE']
                   : topPrediction
-                  ? ["#FF0000", "#D10081", "#D100C3"]
-                  : ["#A700D1", "#602C91", "#434aa8"]
+                  ? ['#FF0000', '#D10081', '#D100C3']
+                  : ['#A700D1', '#602C91', '#434aa8']
               }
               style={{
-                position: "absolute",
-                height: "100%",
-                width: "100%",
+                position: 'absolute',
+                height: '100%',
+                width: '100%',
               }}
             />
           </MaskedView>
@@ -154,36 +150,34 @@ const MessagingMainScreen = ({ navigation }) => {
               style={{
                 left: 5,
                 zIndex: 99999,
-              }}
-            >
+              }}>
               <LinearGradient
                 colors={
                   newMatch
-                    ? ["#00D6DE", "#00C8D6", "#45F9FF"]
+                    ? ['#00D6DE', '#00C8D6', '#45F9FF']
                     : topPrediction
-                    ? ["#FF0000", "#D10081", "#D100C3"]
-                    : ["#A700D1", "#602C91", "#434aa8"]
+                    ? ['#FF0000', '#D10081', '#D100C3']
+                    : ['#A700D1', '#602C91', '#434aa8']
                 }
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   top: 10,
                   left: 10,
                   height: 13,
                   width: 13,
                   borderRadius: 13 / 2,
-                  backgroundColor: "#434aa8",
+                  backgroundColor: '#434aa8',
                 }}
               />
             </View>
           ) : null}
           <View
             style={{
-              alignItems: "center",
+              alignItems: 'center',
               marginVertical: 10,
-            }}
-          >
+            }}>
             <Image
-              source={{ uri: image1 }}
+              source={{uri: image1}}
               style={{
                 height: 75,
                 width: 75,
@@ -193,48 +187,44 @@ const MessagingMainScreen = ({ navigation }) => {
             />
             {newMatch ? (
               <LinearGradient
-                colors={["#45F9FF", "#00C8D6", "#00D6DE"]}
+                colors={['#45F9FF', '#00C8D6', '#00D6DE']}
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: -16,
-                  backgroundColor: "#434aa8",
+                  backgroundColor: '#434aa8',
                   borderRadius: 15 / 2,
                   height: 15,
                   width: 40,
-                }}
-              >
+                }}>
                 <Text
                   style={{
                     fontSize: 13,
-                    fontWeight: "500",
-                    color: "white",
-                    textAlign: "center",
-                  }}
-                >
+                    fontWeight: '500',
+                    color: 'white',
+                    textAlign: 'center',
+                  }}>
                   New
                 </Text>
               </LinearGradient>
             ) : null}
             {topPrediction ? (
               <LinearGradient
-                colors={["#FF0000", "#D10081", "#D100C3"]}
+                colors={['#FF0000', '#D10081', '#D100C3']}
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   bottom: -16,
-                  backgroundColor: "#434aa8",
+                  backgroundColor: '#434aa8',
                   borderRadius: 15 / 2,
                   height: 15,
                   width: 40,
-                }}
-              >
+                }}>
                 <Text
                   style={{
                     fontSize: 13,
-                    fontWeight: "500",
-                    color: "white",
-                    textAlign: "center",
-                  }}
-                >
+                    fontWeight: '500',
+                    color: 'white',
+                    textAlign: 'center',
+                  }}>
                   Top
                 </Text>
               </LinearGradient>
@@ -280,7 +270,7 @@ const MessagingMainScreen = ({ navigation }) => {
   }) => (
     <TouchableCmp
       onPress={() => {
-        navigation.navigate("ChatScreen", {
+        navigation.navigate('ChatScreen', {
           image1,
           image2,
           image3,
@@ -308,104 +298,97 @@ const MessagingMainScreen = ({ navigation }) => {
           name,
           chat,
         });
-      }}
-    >
+      }}>
       <View
         style={{
-          flexDirection: "row",
+          flexDirection: 'row',
           paddingVertical: 5,
-        }}
-      >
+        }}>
         <View>
           <MaskedView
             style={{
-              position: "absolute",
-              height: "100%",
-              width: "100%",
+              position: 'absolute',
+              height: '100%',
+              width: '100%',
             }}
             maskElement={
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
                 <Progress.Circle
                   progress={online ? 0.81 : 0}
                   size={90}
                   color={
-                    newMatch ? "#00D6DE" : topPrediction ? "#FF0000" : "#434aa8"
+                    newMatch ? '#00D6DE' : topPrediction ? '#FF0000' : '#434aa8'
                   }
                   borderWidth={0}
                   showsText={false}
-                  strokeCap={"round"}
+                  strokeCap={'round'}
                   thickness={2}
                   style={{
-                    position: "absolute",
-                    transform: [{ rotate: "215deg" }],
+                    position: 'absolute',
+                    transform: [{rotate: '215deg'}],
                   }}
                 />
               </View>
-            }
-          >
+            }>
             <LinearGradient
               colors={
                 newMatch
-                  ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                  ? ['#45F9FF', '#00C8D6', '#00D6DE']
                   : topPrediction
-                  ? ["#FF0000", "#D10081", "#D100C3"]
-                  : ["#A700D1", "#602C91", "#434aa8"]
+                  ? ['#FF0000', '#D10081', '#D100C3']
+                  : ['#A700D1', '#602C91', '#434aa8']
               }
               style={{
-                position: "absolute",
-                height: "100%",
-                width: "100%",
+                position: 'absolute',
+                height: '100%',
+                width: '100%',
               }}
             />
           </MaskedView>
           <View
             style={{
               zIndex: 3,
-            }}
-          >
+            }}>
             {notify ? (
               <View
                 style={{
-                  position: "absolute",
+                  position: 'absolute',
                   zIndex: 99999,
                   left: 5,
-                }}
-              >
+                }}>
                 <LinearGradient
                   colors={
                     newMatch
-                      ? ["#45F9FF", "#00C8D6", "#00D6DE"]
+                      ? ['#45F9FF', '#00C8D6', '#00D6DE']
                       : topPrediction
-                      ? ["#FF0000", "#D10081", "#D100C3"]
-                      : ["#A700D1", "#602C91", "#434aa8"]
+                      ? ['#FF0000', '#D10081', '#D100C3']
+                      : ['#A700D1', '#602C91', '#434aa8']
                   }
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     top: 10,
                     left: 7,
                     height: 15,
                     width: 15,
                     borderRadius: 15 / 2,
-                    backgroundColor: "#434aa8",
+                    backgroundColor: '#434aa8',
                   }}
                 />
               </View>
             ) : null}
             <View
               style={{
-                alignItems: "center",
+                alignItems: 'center',
                 marginVertical: 10,
-              }}
-            >
+              }}>
               <Image
-                source={{ uri: image1 }}
+                source={{uri: image1}}
                 style={{
                   height: 75,
                   width: 75,
@@ -415,45 +398,41 @@ const MessagingMainScreen = ({ navigation }) => {
               />
               <Text
                 style={{
-                  textAlign: "center",
-                  position: "absolute",
+                  textAlign: 'center',
+                  position: 'absolute',
                   bottom: -16,
-                  fontWeight: "300",
+                  fontWeight: '300',
                   color: newMatch
-                    ? "#00D6DE"
+                    ? '#00D6DE'
                     : topPrediction
-                    ? "#FF0000"
-                    : "#434aa8",
-                }}
-              >{`${predictionValue}%`}</Text>
+                    ? '#FF0000'
+                    : '#434aa8',
+                }}>{`${predictionValue}%`}</Text>
             </View>
           </View>
         </View>
-        <View style={{ flex: 1 }}>
+        <View style={{flex: 1}}>
           <Text
             style={{
               fontSize: 18,
-              fontWeight: notify ? "600" : "200",
-            }}
-          >
+              fontWeight: notify ? '600' : '200',
+            }}>
             {name}
           </Text>
           <View
             style={{
-              flexDirection: "row",
+              flexDirection: 'row',
               marginVertical: 5,
-            }}
-          >
+            }}>
             <Text
               numberOfLines={2}
               style={{
                 fontSize: 18,
-                fontWeight: notify ? "500" : "300",
-                color: "grey",
+                fontWeight: notify ? '500' : '300',
+                color: 'grey',
                 flex: 1,
-                flexWrap: "wrap",
-              }}
-            >
+                flexWrap: 'wrap',
+              }}>
               {text}
             </Text>
           </View>
@@ -462,7 +441,7 @@ const MessagingMainScreen = ({ navigation }) => {
     </TouchableCmp>
   );
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({item}) => (
     <Item
       name={item.name}
       image1={item.image1}
@@ -501,169 +480,156 @@ const MessagingMainScreen = ({ navigation }) => {
   const headerTopComponent = () => (
     <TouchableCmp
       onPress={() => {
-        setListColumnData(initialData);
+        setListColumnData(messageData);
         LayoutAnimation.configureNext(layoutAnimConfig);
-      }}
-    >
+      }}>
       <View
         style={{
-          alignItems: "center",
+          alignItems: 'center',
           paddingBottom: 10,
-        }}
-      >
+        }}>
         <MaskedView
           style={{
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           maskElement={
             <View
               style={{
-                height: "100%",
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+                height: '100%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
               <Progress.Circle
                 progress={1}
                 size={70}
-                color={"#434aa8"}
+                color={'#434aa8'}
                 borderWidth={0}
                 showsText={false}
-                strokeCap={"round"}
+                strokeCap={'round'}
                 thickness={2}
                 style={{
-                  position: "absolute",
-                  transform: [{ rotate: "211deg" }],
+                  position: 'absolute',
+                  transform: [{rotate: '211deg'}],
                 }}
               />
             </View>
-          }
-        >
+          }>
           <LinearGradient
-            colors={["#A700D1", "#602C91", "#434aa8"]}
+            colors={['#A700D1', '#602C91', '#434aa8']}
             style={{
-              position: "absolute",
-              alignItems: "center",
-              height: "100%",
-              width: "100%",
+              position: 'absolute',
+              alignItems: 'center',
+              height: '100%',
+              width: '100%',
             }}
           />
         </MaskedView>
         <MaskedView
           style={{
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           maskElement={
             <View
               style={{
-                height: "100%",
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+                height: '100%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
               <Progress.Circle
                 progress={1}
                 size={80}
-                color={"#434aa8"}
+                color={'#434aa8'}
                 borderWidth={0}
                 showsText={false}
-                strokeCap={"round"}
+                strokeCap={'round'}
                 thickness={2}
                 style={{
-                  position: "absolute",
-                  transform: [{ rotate: "211deg" }],
+                  position: 'absolute',
+                  transform: [{rotate: '211deg'}],
                 }}
               />
             </View>
-          }
-        >
+          }>
           <LinearGradient
-            colors={["#FF0000", "#D10081", "#D100C3"]}
+            colors={['#FF0000', '#D10081', '#D100C3']}
             style={{
-              position: "absolute",
-              alignItems: "center",
-              height: "100%",
-              width: "100%",
+              position: 'absolute',
+              alignItems: 'center',
+              height: '100%',
+              width: '100%',
             }}
           />
         </MaskedView>
         <MaskedView
           style={{
-            position: "absolute",
-            height: "100%",
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
+            position: 'absolute',
+            height: '100%',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           maskElement={
             <View
               style={{
-                height: "100%",
-                width: "100%",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
+                height: '100%',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
               <Progress.Circle
                 progress={1}
                 size={90}
-                color={"#434aa8"}
+                color={'#434aa8'}
                 borderWidth={0}
                 showsText={false}
-                strokeCap={"round"}
+                strokeCap={'round'}
                 thickness={2}
                 style={{
-                  position: "absolute",
-                  transform: [{ rotate: "211deg" }],
+                  position: 'absolute',
+                  transform: [{rotate: '211deg'}],
                 }}
               />
             </View>
-          }
-        >
+          }>
           <LinearGradient
-            colors={["#45F9FF", "#00C8D6", "#00D6DE"]}
+            colors={['#45F9FF', '#00C8D6', '#00D6DE']}
             style={{
-              position: "absolute",
-              alignItems: "center",
-              height: "100%",
-              width: "100%",
+              position: 'absolute',
+              alignItems: 'center',
+              height: '100%',
+              width: '100%',
             }}
           />
         </MaskedView>
         <View
           style={{
             zIndex: 3,
-          }}
-        >
+          }}>
           <View
             style={{
-              alignItems: "center",
+              alignItems: 'center',
               marginVertical: 10,
-            }}
-          >
+            }}>
             <View
               style={{
                 height: 75,
                 width: 75,
                 marginHorizontal: 15,
                 borderRadius: 75 / 2,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text
-                style={{ fontWeight: "600", fontSize: 18, color: "#434aa8" }}
-              >
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text style={{fontWeight: '600', fontSize: 18, color: '#434aa8'}}>
                 ALL
               </Text>
             </View>
@@ -673,7 +639,7 @@ const MessagingMainScreen = ({ navigation }) => {
     </TouchableCmp>
   );
 
-  const renderTopRowItem = ({ item }) => (
+  const renderTopRowItem = ({item}) => (
     <TopRowItem
       image1={item.image1}
       topPrediction={item.topPrediction}
@@ -684,27 +650,27 @@ const MessagingMainScreen = ({ navigation }) => {
   );
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       dispatch(setProgress(0));
       navigation.getParent()?.setOptions({
-        tabBarStyle: { display: "flex" },
+        tabBarStyle: {display: 'flex'},
       });
     });
 
     return unsubscribe;
-  }, [navigation]);
+  }, [dispatch, navigation]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
-      <View style={{ height: 120 }}>
+    <View style={{flex: 1}}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
+      <View style={{height: 120}}>
         <FlatList
-          data={initialData}
+          data={messageData}
           horizontal={true}
           inverted={true}
           renderItem={renderTopRowItem}
@@ -717,10 +683,10 @@ const MessagingMainScreen = ({ navigation }) => {
       </View>
       <View
         style={{
-          width: "80%",
-          borderColor: "#EDEDED",
+          width: '80%',
+          borderColor: '#EDEDED',
           borderBottomWidth: 1,
-          alignSelf: "center",
+          alignSelf: 'center',
           marginVertical: 5,
         }}
       />
@@ -744,19 +710,19 @@ const MessagingMainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

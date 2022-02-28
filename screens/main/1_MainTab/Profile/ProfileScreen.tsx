@@ -1,36 +1,25 @@
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Platform,
   StyleSheet,
   TouchableNativeFeedback,
   TouchableOpacity,
   StatusBar,
-  Text,
-  Image,
-  Dimensions,
   View,
   Keyboard,
-  KeyboardAvoidingView,
-  Animated,
   ScrollView,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../../hooks";
-import { setProgress } from "../../../../store/actions/progressbar/progressbar";
-import FullProfile from "../../../../components/FullProfile/FullProfile";
-import { Modalize } from "react-native-modalize";
-import Modal from "../../../../components/FullProfile/FullProfile_components/Modal/Modal";
+} from 'react-native';
+import {useAppDispatch} from '../../../../hooks';
+import {setProgress} from '../../../../store/actions/progressbar/progressbar';
+import FullProfile from '../../../../components/FullProfile/FullProfile';
+import {Modalize} from 'react-native-modalize';
+import Modal from '../../../../components/FullProfile/FullProfile_components/Modal/Modal';
 
-const ProfileScreen = ({ navigation, route }) => {
+const ProfileScreen = ({navigation, route}) => {
   const dispatch = useAppDispatch();
   const [params, setParams] = useState({});
   const [showMessageButton, setShowMessageButton] = useState(true);
-  const [pickedPicture, setPickedPicture] = useState("");
+  const [pickedPicture, setPickedPicture] = useState('');
   const [pickedPrompt, setPickedPrompt] = useState({});
   const [pickedPromptHeight, setPickedPromptHeight] = useState(0);
 
@@ -43,13 +32,13 @@ const ProfileScreen = ({ navigation, route }) => {
   const onCloseModal = () => {
     setTimeout(() => {
       setPickedPrompt({});
-      setPickedPicture("");
+      setPickedPicture('');
     }, 500);
     Keyboard.dismiss();
   };
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -60,12 +49,12 @@ const ProfileScreen = ({ navigation, route }) => {
   }, [route.params]);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       dispatch(setProgress(0));
     });
 
     return unsubscribe;
-  }, [navigation]);
+  }, [dispatch, navigation]);
 
   const setPicture = (imageUrl) => {
     setPickedPicture(imageUrl);
@@ -81,7 +70,7 @@ const ProfileScreen = ({ navigation, route }) => {
 
   return (
     <View style={styles.screen}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
+      <StatusBar barStyle={'dark-content'} animated={true} />
       <ScrollView>
         <FullProfile
           name={params.name}
@@ -131,19 +120,19 @@ const ProfileScreen = ({ navigation, route }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

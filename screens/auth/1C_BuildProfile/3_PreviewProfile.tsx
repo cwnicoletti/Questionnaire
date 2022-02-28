@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef} from 'react';
 import {
   StatusBar,
   KeyboardAvoidingView,
@@ -10,24 +10,19 @@ import {
   View,
   Animated,
   ScrollView,
-  Image,
   Dimensions,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch } from "../../../hooks";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
-
-import LottieView from "lottie-react-native";
-import FullProfile from "../../../components/FullProfile/FullProfile";
+} from 'react-native';
+import {Feather} from '@expo/vector-icons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import LottieView from 'lottie-react-native';
+import FullProfile from '../../../components/FullProfile/FullProfile';
 
 const PreviewProfile = (props) => {
-  const dispatch = useAppDispatch();
   const slideAnim = useRef(new Animated.Value(-100)).current;
   const lottieRef = useRef();
 
-  let width = Dimensions.get("window").width;
-  if (Dimensions.get("window").width > 414) {
+  let width = Dimensions.get('window').width;
+  if (Dimensions.get('window').width > 414) {
     width = 414;
   }
 
@@ -50,44 +45,40 @@ const PreviewProfile = (props) => {
   }, []);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={true}
-      style={styles.screen}
-    >
-      <StatusBar barStyle={"dark-content"} animated={true} />
+      style={styles.screen}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
       <Animated.View
         style={{
-          flexDirection: "row",
-          borderColor: "grey",
+          flexDirection: 'row',
+          borderColor: 'grey',
           borderWidth: 1,
           borderTopWidth: 0,
-          transform: [{ translateY: slideAnim }],
-        }}
-      >
+          transform: [{translateY: slideAnim}],
+        }}>
         <SafeAreaView
           style={{
             flex: 1,
             marginTop: 20,
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "flex-end",
-          }}
-        >
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+          }}>
           <View
             style={{
-              width: "100%",
-              position: "absolute",
-            }}
-          >
+              width: '100%',
+              position: 'absolute',
+            }}>
             <LottieView
               ref={lottieRef}
-              source={require("../../../assets/lottie_anims/565-camera.json")}
+              source={require('../../../assets/lottie_anims/565-camera.json')}
               autoPlay={false}
               loop={false}
               speed={2.2}
@@ -101,10 +92,9 @@ const PreviewProfile = (props) => {
             <Text
               style={{
                 fontSize: 22,
-                fontWeight: "300",
-                textAlign: "center",
-              }}
-            >
+                fontWeight: '300',
+                textAlign: 'center',
+              }}>
               Lookin' pretty sweet!
             </Text>
           </View>
@@ -115,7 +105,7 @@ const PreviewProfile = (props) => {
           name="Christian Nicoletti"
           predictionValue={99.99}
           age={25}
-          height={`"6' 0"`}
+          height={'"6\' 0"'}
           worksOut="Sometimes"
           city="Castaic"
           jobTitle="Software Engineer"
@@ -144,73 +134,69 @@ const PreviewProfile = (props) => {
         style={{
           marginTop: 20,
           marginBottom: 30,
-          flexDirection: "row",
-          justifyContent: "flex-end",
-          alignItems: "flex-end",
-        }}
-      >
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          alignItems: 'flex-end',
+        }}>
         <View
           style={{
             flex: 1,
             marginLeft: 20,
-            flexDirection: "row",
-            alignSelf: "center",
-            alignItems: "center",
-            justifyContent: "flex-start",
-          }}
-        >
-          <Text style={{ fontSize: 13, marginHorizontal: 5 }}>
+            flexDirection: 'row',
+            alignSelf: 'center',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}>
+          <Text style={{fontSize: 13, marginHorizontal: 5}}>
             Just one more step
           </Text>
           <LottieView
-            source={require("../../../assets/lottie_anims/70797-arrows.json")}
+            source={require('../../../assets/lottie_anims/70797-arrows.json')}
             autoPlay={true}
             loop={true}
             colorFilters={[
               {
-                keypath: "Shape Layer 2",
-                color: "#434aa8 ",
+                keypath: 'Shape Layer 2',
+                color: '#434aa8 ',
               },
               {
-                keypath: "Shape Layer 3",
-                color: "#434aa8 ",
+                keypath: 'Shape Layer 3',
+                color: '#434aa8 ',
               },
               {
-                keypath: "Shape Layer 1",
-                color: "#434aa8 ",
+                keypath: 'Shape Layer 1',
+                color: '#434aa8 ',
               },
             ]}
             speed={1.2}
-            style={{ height: 50, width: 50 }}
+            style={{height: 50, width: 50}}
           />
         </View>
         <TouchableCmp
           onPress={() => {
-            props.navigation.navigate("ReadyForFirstSurveys");
-          }}
-        >
+            props.navigation.navigate('ReadyForFirstSurveys');
+          }}>
           <View
             style={{
-              borderColor: "#A1A1A1",
+              borderColor: '#A1A1A1',
               borderWidth: 1,
               marginRight: 20,
               height: 70,
               width: 70,
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'row',
               borderRadius: 35,
-              backgroundColor: "#ffffff",
+              backgroundColor: '#ffffff',
               shadowOffset: {
                 width: -2,
                 height: 2,
               },
-              shadowColor: "black",
+              shadowColor: 'black',
               shadowOpacity: 0.3,
               shadowRadius: 2,
-            }}
-          >
-            <Feather name="arrow-right" size={28} color={"#616161"} />
+            }}>
+            <Feather name="arrow-right" size={28} color={'#616161'} />
           </View>
         </TouchableCmp>
       </View>
@@ -221,14 +207,14 @@ const PreviewProfile = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   seekingAText: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   buttonsContainer: {

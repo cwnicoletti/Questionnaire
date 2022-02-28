@@ -1,16 +1,16 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { TransitionPresets } from "@react-navigation/stack";
-import ProfileMainScreen from "../screens/main/5_ProfileTab/ProfileMainScreen";
-import PerformanceScreen from "../screens/main/5_ProfileTab/Performance/PerformanceScreen";
-import SettingsScreen from "../screens/main/5_ProfileTab/Settings/SettingsScreen";
-import EditPickPrompt from "../screens/main/5_ProfileTab/EditProfile/EditPrompt/EditPickPrompt";
-import EditWritePrompt from "../screens/main/5_ProfileTab/EditProfile/EditPrompt/EditWritePrompt";
-import TopTabEditProfileNavigator from "./6_TopTabEditProfileNavigator";
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import {TransitionPresets} from '@react-navigation/stack';
+import ProfileMainScreen from '../screens/main/5_ProfileTab/ProfileMainScreen';
+import PerformanceScreen from '../screens/main/5_ProfileTab/Performance/PerformanceScreen';
+import SettingsScreen from '../screens/main/5_ProfileTab/Settings/SettingsScreen';
+import EditPickPrompt from '../screens/main/5_ProfileTab/EditProfile/EditPrompt/EditPickPrompt';
+import EditWritePrompt from '../screens/main/5_ProfileTab/EditProfile/EditPrompt/EditWritePrompt';
+import TopTabEditProfileNavigator from './6_TopTabEditProfileNavigator';
 
 const Stack = createStackNavigator();
 
-const forFade = ({ current }) => ({
+const forFade = ({current}) => ({
   cardStyle: {
     opacity: current.progress,
   },

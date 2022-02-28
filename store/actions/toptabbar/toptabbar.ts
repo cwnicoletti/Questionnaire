@@ -1,9 +1,9 @@
-import { SET_HIDE, SET_CURRENT_SCREEN } from "./types";
+import {SET_HIDE, SET_CURRENT_SCREEN} from './types';
 
 export const setHide = (
   cardScreenValue: boolean,
   messagingScreenValue: boolean,
-  questionnaireScreenValue: boolean
+  questionnaireScreenValue: boolean,
 ) => {
   return async (dispatch) => {
     await dispatch({

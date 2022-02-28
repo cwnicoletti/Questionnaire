@@ -1,14 +1,14 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import ProfileScreen from "../screens/main/1_MainTab/Profile/ProfileScreen";
-import PurchaseScreen from "../screens/main/1_MainTab/Purchase/PurchaseScreen";
-import MainScreen from "../screens/main/1_MainTab/MainScreen";
-import { TransitionPresets } from "@react-navigation/stack";
-import TitleOnlyHeader from "../components/headers/TitleOnlyHeader";
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import ProfileScreen from '../screens/main/1_MainTab/Profile/ProfileScreen';
+import PurchaseScreen from '../screens/main/1_MainTab/Purchase/PurchaseScreen';
+import MainScreen from '../screens/main/1_MainTab/MainScreen';
+import {TransitionPresets} from '@react-navigation/stack';
+import TitleOnlyHeader from '../components/headers/TitleOnlyHeader';
 
 const Stack = createStackNavigator();
 
-const forFade = ({ current }) => ({
+const forFade = ({current}) => ({
   cardStyle: {
     opacity: current.progress,
   },

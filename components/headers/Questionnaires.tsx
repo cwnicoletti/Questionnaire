@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Text,
   SafeAreaView,
@@ -6,58 +6,53 @@ import {
   Platform,
   TouchableNativeFeedback,
   TouchableOpacity,
-} from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { setProgress } from "../../store/actions/progressbar/progressbar";
-import { useAppDispatch } from "../../hooks";
+} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
+import {setProgress} from '../../store/actions/progressbar/progressbar';
+import {useAppDispatch} from '../../hooks';
 
-const Questionnaires = ({ navigation }) => {
+const Questionnaires = ({navigation}) => {
   const dispatch = useAppDispatch();
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
   return (
     <SafeAreaView
       style={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: "row",
-      }}
-    >
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
       <View
         style={{
           left: 30,
           opacity: 0,
-        }}
-      >
+        }}>
         <Ionicons name="ios-create" size={28} color="black" />
       </View>
       <Text
         style={{
           fontSize: 22,
-          fontWeight: "200",
+          fontWeight: '200',
           padding: 5,
-        }}
-      >
+        }}>
         Questionnaires
       </Text>
       <TouchableCmp
         onPress={() => {
           navigation.getParent()?.setOptions({
-            tabBarStyle: { display: "none" },
+            tabBarStyle: {display: 'none'},
           });
-          navigation.navigate("CreateSurvey1");
+          navigation.navigate('CreateSurvey1');
           setTimeout(() => {
             dispatch(setProgress(0.1));
           }, 400);
-        }}
-      >
+        }}>
         <View
           style={{
             right: 30,
-          }}
-        >
+          }}>
           <Ionicons name="ios-create" size={28} color="black" />
         </View>
       </TouchableCmp>

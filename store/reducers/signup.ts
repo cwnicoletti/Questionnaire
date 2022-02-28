@@ -5,12 +5,12 @@ import {
   IS_USING_MAIN,
   SignUpState,
   Action,
-} from "../actions/signup/types";
+} from '../actions/signup/types';
 
 const intialState: SignUpState = {
-  email: "",
-  fullname: "",
-  username: "",
+  email: '',
+  fullname: '',
+  username: '',
   isUsingMain: false,
 };
 

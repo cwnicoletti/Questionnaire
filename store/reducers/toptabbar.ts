@@ -1,7 +1,12 @@
-import { SET_HIDE, SET_CURRENT_SCREEN, ProgressState, Action } from "../actions/toptabbar/types";
+import {
+  SET_HIDE,
+  SET_CURRENT_SCREEN,
+  ProgressState,
+  Action,
+} from '../actions/toptabbar/types';
 
 const intialState: ProgressState = {
-  currentScreen: "",
+  currentScreen: '',
   hideCardScreen: false,
   hideMessagingScreen: false,
   hideQuestionnaireScreen: false,

@@ -4,7 +4,7 @@ import React, {
   useReducer,
   useRef,
   useState,
-} from "react";
+} from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
@@ -16,18 +16,17 @@ import {
   Keyboard,
   StatusBar,
   SafeAreaView,
-} from "react-native";
-import { useAppDispatch } from "../../../hooks";
-import { Feather, Entypo, FontAwesome } from "@expo/vector-icons";
+} from 'react-native';
+import {Feather, Entypo, FontAwesome} from '@expo/vector-icons';
 
-import { Ionicons } from "@expo/vector-icons";
-import VerifyCodeInput from "../../../components/VerifyCodeInput";
-import { Picker } from "@react-native-picker/picker";
+import {Ionicons} from '@expo/vector-icons';
+import VerifyCodeInput from '../../../components/VerifyCodeInput';
+import {Picker} from '@react-native-picker/picker';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
+  if (action.type === 'FORM_INPUT_UPDATE') {
     const updateValues = {
       ...state.inputValues,
       [action.input]: action.value,
@@ -52,19 +51,18 @@ const formReducer = (state, action) => {
 };
 
 const SignupScreen1 = (props) => {
-  const dispatch = useAppDispatch();
   const [isPickingContryCode, setIsPickingCountryCode] = useState(false);
-  const [countryCode, setCountryCode] = useState("US +1");
+  const [countryCode, setCountryCode] = useState('US +1');
   const [enabledAvoidView, setEnabledAvoidView] = useState(true);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      numbers: "",
+      numbers: '',
     },
     inputValidities: {
       numbers: false,
@@ -81,13 +79,13 @@ const SignupScreen1 = (props) => {
         input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [dispatchFormState],
   );
 
-  const phoneNumberInputRef = useRef<Input>(null);
+  const phoneNumberInputRef = useRef(null);
 
   useEffect(() => {
-    const unsubscribe = props.navigation.addListener("focus", async () => {
+    const unsubscribe = props.navigation.addListener('focus', async () => {
       setEnabledAvoidView(true);
     });
 
@@ -96,85 +94,81 @@ const SignupScreen1 = (props) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       enabled={enabledAvoidView}
       keyboardVerticalOffset={20}
-      style={styles.screen}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={"dark-content"} animated={true} />
-        <View style={{ flex: 1 }}>
+      style={styles.screen}>
+      <SafeAreaView style={{flex: 1}}>
+        <StatusBar barStyle={'dark-content'} animated={true} />
+        <View style={{flex: 1}}>
           <TouchableCmp
             onPress={() => {
-              props.navigation.goBack("");
-            }}
-          >
+              props.navigation.goBack('');
+            }}>
             <Ionicons
               name="ios-arrow-back"
               size={30}
               color="black"
-              style={{ margin: 20 }}
+              style={{margin: 20}}
             />
           </TouchableCmp>
-          <View style={{ flex: 1, marginTop: 80 }}>
+          <View style={{flex: 1, marginTop: 80}}>
             <Text style={styles.yourNumber}>Your phone number is</Text>
             <View style={styles.authContainer}>
-              <View style={{ flex: 1 }}>
+              <View style={{flex: 1}}>
                 <TouchableCmp
                   onPress={() => {
                     setIsPickingCountryCode(true);
                     Keyboard.dismiss();
-                  }}
-                >
+                  }}>
                   <View
                     style={{
                       height: 63,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexDirection: "row",
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexDirection: 'row',
                       borderBottomWidth: 1,
-                      borderColor: "black",
-                    }}
-                  >
-                    <Text adjustsFontSizeToFit style={{ fontSize: 20 }}>
+                      borderColor: 'black',
+                    }}>
+                    <Text adjustsFontSizeToFit style={{fontSize: 20}}>
                       {countryCode}
                     </Text>
                     <Entypo name="chevron-small-down" size={24} color="black" />
                   </View>
                 </TouchableCmp>
               </View>
-              <View style={{ flex: 2 }}>
+              <View style={{flex: 2}}>
                 <VerifyCodeInput
                   id="numbers"
                   keyboardType="number-pad"
-                  textContentType={"telephoneNumber"}
+                  textContentType={'telephoneNumber'}
                   autoFocus={true}
                   inputRef={phoneNumberInputRef}
-                  placeholder={"Phone number"}
-                  placeholderTextColor={"grey"}
-                  onKeyPress={({ nativeEvent: { key: keyValue } }) => {
-                    if (keyValue.length > 1 && keyValue !== "Backspace") {
+                  placeholder={'Phone number'}
+                  placeholderTextColor={'grey'}
+                  onKeyPress={({nativeEvent: {key: keyValue}}) => {
+                    if (keyValue.length > 1 && keyValue !== 'Backspace') {
                       setEnabledAvoidView(false);
-                      props.navigation.navigate("SignupPhoneScreen2");
+                      props.navigation.navigate('SignupPhoneScreen2');
                     }
                   }}
                   onSubmitEditing={() => {
                     setEnabledAvoidView(false);
-                    props.navigation.navigate("SignupPhoneScreen2");
+                    props.navigation.navigate('SignupPhoneScreen2');
                   }}
                   onFocus={() => setIsPickingCountryCode(false)}
                   onInputChange={inputChangeHandler}
                   initialValue=""
                   styleInput={{
                     fontSize: 28,
-                    fontWeight: "300",
-                    backgroundColor: "#ffffff",
+                    fontWeight: '300',
+                    backgroundColor: '#ffffff',
                   }}
                 />
               </View>
             </View>
-            <View style={{ marginHorizontal: "5%", marginVertical: 20 }}>
-              <Text style={{ color: "grey", textAlign: "center" }}>
+            <View style={{marginHorizontal: '5%', marginVertical: 20}}>
+              <Text style={{color: 'grey', textAlign: 'center'}}>
                 Naire will send you a verification code by text message. Message
                 and data rates may apply.
               </Text>
@@ -185,85 +179,78 @@ const SignupScreen1 = (props) => {
           <View
             style={{
               flex: 1,
-              justifyContent: "flex-end",
-              alignItems: "flex-end",
-            }}
-          >
+              justifyContent: 'flex-end',
+              alignItems: 'flex-end',
+            }}>
             <TouchableCmp
               onPress={() => {
                 setEnabledAvoidView(false);
-                props.navigation.navigate("SignupPhoneScreen2");
+                props.navigation.navigate('SignupPhoneScreen2');
               }}
-              disabled={formState.formIsValid === false}
-            >
+              disabled={formState.formIsValid === false}>
               <View
                 style={{
-                  borderColor: "#A1A1A1",
+                  borderColor: '#A1A1A1',
                   borderWidth: 1,
                   marginRight: 20,
                   height: 70,
                   width: 70,
-                  alignItems: "center",
-                  justifyContent: "center",
-                  flexDirection: "row",
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexDirection: 'row',
                   borderRadius: 35,
-                  backgroundColor: "#ffffff",
+                  backgroundColor: '#ffffff',
                   shadowOffset: {
                     width: -2,
                     height: 2,
                   },
-                  shadowColor: "black",
+                  shadowColor: 'black',
                   shadowOpacity: 0.3,
                   shadowRadius: 2,
-                }}
-              >
-                <Feather name="arrow-right" size={28} color={"#616161"} />
+                }}>
+                <Feather name="arrow-right" size={28} color={'#616161'} />
               </View>
             </TouchableCmp>
           </View>
         ) : (
           <View>
-            <View style={{ flexDirection: "row" }}>
-              <View style={{ flex: 1 }}></View>
+            <View style={{flexDirection: 'row'}}>
+              <View style={{flex: 1}} />
               <View
                 style={{
                   flex: 3,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
                 <Text
                   style={{
-                    textAlign: "center",
+                    textAlign: 'center',
                     fontSize: 20,
-                    fontWeight: "500",
-                  }}
-                >
+                    fontWeight: '500',
+                  }}>
                   Select Country Code
                 </Text>
                 <FontAwesome
                   name="level-down"
                   size={16}
                   color="black"
-                  style={{ marginHorizontal: 5 }}
+                  style={{marginHorizontal: 5}}
                 />
               </View>
-              <View style={{ flex: 1 }}>
+              <View style={{flex: 1}}>
                 <TouchableCmp
                   onPress={() => {
                     phoneNumberInputRef.current.focus();
                     setIsPickingCountryCode(false);
-                  }}
-                >
+                  }}>
                   <Text
                     style={{
-                      color: "#45BDF5",
-                      textAlign: "center",
+                      color: '#45BDF5',
+                      textAlign: 'center',
                       fontSize: 20,
-                      fontWeight: "300",
-                    }}
-                  >
+                      fontWeight: '300',
+                    }}>
                     done
                   </Text>
                 </TouchableCmp>
@@ -271,13 +258,12 @@ const SignupScreen1 = (props) => {
             </View>
             <Picker
               style={{
-                backgroundColor: "rgba(0,0,0,0)",
+                backgroundColor: 'rgba(0,0,0,0)',
               }}
               selectedValue={countryCode}
               onValueChange={(value) => {
                 setCountryCode(value);
-              }}
-            >
+              }}>
               <Picker.Item label="Afghanistan +93" value="AF +93" />
               <Picker.Item label="Albania +355" value="AL +355" />
               <Picker.Item label="Algeria +213" value="DZ +213" />
@@ -598,21 +584,21 @@ const SignupScreen1 = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourNumber: {
-    color: "black",
-    marginLeft: "10%",
+    color: 'black',
+    marginLeft: '10%',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginHorizontal: "10%",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: '10%',
     marginVertical: 10,
   },
 });

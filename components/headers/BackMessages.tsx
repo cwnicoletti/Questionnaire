@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   View,
   Text,
@@ -7,12 +7,12 @@ import {
   TouchableNativeFeedback,
   Platform,
   Image,
-} from "react-native";
-import { Ionicons, Entypo } from "@expo/vector-icons";
-import { Modalize } from "react-native-modalize";
-import { Host, Portal } from "react-native-portalize";
+} from 'react-native';
+import {Ionicons, Entypo} from '@expo/vector-icons';
+import {Modalize} from 'react-native-modalize';
+import {Portal} from 'react-native-portalize';
 
-const BackMessages = ({ navigation, route }) => {
+const BackMessages = ({navigation, route}) => {
   const [params, setParams] = useState({});
 
   const modalizeRef = useRef<Modalize>(null);
@@ -32,33 +32,31 @@ const BackMessages = ({ navigation, route }) => {
   }, [route.params]);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
     <SafeAreaView
       style={{
-        justifyContent: "space-between",
-        alignItems: "center",
-        flexDirection: "row",
-      }}
-    >
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
       <TouchableCmp
         onPress={() => {
           navigation.pop();
-        }}
-      >
+        }}>
         <Ionicons
           name="ios-arrow-back"
           size={28}
           color="black"
-          style={{ marginLeft: 20 }}
+          style={{marginLeft: 20}}
         />
       </TouchableCmp>
       <TouchableCmp
         onPress={() => {
-          navigation.navigate("ViewProfile", {
+          navigation.navigate('ViewProfile', {
             image1: params.image1,
             image2: params.image2,
             image3: params.image3,
@@ -84,25 +82,23 @@ const BackMessages = ({ navigation, route }) => {
             jobTitle: params.jobTitle,
             predictionValue: params.predictionValue,
           });
-        }}
-      >
+        }}>
         <View
           style={{
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "row",
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'row',
             paddingVertical: 10,
-          }}
-        >
+          }}>
           <Image
-            source={{ uri: params.image1 }}
+            source={{uri: params.image1}}
             style={{
               height: 60,
               width: 60,
               borderRadius: 60 / 2,
             }}
           />
-          <Text style={{ fontSize: 18, fontWeight: "200", margin: 5 }}>
+          <Text style={{fontSize: 18, fontWeight: '200', margin: 5}}>
             {params.name}
           </Text>
         </View>
@@ -110,13 +106,12 @@ const BackMessages = ({ navigation, route }) => {
       <TouchableCmp
         onPress={() => {
           onOpen();
-        }}
-      >
+        }}>
         <Entypo
           name="dots-three-vertical"
           size={24}
           color="black"
-          style={{ marginRight: 20 }}
+          style={{marginRight: 20}}
         />
       </TouchableCmp>
       <Portal>
@@ -124,26 +119,24 @@ const BackMessages = ({ navigation, route }) => {
           ref={modalizeRef}
           modalHeight={240}
           scrollViewProps={{
-            keyboardShouldPersistTaps: "handled",
+            keyboardShouldPersistTaps: 'handled',
             scrollEnabled: false,
           }}
-          rootStyle={{ backgroundColor: "rgba(0,0,0,0)" }}
-          modalStyle={{ backgroundColor: "rgba(0,0,0,0)" }}
-        >
-          <SafeAreaView style={{ alignItems: "center" }}>
+          rootStyle={{backgroundColor: 'rgba(0,0,0,0)'}}
+          modalStyle={{backgroundColor: 'rgba(0,0,0,0)'}}>
+          <SafeAreaView style={{alignItems: 'center'}}>
             <TouchableCmp>
               <View
                 style={{
                   height: 60,
                   width: 400,
-                  backgroundColor: "white",
+                  backgroundColor: 'white',
                   borderRadius: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   marginBottom: 5,
-                }}
-              >
-                <Text style={{ color: "red", fontSize: 16 }}>Remove match</Text>
+                }}>
+                <Text style={{color: 'red', fontSize: 16}}>Remove match</Text>
               </View>
             </TouchableCmp>
             <TouchableCmp>
@@ -151,14 +144,13 @@ const BackMessages = ({ navigation, route }) => {
                 style={{
                   height: 60,
                   width: 400,
-                  backgroundColor: "white",
+                  backgroundColor: 'white',
                   borderRadius: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   marginBottom: 15,
-                }}
-              >
-                <Text style={{ color: "red", fontSize: 16 }}>Report</Text>
+                }}>
+                <Text style={{color: 'red', fontSize: 16}}>Report</Text>
               </View>
             </TouchableCmp>
             <TouchableCmp onPress={onClose}>
@@ -166,13 +158,12 @@ const BackMessages = ({ navigation, route }) => {
                 style={{
                   height: 60,
                   width: 400,
-                  backgroundColor: "white",
+                  backgroundColor: 'white',
                   borderRadius: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 16 }}>Cancel</Text>
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Text style={{fontSize: 16}}>Cancel</Text>
               </View>
             </TouchableCmp>
           </SafeAreaView>

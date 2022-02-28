@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   ActivityIndicator,
   Platform,
@@ -8,16 +8,16 @@ import {
   TouchableOpacity,
   View,
   StatusBar,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import {
   MaterialCommunityIcons,
   Feather,
   MaterialIcons,
-} from "@expo/vector-icons";
-import { useAppDispatch } from "../../../hooks";
-import { setProgress } from "../../../store/actions/progressbar/progressbar";
-import LottieView from "lottie-react-native";
+} from '@expo/vector-icons';
+import {useAppDispatch} from '../../../hooks';
+import {setProgress} from '../../../store/actions/progressbar/progressbar';
+import LottieView from 'lottie-react-native';
 
 const AIntroduction = (props) => {
   const dispatch = useAppDispatch();
@@ -34,45 +34,43 @@ const AIntroduction = (props) => {
   }, []);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
-      <View
-        style={{ flex: 2, justifyContent: "flex-end", alignItems: "center" }}
-      >
+    <SafeAreaView style={{flex: 1}}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
+      <View style={{flex: 2, justifyContent: 'flex-end', alignItems: 'center'}}>
         <LottieView
           ref={lottieRef}
-          source={require("../../../assets/lottie_anims/52058-check.json")}
+          source={require('../../../assets/lottie_anims/52058-check.json')}
           autoPlay={false}
           loop={false}
           colorFilters={[
             {
-              keypath: "circle - bg",
-              color: "#434aa8 ",
+              keypath: 'circle - bg',
+              color: '#434aa8 ',
             },
             {
-              keypath: "circle - stroke",
-              color: "#434aa8 ",
+              keypath: 'circle - stroke',
+              color: '#434aa8 ',
             },
           ]}
-          style={{ height: 80 }}
+          style={{height: 80}}
         />
-        <Text style={{ fontWeight: "500", fontSize: 32, color: "#434aa8" }}>
+        <Text style={{fontWeight: '500', fontSize: 32, color: '#434aa8'}}>
           Awesome!
         </Text>
-        <Text style={{ marginTop: 5, fontWeight: "300" }}>
+        <Text style={{marginTop: 5, fontWeight: '300'}}>
           You're ready to start
         </Text>
         <View
           style={{
-            alignSelf: "center",
+            alignSelf: 'center',
             borderBottomWidth: 1,
-            borderColor: "black",
-            width: "50%",
+            borderColor: 'black',
+            width: '50%',
             marginTop: 20,
           }}
         />
@@ -80,25 +78,23 @@ const AIntroduction = (props) => {
           style={{
             fontSize: 22,
             marginTop: 20,
-            fontWeight: "500",
-            color: "#434aa8",
-          }}
-        >
+            fontWeight: '500',
+            color: '#434aa8',
+          }}>
           Naire is a survey-based dating experience
         </Text>
-        <Text style={{ fontSize: 16, marginTop: 10, fontWeight: "300" }}>
+        <Text style={{fontSize: 16, marginTop: 10, fontWeight: '300'}}>
           This means you will be provided with:
         </Text>
       </View>
-      <View style={{ flex: 3, alignItems: "center" }}>
-        <View style={{ marginHorizontal: 40 }}>
+      <View style={{flex: 3, alignItems: 'center'}}>
+        <View style={{marginHorizontal: 40}}>
           <View
             style={{
               flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
             <MaterialCommunityIcons
               name="format-list-checks"
               size={24}
@@ -106,16 +102,14 @@ const AIntroduction = (props) => {
             />
             <View
               style={{
-                flexDirection: "column",
-              }}
-            >
+                flexDirection: 'column',
+              }}>
               <Text
                 style={{
                   fontSize: 15,
                   marginHorizontal: 15,
-                  fontWeight: "500",
-                }}
-              >
+                  fontWeight: '500',
+                }}>
                 A questionnaire after each date/relationship
               </Text>
               <Text
@@ -123,9 +117,8 @@ const AIntroduction = (props) => {
                   fontSize: 14,
                   marginHorizontal: 15,
                   marginTop: 5,
-                  color: "grey",
-                }}
-              >
+                  color: 'grey',
+                }}>
                 Every questionnaire will help the algorithm bring you one step
                 closer to a better date
               </Text>
@@ -134,23 +127,20 @@ const AIntroduction = (props) => {
           <View
             style={{
               flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
             <MaterialCommunityIcons name="history" size={24} color="black" />
             <View
               style={{
-                flexDirection: "column",
-              }}
-            >
+                flexDirection: 'column',
+              }}>
               <Text
                 style={{
                   fontSize: 15,
                   marginHorizontal: 15,
-                  fontWeight: "500",
-                }}
-              >
+                  fontWeight: '500',
+                }}>
                 Questionnaires based on previous relationships/dates
               </Text>
               <Text
@@ -158,9 +148,8 @@ const AIntroduction = (props) => {
                   fontSize: 14,
                   marginHorizontal: 15,
                   marginTop: 5,
-                  color: "grey",
-                }}
-              >
+                  color: 'grey',
+                }}>
                 This will help the algorithm kick-start with a good first date
               </Text>
             </View>
@@ -168,23 +157,20 @@ const AIntroduction = (props) => {
           <View
             style={{
               flex: 1,
-              flexDirection: "row",
-              alignItems: "center",
-            }}
-          >
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
             <MaterialIcons name="people" size={24} color="black" />
             <View
               style={{
-                flexDirection: "column",
-              }}
-            >
+                flexDirection: 'column',
+              }}>
               <Text
                 style={{
                   fontSize: 15,
                   marginHorizontal: 15,
-                  fontWeight: "500",
-                }}
-              >
+                  fontWeight: '500',
+                }}>
                 Cards of potential dates
               </Text>
               <Text
@@ -192,9 +178,8 @@ const AIntroduction = (props) => {
                   fontSize: 14,
                   marginHorizontal: 15,
                   marginTop: 5,
-                  color: "grey",
-                }}
-              >
+                  color: 'grey',
+                }}>
                 In return the algorithm will predict your most compatible dates
               </Text>
             </View>
@@ -204,42 +189,39 @@ const AIntroduction = (props) => {
       <View
         style={{
           flex: 1,
-          justifyContent: "center",
-          alignItems: "flex-end",
-        }}
-      >
+          justifyContent: 'center',
+          alignItems: 'flex-end',
+        }}>
         <TouchableCmp
           onPress={() => {
-            props.navigation.navigate("CreateUser1");
+            props.navigation.navigate('CreateUser1');
             setTimeout(() => {
               dispatch(setProgress(0.2));
             }, 400);
-          }}
-        >
+          }}>
           <View
             style={{
-              borderColor: "#A1A1A1",
+              borderColor: '#A1A1A1',
               borderWidth: 1,
               marginRight: 20,
               marginBottom: 20,
               height: 70,
               width: 70,
-              alignItems: "center",
-              justifyContent: "center",
-              flexDirection: "row",
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexDirection: 'row',
               borderRadius: 35,
-              backgroundColor: "#ffffff",
+              backgroundColor: '#ffffff',
               shadowOffset: {
                 width: -2,
                 height: 2,
               },
-              shadowColor: "black",
+              shadowColor: 'black',
               shadowOpacity: 0.3,
               shadowRadius: 2,
-            }}
-          >
+            }}>
             {!loading ? (
-              <Feather name="arrow-right" size={28} color={"#616161"} />
+              <Feather name="arrow-right" size={28} color={'#616161'} />
             ) : (
               <ActivityIndicator color="#616161" />
             )}
@@ -253,19 +235,19 @@ const AIntroduction = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

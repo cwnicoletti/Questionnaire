@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useReducer,
-  useRef,
-  useState,
-} from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -15,31 +9,23 @@ import {
   View,
   Animated,
   ScrollView,
-} from "react-native";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import {
-  FontAwesome,
-  FontAwesome5,
-  EvilIcons,
-  Feather,
-  Entypo,
-  MaterialCommunityIcons,
-  SimpleLineIcons,
-} from "@expo/vector-icons";
-import FullProfile from "../../../components/FullProfile/FullProfile";
-import * as Progress from "react-native-progress";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { LinearGradient } from "expo-linear-gradient";
-import { Modalize } from "react-native-modalize";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Modal from "../../../components/FullProfile/FullProfile_components/Modal/Modal";
-import { Host, Portal } from "react-native-portalize";
+} from 'react-native';
+import {useAppDispatch} from '../../../hooks';
+import {EvilIcons, Feather} from '@expo/vector-icons';
+import FullProfile from '../../../components/FullProfile/FullProfile';
+import * as Progress from 'react-native-progress';
+import MaskedView from '@react-native-masked-view/masked-view';
+import {LinearGradient} from 'expo-linear-gradient';
+import {Modalize} from 'react-native-modalize';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import Modal from '../../../components/FullProfile/FullProfile_components/Modal/Modal';
+import {Portal} from 'react-native-portalize';
 
-const CardMainScreen = ({ navigation }) => {
+const CardMainScreen = ({navigation}) => {
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
   const [showMessageButton, setShowMessageButton] = useState(true);
-  const [pickedPicture, setPickedPicture] = useState("");
+  const [pickedPicture, setPickedPicture] = useState('');
   const [pickedPrompt, setPickedPrompt] = useState({});
   const [pickedPromptHeight, setPickedPromptHeight] = useState(0);
   const fadeLoadingAnim = useRef(new Animated.Value(0)).current;
@@ -54,13 +40,13 @@ const CardMainScreen = ({ navigation }) => {
   const onCloseModal = () => {
     setTimeout(() => {
       setPickedPrompt({});
-      setPickedPicture("");
+      setPickedPicture('');
     }, 500);
     Keyboard.dismiss();
   };
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -134,9 +120,9 @@ const CardMainScreen = ({ navigation }) => {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", async () => {
+    const unsubscribe = navigation.addListener('focus', async () => {
       navigation.getParent()?.setOptions({
-        tabBarStyle: { display: "flex" },
+        tabBarStyle: {display: 'flex'},
       });
     });
 
@@ -145,9 +131,9 @@ const CardMainScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
+      <StatusBar barStyle={'dark-content'} animated={true} />
       {!loading ? (
-        <Animated.View style={{ opacity: fadeAnim, justifyContent: "center" }}>
+        <Animated.View style={{opacity: fadeAnim, justifyContent: 'center'}}>
           <ScrollView
           // TODO: hide tabbar on scroll
           // onScroll={onScrollHandler}
@@ -158,17 +144,16 @@ const CardMainScreen = ({ navigation }) => {
               <TouchableCmp
                 onPress={() => {
                   navigation.getParent()?.setOptions({
-                    tabBarStyle: { display: "none" },
+                    tabBarStyle: {display: 'none'},
                   });
-                  navigation.navigate("CardPreferencesScreen");
-                }}
-              >
+                  navigation.navigate('CardPreferencesScreen');
+                }}>
                 <EvilIcons
                   name="search"
                   size={32}
                   color="black"
                   style={{
-                    alignSelf: "flex-end",
+                    alignSelf: 'flex-end',
                     paddingBottom: 23,
                     paddingRight: 25,
                   }}
@@ -178,7 +163,7 @@ const CardMainScreen = ({ navigation }) => {
                 name="Sonya"
                 predictionValue={98.67}
                 age={27}
-                height={`5' 7"`}
+                height={'5\' 7"'}
                 worksOut="Sometimes"
                 smokesTobacco="Never"
                 smokesWeed="Sometimes"
@@ -209,17 +194,16 @@ const CardMainScreen = ({ navigation }) => {
           </ScrollView>
           <TouchableCmp
             onPress={() => {
-              navigation.navigate("InterCard");
-            }}
-          >
+              navigation.navigate('InterCard');
+            }}>
             <View
               style={{
-                position: "absolute",
+                position: 'absolute',
                 zIndex: 9999,
-                backgroundColor: "white",
-                justifyContent: "center",
-                alignItems: "center",
-                borderColor: "black",
+                backgroundColor: 'white',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderColor: 'black',
                 left: 20,
                 bottom: 20,
                 height: 75,
@@ -228,12 +212,11 @@ const CardMainScreen = ({ navigation }) => {
                   width: -1,
                   height: 1,
                 },
-                shadowColor: "black",
+                shadowColor: 'black',
                 shadowOpacity: 0.1,
                 shadowRadius: 2,
                 borderRadius: 75 / 2,
-              }}
-            >
+              }}>
               <Feather name="fast-forward" size={24} color="black" />
             </View>
           </TouchableCmp>
@@ -252,42 +235,40 @@ const CardMainScreen = ({ navigation }) => {
       ) : (
         <MaskedView
           style={{
-            height: "100%",
+            height: '100%',
             marginTop: 15,
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           maskElement={
             <Animated.View
               style={{
                 flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
+                justifyContent: 'center',
+                alignItems: 'center',
                 opacity: fadeLoadingAnim,
-              }}
-            >
+              }}>
               <SafeAreaView>
                 <Progress.Circle
                   size={150}
-                  color={"#434aa8"}
+                  color={'#434aa8'}
                   borderWidth={1}
-                  strokeCap={"round"}
+                  strokeCap={'round'}
                   thickness={2}
                   indeterminate={true}
                   style={{
                     paddingTop: 10,
-                    alignItems: "center",
+                    alignItems: 'center',
                   }}
                 />
               </SafeAreaView>
             </Animated.View>
-          }
-        >
+          }>
           <LinearGradient
-            colors={["#A700D1", "#434aa8"]}
+            colors={['#A700D1', '#434aa8']}
             style={{
               height: 180,
-              width: "100%",
+              width: '100%',
             }}
           />
         </MaskedView>
@@ -299,19 +280,19 @@ const CardMainScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   yourCode: {
-    marginLeft: "10%",
-    color: "black",
+    marginLeft: '10%',
+    color: 'black',
     fontSize: 29,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 
   authContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 
   activityContainer: {

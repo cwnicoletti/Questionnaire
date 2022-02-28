@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from 'react';
 import {
   StyleSheet,
   Platform,
@@ -7,16 +7,16 @@ import {
   Dimensions,
   TouchableNativeFeedback,
   TouchableOpacity,
-} from "react-native";
-import MaskedView from "@react-native-masked-view/masked-view";
-import { FontAwesome, FontAwesome5 } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
+} from 'react-native';
+import MaskedView from '@react-native-masked-view/masked-view';
+import {FontAwesome, FontAwesome5} from '@expo/vector-icons';
+import {LinearGradient} from 'expo-linear-gradient';
 
 const ImageWithMessage = (props) => {
-  const width = Dimensions.get("window").width;
+  const width = Dimensions.get('window').width;
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -26,7 +26,7 @@ const ImageWithMessage = (props) => {
         source={{
           uri: props.image,
         }}
-        style={{ height: width, width: width, marginRight: 15 }}
+        style={{height: width, width: width, marginRight: 15}}
       />
       {props.showMessage ? (
         <TouchableCmp
@@ -36,19 +36,20 @@ const ImageWithMessage = (props) => {
             }
             if (props.navigation) {
               props.navigation.getParent()?.setOptions({
-                tabBarStyle: { display: "none" },
+                tabBarStyle: {display: 'none'},
               });
             }
-            props.onOpen();
-          }}
-        >
+            if (props.navigation) {
+              props.onOpen();
+            }
+          }}>
           <View
             style={{
-              position: "absolute",
-              backgroundColor: "white",
-              justifyContent: "center",
-              alignItems: "center",
-              alignSelf: "flex-end",
+              position: 'absolute',
+              backgroundColor: 'white',
+              justifyContent: 'center',
+              alignItems: 'center',
+              alignSelf: 'flex-end',
               right: 20,
               bottom: 20,
               height: 50,
@@ -57,39 +58,36 @@ const ImageWithMessage = (props) => {
                 width: 0,
                 height: 0,
               },
-              shadowColor: "black",
+              shadowColor: 'black',
               shadowOpacity: 0.1,
               shadowRadius: 6,
               borderRadius: 50 / 2,
-            }}
-          >
+            }}>
             <MaskedView
-              style={{ flex: 1 }}
+              style={{flex: 1}}
               maskElement={
                 <View
                   style={{
                     flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
                   <FontAwesome
                     name="envelope-o"
                     size={28}
                     color="black"
-                    style={{ position: "absolute" }}
+                    style={{position: 'absolute'}}
                   />
                   <FontAwesome5
                     name="heart"
                     size={11}
                     color="black"
-                    style={{ marginBottom: 5 }}
+                    style={{marginBottom: 5}}
                   />
                 </View>
-              }
-            >
+              }>
               <LinearGradient
-                colors={["#A700D1", "#434aa8"]}
+                colors={['#A700D1', '#434aa8']}
                 style={{
                   flex: 1,
                   height: 50,

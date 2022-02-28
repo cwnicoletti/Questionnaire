@@ -1,11 +1,11 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import InterScreen2 from "../screens/main/1_MainTab/InterScreen2";
-import BottomTabNavigator from "./4_BottomTabNavigator";
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
+import InterScreen2 from '../screens/main/1_MainTab/InterScreen2';
+import BottomTabNavigator from './4_BottomTabNavigator';
 
 const Stack = createStackNavigator();
 
-const forFade = ({ current }) => ({
+const forFade = ({current}) => ({
   cardStyle: {
     opacity: current.progress,
   },

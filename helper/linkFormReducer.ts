@@ -1,8 +1,8 @@
-import updateDictionaryOnRemove from "./updateDictionaryOnRemove";
+import updateDictionaryOnRemove from './updateDictionaryOnRemove';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
-const FORM_INPUT_LINKS_UPDATE = "FORM_INPUT_LINKS_UPDATE";
-const FORM_INPUT_LINKS_REMOVE = "FORM_INPUT_LINKS_REMOVE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+const FORM_INPUT_LINKS_UPDATE = 'FORM_INPUT_LINKS_UPDATE';
+const FORM_INPUT_LINKS_REMOVE = 'FORM_INPUT_LINKS_REMOVE';
 
 const linkFormReducer = (state, action) => {
   switch (action.type) {
@@ -41,13 +41,13 @@ const linkFormReducer = (state, action) => {
     case FORM_INPUT_LINKS_REMOVE:
       const remainingLinkValues = Object.fromEntries(
         Object.entries(state.inputValues).filter(
-          ([links, v]) => links !== `link${action.linkNum}`
-        )
+          ([links, v]) => links !== `link${action.linkNum}`,
+        ),
       );
       const reorderedRemainingLinkValues =
         updateDictionaryOnRemove(remainingLinkValues);
       return {
-        inputValues: { ...reorderedRemainingLinkValues },
+        inputValues: {...reorderedRemainingLinkValues},
       };
   }
   return state;

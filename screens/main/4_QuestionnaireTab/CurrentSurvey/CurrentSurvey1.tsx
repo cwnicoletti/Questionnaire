@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer, useState } from "react";
+import React, {useCallback, useEffect, useReducer, useState} from 'react';
 import {
   StatusBar,
   Platform,
@@ -9,18 +9,18 @@ import {
   View,
   ScrollView,
   Keyboard,
-} from "react-native";
-import { Feather, Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { useAppDispatch } from "../../../../hooks";
-import Slider from "@react-native-community/slider";
+} from 'react-native';
+import {Ionicons} from '@expo/vector-icons';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {useAppDispatch} from '../../../../hooks';
+import Slider from '@react-native-community/slider';
 
-import Input from "../../../../components/Input";
+import Input from '../../../../components/Input';
 
-const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
 const formReducer = (state, action) => {
-  if (action.type === "FORM_INPUT_UPDATE") {
+  if (action.type === 'FORM_INPUT_UPDATE') {
     const updateValues = {
       ...state.inputValues,
       [action.input]: action.value,
@@ -44,8 +44,7 @@ const formReducer = (state, action) => {
   return state;
 };
 
-const CurrentSurvey1 = ({ navigation }) => {
-  const dispatch = useAppDispatch();
+const CurrentSurvey1 = ({navigation}) => {
   const [sliderEnjoymentValue, setSliderEnjoymentValue] = useState(1);
   const [sliderCompatibilityValue, setSliderCompatibilityValue] = useState(1);
   const [sliderCommunicationValue, setSliderCommunicationValue] = useState(1);
@@ -66,17 +65,17 @@ const CurrentSurvey1 = ({ navigation }) => {
   if (
     typeof navigation
       .getState()
-      .routes.filter((screen) => screen.name === "CurrentSurvey1")[0] !==
-    "undefined"
+      .routes.filter((screen) => screen.name === 'CurrentSurvey1')[0] !==
+    'undefined'
   ) {
     getParams = navigation
       .getState()
-      .routes.filter((screen) => screen.name === "CurrentSurvey1")[0].params;
+      .routes.filter((screen) => screen.name === 'CurrentSurvey1')[0].params;
   }
 
   const [formState, dispatchFormState] = useReducer(formReducer, {
     inputValues: {
-      label: getParams.label ? getParams.label : "",
+      label: getParams.label ? getParams.label : '',
     },
     inputValidities: {
       label: false,
@@ -93,91 +92,86 @@ const CurrentSurvey1 = ({ navigation }) => {
         input: inputIdentifier,
       });
     },
-    [dispatchFormState]
+    [dispatchFormState],
   );
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   useEffect(() => {
     setSliderEnjoymentValue(
-      getParams.enjoyment ? getParams.enjoyment * 100 : 0
+      getParams.enjoyment ? getParams.enjoyment * 100 : 0,
     );
     setSliderCompatibilityValue(
-      getParams.compatibility ? getParams.compatibility * 100 : 0
+      getParams.compatibility ? getParams.compatibility * 100 : 0,
     );
     setSliderCommunicationValue(
-      getParams.communication ? getParams.communication * 100 : 0
+      getParams.communication ? getParams.communication * 100 : 0,
     );
     setSliderLoyaltyValue(getParams.loyalty ? getParams.loyalty * 100 : 0);
     setSliderFunValue(getParams.fun ? getParams.fun * 100 : 0);
     setSliderPhysicalAttractionValue(
-      getParams.physicalAttraction ? getParams.physicalAttraction * 100 : 0
+      getParams.physicalAttraction ? getParams.physicalAttraction * 100 : 0,
     );
     setSliderMentalAttractionValue(
-      getParams.mentalAttraction ? getParams.mentalAttraction * 100 : 0
+      getParams.mentalAttraction ? getParams.mentalAttraction * 100 : 0,
     );
     setSliderInstinctualAttractionValue(
       getParams.instinctualAttraction
         ? getParams.instinctualAttraction * 100
-        : 0
+        : 0,
     );
     setSliderEmotionAttractionValue(
-      getParams.emotionAttraction ? getParams.emotionAttraction * 100 : 0
+      getParams.emotionAttraction ? getParams.emotionAttraction * 100 : 0,
     );
   }, []);
 
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar barStyle={"dark-content"} animated={true} />
+    <View style={{flex: 1}}>
+      <StatusBar barStyle={'dark-content'} animated={true} />
       <SafeAreaView
-        style={{ flexDirection: "row", justifyContent: "space-between" }}
-      >
+        style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <TouchableCmp
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Ionicons
             name="ios-arrow-back"
             size={30}
             color="black"
-            style={{ marginHorizontal: 20 }}
+            style={{marginHorizontal: 20}}
           />
         </TouchableCmp>
         <TouchableCmp
           onPress={() => {
             navigation.goBack();
-          }}
-        >
+          }}>
           <Text
             style={{
               fontSize: 18,
-              fontWeight: "600",
+              fontWeight: '600',
               marginHorizontal: 20,
-              color: "#434aa8",
-            }}
-          >
+              color: '#434aa8',
+            }}>
             Save
           </Text>
         </TouchableCmp>
       </SafeAreaView>
-      <View style={{ flex: 1 }}>
+      <View style={{flex: 1}}>
         <ScrollView>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
-            }}
-          >
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               What should the label for this survey be?
             </Text>
           </View>
-          <View style={{ marginTop: 30 }}>
+          <View style={{marginTop: 30}}>
             <Input
               id="label"
               placeholder={getParams.label}
@@ -196,43 +190,41 @@ const CurrentSurvey1 = ({ navigation }) => {
               initialValue={getParams.label}
               styleInput={{
                 fontSize: 28,
-                fontWeight: "300",
-                backgroundColor: "#ffffff",
-                marginHorizontal: "10%",
-                width: "50%",
-                borderColor: "grey",
+                fontWeight: '300',
+                backgroundColor: '#ffffff',
+                marginHorizontal: '10%',
+                width: '50%',
+                borderColor: 'grey',
                 borderBottomWidth: 1,
               }}
             />
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How much did you enjoy the relationship?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderEnjoymentValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={getParams.enjoyment ? getParams.enjoyment * 100 : 0}
@@ -246,45 +238,40 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How compatible were the two of you?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderCompatibilityValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={
@@ -300,45 +287,40 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How much did you like the way they communicated?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderCommunicationValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={
@@ -354,41 +336,36 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>How loyal were they?</Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>{sliderLoyaltyValue / 100}%</Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={getParams.loyalty ? getParams.loyalty * 100 : 0}
@@ -402,43 +379,38 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How fun was the relationship?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>{sliderFunValue / 100}%</Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={getParams.fun ? getParams.fun * 100 : 0}
@@ -452,45 +424,40 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How physically attracted were you to this person?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderPhysicalAttractionValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={
@@ -508,45 +475,40 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How mentally attracted were you to this person?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderMentalAttractionValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={
@@ -564,45 +526,40 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How instinctually attracted were you to this person?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderInstinctualAttractionValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={
@@ -620,45 +577,40 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginHorizontal: "10%",
+              flexDirection: 'row',
+              alignItems: 'center',
+              marginHorizontal: '10%',
               marginTop: 80,
-            }}
-          >
+            }}>
             <Text style={styles.youAreAText}>
               How attracted were you to their emotions?
             </Text>
           </View>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              alignSelf: 'center',
               marginTop: 40,
-              marginHorizontal: "10%",
-            }}
-          >
+              marginHorizontal: '10%',
+            }}>
             <Text style={styles.youAreAText}>
               {sliderEmotionAttractionValue / 100}%
             </Text>
           </View>
-          <View style={{ alignSelf: "center" }}>
+          <View style={{alignSelf: 'center'}}>
             <Slider
-              style={{ width: 300, height: 40 }}
+              style={{width: 300, height: 40}}
               minimumValue={0}
               step={1}
               value={
@@ -676,13 +628,10 @@ const CurrentSurvey1 = ({ navigation }) => {
             <View
               style={{
                 width: 300,
-                flexDirection: "row",
-              }}
-            >
-              <Text style={{ flex: 1, marginHorizontal: 10 }}>
-                0% least ever
-              </Text>
-              <Text style={{ textAlign: "right", marginHorizontal: 10 }}>
+                flexDirection: 'row',
+              }}>
+              <Text style={{flex: 1, marginHorizontal: 10}}>0% least ever</Text>
+              <Text style={{textAlign: 'right', marginHorizontal: 10}}>
                 100% most ever
               </Text>
             </View>
@@ -696,13 +645,13 @@ const CurrentSurvey1 = ({ navigation }) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "#ffffff",
+    backgroundColor: '#ffffff',
   },
 
   youAreAText: {
-    color: "black",
+    color: 'black',
     fontSize: 22,
-    fontWeight: "500",
+    fontWeight: '500',
   },
 });
 

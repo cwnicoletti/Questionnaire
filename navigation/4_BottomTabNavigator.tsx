@@ -1,24 +1,24 @@
-import React from "react";
-import { View, Image } from "react-native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MainStackNavigator from "./5A_MainStackNavigator";
-import CardStackNavigator from "./5B_CardStackNavigator";
-import MessagingStackNavigator from "./5C_MessagingStackNavigator";
-import QuestionnaireStackNavigator from "./5D_QuestionnaireStackNavigator";
-import ProfileStackNavigator from "./5E_ProfileStackNavigator";
+import React from 'react';
+import {View, Image} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import MainStackNavigator from './5A_MainStackNavigator';
+import CardStackNavigator from './5B_CardStackNavigator';
+import MessagingStackNavigator from './5C_MessagingStackNavigator';
+import QuestionnaireStackNavigator from './5D_QuestionnaireStackNavigator';
+import ProfileStackNavigator from './5E_ProfileStackNavigator';
 import {
   Entypo,
   MaterialIcons,
   MaterialCommunityIcons,
   Feather,
-} from "@expo/vector-icons";
-import TitleOnlyHeader from "../components/headers/TitleOnlyHeader";
+} from '@expo/vector-icons';
+import TitleOnlyHeader from '../components/headers/TitleOnlyHeader';
 
-import Profile from "../components/headers/Profile";
+import Profile from '../components/headers/Profile';
 
 const Tab = createBottomTabNavigator();
 
-const forFade = ({ current }) => ({
+const forFade = ({current}) => ({
   cardStyle: {
     opacity: current.progress,
   },
@@ -26,22 +26,22 @@ const forFade = ({ current }) => ({
 
 const screenOptions = (route, color) => {
   switch (route.name) {
-    case "MainStackNavigator":
+    case 'MainStackNavigator':
       return (
         <Image
-          source={require("../assets/naire_icon/transparent_colored_cut.png")}
-          style={{ height: 28, width: 18 }}
+          source={require('../assets/naire_icon/transparent_colored_cut.png')}
+          style={{height: 28, width: 18}}
         />
       );
-    case "CardStackNavigator":
+    case 'CardStackNavigator':
       return (
         <MaterialCommunityIcons name="cards-outline" size={30} color={color} />
       );
-    case "MessagingStackNavigator":
+    case 'MessagingStackNavigator':
       return <Entypo name="chat" size={30} color={color} />;
-    case "QuestionnaireStackNavigator":
+    case 'QuestionnaireStackNavigator':
       return <Feather name="list" size={30} color={color} />;
-    case "ProfileStackNavigator":
+    case 'ProfileStackNavigator':
       return <MaterialIcons name="person" size={38} color={color} />;
     default:
       break;
@@ -74,37 +74,34 @@ const screenOptions = (route, color) => {
 function TopTabNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={({ route }) => ({
+      screenOptions={({route}) => ({
         tabBarBounces: true,
         tabBarShowLabel: false,
-        tabBarActiveTintColor: "#434aa8",
+        tabBarActiveTintColor: '#434aa8',
         swipeEnabled: false,
         header: () => <TitleOnlyHeader />,
-        tabBarIcon: ({ color }) => screenOptions(route, color),
-        tabBarIndicatorStyle: { backgroundColor: "#434aa8" },
+        tabBarIcon: ({color}) => screenOptions(route, color),
+        tabBarIndicatorStyle: {backgroundColor: '#434aa8'},
         tabBarStyle: {
-          borderTopColor: "transparent",
-          shadowColor: "transparent",
+          borderTopColor: 'transparent',
+          shadowColor: 'transparent',
           borderTopWidth: 0,
           elevation: 0,
-          position: "absolute",
+          position: 'absolute',
           zIndex: 9999,
         },
-      })}
-    >
+      })}>
       <Tab.Screen
         name="MainStackNavigator"
         component={MainStackNavigator}
         options={{
-          header: ({ navigation }) => (
-            <TitleOnlyHeader navigation={navigation} />
-          ),
+          header: ({navigation}) => <TitleOnlyHeader navigation={navigation} />,
         }}
       />
       <Tab.Screen
         name="CardStackNavigator"
         component={CardStackNavigator}
-        options={({ route }) => ({
+        options={({route}) => ({
           headerShown: false,
           // TODO: hide tabbar on scroll
           // tabBarStyle: {
@@ -136,7 +133,7 @@ function TopTabNavigator() {
         name="ProfileStackNavigator"
         component={ProfileStackNavigator}
         options={{
-          header: ({ navigation, routes }) => (
+          header: ({navigation, routes}) => (
             <Profile navigation={navigation} routes={routes} />
           ),
         }}

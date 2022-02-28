@@ -1,9 +1,8 @@
-import React, { useEffect, useReducer } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import { useAppSelector } from "../hooks";
+import React, {useEffect, useReducer} from 'react';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
 
-const INPUT_CHANGE = "INPUT_CHANGE";
-const INPUT_BLUR = "INPUT_BLUR";
+const INPUT_CHANGE = 'INPUT_CHANGE';
+const INPUT_BLUR = 'INPUT_BLUR';
 
 const inputReducer = (state, action) => {
   switch (action.type) {
@@ -26,13 +25,13 @@ const inputReducer = (state, action) => {
 
 const Input = (props) => {
   const [inputState, dispatch] = useReducer(inputReducer, {
-    value: props.initialValue ? props.initialValue : "",
+    value: props.initialValue ? props.initialValue : '',
     error: props.errorText,
     isValid: props.initiallyValid,
     touched: false,
   });
 
-  const { onInputChange, id } = props;
+  const {onInputChange, id} = props;
 
   useEffect(() => {
     onInputChange(id, inputState.value, inputState.isValid);
@@ -66,7 +65,7 @@ const Input = (props) => {
     }
     if (props.minLength !== realUndefined && text.length < props.minLength) {
       isValid = false;
-      error = "Password not long enough!";
+      error = 'Password not long enough!';
     }
 
     dispatch({
@@ -86,22 +85,20 @@ const Input = (props) => {
   return (
     <View style={styles.formControl}>
       {props.label ? (
-        <Text style={{ ...styles.label, ...props.textLabel }}>
-          {props.label}
-        </Text>
+        <Text style={{...styles.label, ...props.textLabel}}>{props.label}</Text>
       ) : null}
       <TextInput
         {...props}
         style={{
           ...styles.input,
-          color: "black",
-          backgroundColor: "#eeeeee",
+          color: 'black',
+          backgroundColor: '#eeeeee',
           ...props.styleInput,
         }}
         value={inputState.value}
-        placeholder={props.placeholder ? props.placeholder : "type here..."}
+        placeholder={props.placeholder ? props.placeholder : 'type here...'}
         placeholderTextColor={
-          props.placeholderTextColor ? props.placeholderTextColor : "grey"
+          props.placeholderTextColor ? props.placeholderTextColor : 'grey'
         }
         onChangeText={textChangeHandler}
         onBlur={lostFocusHandler}
@@ -120,17 +117,17 @@ const Input = (props) => {
 const styles = StyleSheet.create({
   formControl: {
     height: 60,
-    width: "100%",
+    width: '100%',
   },
 
   label: {
     marginVertical: 1,
     paddingLeft: 15,
-    color: "white",
+    color: 'white',
   },
 
   input: {
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 10,
     borderRadius: 15,
     paddingVertical: 13,
@@ -143,7 +140,7 @@ const styles = StyleSheet.create({
   },
 
   errorText: {
-    color: "red",
+    color: 'red',
     fontSize: 13,
   },
 });

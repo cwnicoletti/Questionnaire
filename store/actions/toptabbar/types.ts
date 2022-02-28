@@ -1,5 +1,5 @@
-export const SET_HIDE = "SET_HIDE";
-export const SET_CURRENT_SCREEN = "SET_CURRENT_SCREEN";
+export const SET_HIDE = 'SET_HIDE';
+export const SET_CURRENT_SCREEN = 'SET_CURRENT_SCREEN';
 
 export interface ProgressState {
   currentScreen: string;

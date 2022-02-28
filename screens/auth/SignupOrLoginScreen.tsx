@@ -1,5 +1,5 @@
-import { FontAwesome, SimpleLineIcons, AntDesign } from "@expo/vector-icons";
-import React, { useEffect, useRef } from "react";
+import {FontAwesome, SimpleLineIcons, AntDesign} from '@expo/vector-icons';
+import React, {useEffect, useRef} from 'react';
 import {
   Platform,
   StyleSheet,
@@ -11,11 +11,11 @@ import {
   ImageBackground,
   Image,
   StatusBar,
-} from "react-native";
+} from 'react-native';
 
 const SignupOrLoginScreen = (props) => {
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
@@ -34,170 +34,154 @@ const SignupOrLoginScreen = (props) => {
       style={{
         ...styles.screen,
         opacity: fadeInAnim,
-      }}
-    >
-      <StatusBar barStyle={"light-content"} animated={true} />
+      }}>
+      <StatusBar barStyle={'light-content'} animated={true} />
       <ImageBackground
-        source={require("../../assets/background.jpg")}
+        source={require('../../assets/background.jpg')}
         resizeMode="cover"
         style={{
-          height: "100%",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+          height: '100%',
+          width: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
         <Image
           style={{
             flex: 2,
           }}
-          source={require("../../assets/naire_icon/full_transparent.png")}
+          source={require('../../assets/naire_icon/full_transparent.png')}
           resizeMode="contain"
         />
-        <View style={{ flex: 1, marginHorizontal: 15 }}>
+        <View style={{flex: 1, marginHorizontal: 15}}>
           <TouchableCmp
             onPress={() => {
-              props.navigation.navigate("Signup1");
-            }}
-          >
+              props.navigation.navigate('Signup1');
+            }}>
             <View
               style={{
-                backgroundColor: "black",
-                borderColor: "white",
+                backgroundColor: 'black',
+                borderColor: 'white',
                 borderWidth: 1,
                 margin: 10,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-              }}
-            >
+              }}>
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                }}>
                 <AntDesign
                   name="apple1"
                   size={24}
                   color="white"
-                  style={{ marginLeft: 20 }}
+                  style={{marginLeft: 20}}
                 />
               </View>
               <Text
                 style={{
                   fontSize: 17,
                   margin: 15,
-                  color: "white",
-                }}
-              >
+                  color: 'white',
+                }}>
                 Sign in with Apple
               </Text>
             </View>
           </TouchableCmp>
           <TouchableCmp
             onPress={() => {
-              props.navigation.navigate("Signup1");
-            }}
-          >
+              props.navigation.navigate('Signup1');
+            }}>
             <View
               style={{
-                backgroundColor: "#3b5999",
-                borderColor: "white",
+                backgroundColor: '#3b5999',
+                borderColor: 'white',
                 borderWidth: 1,
                 margin: 10,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-              }}
-            >
+              }}>
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                }}>
                 <FontAwesome
                   name="facebook-square"
                   size={24}
                   color="white"
-                  style={{ marginLeft: 20 }}
+                  style={{marginLeft: 20}}
                 />
               </View>
               <Text
                 style={{
                   fontSize: 17,
                   margin: 15,
-                  color: "white",
-                }}
-              >
+                  color: 'white',
+                }}>
                 Sign in with Facebook
               </Text>
             </View>
           </TouchableCmp>
           <TouchableCmp
             onPress={() => {
-              props.navigation.navigate("SignupPhoneScreen1");
-            }}
-          >
+              props.navigation.navigate('SignupPhoneScreen1');
+            }}>
             <View
               style={{
-                borderColor: "white",
+                borderColor: 'white',
                 borderWidth: 1,
                 margin: 10,
-                alignItems: "center",
-                justifyContent: "center",
-                flexDirection: "row",
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
                 borderRadius: 35,
-              }}
-            >
+              }}>
               <View
                 style={{
-                  height: "100%",
-                  width: "100%",
-                  position: "absolute",
-                  justifyContent: "center",
-                }}
-              >
+                  height: '100%',
+                  width: '100%',
+                  position: 'absolute',
+                  justifyContent: 'center',
+                }}>
                 <SimpleLineIcons
                   name="phone"
                   size={24}
                   color="white"
-                  style={{ marginLeft: 20 }}
+                  style={{marginLeft: 20}}
                 />
               </View>
               <Text
                 style={{
                   fontSize: 17,
                   margin: 15,
-                  color: "white",
-                }}
-              >
+                  color: 'white',
+                }}>
                 Sign in with Phone Number
               </Text>
             </View>
           </TouchableCmp>
-          <View style={{ margin: 15, marginTop: 5, alignItems: "center" }}>
-            <Text style={{ color: "white", marginBottom: 5 }}>
-              By pressing a sign in option, you agree to our{" "}
+          <View style={{margin: 15, marginTop: 5, alignItems: 'center'}}>
+            <Text style={{color: 'white', marginBottom: 5}}>
+              By pressing a sign in option, you agree to our{' '}
               <Text
-                style={{ fontWeight: "500", textDecorationLine: "underline" }}
-              >
+                style={{fontWeight: '500', textDecorationLine: 'underline'}}>
                 Terms
               </Text>
               .
             </Text>
-            <Text style={{ color: "white" }}>
-              Find out how we use your data in our{" "}
+            <Text style={{color: 'white'}}>
+              Find out how we use your data in our{' '}
               <Text
-                style={{ fontWeight: "500", textDecorationLine: "underline" }}
-              >
+                style={{fontWeight: '500', textDecorationLine: 'underline'}}>
                 Privacy Policy
               </Text>
               .
@@ -212,28 +196,28 @@ const SignupOrLoginScreen = (props) => {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#000000",
+    width: '100%',
+    height: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#000000',
   },
 
   titleText: {
-    alignItems: "center",
-    justifyContent: "center",
-    color: "white",
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
     fontSize: 60,
-    fontFamily: "Nautilus",
+    fontFamily: 'Nautilus',
   },
 
   image: {
-    height: "35%",
+    height: '35%',
     margin: 40,
   },
 
   text: {
-    color: "white",
+    color: 'white',
     padding: 10,
   },
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from 'react';
 import {
   Text,
   SafeAreaView,
@@ -7,13 +7,13 @@ import {
   TouchableOpacity,
   TouchableNativeFeedback,
   Animated,
-} from "react-native";
-import { Feather } from "@expo/vector-icons";
-import { useNavigationState } from "@react-navigation/native";
+} from 'react-native';
+import {Feather} from '@expo/vector-icons';
+import {useNavigationState} from '@react-navigation/native';
 
-const Profile = ({ navigation, routes }) => {
+const Profile = ({navigation}) => {
   const [showX, setShowX] = useState(false);
-  const [headerTitle, setHeaderTitle] = useState("Profile");
+  const [headerTitle, setHeaderTitle] = useState('Profile');
   const state = useNavigationState((state) => state);
   const opacityXAnim = useRef(new Animated.Value(0)).current;
 
@@ -36,60 +36,57 @@ const Profile = ({ navigation, routes }) => {
   useEffect(() => {
     if (state.routes[4].state?.routes[1] !== undefined) {
       switch (state.routes[4].state?.routes[1].name) {
-        case "TopTabEditProfileNavigator":
+        case 'TopTabEditProfileNavigator':
           setShowX(true);
           showOpacityX();
-          setHeaderTitle("Edit Profile");
+          setHeaderTitle('Edit Profile');
           break;
-        case "PerformanceScreen":
+        case 'PerformanceScreen':
           setShowX(true);
           showOpacityX();
-          setHeaderTitle("History & Metrics");
+          setHeaderTitle('History & Metrics');
           break;
-        case "SettingsScreen":
+        case 'SettingsScreen':
           setShowX(true);
           showOpacityX();
-          setHeaderTitle("Settings");
+          setHeaderTitle('Settings');
           break;
         default:
           break;
       }
     } else {
       removeOpacityX();
-      setHeaderTitle("Profile");
+      setHeaderTitle('Profile');
     }
-  }, [state]);
+  }, [removeOpacityX, showOpacityX, state]);
 
   let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === "android") {
+  if (Platform.OS === 'android') {
     TouchableCmp = TouchableNativeFeedback;
   }
 
   return (
     <SafeAreaView
       style={{
-        justifyContent: showX ? "space-between" : "center",
-        alignItems: "center",
-        flexDirection: "row",
-      }}
-    >
+        justifyContent: showX ? 'space-between' : 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
+      }}>
       {showX ? (
         <View
           style={{
             opacity: 0,
             marginLeft: 30,
-          }}
-        >
+          }}>
           <Feather name="x" size={24} color="black" />
         </View>
       ) : null}
       <Text
         style={{
           fontSize: 22,
-          fontWeight: "200",
+          fontWeight: '200',
           padding: 5,
-        }}
-      >
+        }}>
         {headerTitle}
       </Text>
 
@@ -98,19 +95,17 @@ const Profile = ({ navigation, routes }) => {
           onPress={() => {
             removeOpacityX();
             navigation.setOptions({
-              tabBarStyle: { display: "flex" },
+              tabBarStyle: {display: 'flex'},
             });
             setTimeout(() => {
-              navigation.navigate("ProfileMainScreen");
+              navigation.navigate('ProfileMainScreen');
             }, 50);
-          }}
-        >
+          }}>
           <Animated.View
             style={{
               opacity: opacityXAnim,
               marginRight: 30,
-            }}
-          >
+            }}>
             <Feather name="x" size={24} color="black" />
           </Animated.View>
         </TouchableCmp>
