@@ -18,7 +18,6 @@ exports[`<ImageWithMessage /> renders <ImageWithMessage /> with custom props 1`]
   />
   <View
     accessible={true}
-    collapsable={false}
     focusable={true}
     onClick={[Function]}
     onResponderGrant={[Function]}
