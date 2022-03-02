@@ -191,7 +191,6 @@ const QuestionnaireMainScreen = ({navigation}) => {
           }}>
           <View
             style={{
-              flex: 1,
               justifyContent: 'center',
               alignItems: 'center',
             }}>
@@ -317,7 +316,6 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

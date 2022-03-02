@@ -130,7 +130,6 @@ function QuestionnaireStackNavigator() {
         name="CurrentSurvey1"
         component={CurrentSurvey1}
         options={{
-          gestureEnabled: false,
           headerShown: false,
         }}
       />
@@ -138,7 +137,6 @@ function QuestionnaireStackNavigator() {
         name="Priorities"
         component={Priorities}
         options={{
-          gestureEnabled: false,
           headerShown: false,
         }}
       />
