@@ -66,7 +66,7 @@ const LockedItem = (props) => {
               }}>
               <LottieView
                 ref={props.lottieRef}
-                source={require('../../assets/lottie_anims/512-lock.json')}
+                source={require('../../../../assets/lottie_anims/512-lock.json')}
                 autoPlay={false}
                 loop={false}
                 colorFilters={[
