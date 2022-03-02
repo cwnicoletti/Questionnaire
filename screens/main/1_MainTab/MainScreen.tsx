@@ -16,8 +16,8 @@ import useDidMountEffect from '../../../helper/useDidMountEffect';
 import {setProgress} from '../../../store/actions/progressbar/progressbar';
 import MaskedView from '@react-native-masked-view/masked-view';
 import {LinearGradient} from 'expo-linear-gradient';
-import LockedItem from '../../../components/MainScreenPredictions/LockedItem';
-import Prediction from '../../../components/MainScreenPredictions/Prediction';
+import LockedItem from '../../../components/screen_specific/MainScreen/Predictions/LockedItem';
+import Prediction from '../../../components/screen_specific/MainScreen/Predictions/Prediction';
 import {mainScreenData} from '../../../data/mainScreenData';
 
 const MainScreen = ({navigation}) => {
