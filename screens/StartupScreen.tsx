@@ -2,7 +2,22 @@ import React, {useCallback, useEffect, useState, useRef} from 'react';
 import {Image, StyleSheet, Animated} from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
 import {Asset} from 'expo-asset';
+import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import {
+  Ionicons,
+  FontAwesome,
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Feather,
+  Entypo,
+  FontAwesome5,
+  AntDesign,
+  SimpleLineIcons,
+  EvilIcons,
+  Fontisto,
+  Octicons,
+} from '@expo/vector-icons';
 
 const StartupScreen = (props) => {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -53,10 +68,32 @@ const StartupScreen = (props) => {
       require('../assets/background.jpg'),
     ];
 
+    const fonts = [
+      Ionicons.font,
+      FontAwesome.font,
+      MaterialCommunityIcons.font,
+      MaterialIcons.font,
+      Feather.font,
+      Entypo.font,
+      FontAwesome5.font,
+      AntDesign.font,
+      SimpleLineIcons.font,
+      EvilIcons.font,
+      Fontisto.font,
+      Octicons.font,
+    ];
+
     const cacheImages = images.map((image) => {
-      return Asset.fromModule(image).downloadAsync();
+      if (typeof image === 'string') {
+        return Image.prefetch(image);
+      } else {
+        return Asset.fromModule(image).downloadAsync();
+      }
     });
-    return Promise.all(cacheImages);
+
+    const fontAssets = fonts.map((font) => Font.loadAsync(font));
+
+    return Promise.all([cacheImages, fontAssets]);
   };
 
   if (!appIsReady) {
