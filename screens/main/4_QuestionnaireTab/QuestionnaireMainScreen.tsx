@@ -9,6 +9,7 @@ import {
   View,
   UIManager,
   LayoutAnimation,
+  Animated,
 } from 'react-native';
 import {useAppDispatch} from '../../../hooks';
 import {
@@ -16,7 +17,7 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from '@expo/vector-icons';
-import Animated, {useAnimatedStyle} from 'react-native-reanimated';
+import {useAnimatedStyle} from 'react-native-reanimated';
 import SwipeableItem, {
   useSwipeableItemParams,
 } from 'react-native-swipeable-item';
@@ -58,6 +59,7 @@ const QuestionnaireMainScreen = ({navigation}) => {
         {...params}
         itemRefs={itemRefs}
         label={params.item.label}
+        index={params.index}
         enjoyment={params.item.enjoyment}
         compatibility={params.item.compatibility}
         communication={params.item.communication}
@@ -75,8 +77,8 @@ const QuestionnaireMainScreen = ({navigation}) => {
     item,
     drag,
     itemRefs,
-    data,
     label,
+    index,
     enjoyment,
     compatibility,
     communication,
@@ -86,86 +88,108 @@ const QuestionnaireMainScreen = ({navigation}) => {
     mentalAttraction,
     instinctualAttraction,
     emotionAttraction,
-  }) => (
-    <View>
-      <ScaleDecorator>
-        <SwipeableItem
-          key={item.id}
-          item={item}
-          ref={(ref) => {
-            if (ref && !itemRefs.current.get(item.id)) {
-              itemRefs.current.set(item.id, ref);
-            }
-          }}
-          onChange={({open}) => {
-            if (open) {
-              // Close all other open items
-              [...itemRefs.current.entries()].forEach(([key, ref]) => {
-                if (key !== item.id && ref) {
-                  ref.close();
-                }
-              });
-            }
-          }}
-          overSwipe={OVERSWIPE_DIST}
-          renderUnderlayLeft={() => (
-            <UnderlayLeft drag={drag} itemRefs={itemRefs} />
-          )}
-          snapPointsLeft={[70]}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: 'white',
-              justifyContent: 'center',
-              marginBottom: 1,
-              borderWidth: 1,
-              borderColor: '#BDBDBD',
-            }}>
-            <Ionicons
-              name="ios-menu"
-              size={32}
-              color="#BDBDBD"
-              style={{
-                position: 'absolute',
-                zIndex: 99999,
-                left: 10,
-                alignSelf: 'center',
-              }}
-            />
-            <TouchableCmp
-              onLongPress={drag}
-              onPress={() => {
-                navigation.navigate('CurrentSurvey1', {
-                  label,
-                  enjoyment,
-                  compatibility,
-                  communication,
-                  loyalty,
-                  fun,
-                  physicalAttraction,
-                  mentalAttraction,
-                  instinctualAttraction,
-                  emotionAttraction,
+  }) => {
+    const fadeItemProgressAnim = useRef(new Animated.Value(0)).current;
+
+    const fadeInItemProgress = () => {
+      Animated.timing(fadeItemProgressAnim, {
+        toValue: 1,
+        duration: 100 * (index + 1),
+        useNativeDriver: true,
+      }).start();
+    };
+
+    useEffect(() => {
+      setTimeout(() => {
+        fadeInItemProgress();
+      }, 100 * (index + 1));
+    }, []);
+
+    return (
+      <Animated.View
+        style={{
+          opacity: fadeItemProgressAnim,
+        }}>
+        <ScaleDecorator>
+          <SwipeableItem
+            key={item.id}
+            item={item}
+            ref={(ref) => {
+              if (ref && !itemRefs.current.get(item.id)) {
+                itemRefs.current.set(item.id, ref);
+              }
+            }}
+            onChange={({open}) => {
+              if (open) {
+                // Close all other open items
+                [...itemRefs.current.entries()].forEach(([key, ref]) => {
+                  if (key !== item.id && ref) {
+                    ref.close();
+                  }
                 });
+              }
+            }}
+            overSwipe={OVERSWIPE_DIST}
+            renderUnderlayLeft={() => (
+              <UnderlayLeft drag={drag} itemRefs={itemRefs} />
+            )}
+            snapPointsLeft={[70]}>
+            <View
+              style={{
+                backgroundColor: 'white',
+                justifyContent: 'center',
+                marginBottom: 1,
+                borderWidth: 1,
+                borderColor: '#BDBDBD',
               }}>
-              <View
+              <Ionicons
+                name="ios-menu"
+                size={32}
+                color="#BDBDBD"
                 style={{
-                  flex: 1,
-                  height: 75,
-                  marginLeft: 65,
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  position: 'absolute',
+                  zIndex: 99999,
+                  left: 10,
+                  alignSelf: 'center',
+                }}
+              />
+              <TouchableCmp
+                onLongPress={drag}
+                onPress={() => {
+                  navigation.getParent()?.setOptions({
+                    tabBarStyle: {display: 'none'},
+                  });
+                  navigation.navigate('CurrentSurvey1', {
+                    label,
+                    enjoyment,
+                    compatibility,
+                    communication,
+                    loyalty,
+                    fun,
+                    physicalAttraction,
+                    mentalAttraction,
+                    instinctualAttraction,
+                    emotionAttraction,
+                  });
                 }}>
-                <Text style={{fontSize: 18, fontWeight: '200'}}>
-                  {item.label}
-                </Text>
-              </View>
-            </TouchableCmp>
-          </View>
-        </SwipeableItem>
-      </ScaleDecorator>
-    </View>
-  );
+                <View
+                  style={{
+                    height: 75,
+                    marginLeft: 65,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                  }}>
+                  <Text style={{fontSize: 18, fontWeight: '200'}}>
+                    {item.label}
+                  </Text>
+                </View>
+              </TouchableCmp>
+            </View>
+          </SwipeableItem>
+        </ScaleDecorator>
+      </Animated.View>
+    );
+  };
 
   const UnderlayLeft = ({drag, itemRefs}: {drag: () => void}) => {
     const {item, percentOpen} = useSwipeableItemParams<typeof Item>();
@@ -215,6 +239,9 @@ const QuestionnaireMainScreen = ({navigation}) => {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', async () => {
+      navigation.getParent()?.setOptions({
+        tabBarStyle: {display: 'flex'},
+      });
       dispatch(setProgress(0));
     });
 
@@ -222,11 +249,14 @@ const QuestionnaireMainScreen = ({navigation}) => {
   }, [dispatch, navigation]);
 
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
+    <View
+      style={{
+        flexGrow: 1,
+        backgroundColor: 'white',
+      }}>
       <StatusBar barStyle={'dark-content'} animated={true} />
       <View
         style={{
-          flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
         }}>
@@ -244,12 +274,14 @@ const QuestionnaireMainScreen = ({navigation}) => {
       </View>
       <View
         style={{
-          flex: 1,
-          marginBottom: 10,
+          marginVertical: 10,
           alignSelf: 'center',
         }}>
         <TouchableCmp
           onPress={() => {
+            navigation.getParent()?.setOptions({
+              tabBarStyle: {display: 'none'},
+            });
             navigation.navigate('Priorities');
           }}>
           <LinearGradient
@@ -292,18 +324,16 @@ const QuestionnaireMainScreen = ({navigation}) => {
           </LinearGradient>
         </TouchableCmp>
       </View>
-      <View
-        style={{
-          flex: 10,
-        }}>
+      <View style={{flex: 1}}>
         <DraggableFlatList
           keyExtractor={(item) => item.id}
           data={data}
           renderItem={renderItem}
-          initialNumToRender={9}
+          initialNumToRender={0}
           onDragEnd={({data}) => setData(data)}
           activationDistance={10}
           dragItemOverflow={true}
+          contentContainerStyle={{flexGrow: 1}}
         />
       </View>
     </View>
@@ -311,16 +341,13 @@ const QuestionnaireMainScreen = ({navigation}) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
+  container: {},
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   underlayLeft: {
-    flex: 1,
     justifyContent: 'flex-end',
   },
 });
