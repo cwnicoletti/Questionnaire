@@ -9,11 +9,10 @@ import {
   View,
   Image,
 } from 'react-native';
-import {Feather, Fontisto} from '@expo/vector-icons';
+import {Feather, Fontisto, Ionicons} from '@expo/vector-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppDispatch} from '../../../hooks';
 import {setProgress} from '../../../store/actions/progressbar/progressbar';
-import {Ionicons} from '@expo/vector-icons';
 import getPhotoPermissions from '../../../helper/getPhotoPermissions';
 import * as ImagePicker from 'expo-image-picker';
 import LottieView from 'lottie-react-native';

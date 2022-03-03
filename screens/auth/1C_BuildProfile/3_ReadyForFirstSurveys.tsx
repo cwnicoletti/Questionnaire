@@ -10,9 +10,8 @@ import {
   View,
   Animated,
 } from 'react-native';
-import {Feather, MaterialCommunityIcons} from '@expo/vector-icons';
+import {Feather, MaterialCommunityIcons, Ionicons} from '@expo/vector-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {Ionicons} from '@expo/vector-icons';
 
 import LottieView from 'lottie-react-native';
 

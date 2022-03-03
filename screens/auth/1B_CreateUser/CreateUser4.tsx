@@ -10,11 +10,10 @@ import {
   View,
   Keyboard,
 } from 'react-native';
-import {Feather, EvilIcons, MaterialIcons} from '@expo/vector-icons';
+import {Feather, EvilIcons, MaterialIcons, Ionicons} from '@expo/vector-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppDispatch} from '../../../hooks';
 import {setProgress} from '../../../store/actions/progressbar/progressbar';
-import {Ionicons} from '@expo/vector-icons';
 import {Modalize} from 'react-native-modalize';
 
 import BouncyCheckbox from 'react-native-bouncy-checkbox';

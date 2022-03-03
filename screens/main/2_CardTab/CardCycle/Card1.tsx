@@ -10,7 +10,6 @@ import {
   Animated,
   ScrollView,
 } from 'react-native';
-import {useAppDispatch} from '../../../../hooks';
 import {EvilIcons, Feather} from '@expo/vector-icons';
 import FullProfile from '../../../../components/FullProfile/FullProfile';
 import * as Progress from 'react-native-progress';

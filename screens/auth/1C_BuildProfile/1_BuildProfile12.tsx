@@ -8,13 +8,11 @@ import {
   TouchableNativeFeedback,
   TouchableOpacity,
   View,
-  FlatList,
 } from 'react-native';
-import {Feather, Ionicons, AntDesign} from '@expo/vector-icons';
+import {Feather, Ionicons} from '@expo/vector-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppDispatch} from '../../../hooks';
 import {setProgress} from '../../../store/actions/progressbar/progressbar';
-import useDidMountEffect from '../../../helper/useDidMountEffect';
 
 const BuildProfile12 = (props) => {
   const dispatch = useAppDispatch();

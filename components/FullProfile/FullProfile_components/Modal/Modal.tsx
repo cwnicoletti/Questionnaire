@@ -20,9 +20,8 @@ import {
 import MaskedView from '@react-native-masked-view/masked-view';
 import {FontAwesome, FontAwesome5, Feather} from '@expo/vector-icons';
 import {LinearGradient} from 'expo-linear-gradient';
-import {useAppDispatch, useAppSelector} from '../../../../hooks';
+import {useAppDispatch} from '../../../../hooks';
 import {Modalize} from 'react-native-modalize';
-import {Host, Portal} from 'react-native-portalize';
 import Input from '../../../../components/Input';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
 import LottieView from 'lottie-react-native';

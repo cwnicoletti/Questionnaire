@@ -10,11 +10,10 @@ import {
   View,
   Animated,
 } from 'react-native';
-import {Feather} from '@expo/vector-icons';
+import {Feather, Ionicons} from '@expo/vector-icons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useAppDispatch} from '../../../hooks';
 import {setProgress} from '../../../store/actions/progressbar/progressbar';
-import {Ionicons} from '@expo/vector-icons';
 
 import LottieView from 'lottie-react-native';
 

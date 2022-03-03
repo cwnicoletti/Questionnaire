@@ -11,12 +11,9 @@ import {
 } from 'react-native';
 import {
   Ionicons,
-  EvilIcons,
   Feather,
   Entypo,
   MaterialCommunityIcons,
-  SimpleLineIcons,
-  FontAwesome,
   FontAwesome5,
 } from '@expo/vector-icons';
 import PromptWithMessage from './FullProfile_components/Prompt/PromptWithMessage';

@@ -15,12 +15,9 @@ import {
   Feather,
   MaterialIcons,
 } from '@expo/vector-icons';
-import {useAppDispatch} from '../../../hooks';
-import {setProgress} from '../../../store/actions/progressbar/progressbar';
 import LottieView from 'lottie-react-native';
 
 const SurveyDone = (props) => {
-  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(false);
 
   const lottieRef = useRef();
