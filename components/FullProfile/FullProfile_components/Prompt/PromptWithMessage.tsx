@@ -46,11 +46,6 @@ const PromptWithMessage = (props) => {
             <View style={{marginTop: 10}}>
               <TouchableCmp
                 onPress={() => {
-                  if (props.navigation) {
-                    props.navigation.getParent()?.setOptions({
-                      tabBarStyle: {display: 'none'},
-                    });
-                  }
                   props.onOpen();
                   if (props.setPrompt) {
                     props.setPrompt({

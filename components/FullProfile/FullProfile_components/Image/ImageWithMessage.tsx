@@ -34,14 +34,7 @@ const ImageWithMessage = (props) => {
             if (props.setPicture) {
               props.setPicture(props.image);
             }
-            if (props.navigation) {
-              props.navigation.getParent()?.setOptions({
-                tabBarStyle: {display: 'none'},
-              });
-            }
-            if (props.navigation) {
-              props.onOpen();
-            }
+            props.onOpen();
           }}>
           <View
             style={{
