@@ -64,7 +64,14 @@ const StartupScreen = (props) => {
 
   const cacheResourcesAsync = async () => {
     const images = [
+      require('../assets/naire_icon/full_transparent_colored.png'),
+      require('../assets/naire_icon/full_transparent.png'),
+      require('../assets/naire_icon/full.png'),
+      require('../assets/naire_icon/icon.png'),
+      require('../assets/naire_icon/transparent_black.png'),
+      require('../assets/naire_icon/transparent_colored_cut.png'),
       require('../assets/naire_icon/transparent_colored.png'),
+      require('../assets/naire_icon/transparent_white.png'),
       require('../assets/background.jpg'),
     ];
 
