@@ -329,7 +329,7 @@ const QuestionnaireMainScreen = ({navigation}) => {
           keyExtractor={(item) => item.id}
           data={data}
           renderItem={renderItem}
-          initialNumToRender={0}
+          initialNumToRender={1}
           onDragEnd={({data}) => setData(data)}
           activationDistance={10}
           dragItemOverflow={true}
