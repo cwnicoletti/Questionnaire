@@ -28,6 +28,7 @@
     "buffer": "^6.0.3",
     "expo": "^43.0.0",
     "expo-app-loading": "~1.2.1",
+    "expo-font": "~10.0.3",
     "expo-image-picker": "~11.0.3",
     "expo-linear-gradient": "~10.0.3",
     "expo-notifications": "~0.13.3",
@@ -58,8 +59,7 @@
     "react-navigation": "^4.4.4",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
-    "redux-thunk": "^2.4.1",
-    "expo-font": "~10.0.3"
+    "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
