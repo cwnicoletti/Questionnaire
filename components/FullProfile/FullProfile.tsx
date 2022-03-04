@@ -1,14 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {
-  StyleSheet,
-  Text,
-  Image,
-  View,
-  Dimensions,
-  TouchableOpacity,
-  TouchableNativeFeedback,
-  Platform,
-} from 'react-native';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 import {
   Ionicons,
   Feather,
@@ -20,11 +11,6 @@ import PromptWithMessage from './FullProfile_components/Prompt/PromptWithMessage
 import ImageWithMessage from './FullProfile_components/Image/ImageWithMessage';
 
 const FullProfileCard = (props) => {
-  let TouchableCmp: any = TouchableOpacity;
-  if (Platform.OS === 'android') {
-    TouchableCmp = TouchableNativeFeedback;
-  }
-
   return (
     <View style={{backgroundColor: '#FAFAFA'}}>
       <ImageWithMessage

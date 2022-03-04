@@ -20,10 +20,6 @@ const BackNotifications = ({navigation, route}) => {
     modalizeRef.current?.open();
   };
 
-  const onClose = () => {
-    modalizeRef.current?.close();
-  };
-
   useEffect(() => {
     if (route.params) {
       setParams(route.params);

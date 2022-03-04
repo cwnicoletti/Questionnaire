@@ -8,9 +8,8 @@ import {
   TouchableNativeFeedback,
   Platform,
 } from 'react-native';
-import {Ionicons} from '@expo/vector-icons';
 import MaskedView from '@react-native-masked-view/masked-view';
-import {FontAwesome, Feather} from '@expo/vector-icons';
+import {Feather} from '@expo/vector-icons';
 import {LinearGradient} from 'expo-linear-gradient';
 
 const TitleOnlyHeader = ({navigation}) => {
