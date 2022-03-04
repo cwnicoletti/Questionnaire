@@ -1,8 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {
-  TransitionPresets,
-} from '@react-navigation/stack';
+import {TransitionPresets} from '@react-navigation/stack';
 import CardMainScreen from '../screens/main/2_CardTab/CardMainScreen';
 import Card1 from '../screens/main/2_CardTab/CardCycle/Card1';
 import InterCard from '../screens/main/2_CardTab/CardCycle/InterCard';
