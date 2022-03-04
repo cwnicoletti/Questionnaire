@@ -1,16 +1,16 @@
-import React, {useRef, useState} from 'react';
-import {useSelector} from 'react-redux';
+import React, {useRef} from 'react';
+import {useAppSelector} from '../hooks';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import AuthenticatedNavigator from './2_AuthenticatedNavigator';
 import {Dimensions, SafeAreaView, Animated} from 'react-native';
 import * as Progress from 'react-native-progress';
 import useDidMountEffect from '../helper/useDidMountEffect';
 import MainNavigator from './3_MainNavigator';
-import {Host, Portal} from 'react-native-portalize';
+import {Host} from 'react-native-portalize';
 
 const AppNavigator = () => {
-  const progress = useSelector((state) => state.progressbar.progress);
-  const isUsingMain = useSelector((state) => state.signup.isUsingMain);
+  const progress = useAppSelector((state) => state.progressbar.progress);
+  const isUsingMain = useAppSelector((state) => state.signup.isUsingMain);
   const growAnim = useRef(new Animated.Value(0)).current;
   const width = Dimensions.get('window').width;
 
