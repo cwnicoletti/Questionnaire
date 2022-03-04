@@ -11,7 +11,7 @@ import BackNotifications from '../components/headers/BackNotifications';
 
 const Stack = createStackNavigator();
 
-const forFade = ({current}) => ({
+const forFade = ({current}: {current: {progress: number | any}}) => ({
   cardStyle: {
     opacity: current.progress,
   },

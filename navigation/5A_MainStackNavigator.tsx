@@ -4,11 +4,10 @@ import ProfileScreen from '../screens/main/1_MainTab/Profile/ProfileScreen';
 import PurchaseScreen from '../screens/main/1_MainTab/Purchase/PurchaseScreen';
 import MainScreen from '../screens/main/1_MainTab/MainScreen';
 import {TransitionPresets} from '@react-navigation/stack';
-import TitleOnlyHeader from '../components/headers/TitleOnlyHeader';
 
 const Stack = createStackNavigator();
 
-const forFade = ({current}) => ({
+const forFade = ({current}: {current: {progress: number | any}}) => ({
   cardStyle: {
     opacity: current.progress,
   },

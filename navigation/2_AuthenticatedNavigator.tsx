@@ -44,18 +44,65 @@ import LastAuthScreen2 from '../screens/auth/1E_LastAuthScreens/1_LastAuthScreen
 import InterScreen from '../screens/auth/1E_LastAuthScreens/InterScreen';
 import StartupScreen from '../screens/StartupScreen';
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Startup: undefined,
+  StartAuth: undefined,
+  SignupPhoneScreen1: undefined,
+  SignupPhoneScreen2: undefined,
+  AIntroduction: undefined,
+  CreateUser1: undefined,
+  CreateUser2: undefined,
+  CreateUser3: undefined,
+  CreateUser4: undefined,
+  CreateUser5: undefined,
+  ReadyToBuild: undefined,
+  BuildProfile1: undefined,
+  BuildProfile2: undefined,
+  BuildProfile3: undefined,
+  BuildProfile4: undefined,
+  BuildProfile5: undefined,
+  BuildProfile6: undefined,
+  BuildProfile7: undefined,
+  BuildProfile8: undefined,
+  BuildProfile9: undefined,
+  BuildProfile10: undefined,
+  BuildProfile11: undefined,
+  BuildProfile12: undefined,
+  PickPrompt: undefined,
+  WritePrompt: undefined,
+  PreviewProfile: undefined,
+  ReadyForFirstSurveys: undefined,
+  AFirstSurveysIntroduction: undefined,
+  FirstSurveys2: undefined,
+  FirstSurveys3: undefined,
+  FirstSurveys4: undefined,
+  FirstSurveys5: undefined,
+  FirstSurveys6: undefined,
+  FirstSurveys7: undefined,
+  FirstSurveys8: undefined,
+  FirstSurveys9: undefined,
+  FirstSurveys10: undefined,
+  FirstSurveys11: undefined,
+  SurveyDone: undefined,
+  LastAuthScreen1: undefined,
+  LastAuthScreen2: undefined,
+  InterScreen: undefined,
+};
 
-const forFade = ({current}) => ({
-  cardStyle: {
-    opacity: current.progress,
-  },
-});
+const RootStack = createStackNavigator<RootStackParamList>();
+
+const forFade = ({current}: {current: {progress: number | any}}) => {
+  return {
+    cardStyle: {
+      opacity: current.progress,
+    },
+  };
+};
 
 function AuthenticatedNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <RootStack.Navigator>
+      <RootStack.Screen
         name="Startup"
         component={StartupScreen}
         options={{
@@ -63,7 +110,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="StartAuth"
         component={SignupOrLoginScreen}
         options={{
@@ -72,7 +119,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="SignupPhoneScreen1"
         component={SignupScreen1}
         options={{
@@ -80,14 +127,14 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="SignupPhoneScreen2"
         component={SignupScreen2}
         options={{
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="AIntroduction"
         component={AIntroduction}
         options={{
@@ -96,7 +143,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="CreateUser1"
         component={CreateUser1}
         options={{
@@ -104,7 +151,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="CreateUser2"
         component={CreateUser2}
         options={{
@@ -112,7 +159,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="CreateUser3"
         component={CreateUser3}
         options={{
@@ -120,7 +167,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="CreateUser4"
         component={CreateUser4}
         options={{
@@ -128,7 +175,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="CreateUser5"
         component={CreateUser5}
         options={{
@@ -136,7 +183,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="ReadyToBuild"
         component={ReadyToBuild}
         options={{
@@ -144,7 +191,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile1"
         component={BuildProfile1}
         options={{
@@ -152,7 +199,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile2"
         component={BuildProfile2}
         options={{
@@ -160,7 +207,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile3"
         component={BuildProfile3}
         options={{
@@ -168,7 +215,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile4"
         component={BuildProfile4}
         options={{
@@ -176,7 +223,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile5"
         component={BuildProfile5}
         options={{
@@ -184,7 +231,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile6"
         component={BuildProfile6}
         options={{
@@ -192,7 +239,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile7"
         component={BuildProfile7}
         options={{
@@ -200,7 +247,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile8"
         component={BuildProfile8}
         options={{
@@ -208,7 +255,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile9"
         component={BuildProfile9}
         options={{
@@ -216,7 +263,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile10"
         component={BuildProfile10}
         options={{
@@ -224,7 +271,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile11"
         component={BuildProfile11}
         options={{
@@ -232,7 +279,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="BuildProfile12"
         component={BuildProfile12}
         options={{
@@ -240,7 +287,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="PickPrompt"
         component={PickPrompt}
         options={{
@@ -249,7 +296,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="WritePrompt"
         component={WritePrompt}
         options={{
@@ -258,7 +305,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="PreviewProfile"
         component={PreviewProfile}
         options={{
@@ -266,7 +313,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="ReadyForFirstSurveys"
         component={ReadyForFirstSurveys}
         options={{
@@ -274,7 +321,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="AFirstSurveysIntroduction"
         component={AFirstSurveysIntroduction}
         options={{
@@ -282,7 +329,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys2"
         component={FirstSurveys2}
         options={{
@@ -290,7 +337,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys3"
         component={FirstSurveys3}
         options={{
@@ -298,7 +345,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys4"
         component={FirstSurveys4}
         options={{
@@ -306,7 +353,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys5"
         component={FirstSurveys5}
         options={{
@@ -314,7 +361,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys6"
         component={FirstSurveys6}
         options={{
@@ -322,7 +369,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys7"
         component={FirstSurveys7}
         options={{
@@ -330,7 +377,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys8"
         component={FirstSurveys8}
         options={{
@@ -338,7 +385,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys9"
         component={FirstSurveys9}
         options={{
@@ -346,7 +393,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys10"
         component={FirstSurveys10}
         options={{
@@ -354,7 +401,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="FirstSurveys11"
         component={FirstSurveys11}
         options={{
@@ -362,7 +409,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="SurveyDone"
         component={SurveyDone}
         options={{
@@ -370,7 +417,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="LastAuthScreen1"
         component={LastAuthScreen1}
         options={{
@@ -378,7 +425,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="LastAuthScreen2"
         component={LastAuthScreen2}
         options={{
@@ -386,7 +433,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="InterScreen"
         component={InterScreen}
         options={{
@@ -395,7 +442,7 @@ function AuthenticatedNavigator() {
           headerShown: false,
         }}
       />
-    </Stack.Navigator>
+    </RootStack.Navigator>
   );
 }
 

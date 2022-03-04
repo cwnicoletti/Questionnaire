@@ -19,7 +19,7 @@ import Questionnaires from '../components/headers/Questionnaires';
 
 const Stack = createStackNavigator();
 
-const forFade = ({current}) => ({
+const forFade = ({current}: {current: {progress: number | any}}) => ({
   cardStyle: {
     opacity: current.progress,
   },

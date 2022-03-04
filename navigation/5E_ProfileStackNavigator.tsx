@@ -10,7 +10,7 @@ import TopTabEditProfileNavigator from './6_TopTabEditProfileNavigator';
 
 const Stack = createStackNavigator();
 
-const forFade = ({current}) => ({
+const forFade = ({current}: {current: {progress: number | any}}) => ({
   cardStyle: {
     opacity: current.progress,
   },

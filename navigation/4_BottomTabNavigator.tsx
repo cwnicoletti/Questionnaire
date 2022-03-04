@@ -18,13 +18,7 @@ import Profile from '../components/headers/Profile';
 
 const Tab = createBottomTabNavigator();
 
-const forFade = ({current}) => ({
-  cardStyle: {
-    opacity: current.progress,
-  },
-});
-
-const screenOptions = (route, color) => {
+const pickTabBarIcon = (route, color: string) => {
   switch (route.name) {
     case 'MainStackNavigator':
       return (
@@ -74,13 +68,13 @@ const screenOptions = (route, color) => {
 function TopTabNavigator() {
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({route, navigation}) => ({
         tabBarBounces: true,
         tabBarShowLabel: false,
         tabBarActiveTintColor: '#434aa8',
         swipeEnabled: false,
-        header: () => <TitleOnlyHeader />,
-        tabBarIcon: ({color}) => screenOptions(route, color),
+        header: () => <TitleOnlyHeader navigation={navigation} />,
+        tabBarIcon: ({color}) => pickTabBarIcon(route, color),
         tabBarIndicatorStyle: {backgroundColor: '#434aa8'},
         tabBarStyle: {
           borderTopColor: 'transparent',
@@ -133,9 +127,7 @@ function TopTabNavigator() {
         name="ProfileStackNavigator"
         component={ProfileStackNavigator}
         options={{
-          header: ({navigation, routes}) => (
-            <Profile navigation={navigation} routes={routes} />
-          ),
+          header: ({navigation}) => <Profile navigation={navigation} />,
         }}
       />
     </Tab.Navigator>
