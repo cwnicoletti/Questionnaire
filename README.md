@@ -1,13 +1,13 @@
 <p align="center">
-  <img alt="Naire Logo" height="128" src="https://user-images.githubusercontent.com/56566033/151099678-4fc99cd6-03f8-4f51-b44d-959828c0113e.png">
+  <img alt="Questionnaire Logo" height="128" src="https://user-images.githubusercontent.com/56566033/151099678-4fc99cd6-03f8-4f51-b44d-959828c0113e.png">
   <h1 align="center">A survey-based dating app</h1>
 </p>
 
 <p align="center">
-  <a href="https://github.com/cwnicoletti/Naire/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-critical" alt="CC BY-NC 4.0"></a>
-  <img src="https://img.shields.io/github/repo-size/cwnicoletti/Naire" alt="Repo Size">
-  <img src="https://img.shields.io/github/commit-activity/m/cwnicoletti/Naire" alt="Repo Size">
-  <a href="https://app.codacy.com/gh/cwnicoletti/Naire/dashboard">
+  <a href="https://github.com/cwnicoletti/Questionnaire/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-critical" alt="CC BY-NC 4.0"></a>
+  <img src="https://img.shields.io/github/repo-size/cwnicoletti/Questionnaire" alt="Repo Size">
+  <img src="https://img.shields.io/github/commit-activity/m/cwnicoletti/Questionnaire" alt="Repo Size">
+  <a href="https://app.codacy.com/gh/cwnicoletti/Questionnaire/dashboard">
     <img src="https://img.shields.io/codacy/grade/a5a52184b36940d9aac4438344861370" alt="Codacy Grade">
   </a>
 </p>
@@ -62,20 +62,6 @@ Features
 -   Profile editing and previewing
 -   Performance charts of previous dates and relationships
 
-Images
-------
-
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152225582-d4342e15-350e-4776-b378-36b495b2c9e5.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152225663-6745d2b2-f04a-456e-94e6-5cd3c3a83f47.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152225984-483b49b3-29ca-413e-8e8b-cfe4714f75c6.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152226027-11508cde-6420-46d8-8f9d-c227c3e1b9d0.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152226106-73d30826-9c8e-40ac-8afb-743f10ebe76d.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152623347-304ed94d-d086-48ac-ad88-ac59f71d88f6.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152226184-1b176cfb-f06f-47fb-be2c-46b6a29503a8.PNG">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/153035590-4371b219-6983-40b8-9ed2-4a3b91091903.png">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/153035593-16ba7390-032d-4211-9db9-1c6577566d18.png">
-<img alt="" width="300" src="https://user-images.githubusercontent.com/56566033/152895806-917681a5-f047-4b06-a3f7-f11f5524cd40.PNG">
-
 Videos
 ------
 (works best on web/desktop)
@@ -96,8 +82,8 @@ This is a "private" app in development, just for demo purposes, so I'm not takin
 
 Dependencies
 ------------
-[Package.json](https://github.com/cwnicoletti/Naire/blob/main/package.json)
+[Package.json](https://github.com/cwnicoletti/Questionnaire/blob/main/package.json)
 
 Licensing
 ---------
-The content of this repository is licensed under the terms specified in the [LICENSE](https://github.com/cwnicoletti/Naire/blob/main/LICENSE.md) file.
+The content of this repository is licensed under the terms specified in the [LICENSE](https://github.com/cwnicoletti/Questionnaire/blob/main/LICENSE.md) file.
